@@ -1,5 +1,3 @@
-import { defineConfig } from "vitepress"
+import { defineConfig } from 'vitepress';
 
-export default defineConfig({
-
-})
+export default defineConfig({});

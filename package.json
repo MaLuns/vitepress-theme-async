@@ -1,19 +1,42 @@
 {
-  "name": "vitepress-theme-async",
-  "version": "1.0.0",
-  "main": "index.js",
-  "repository": "git@github.com:MaLuns/vitepress-theme-async.git",
-  "author": "白云苍狗 <admin@imalun.com>",
-  "license": "MIT",
-  "private": true,
-  "type": "module",
-  "scripts": {
-    "docs:dev": "vitepress dev docs",
-    "docs:build": "vitepress build docs",
-    "docs:preview": "vitepress preview docs"
-  },
-  "workspaces": [
-    "docs",
-    "packages/*"
-  ]
+	"name": "vitepress-theme-async",
+	"version": "1.0.0",
+	"main": "index.js",
+	"repository": "git@github.com:MaLuns/vitepress-theme-async.git",
+	"author": "白云苍狗 <admin@imalun.com>",
+	"license": "MIT",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"docs:dev": "vitepress dev docs",
+		"docs:build": "vitepress build docs",
+		"docs:preview": "vitepress preview docs",
+		"lint": "eslint --cache --max-warnings 0  \"**/*.{js,jsx,vue,ts,tsx}\" --fix",
+		"prettier": "prettier --write \"**/*.{js,jsx,vue,ts,tsx,json,less}\"",
+		"prepare": "husky install"
+	},
+	"devDependencies": {
+		"@commitlint/cli": "^17.7.2",
+		"@commitlint/config-conventional": "^17.7.0",
+		"@typescript-eslint/eslint-plugin": "^6.7.5",
+		"@typescript-eslint/parser": "^6.7.5",
+		"eslint": "^8.51.0",
+		"eslint-config-prettier": "^9.0.0",
+		"eslint-plugin-prettier": "^5.0.1",
+		"husky": "^8.0.3",
+		"lint-staged": "^14.0.1",
+		"prettier": "^3.0.3",
+		"vue-eslint-parser": "^9.3.2"
+	},
+	"workspaces": [
+		"docs",
+		"packages/*"
+	],
+	"lint-staged": {
+		"**/*.{js,jsx,vue,ts,tsx}": [
+			"eslint --cache --max-warnings 0 --fix --ignore-pattern !.vitepress",
+			"prettier --write"
+		],
+		"**/*.{js,jsx,vue,ts,tsx,json,less}": "prettier --write"
+	}
 }
