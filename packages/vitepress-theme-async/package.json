@@ -1,0 +1,17 @@
+{
+	"name": "vitepress-theme-async",
+	"version": "1.0.0",
+	"type": "module",
+	"main": "./index.ts",
+	"types": "./types/index.d.ts",
+	"keywords": [
+		"vitepress",
+		"theme"
+	],
+	"devDependencies": {
+		"@types/node": "^17.0.35",
+		"typescript": "^4.6.4",
+		"vue": "^3.2.45",
+		"vitepress": "^1.0.0-rc.21"
+	}
+}

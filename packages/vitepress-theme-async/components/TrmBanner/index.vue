@@ -1,0 +1,52 @@
+<script setup lang="ts">
+import { useData } from "vitepress";
+import { AsyncThemeConfig } from "types/index.js";
+import { useBanner, useSingleColumn } from "../../composables/index.js";
+import Banner from "./Banner.vue";
+
+const { page } = useData<AsyncThemeConfig>();
+const banner = useBanner();
+const singleColumn = useSingleColumn();
+
+const onScrollTo = () => {
+	const container = document.querySelector(".trm-banner");
+	container && window.scrollTo({ top: container.clientHeight - 20, behavior: "smooth" });
+};
+</script>
+
+<template>
+	<div class="trm-banner">
+		<Banner :banner="banner" />
+		<div class="trm-banner-content trm-overlay">
+			<div class="container">
+				<div class="row">
+					<div v-if="!singleColumn" class="col-lg-4"></div>
+					<div :class="!singleColumn ? 'col-lg-8' : 'col-lg-12'">
+						<!-- banner title -->
+						<div :class="!singleColumn ? 'trm-banner-text' : 'trm-banner-text trm-text-center'">
+							<div class="trm-label trm-mb-20">{{ banner?.bannerText }}</div>
+							<h1 class="trm-mb-30 trm-hsmb-font" v-html="page.title"></h1>
+							<ul class="trm-breadcrumbs trm-label">
+								<li>
+									<a href="/" class="trm-anima-link">Home</a>
+								</li>
+								<li>
+									<span>
+										{{ page.relativePath.split("/")[0] }}
+									</span>
+								</li>
+							</ul>
+						</div>
+						<!-- banner title end -->
+						<!-- scroll hint -->
+						<span class="trm-scroll-hint-frame" @click="onScrollTo">
+							<div class="trm-scroll-hint"></div>
+							<span class="trm-label">Scroll down</span>
+						</span>
+						<!-- scroll hint end -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</template>
