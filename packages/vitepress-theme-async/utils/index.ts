@@ -39,3 +39,35 @@ export const isInViewPortOfOne = (el: HTMLElement) => {
 		};
 	}
 }
+
+/**
+ * 时间格式化
+ * @param date
+ * @param format
+ * @returns
+ */
+export const formatDate = (date: Date | number | string | undefined, format: string): string => {
+	if (date === undefined) return ''
+	if (!(date instanceof Date)) date = new Date(date)
+
+	const year = date.getFullYear();
+	const month = date.getMonth() + 1;
+	const day = date.getDate();
+	const hour = date.getHours();
+	const minute = date.getMinutes();
+	const second = date.getSeconds();
+
+	const map: Record<string, number> = {
+		YYYY: year,
+		MM: month,
+		DD: day,
+		HH: hour,
+		mm: minute,
+		ss: second,
+	};
+
+	return format.replace(/YYYY|MM|DD|HH|mm|ss/g, (match: string) => {
+		const value = map[match] + "";
+		return value !== undefined ? (value.length > 1 ? value : (Array(2).fill("0").join("") + value).slice(-2)) : match;
+	});
+};

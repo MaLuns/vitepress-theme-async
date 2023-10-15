@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useTheme } from "../../composables/index.js";
-import TrmIcon from "../Trm/Icon.vue";
+import TrmIcon from "../TrmIcon.vue";
 const theme = useTheme();
 </script>
 

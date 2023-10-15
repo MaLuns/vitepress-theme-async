@@ -1,0 +1,18 @@
+<template>
+	<div class="trm-preloader">
+		<div class="trm-holder">
+			<div class="preloader">
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+			</div>
+		</div>
+	</div>
+</template>

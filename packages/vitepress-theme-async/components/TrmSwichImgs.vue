@@ -3,7 +3,7 @@ import { computed } from "vue";
 
 const props = withDefaults(
 	defineProps<{
-		src: Array<string | undefined>;
+		src: Array<string | undefined> | string;
 		attrs?: Record<string, string>;
 	}>(),
 	{
@@ -12,7 +12,13 @@ const props = withDefaults(
 	},
 );
 
-const imgs = computed(() => props.src.filter(Boolean));
+const imgs = computed(() => {
+	if (Array.isArray(props.src)) {
+		return props.src.filter(Boolean);
+	} else {
+		return [props.src];
+	}
+});
 </script>
 
 <template>

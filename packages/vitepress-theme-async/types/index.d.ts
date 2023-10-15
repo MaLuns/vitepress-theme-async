@@ -126,9 +126,9 @@ export declare interface AsyncThemeConfig extends DefaultTheme.Config {
 		// Secure the button in the lower right corner
 		read: string
 		arrows: string
+		// Category entry icon
+		next: string
 
-		// // Category entry icon
-		// next: string
 		// // Date of article details
 		// calendar: string
 		// // Article details time
