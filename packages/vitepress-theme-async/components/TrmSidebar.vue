@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import TrmSidebarUser from "./User.vue";
-import TrmSidebarSocial from "./Social.vue";
-import TrmSidebarInfo from "./Info.vue";
-import TrmSidebarEmail from "./Email.vue";
+import TrmSidebarUser from "./TrmSidebarUser.vue";
+import TrmSidebarSocial from "./TrmSidebarSocial.vue";
+import TrmSidebarInfo from "./TrmSidebarInfo.vue";
+import TrmSidebarEmail from "./TrmSidebarEmail.vue";
 import { onMounted, onUnmounted, ref } from "vue";
-import { getScrollTop } from "../../utils/index.js";
+import { getScrollTop } from "../utils/index";
 
 const isFixed = ref(false);
 const sidebarRef = ref<HTMLDivElement>();

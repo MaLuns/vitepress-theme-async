@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { useTheme } from "../../composables/index.js";
-import TrmSwichImgs from "../TrmSwichImgs.vue";
-import avatarImg from "../../assets/avatar.jpg";
+import { useTheme } from "../composables/index";
+import TrmSwichImgs from "./TrmSwichImgs.vue";
+import avatarImg from "../assets/avatar.jpg";
 import { onMounted, ref } from "vue";
 
 const theme = useTheme();
@@ -19,7 +19,7 @@ const setTyper = (element: HTMLElement, words?: Array<string>) => {
 	let direction = DIRECTION_FORWARDS;
 	let wordIndex = 0;
 	let letterIndex = 0;
-	let wordTypeInterval: any;
+	let wordTypeInterval: unknown;
 
 	startTyping();
 
@@ -35,7 +35,7 @@ const setTyper = (element: HTMLElement, words?: Array<string>) => {
 
 			if (letterIndex == word.length) {
 				direction = DIRECTION_BACKWARDS;
-				clearInterval(wordTypeInterval);
+				clearInterval(<number>wordTypeInterval);
 				setTimeout(startTyping, WORD_STAY_DELAY);
 			}
 		} else if (direction == DIRECTION_BACKWARDS) {

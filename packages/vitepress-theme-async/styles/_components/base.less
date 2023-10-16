@@ -1,7 +1,7 @@
 *,
 ::after,
 ::before {
-	box-sizing     : border-box;
+	box-sizing: border-box;
 	// firefox scroll bar
 	scrollbar-width: thin;
 	scrollbar-color: var(--primary-50, #afb42b) transparent;
@@ -10,22 +10,22 @@
 *::-webkit-selection,
 *::-moz-selection,
 *::selection {
-	color           : var(--selection-color);
+	color: var(--selection-color);
 	background-color: var(--selection-bg-color);
 }
 
 ::-webkit-scrollbar {
-	width : 8px;
+	width: 8px;
 	height: 8px;
 }
 
 ::-webkit-scrollbar-thumb {
-	border-radius   : 2px;
+	border-radius: 2px;
 	background-color: var(--primary-50, #afb42b);
 }
 
 ::-webkit-scrollbar-track {
-	border-radius   : 2px;
+	border-radius: 2px;
 	background-color: var(--body-bg-color);
 }
 
@@ -36,7 +36,7 @@
 
 	&.dark {
 		.trm-dark-icon {
-			display: block;
+			display: unset;
 		}
 
 		.trm-light-icon {
@@ -46,30 +46,30 @@
 }
 
 body {
-	font-weight           : 500;
-	color                 : var(--body-color, #7b7b7d);
-	background-color      : var(--body-bg-color);
-	letter-spacing        : 0.05em;
-	overflow-x            : hidden;
-	margin                : 0;
-	margin-right          : calc(100% - 100vw);
-	padding               : 10px;
-	height                : 100vh;
-	scroll-behavior       : smooth;
+	font-weight: 500;
+	color: var(--body-color, #7b7b7d);
+	background-color: var(--body-bg-color);
+	letter-spacing: 0.05em;
+	overflow-x: hidden;
+	margin: 0;
+	margin-right: calc(100% - 100vw);
+	padding: 10px;
+	height: 100vh;
+	scroll-behavior: smooth;
 	-webkit-font-smoothing: antialiased;
 
 	&::before {
-		content       : "";
-		position      : fixed;
-		left          : 10px;
-		top           : 10px;
-		width         : calc(100% - 20px);
-		height        : calc(100% - 20px);
-		z-index       : 9999;
+		content: "";
+		position: fixed;
+		left: 10px;
+		top: 10px;
+		width: calc(100% - 20px);
+		height: calc(100% - 20px);
+		z-index: 9999;
 		pointer-events: none;
-		box-shadow    : 0 0 0 20px var(--body-bg-color);
-		border-radius : 10px;
-		outline       : var(--body-bg-color) solid 10px;
+		box-shadow: 0 0 0 20px var(--body-bg-color);
+		border-radius: 10px;
+		outline: var(--body-bg-color) solid 10px;
 	}
 
 	@media (max-width: 768px) {
@@ -79,10 +79,9 @@ body {
 	}
 }
 
-
 a,
 a:hover {
-	color          : inherit;
+	color: inherit;
 	text-decoration: none;
 }
 
@@ -106,12 +105,12 @@ h3,
 h4,
 h5,
 h6 {
-	line-height   : 1.2;
+	line-height: 1.2;
 	letter-spacing: 0;
-	font-weight   : 800;
-	color         : var(--theme-color, #00283a);
-	margin-bottom : 0;
-	margin-top    : 0;
+	font-weight: 800;
+	color: var(--theme-color, #00283a);
+	margin-bottom: 0;
+	margin-top: 0;
 }
 
 .h1,
@@ -144,48 +143,104 @@ h6 {
 	font-size: 1rem;
 }
 
+.trm-label {
+	text-transform: uppercase;
+	font-size: 11px;
+	font-weight: 700;
+	letter-spacing: 2px;
+	color: var(--theme-color, #00283a);
+	.transition-mixin();
+
+	&.trm-label-light {
+		color: var(--body-color, #7b7b7d);
+	}
+
+	&.trm-label-color {
+		color: var(--primary, #afb42b);
+	}
+}
+
+a.trm-label {
+	svg,
+	i {
+		margin-left: 10px;
+	}
+
+	.arrow-right {
+		margin-left: 5px;
+		.transition-mixin();
+	}
+
+	&:focus,
+	&:hover {
+		outline: inherit;
+		color: var(--primary, #afb42b);
+
+		.arrow-right,
+		.arrow-right {
+			transform: translateX(5px);
+			color: inherit;
+		}
+	}
+}
+
 html {
-	&.is-animating {
+	.trm-swup-animation {
+		transition: opacity 0.6s;
+		opacity: 1;
+	}
+
+	// page switching animation
+	&.page-animating {
 		.trm-preloader {
-			opacity         : 1;
+			opacity: 1;
 			transition-delay: 0s;
-			pointer-events  : all;
+			pointer-events: all;
 		}
 
 		.trm-swup-animation {
-			opacity         : 0;
+			opacity: 0;
+			transition-delay: 0s;
+		}
+	}
+
+	// theme switch animation
+	&.theme-animating {
+		.trm-mode-swich-animation-frame {
+			opacity: 1;
+		}
+
+		.trm-swup-animation {
+			opacity: 0;
 			transition-delay: 0s;
 		}
 	}
 }
 
-.trm-scroll-animation {
-	// transform: translateY(30px) scale(1.02);
-	// opacity  : 0;
-	// .transition-mixin(all, .6s);
+// .trm-scroll-animation {
+// transform: translateY(30px) scale(1.02);
+// opacity  : 0;
+// .transition-mixin(all, .6s);
 
-	// &.trm-active-el {
-	// 	opacity  : 1;
-	// 	transform: translateY(0) scale(1);
-	// }
-}
-
+// &.trm-active-el {
+// 	opacity  : 1;
+// 	transform: translateY(0) scale(1);
+// }
+// }
 
 // 定义 margin padding 变量
 @marginKey: 10, 15, 20, 25, 30, 35, 40;
 
 each(@marginKey, {
-		.trm-p-@{value} {
-			padding: unit(@value, px) !important;
-		}
-
-		.trm-mb-@{value} {
-			margin-bottom: unit(@value, px);
-		}
-
-		.trm-mt-@{value} {
-			margin-top: unit(@value, px);
-		}
+	.trm-p-@{value} {
+		padding: unit(@value, px) !important;
 	}
 
-);
+	.trm-mb-@{value} {
+		margin-bottom: unit(@value, px);
+	}
+
+	.trm-mt-@{value} {
+		margin-top: unit(@value, px);
+	}
+});

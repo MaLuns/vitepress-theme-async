@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { useData } from "vitepress";
-import { formatDate } from "../../utils/index.js";
+import { formatDate } from "../../utils/index";
 import TrmSwichImgs from "../TrmSwichImgs.vue";
+import defImage from "../../assets/block.jpg";
 
 defineProps<{
 	post: PostFrontmatter;
@@ -14,17 +15,17 @@ const { page } = useData();
 <template>
 	<div class="trm-blog-card trm-scroll-animation">
 		<a :href="url" class="trm-cover-frame trm-anima-link">
-			<template v-if="post.cover === 'date'">
+			<template v-if="post.cover?.type === 'date'">
 				<div class="trm-cover-date">
 					<div class="trm-cover-day">{{ formatDate(post.date, "DD") }} %></div>
 					<div class="trm-cover-month">{{ formatDate(post.date, "MM") }}</div>
 				</div>
 			</template>
-			<template v-else-if="post.cover === 'random'">
+			<template v-else-if="post.cover?.type === 'random'">
 				<div class="trm-cover-img" data-random-img></div>
 			</template>
-			<template v-else-if="post.cover">
-				<TrmSwichImgs :src="post.cover" :attrs="{ alt: 'cover', class: 'no-fancybox' }" />
+			<template v-else-if="post.cover?.type">
+				<TrmSwichImgs :src="post.cover.default || defImage" :attrs="{ alt: 'cover', class: 'no-fancybox' }" />
 			</template>
 		</a>
 		<div v-if="page.frontmatter.index && post.sticky && post.sticky > 0" class="trm-top">置顶</div>

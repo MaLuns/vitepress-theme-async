@@ -5,3 +5,4 @@ sw.js
 **/source/sw.js
 !.vitepress
 **/cache/deps
+dist

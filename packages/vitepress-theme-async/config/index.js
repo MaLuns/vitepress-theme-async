@@ -6,6 +6,11 @@
 export default async () => {
 	return {
 		themeConfig: {
+			page: {
+				archives: '/archives',
+				categorys: '/categorys',
+				tags: '/tags',
+			},
 			user: {
 				name: 'ThemeAsync',
 				first_name: 'Theme',
@@ -86,6 +91,9 @@ export default async () => {
 				arrows: 'fas fa-arrows-alt-h',
 				double_arrows: 'fas fa-angle-double-down',
 				copy: 'fas fa-copy',
+			},
+			cover: {
+				type: 'img',
 			},
 		},
 	};

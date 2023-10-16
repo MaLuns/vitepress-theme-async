@@ -5,23 +5,14 @@
 		"baseUrl": ".",
 		"outDir": "./dist",
 		"target": "ESNext",
-		"module": "NodeNext",
-		"moduleResolution": "NodeNext",
+		"module": "ESNext",
+		"moduleResolution": "Node",
 		"jsx": "preserve",
-		"lib": [
-			"ESNext",
-			"DOM"
-		],
-		"types": [
-			"vite/client"
-		],
+		"lib": ["ESNext", "DOM"],
+		"types": ["vite/client"],
 		"paths": {
-			"vitepress-theme-async": [
-				"index.ts"
-			]
+			"vitepress-theme-async": ["index.ts"]
 		}
 	},
-	"include": [
-		"."
-	]
+	"include": ["."]
 }

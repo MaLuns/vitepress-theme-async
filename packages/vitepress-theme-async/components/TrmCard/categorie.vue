@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useTheme } from "../../composables/index.js";
+import { useTheme } from "../../composables/index";
 import TrmIcon from "../TrmIcon.vue";
 
 defineProps<{

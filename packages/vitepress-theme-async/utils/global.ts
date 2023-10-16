@@ -1,21 +1,4 @@
-import { getScrollTop, isInViewPortOfOne } from "./index.js";
-
-/**
- * 执行页面切换动画
- * @param wait
- * @returns
- */
-const pageLoading = (wait: number = 600): Promise<void> => {
-	return new Promise(resolve => {
-		document.querySelector('html')!.classList.add('is-animating');
-		document.querySelector<HTMLDivElement>('.trm-scroll-container')!.style.opacity = '0';
-		setTimeout(() => {
-			document.querySelector('html')!.classList.remove('is-animating');
-			document.querySelector<HTMLDivElement>('.trm-scroll-container')!.style.opacity = '1';
-			resolve();
-		}, wait);
-	});
-};
+import { getScrollTop, isInViewPortOfOne } from './index';
 
 /**
  * 执行主题切换动画
@@ -28,7 +11,7 @@ const themeLoading = (wait: number = 600): Promise<void> => {
 	/* Animated mask layers */
 	const mode_swich_animation_frame = document.querySelector<HTMLDivElement>('.trm-mode-swich-animation-frame');
 
-	if (!mode_swich_animation_frame || !scroll_container) return Promise.resolve()
+	if (!mode_swich_animation_frame || !scroll_container) return Promise.resolve();
 
 	return new Promise<void>(resolve => {
 		/* Start to switch theme animation */
@@ -60,9 +43,9 @@ const switchReadMode = () => {
 
 	const newEle = document.createElement('button');
 	newEle.type = 'button';
-	newEle.title = "退出阅读模式";
+	newEle.title = '退出阅读模式';
 	newEle.className = `trm-exit-readmode trm-glow`;
-	newEle.innerHTML = '退出'
+	newEle.innerHTML = '退出';
 	// newEle.innerHTML = utils.icons(window.ASYNC_CONFIG.icons.close, window.ASYNC_CONFIG.icontype);
 
 	type Flag = { el: HTMLElement; ratio?: number } | void;
@@ -184,7 +167,6 @@ const switchToc = (show?: boolean, x?: number, y?: number) => {
 };
 
 export default {
-	pageLoading,
 	themeLoading,
 	switchSingleColumn,
 	switchReadMode,

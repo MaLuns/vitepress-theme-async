@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import TrmTopBarLogo from "./Logo.vue";
-import TrmTopBarMenu from "./Menu.vue";
+import TrmTopBarLogo from "./TrmTopBarLogo.vue";
+import TrmTopBarMenu from "./TrmTopBarMenu.vue";
 // import TrmTopBarTheme from "./Theme.vue";
 // import TrmTopBarSearch from "./Search.vue";
 </script>

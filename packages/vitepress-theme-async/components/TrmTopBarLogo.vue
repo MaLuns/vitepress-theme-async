@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { useTheme } from "../../composables/index.js";
-import TrmSwichImgs from "../TrmSwichImgs.vue";
+import { useTheme } from "../composables/index";
+import TrmSwichImgs from "./TrmSwichImgs.vue";
 
 const theme = useTheme();
 </script>

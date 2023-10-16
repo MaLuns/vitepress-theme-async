@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { AsyncThemeConfig } from "types/index.js";
+import { AsyncThemeConfig } from "types/index";
 defineProps<{
 	banner: AsyncThemeConfig["banner"];
 }>();

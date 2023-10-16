@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { useData } from "vitepress";
-import { AsyncThemeConfig } from "types/index.js";
-import { useBanner, useSingleColumn } from "../../composables/index.js";
-import Banner from "./Banner.vue";
+import { AsyncThemeConfig } from "types/index";
+import { useBanner, useSingleColumn } from "../composables/index";
+import TrmBannerBg from "./TrmBannerBg.vue";
 
 const { page } = useData<AsyncThemeConfig>();
 const banner = useBanner();
@@ -16,7 +16,7 @@ const onScrollTo = () => {
 
 <template>
 	<div class="trm-banner">
-		<Banner :banner="banner" />
+		<TrmBannerBg :banner="banner" />
 		<div class="trm-banner-content trm-overlay">
 			<div class="container">
 				<div class="row">
