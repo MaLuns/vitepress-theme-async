@@ -65,7 +65,7 @@ const onChangePageNumber = (current: number) => {
 </script>
 
 <template>
-	<div class="trm-pagination">
+	<div v-if="pageList.length > 1" class="trm-pagination">
 		<template v-for="(page, i) in pageList" :key="page">
 			<span v-if="i > 0 && page - 1 !== pageList[i - 1]" class="space">…</span>
 			<span v-if="page === currentPage" class="page-number current">{{ page }}</span>

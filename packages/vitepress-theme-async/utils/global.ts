@@ -1,4 +1,4 @@
-import { getScrollTop, isInViewPortOfOne } from './index';
+import { getScrollTop, isInViewPortOfOne } from './client/index';
 
 /**
  * 执行主题切换动画

@@ -10,6 +10,7 @@
 	],
 	"dependencies": {
 		"@vueuse/core": "^9.6.0",
+		"gray-matter": "^4.0.3",
 		"dayjs": "^1.11.10"
 	},
 	"devDependencies": {

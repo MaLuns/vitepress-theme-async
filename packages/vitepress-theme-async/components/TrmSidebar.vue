@@ -4,7 +4,7 @@ import TrmSidebarSocial from "./TrmSidebarSocial.vue";
 import TrmSidebarInfo from "./TrmSidebarInfo.vue";
 import TrmSidebarEmail from "./TrmSidebarEmail.vue";
 import { onMounted, onUnmounted, ref } from "vue";
-import { getScrollTop } from "../utils/index";
+import { getScrollTop } from "../utils/client/index";
 
 const isFixed = ref(false);
 const sidebarRef = ref<HTMLDivElement>();

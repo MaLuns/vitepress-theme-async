@@ -6,6 +6,7 @@
 export default async () => {
 	return {
 		themeConfig: {
+			postDir: 'posts',
 			page: {
 				archives: '/archives',
 				categorys: '/categorys',

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useData } from "vitepress";
-import { formatDate } from "../../utils/index";
+import { formatDate } from "../../utils/client/index";
 import TrmSwichImgs from "../TrmSwichImgs.vue";
 import defImage from "../../assets/block.jpg";
 

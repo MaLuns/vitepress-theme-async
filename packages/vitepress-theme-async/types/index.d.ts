@@ -35,6 +35,8 @@ export interface NavItemWithChildren {
 
 export declare interface AsyncThemeConfig extends DefaultTheme.Config {
 	nav?: NavItem[];
+	timeZone?: number;
+	postDir?: string;
 
 	//  default page path
 	page?: {

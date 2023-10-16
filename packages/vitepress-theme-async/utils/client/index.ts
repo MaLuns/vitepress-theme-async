@@ -6,7 +6,7 @@ export const getScrollTop = () => {
 	const supportPageOffset = window.pageXOffset !== undefined;
 	const isCSS1Compat = (document.compatMode || '') === 'CSS1Compat';
 	return supportPageOffset ? window.pageYOffset : isCSS1Compat ? document.documentElement.scrollTop : document.body.scrollTop;
-}
+};
 
 /**
  * 窗体高度
@@ -14,13 +14,13 @@ export const getScrollTop = () => {
  */
 export const getViewPortHeight = () => {
 	return window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
-}
+};
 
 /**
-* 判断是否在可视范围内
-* @param el
-* @returns
-*/
+ * 判断是否在可视范围内
+ * @param el
+ * @returns
+ */
 export const isInViewPortOfOne = (el: HTMLElement) => {
 	const viewPortHeight = getViewPortHeight();
 	const scrollTop = getScrollTop();
@@ -38,7 +38,7 @@ export const isInViewPortOfOne = (el: HTMLElement) => {
 			is: false,
 		};
 	}
-}
+};
 
 /**
  * 时间格式化
@@ -46,28 +46,27 @@ export const isInViewPortOfOne = (el: HTMLElement) => {
  * @param format
  * @returns
  */
-export const formatDate = (date: Date | number | string | undefined, format: string): string => {
-	if (date === undefined) return ''
-	if (!(date instanceof Date)) date = new Date(date)
-
-	const year = date.getFullYear();
-	const month = date.getMonth() + 1;
-	const day = date.getDate();
-	const hour = date.getHours();
-	const minute = date.getMinutes();
-	const second = date.getSeconds();
-
-	const map: Record<string, number> = {
-		YYYY: year,
-		MM: month,
-		DD: day,
-		HH: hour,
-		mm: minute,
-		ss: second,
+export const formatDate = (d: Date | number | string | undefined, fmt: string = 'yyyy-MM-dd hh:mm:ss'): string => {
+	if (d === undefined) return '';
+	if (!(d instanceof Date)) {
+		d = new Date(d);
+	}
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	const o: any = {
+		'M+': d.getMonth() + 1, // 月份
+		'd+': d.getDate(), // 日
+		'h+': d.getHours(), // 小时
+		'm+': d.getMinutes(), // 分
+		's+': d.getSeconds(), // 秒
+		'q+': Math.floor((d.getMonth() + 3) / 3), // 季度
+		S: d.getMilliseconds(), // 毫秒
 	};
-
-	return format.replace(/YYYY|MM|DD|HH|mm|ss/g, (match: string) => {
-		const value = map[match] + "";
-		return value !== undefined ? (value.length > 1 ? value : (Array(2).fill("0").join("") + value).slice(-2)) : match;
-	});
+	if (/(y+)/.test(fmt)) {
+		fmt = fmt.replace(RegExp.$1, `${d.getFullYear()}`.substr(4 - RegExp.$1.length));
+	}
+	// eslint-disable-next-line no-restricted-syntax
+	for (const k in o) {
+		if (new RegExp(`(${k})`).test(fmt)) fmt = fmt.replace(RegExp.$1, RegExp.$1.length === 1 ? o[k] : `00${o[k]}`.substr(`${o[k]}`.length));
+	}
+	return fmt;
 };

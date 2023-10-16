@@ -31,6 +31,7 @@ export const useBanner = () => {
 	};
 };
 
+// 获取页面 url 配置
 export const usePageUrl = () => {
 	const { theme } = useData<AsyncThemeConfig>();
 	const { archives, categorys, tags } = theme.value.page ?? {};
@@ -122,6 +123,9 @@ const groupBy = <T extends Record<string, any>>(data: T[], path: string) => {
 
 // 获取所有文章
 export const useAllPosts = () => getPosts();
+
+// 获取当前页面
+export const useCurrentPost = () => {};
 
 // 获取所有标签
 export const useTags = () => groupBy(getPosts(), 'frontmatter.tags');
