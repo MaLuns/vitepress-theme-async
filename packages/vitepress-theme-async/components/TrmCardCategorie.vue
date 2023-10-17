@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { useTheme } from "../../composables/index";
-import TrmIcon from "../TrmIcon.vue";
+import { useTheme } from "../composables/index";
+import TrmIcon from "./TrmIcon.vue";
 
 defineProps<{
 	name: string;

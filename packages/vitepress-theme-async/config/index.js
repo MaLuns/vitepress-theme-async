@@ -9,7 +9,7 @@ export default async () => {
 			postDir: 'posts',
 			page: {
 				archives: '/archives',
-				categorys: '/categorys',
+				categories: '/categories',
 				tags: '/tags',
 			},
 			user: {

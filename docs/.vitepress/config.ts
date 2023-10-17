@@ -4,6 +4,7 @@ import Config from 'vitepress-theme-async/config';
 
 export default defineConfigWithTheme<AsyncThemeConfig>({
 	extends: Config,
+	cleanUrls: true,
 	themeConfig: {
 		nav: [
 			{ text: 'Home', link: '/' },
@@ -11,7 +12,7 @@ export default defineConfigWithTheme<AsyncThemeConfig>({
 				text: 'Demo',
 				items: [
 					{ text: '归档', link: '/archives' },
-					{ text: '分类', link: '/categorys' },
+					{ text: '分类', link: '/categories' },
 					{ text: '标签', link: '/tags' },
 				],
 			},

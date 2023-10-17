@@ -38,7 +38,7 @@ const singleColumn = useSingleColumn();
 						<div class="trm-page-content" :class="!singleColumn ? 'col-lg-8' : 'col-lg-12'">
 							<div id="trm-content" class="trm-content">
 								<TrmPageIndex v-if="frontmatter.index" />
-								<TrmPageArchive :key="frontmatter.layout" v-else-if="['tags', 'archives', 'categorys'].includes(frontmatter.layout)" />
+								<TrmPageArchive :key="frontmatter.layout" v-else-if="['tags', 'archives', 'categories'].includes(frontmatter.layout)" :type="frontmatter.layout" />
 								<TrmPagePost v-else />
 								<div class="trm-divider footer-divider"></div>
 								<TrmFooter />

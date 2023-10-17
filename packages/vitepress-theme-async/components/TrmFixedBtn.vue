@@ -1,9 +1,13 @@
 <script setup lang="ts">
+import { onMounted, onUnmounted, ref } from "vue";
 import { useTheme } from "../composables/index";
 import handle from "../utils/global";
 import TrmIcon from "./TrmIcon.vue";
+import { getScrollTop } from "../utils/client";
 
 const theme = useTheme();
+const offset = ref(false);
+const ratio = ref(0);
 
 const themeLoading = (wait: number = 600): Promise<void> => {
 	return new Promise<void>(resolve => {
@@ -32,10 +36,26 @@ const switchThemeMode = () => {
 const switchSingleColumn = () => {
 	document.body.classList.toggle("trm-single-column");
 };
+
+const scrollFun = () => {
+	const scrollTop = getScrollTop();
+	const { scrollHeight, clientHeight } = document.documentElement;
+	offset.value = scrollTop >= 500;
+	ratio.value = parseInt(((scrollTop / (scrollHeight - clientHeight)) * 100).toString());
+};
+
+onMounted(() => {
+	window.addEventListener("scroll", scrollFun);
+	scrollFun();
+});
+
+onUnmounted(() => {
+	window.removeEventListener("scroll", scrollFun);
+});
 </script>
 
 <template>
-	<div class="trm-fixed-container">
+	<div class="trm-fixed-container" :class="offset ? 'offset' : ''">
 		<slot name="fixed-container-before" />
 		<!-- <% if(is_toc) { %> -->
 		<div class="trm-fixed-btn post-toc-btn" data-title="<%- __('rightside.toc_title') %>">
@@ -53,7 +73,7 @@ const switchSingleColumn = () => {
 		<div class="trm-fixed-btn hidden-md" data-title="切换单双栏" @click="switchSingleColumn()">
 			<TrmIcon :icon="theme.icons!.arrows" />
 		</div>
-		<div class="trm-fixed-btn" id="trm-back-top" data-title="返回顶部">
+		<div class="trm-fixed-btn trm-back-top" :style="`background-size:100% ${ratio}%;`" data-title="返回顶部">
 			<TrmIcon :icon="theme.icons!.back_top" />
 		</div>
 		<slot name="fixed-container-after" />

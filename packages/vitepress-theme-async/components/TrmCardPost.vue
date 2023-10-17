@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { useData } from "vitepress";
-import { formatDate } from "../../utils/client/index";
-import TrmSwichImgs from "../TrmSwichImgs.vue";
-import defImage from "../../assets/block.jpg";
+import { formatDate } from "../utils/client/index";
+import TrmSwichImgs from "./TrmSwichImgs.vue";
+import defImage from "../assets/block.jpg";
 
 defineProps<{
-	post: PostFrontmatter;
+	post: Theme.PostData;
 	url: string;
 }>();
 
@@ -31,8 +31,8 @@ const { page } = useData();
 		<div v-if="page.frontmatter.index && post.sticky && post.sticky > 0" class="trm-top">置顶</div>
 		<div class="trm-card-descr">
 			<div class="trm-label trm-category trm-mb-20">
-				<a :href="post.categories ? '/categories/' + post.categories : '#.'">
-					{{ post.categories ? post.categories : "未设置" }}
+				<a :href="post.categories?.length ? '/categories/' + post.categories[0] : '#.'">
+					{{ post.categories?.length ? post.categories[0] : "未设置" }}
 				</a>
 			</div>
 			<h5>

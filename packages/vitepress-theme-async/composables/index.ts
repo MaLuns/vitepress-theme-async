@@ -1,11 +1,12 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+import dayjs from 'dayjs';
 import { AsyncThemeConfig } from 'types/index';
-import { ContentData, useData, withBase } from 'vitepress';
+import { useData, withBase } from 'vitepress';
 import { data as allPosts } from './posts.data';
-import { isObject, isString } from '@vueuse/core';
+import { groupBy, sortBy } from '../utils/client';
 
 import bannerImg from '../assets/banner.png';
-import postCoverImg from '../assets/block.jpg';
+import { Ref, WatchStopHandle, onBeforeMount, onUnmounted, ref, watch } from 'vue';
+import { useBrowserLocation } from '@vueuse/core';
 
 // import failureImg from '../assets/img/failure.ico'
 
@@ -19,6 +20,36 @@ export const useTheme = () => {
 export const useSingleColumn = () => {
 	const { frontmatter } = useData<AsyncThemeConfig>();
 	return Boolean(frontmatter.value.single_column);
+};
+
+// 监听参数变动
+export const useQueryVal = <T>(queryKey: string, def: T, fmt: (t: string | null) => T) => {
+	const query = ref<T>(def) as Ref<T>;
+	const location = useBrowserLocation();
+	let watcher: WatchStopHandle;
+	onBeforeMount(() => {
+		watcher = watch(
+			() => location.value.href,
+			val => {
+				if (val) {
+					const { searchParams } = new URL(val);
+					if (searchParams.has(queryKey)) {
+						query.value = fmt(searchParams.get(queryKey));
+					} else {
+						query.value = def;
+					}
+				}
+			},
+			{
+				immediate: true,
+			},
+		);
+	});
+
+	onUnmounted(() => {
+		watcher && watcher();
+	});
+	return query;
 };
 
 // 获取页面 banner 配置
@@ -42,96 +73,23 @@ export const usePageUrl = () => {
 	};
 };
 
-const mergeConfig = (frontmatter: Record<string, any>) => {
-	const { theme } = useData<AsyncThemeConfig>();
-	const { cover } = frontmatter;
-
-	if (isString(cover) && Array.isArray(cover)) {
-		frontmatter.cover = {
-			type: theme.value.cover?.type,
-			default: cover,
-		};
-	} else {
-		frontmatter.cover = {
-			type: theme.value.cover?.type,
-			default: theme.value.cover?.default || postCoverImg,
-			...(isObject(cover) ? cover : {}),
-		};
-	}
-
-	return frontmatter;
-};
-
-const getPosts = (() => {
-	let posts: ContentData[] = [];
-	return () => {
-		if (posts.length === 0) {
-			posts = allPosts.map(item => {
-				return {
-					...item,
-					frontmatter: mergeConfig(item.frontmatter),
-				};
-			});
-		}
-		return posts;
-	};
-})();
-
-const dataPath = (d: any, paths: string) => {
-	const keys = paths.split('.');
-	if (!isObject(d)) return;
-	const len = keys.length;
-	for (let index = 0; index < len; index++) {
-		const key = keys[index];
-		if (!isObject(d[key]) && index < len - 1) {
-			return;
-		} else {
-			d = d[key];
-		}
-	}
-	return d;
-};
-
-//
-const groupBy = <T extends Record<string, any>>(data: T[], path: string) => {
-	const map = new Map<string, number>();
-
-	const setMap = (key: string) => {
-		if (map.has(key)) {
-			map.set(key, map.get(key)! + 1);
-		} else {
-			map.set(key, 1);
-		}
-	};
-
-	data.forEach(item => {
-		const val = dataPath(item, path);
-		if ((val ?? '') !== '') {
-			if (Array.isArray(val)) {
-				for (let index = 0; index < val.length; index++) {
-					setMap(<string>val[index]);
-				}
-			} else {
-				setMap(<string>val);
-			}
-		} else {
-			setMap('');
-		}
-	});
-	return Array.from(map);
-};
-
 // 获取所有文章
-export const useAllPosts = () => getPosts();
+export const useAllPosts = (sort?: Theme.OrderByArg) => {
+	return sort ? sortBy([...allPosts], sort) : [...allPosts];
+};
 
 // 获取当前页面
 export const useCurrentPost = () => {};
 
 // 获取所有标签
-export const useTags = () => groupBy(getPosts(), 'frontmatter.tags');
+export const useTags = () => sortBy(groupBy(allPosts, 'tags'), { 1: -1 });
 
 // 获取所有分类
-export const useCategories = () => groupBy(getPosts(), 'frontmatter.categories');
+export const useCategories = () => sortBy(groupBy(allPosts, 'categories'), { 1: -1 });
 
 // 获取归档
-export const useArchives = () => {};
+export const useArchives = () =>
+	sortBy(
+		groupBy(allPosts, 'date', date => dayjs(date).format('YYYY')),
+		{ 0: -1 },
+	);

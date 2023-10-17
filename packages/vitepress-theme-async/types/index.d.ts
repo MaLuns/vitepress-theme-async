@@ -1,4 +1,4 @@
-import { DefaultTheme, Theme } from 'vitepress';
+import { Theme } from 'vitepress';
 
 declare const theme: Theme;
 
@@ -33,19 +33,31 @@ export interface NavItemWithChildren {
 
 // async-theme-config -----------------------------------------------------------------------
 
-export declare interface AsyncThemeConfig extends DefaultTheme.Config {
+export declare interface AsyncThemeConfig {
 	nav?: NavItem[];
 	timeZone?: number;
 	postDir?: string;
 
-	//  default page path
+	// Page url
 	page?: {
-		/** 归档页路径 */
+		/** archive page url */
 		archives?: string;
-		/** 分类页面 */
+		/** category page url */
 		categorys?: string;
-		/** 标签页 */
+		/** tag page url */
 		tags?: string;
+	};
+
+	// Home page setting
+	index_generator?: {
+		per_page?: number;
+		order_by?: string;
+	};
+
+	//
+	archive_generator?: {
+		per_page?: number;
+		order_by?: string;
 	};
 
 	// User info

@@ -1,9 +1,9 @@
 <script setup lang="ts">
+import { onMounted, onUnmounted, ref } from "vue";
 import TrmSidebarUser from "./TrmSidebarUser.vue";
 import TrmSidebarSocial from "./TrmSidebarSocial.vue";
 import TrmSidebarInfo from "./TrmSidebarInfo.vue";
 import TrmSidebarEmail from "./TrmSidebarEmail.vue";
-import { onMounted, onUnmounted, ref } from "vue";
 import { getScrollTop } from "../utils/client/index";
 
 const isFixed = ref(false);
@@ -32,8 +32,8 @@ onUnmounted(() => {
 });
 </script>
 <template>
-	<div ref="sidebarRef" class="trm-main-card-frame trm-sidebar" :class="[isFixed ? 'fixed' : '']">
-		<div class="trm-main-card">
+	<div ref="sidebarRef" class="trm-sidebar-card" :class="isFixed ? 'fixed' : ''">
+		<div class="trm-sidebar-main">
 			<TrmSidebarUser />
 			<TrmSidebarSocial />
 			<TrmSidebarInfo />

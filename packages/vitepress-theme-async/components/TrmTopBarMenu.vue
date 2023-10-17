@@ -9,7 +9,7 @@ const { theme } = useData<AsyncThemeConfig>();
 		<nav>
 			<ul>
 				<li v-for="(element, index) in theme.nav" :key="index" class="menu-item-has-children">
-					<a :href="element.link ? element.link : ''">
+					<a :href="element.link ? element.link : 'javascript:void(0)'">
 						{{ element.text }}
 					</a>
 					<ul v-if="element.items?.length">
