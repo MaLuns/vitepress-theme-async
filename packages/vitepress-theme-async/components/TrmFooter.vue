@@ -2,6 +2,7 @@
 import { AsyncThemeConfig } from "types/index";
 import { useData } from "vitepress";
 import { ref, onMounted } from "vue";
+import { formatDate } from "../utils/client";
 
 const { theme } = useData<AsyncThemeConfig>();
 const day = ref<number>(0);
@@ -27,25 +28,27 @@ onMounted(() => {
 				{{ theme.footer.beian.icp }}
 			</a>
 		</div>
-		<div v-if="theme?.footer?.copyrightYear" class="trm-footer-item">
-			<span>© {{ theme.footer.copyrightYear }}-</span>
+		<div v-if="theme?.footer?.copyright_year" class="trm-footer-item">
+			<span>© {{ theme.footer.copyright_year }} - {{ formatDate(new Date(), "YYYY") }}</span>
 			<span class="footer-separator" data-separator=" · "></span>
 			<span class="trm-accent-color">{{ theme.user?.name }}</span>
 		</div>
 
 		<div v-if="theme?.footer?.powered?.enable" class="trm-footer-item">
 			<span>
+				由
 				<a href="https://hexo.io" target="_blank" rel="noopener">Vitepress</a>
+				驱动
 			</span>
 			<span class="footer-separator" data-separator=" | "></span>
 			<span>
-				async -
+				主题 -
 				<a rel="noopener" href="https://github.com/MaLuns/vitepress-theme-async" target="_blank">Async</a>
 				v0.0.1
 			</span>
 		</div>
 		<div v-if="theme?.footer?.live_time?.enable" class="trm-footer-item">
-			<span id="since" class="trm-accent-color">{{}}</span>
+			<span id="since" class="trm-accent-color">博客已萌萌哒运行 {{ day }} 天</span>
 		</div>
 		<div v-if="theme?.footer?.custom_text" class="trm-footer-item" v-html="theme?.footer?.custom_text"></div>
 	</footer>

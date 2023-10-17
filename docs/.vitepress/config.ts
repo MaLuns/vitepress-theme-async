@@ -22,5 +22,15 @@ export default defineConfigWithTheme<AsyncThemeConfig>({
 		sidebar: {
 			typedText: ['Web Developer', 'UI Designer'],
 		},
+		user: {
+			email: 'admin@imalun.com',
+		},
+		footer: {
+			copyright_year: '2023',
+			live_time: {
+				enable: true,
+				start_time: '2023/10/01',
+			},
+		},
 	},
 });

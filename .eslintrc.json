@@ -23,6 +23,7 @@
 		"vue/multi-word-component-names": "off",
 		"vue/no-multiple-template-root": "off",
 		"vue/no-v-html": "off",
+		"@typescript-eslint/ban-ts-comment": "off",
 		"@typescript-eslint/no-explicit-any": "off",
 		"@typescript-eslint/no-unused-vars": [
 			"warn",

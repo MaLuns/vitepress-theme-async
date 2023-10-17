@@ -10,6 +10,8 @@ import TrmFixedBtn from "../components/TrmFixedBtn.vue";
 import TrmPageIndex from "../components/TrmPageIndex.vue";
 import TrmPagePost from "../components/TrmPagePost.vue";
 import TrmPageArchive from "../components/TrmPageArchive.vue";
+import TrmPageAbout from "../components/TrmPageAbout.vue";
+import TrmPageLinks from "../components/TrmPageLinks.vue";
 
 // import handle from "../utils/global";
 import { useSingleColumn } from "../composables/index";
@@ -39,6 +41,8 @@ const singleColumn = useSingleColumn();
 							<div id="trm-content" class="trm-content">
 								<TrmPageIndex v-if="frontmatter.index" />
 								<TrmPageArchive :key="frontmatter.layout" v-else-if="['tags', 'archives', 'categories'].includes(frontmatter.layout)" :type="frontmatter.layout" />
+								<TrmPageAbout v-else-if="frontmatter.layout === 'about'" />
+								<TrmPageLinks v-else-if="frontmatter.layout === 'links'" />
 								<TrmPagePost v-else />
 								<div class="trm-divider footer-divider"></div>
 								<TrmFooter />

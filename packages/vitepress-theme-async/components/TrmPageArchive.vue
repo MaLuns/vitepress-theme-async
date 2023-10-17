@@ -29,15 +29,17 @@ const pageList = computed(() => {
 	const startIdx = (currentPage.value - 1) * 10;
 	const endIdx = startIdx + 10;
 	let list = allPosts;
-	if (filter.value) {
-		if (["tags", "categories"].includes(props.type)) {
+	if (["tags", "categories"].includes(props.type)) {
+		list = list.filter(item => {
 			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 			//@ts-ignore
-			list = list.filter(item => item[props.type].includes(filter.value));
-			console.log(list);
-		} else {
-			list = list.filter(item => formatDate(item.date, "YYYY") === filter.value);
-		}
+			let flag = item[props.type].length > 0;
+			//@ts-ignore
+			filter.value && (flag = item[props.type].includes(filter.value));
+			return flag;
+		});
+	} else {
+		filter.value && (list = list.filter(item => formatDate(item.date, "YYYY") === filter.value));
 	}
 	return list.slice(startIdx, endIdx);
 });
@@ -61,7 +63,7 @@ const onFilter = (item: string) => {
 				</div>
 			</div>
 		</div>
-		<div class="col-lg-12">
+		<div v-if="!pageList.length" class="col-lg-12">
 			<TrmDividerTitle :title="filter || 'All'" index="01" />
 		</div>
 		<div class="col-lg-12">

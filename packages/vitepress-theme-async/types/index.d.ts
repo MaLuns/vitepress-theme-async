@@ -125,8 +125,9 @@ export declare interface AsyncThemeConfig {
 			enable: boolean;
 			icp?: string;
 		};
-		// Copyright date
-		copyrightYear?: string;
+		// copyright date
+		copyright_year?: string;
+		// run day
 		live_time?: {
 			enable?: boolean;
 			prefix?: string;
@@ -178,6 +179,19 @@ export declare interface AsyncThemeConfig {
 	cover?: {
 		default: string;
 		type: 'img' | 'date' | 'random';
+	};
+
+	rightside?: {
+		readmode?: boolean;
+		aside?: boolean;
+	};
+
+	// about page
+	about?: {
+		title?: string;
+		introduction?: string;
+		blog?: string;
+		privacy?: string;
 	};
 }
 
