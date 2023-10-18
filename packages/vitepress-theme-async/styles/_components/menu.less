@@ -52,7 +52,7 @@
 					transform: translateY(20px);
 					height: auto;
 					top: 80px;
-					left: -10px;
+					// left: -10px;
 					border-radius: 0 0 10px 10px;
 					box-shadow: var(--box-shadow2, 0 2px 4px -2px rgba(0, 0, 0, 0.15));
 					position: absolute;
@@ -73,6 +73,10 @@
 						&:after,
 						&:before {
 							display: none;
+						}
+
+						&.current-item a {
+							color: var(--primary, #afb42b);
 						}
 					}
 				}
@@ -99,68 +103,64 @@
 		text-align: center;
 		margin: 0;
 		width: 100%;
-	}
 
-	.trm-menu nav {
-		width: 100%;
-	}
+		nav {
+			width: 100%;
 
-	.trm-menu nav ul {
-		margin: 20px 0;
-		flex-direction: column;
-	}
+			ul {
+				margin: 20px 0;
+				flex-direction: column;
 
-	.trm-menu nav ul li {
-		width: 100%;
-		height: auto;
-		display: block;
-	}
+				li {
+					width: 100%;
+					height: auto;
+					display: block;
 
-	.trm-menu nav ul li:after {
-		display: none;
-	}
+					&:after {
+						display: none;
+					}
 
-	.trm-menu nav ul li a {
-		height: 50px;
-		line-height: 50px;
-	}
+					a {
+						height: 50px;
+						line-height: 50px;
+					}
 
-	/* .trm-menu nav ul li.menu-item-has-children a {
-        pointer-events: none
-    }
+					&.current-menu-item {
+						a {
+							color: var(--primary, #afb42b);
+						}
 
-    .trm-menu nav ul li.menu-item-has-children ul li a {
-        pointer-events: all
-    } */
+						ul li a {
+							color: var(--theme-color, #00283a);
+						}
+					}
 
-	.trm-menu nav ul li.current-menu-item a {
-		color: var(--primary, #afb42b);
-	}
+					ul {
+						border-radius: 0;
+						margin: 0;
+						background-color: var(--theme-bg2-color, #f4f5f7);
+						top: 0;
+						left: 0;
+						width: 100%;
+						padding: 0;
+						position: relative;
+						overflow: hidden;
+						opacity: 1;
+						transform: none;
+						margin: 0;
+						pointer-events: all;
+						max-height: 0;
+						box-shadow: var(--box-shadow2, inset 0 0 4px -1px rgba(0, 0, 0, 0.15));
+					}
 
-	.trm-menu nav ul li.current-menu-item ul li a {
-		color: var(--theme-color, #00283a);
-	}
-
-	.trm-menu nav ul li ul {
-		border-radius: 0;
-		margin: 0;
-		background-color: var(--theme-bg2-color, #f4f5f7);
-		top: 0;
-		left: 0;
-		width: 100%;
-		padding: 0;
-		position: relative;
-		overflow: hidden;
-		opacity: 1;
-		transform: none;
-		margin: 0;
-		pointer-events: all;
-		max-height: 0;
-		box-shadow: var(--box-shadow2, inset 0 0 4px -1px rgba(0, 0, 0, 0.15));
-	}
-
-	.trm-menu nav ul li:hover ul {
-		max-height: 300px;
+					&:hover {
+						ul {
+							max-height: 300px;
+						}
+					}
+				}
+			}
+		}
 	}
 }
 

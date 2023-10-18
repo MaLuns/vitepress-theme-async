@@ -2,7 +2,7 @@ import dayjs from 'dayjs';
 import { AsyncThemeConfig } from 'types/index';
 import { useData, withBase } from 'vitepress';
 import { data as allPosts } from './posts.data';
-import { groupBy, sortBy } from '../utils/client';
+import { groupBy, sortBy } from '../utils/shared';
 
 import bannerImg from '../assets/banner.png';
 import { Ref, WatchStopHandle, onBeforeMount, onUnmounted, ref, watch } from 'vue';
@@ -74,12 +74,33 @@ export const usePageUrl = () => {
 };
 
 // 获取所有文章
-export const useAllPosts = (sort?: Theme.OrderByArg) => {
-	return sort ? sortBy([...allPosts], sort) : [...allPosts];
+export const useAllPosts = (sort?: AsyncTheme.OrderByArg, filter?: (v: AsyncTheme.PostData, i: number, l: AsyncTheme.PostData[]) => boolean) => {
+	let list = allPosts;
+	if (filter) {
+		list = list.filter(filter);
+	}
+	return sort ? sortBy([...list], sort) : [...list];
 };
 
 // 获取当前页面
-export const useCurrentPost = () => {};
+export const usePrevNext = () => {
+	const { page } = useData();
+	const posts = useAllPosts();
+	const index = posts.findIndex(post => post.filePath === page.value.filePath);
+	return {
+		prev: posts[index - 1],
+		post: posts[index],
+		next: posts[index + 1],
+	};
+};
+
+// 判断当前页是否是文章页
+export const useIsPost = () => {
+	const { page } = useData();
+	const posts = useAllPosts();
+	const index = posts.findIndex(post => post.filePath === page.value.filePath);
+	return index > -1;
+};
 
 // 获取所有标签
 export const useTags = () => sortBy(groupBy(allPosts, 'tags'), { 1: -1 });
@@ -88,8 +109,10 @@ export const useTags = () => sortBy(groupBy(allPosts, 'tags'), { 1: -1 });
 export const useCategories = () => sortBy(groupBy(allPosts, 'categories'), { 1: -1 });
 
 // 获取归档
-export const useArchives = () =>
-	sortBy(
-		groupBy(allPosts, 'date', date => dayjs(date).format('YYYY')),
+export const useArchives = () => {
+	const theme = useTheme();
+	return sortBy(
+		groupBy(allPosts, 'date', date => dayjs(date).format(theme.value.archive_generator?.date_fmt || 'YYYY')),
 		{ 0: -1 },
 	);
+};

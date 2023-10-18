@@ -6,7 +6,17 @@
 export default async () => {
 	return {
 		themeConfig: {
+			author: 'async',
 			postDir: 'posts',
+			index_generator: {
+				per_page: 10,
+				order_by: '-date',
+			},
+			archive_generator: {
+				per_page: 10,
+				order_by: '-date',
+				date_fmt: 'YYYY-MM',
+			},
 			page: {
 				archives: '/archives',
 				categories: '/categories',
@@ -106,6 +116,16 @@ export default async () => {
 				</ul>`,
 				privacy:
 					'本网站不会追踪访客行为，且不要求访客提供任何敏感信息（比如真实姓名、身份证号码、手机号等），因而也不存在任何隐私泄漏问题。访客参与评论，必须遵守法律法规和基本道德规范，文明礼貌。严禁发布任何有关淫秽、反动、暴力、博彩、恐吓、低俗的内容或违法信息，在尊重言论自由的同时请保持和平与理性。请勿对他人采取不友好的评论或其它过激行为。',
+			},
+			post_pagination: {
+				enable: true,
+				type: 'small',
+			},
+			creative_commons: {
+				license: 'by-nc-sa',
+				language: 'deed.zh',
+				post: true,
+				clipboard: false,
 			},
 		},
 	};

@@ -1,21 +1,16 @@
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed, watch } from "vue";
 import { useRouter } from "vitepress";
 import { useBrowserLocation } from "@vueuse/core";
-import { useQueryVal } from "../composables";
-
-// const emits = defineEmits(["CurrentPageChange"]);
-
-// const emits = defineEmits<{
-// 	CurrentPageChange: [num: number];
-// }>();
+import { useCurrentPageIndex } from "../blog";
 
 const props = withDefaults(
 	defineProps<{
 		total: number;
-		size: number;
+		size?: number;
 	}>(),
 	{
+		total: 0,
 		size: 10,
 	},
 );
@@ -23,7 +18,7 @@ const props = withDefaults(
 const queryPageNumKey = "page";
 const router = useRouter();
 const location = useBrowserLocation();
-const currentPage = useQueryVal("page", 1, i => (isNaN(Number(i)) ? 1 : Number(i)));
+const currentPage = useCurrentPageIndex();
 
 const pageList = computed(() => {
 	const count = Math.ceil(props.total / props.size);
@@ -39,11 +34,29 @@ const onChangePageNumber = (current: number) => {
 	if (currentPage.value === current) {
 		return;
 	}
+	currentPage.value = current;
 	const { searchParams } = new URL(window.location.href!);
 	searchParams.delete(queryPageNumKey);
 	searchParams.append(queryPageNumKey, String(current));
 	router.go(`${location.value.origin}${router.route.path}?${searchParams.toString()}`);
 };
+
+watch(
+	location,
+	() => {
+		if (location.value.href) {
+			const { searchParams } = new URL(location.value.href);
+			if (searchParams.has(queryPageNumKey)) {
+				currentPage.value = Number(searchParams.get(queryPageNumKey));
+			} else {
+				currentPage.value = 1;
+			}
+		}
+	},
+	{
+		immediate: true,
+	},
+);
 </script>
 
 <template>

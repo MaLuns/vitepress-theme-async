@@ -1,12 +1,15 @@
 declare module '*.vue' {
 	import { DefineComponent } from 'vue';
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/ban-types
+	// eslint-disable-next-line @typescript-eslint/ban-types
 	const component: DefineComponent<{}, {}, any>;
 	export default component;
 }
 
 declare module 'vitepress-theme-async/config' {
-	export default any;
+	import { AsyncThemeConfig } from 'vitepress-theme-async';
+	import { UserConfig } from 'vitepress';
+	const config: UserConfig<AsyncThemeConfig>;
+	export default config;
 }
 
 declare interface Window {

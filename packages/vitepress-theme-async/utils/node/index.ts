@@ -24,3 +24,5 @@ export const getFileLastUpdateTime = (url: string) => {
 		return undefined;
 	}
 };
+
+export const slash = (p: string): string => p.replace(/\\/g, '/');

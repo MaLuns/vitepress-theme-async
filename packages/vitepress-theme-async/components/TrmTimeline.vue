@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import { formatDate } from "../utils/client";
-defineProps<{
-	list: Theme.PostData[];
-}>();
+defineProps<{ list: AsyncTheme.PostData[] }>();
 </script>
 <template>
 	<div class="trm-timeline">

@@ -1,12 +1,11 @@
 <script setup lang="ts">
 import { useData } from "vitepress";
-import { formatDate } from "../utils/client/index";
+import { formatDate } from "../utils/client";
 import TrmSwichImgs from "./TrmSwichImgs.vue";
 import defImage from "../assets/block.jpg";
 
 defineProps<{
-	post: Theme.PostData;
-	url: string;
+	post: AsyncTheme.PostData;
 }>();
 
 const { page } = useData();
@@ -14,7 +13,7 @@ const { page } = useData();
 
 <template>
 	<div class="trm-blog-card trm-scroll-animation">
-		<a :href="url" class="trm-cover-frame trm-anima-link">
+		<a :href="post.url" class="trm-cover-frame trm-anima-link">
 			<template v-if="post.cover?.type === 'date'">
 				<div class="trm-cover-date">
 					<div class="trm-cover-day">{{ formatDate(post.date, "DD") }} %></div>
@@ -36,7 +35,7 @@ const { page } = useData();
 				</a>
 			</div>
 			<h5>
-				<a :href="url" class="trm-anima-link">
+				<a :href="post.url" class="trm-anima-link">
 					{{ post.title }}
 				</a>
 			</h5>

@@ -1,6 +1,5 @@
-
-import ThemeAsync from 'vitepress-theme-async'
+import ThemeAsync from 'vitepress-theme-async';
 
 export default {
-	...ThemeAsync
-}
+	...ThemeAsync,
+};

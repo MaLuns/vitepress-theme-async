@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed } from "vue";
-import { useAllPosts, useCategories, useQueryVal, useTheme } from "../composables";
+import { useAllPosts, useCategories, useTheme } from "../composables";
+import { useCurrentPageIndex } from "../blog";
 
 import TrmCardCategorie from "./TrmCardCategorie.vue";
 import TrmCardPost from "./TrmCardPost.vue";
@@ -8,17 +9,17 @@ import TrmPagination from "./TrmPagination.vue";
 import TrmDividerTitle from "./TrmDividerTitle.vue";
 
 const theme = useTheme();
-const allPosts = useAllPosts(`-sticky ${theme.value.index_generator?.order_by || "-date"}`);
+const currentPageIndex = useCurrentPageIndex();
+const pageSize = theme.value.index_generator?.per_page || 10;
+const allPosts = useAllPosts();
 
 const categories = useCategories()
 	.sort((a, b) => b[1] - a[1])
 	.slice(0, 2);
 
-const currentPage = useQueryVal<number>("page", 1, i => (isNaN(Number(i)) ? 1 : Number(i)));
-
 const pageList = computed(() => {
-	const startIdx = (currentPage.value - 1) * 10;
-	const endIdx = startIdx + 10;
+	const startIdx = (currentPageIndex.value - 1) * pageSize;
+	const endIdx = startIdx + pageSize;
 	return allPosts.slice(startIdx, endIdx);
 });
 </script>
@@ -33,8 +34,8 @@ const pageList = computed(() => {
 			<TrmDividerTitle title="最近发布" index="01" />
 		</div>
 		<div class="col-lg-6" v-for="item in pageList" :key="item.url">
-			<TrmCardPost :post="item" :url="item.url" />
+			<TrmCardPost :post="item" />
 		</div>
 	</div>
-	<TrmPagination :total="allPosts.length" />
+	<TrmPagination :total="allPosts.length" :size="pageSize" />
 </template>

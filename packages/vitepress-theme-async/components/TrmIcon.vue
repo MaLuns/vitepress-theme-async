@@ -3,7 +3,7 @@ import { useTheme } from "../composables/index";
 const theme = useTheme();
 withDefaults(
 	defineProps<{
-		icon: string;
+		icon?: string;
 	}>(),
 	{
 		icon: "",

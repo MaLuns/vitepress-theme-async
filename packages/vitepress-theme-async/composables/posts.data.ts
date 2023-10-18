@@ -6,12 +6,14 @@ import { normalizePath } from 'vite';
 import matter from 'gray-matter';
 import path from 'node:path';
 import fs from 'node:fs';
-import { getFileBirthTime, getFileLastUpdateTime } from '../utils/node/index';
+import { getFileBirthTime, getFileLastUpdateTime, slash } from '../utils/node';
+import { sortBy } from '../utils/shared';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const config: SiteConfig<AsyncThemeConfig> = (globalThis as any).VITEPRESS_CONFIG;
+const theme = config.site.themeConfig;
 
-declare const data: Theme.PostData[];
+declare const data: AsyncTheme.PostData[];
 
 let md: MarkdownRenderer;
 const cache = /* @__PURE__ */ new Map();
@@ -19,7 +21,7 @@ const cache = /* @__PURE__ */ new Map();
 export { data };
 
 export default <LoaderModule>{
-	watch: [`${config.site.themeConfig.postDir ?? 'posts'}/**/*.md`].map(p => normalizePath(path.join(config.root, p))),
+	watch: [`${theme.postDir ?? 'posts'}/**/*.md`].map(p => normalizePath(path.join(config.root, p))),
 	async load(files) {
 		md = md || (await createMarkdownRenderer(config.srcDir, config.markdown, config.site.base, config.logger));
 		const raw = [];
@@ -46,7 +48,7 @@ export default <LoaderModule>{
 			});
 
 			// 处理创建时间 md => git => file
-			const timeZone = config.site.themeConfig?.timeZone ?? 8;
+			const timeZone = theme?.timeZone ?? 8;
 			if (!meta.date) {
 				meta.date = getFileBirthTime(file);
 				if (!meta.date) {
@@ -56,17 +58,17 @@ export default <LoaderModule>{
 				meta.date = new Date(`${new Date(meta.date).toUTCString()}+${timeZone}`).getTime();
 			}
 
-			if (!meta.lastUpdateTime) {
-				meta.lastUpdateTime = getFileLastUpdateTime(file);
+			if (!meta.lastUpdated) {
+				meta.lastUpdated = getFileLastUpdateTime(file);
 				if (!meta.lastUpdateTime) {
-					meta.lastUpdateTime = timestamp;
+					meta.lastUpdated = timestamp;
 				}
 			} else {
-				meta.lastUpdateTime = new Date(`${new Date(meta.lastUpdateTime).toUTCString()}+${timeZone}`).getTime();
+				meta.lastUpdated = new Date(`${new Date(meta.lastUpdateTime).toUTCString()}+${timeZone}`).getTime();
 			}
 
 			// 封面
-			const cover = config.site.themeConfig.cover;
+			const cover = theme.cover;
 			if (isString(meta.cover) && Array.isArray(meta.cover)) {
 				meta.cover = {
 					type: cover?.type,
@@ -104,10 +106,11 @@ export default <LoaderModule>{
 				excerpt: renderedExcerpt,
 				...meta,
 				url,
+				filePath: slash(path.relative(config.srcDir, file)),
 			};
 			cache.set(file, { data, timestamp });
 			raw.push(data);
 		}
-		return raw as Theme.PostData[];
+		return sortBy(raw, `-sticky  ${theme.index_generator?.order_by || '-date'}`) as AsyncTheme.PostData[];
 	},
 };

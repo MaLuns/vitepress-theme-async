@@ -2,199 +2,74 @@ import { Theme } from 'vitepress';
 
 declare const theme: Theme;
 
-// nav -----------------------------------------------------------------------
-
-export type NavItem = NavItemWithLink | NavItemWithChildren;
-
-export interface NavItemWithLink {
-	text: string;
-	link: string;
-	items?: never;
-
-	/**
-	 * `activeMatch` is expected to be a regex string. We can't use actual
-	 * RegExp object here because it isn't serializable
-	 */
-	activeMatch?: string;
-	target?: string;
-	rel?: string;
-}
-
-export interface NavItemWithChildren {
-	text?: string;
-	link?: string;
-	items: NavItemWithLink[];
-	/**
-	 * `activeMatch` is expected to be a regex string. We can't use actual
-	 * RegExp object here because it isn't serializable
-	 */
-	activeMatch?: string;
-}
-
 // async-theme-config -----------------------------------------------------------------------
 
 export declare interface AsyncThemeConfig {
-	nav?: NavItem[];
+	author?: string;
+
+	/* */
 	timeZone?: number;
+
+	/* */
 	postDir?: string;
 
-	// Page url
-	page?: {
-		/** archive page url */
-		archives?: string;
-		/** category page url */
-		categorys?: string;
-		/** tag page url */
-		tags?: string;
-	};
+	/* built in page path config */
+	page?: AsyncTheme.BuiltPageConfig;
 
-	// Home page setting
-	index_generator?: {
-		per_page?: number;
-		order_by?: string;
-	};
+	/* Home page setting */
+	index_generator?: Omit<AsyncTheme.PaginationConfig, 'date_fmt'>;
 
-	//
-	archive_generator?: {
-		per_page?: number;
-		order_by?: string;
-	};
+	/* */
+	archive_generator?: AsyncTheme.PaginationConfig;
 
-	// User info
-	user?: {
-		name?: string;
-		first_name?: string;
-		last_name?: string;
-		email?: string;
-		domain?: string;
-		avatar?: string;
-		dark_avatar?: string;
-		describe?: string;
-		ruleText?: string;
-	};
+	/* */
+	post_pagination?: AsyncTheme.PostPaginationConfig;
 
-	// Configure the icon information of the site
-	favicon?: {
-		logo?: string;
-		dark_logo?: string;
-		icon16?: string;
-		icon32?: string;
-		appleTouchIcon?: string;
-		webmanifest?: string;
-		visibilitychange?: boolean;
-		hidden?: string; // Displays an icon when not visible
-		showText?: string;
-		hideText?: string;
-	};
+	/* Layout top bars */
+	top_bars?: AsyncTheme.TobBarsConfig;
 
-	// Banner settings
-	banner?: {
-		type?: 'img' | 'video';
-		bgurl?: string;
-		bannerText?: string;
-		position?: string;
-		fit?: string;
-	};
+	/* User info */
+	user?: AsyncTheme.UserConfig;
 
-	// Sidebar settings
-	sidebar?: {
-		typedTextPrefix?: string;
-		typedText?: string[];
-		info?: {
-			key: string;
-			val: string;
-		}[];
-		social?: {
-			name: string;
-			icon: string;
-			url: string;
-		}[];
-	};
+	/* Configure the icon information of the site */
+	favicon?: AsyncTheme.FaviconConfig;
 
-	// Footer settings
-	footer?: {
-		// theme link (Powered by vitepress).
-		powered?: {
-			enable: boolean;
-		};
-		/**
-		 * Beian icp information for Chinese users. In China, every legal website should have a beian icp in website footer.
-		 * https://beian.miit.gov.cn/
-		 */
-		beian?: {
-			enable: boolean;
-			icp?: string;
-		};
-		// copyright date
-		copyright_year?: string;
-		// run day
-		live_time?: {
-			enable?: boolean;
-			prefix?: string;
-			start_time?: string;
-		};
-		custom_text?: string;
-	};
+	/* Banner config */
+	banner?: AsyncTheme.BannerConfig;
 
-	// The icon used by the theme
-	icons?: {
-		type: 'font' | 'symbol';
-		// Theme switch icon
-		sun: string;
-		moon: string;
-		// email icon
-		email: string;
-		// Return to the top icon
-		back_top: string;
-		toc_tag: string;
-		// Secure the button in the lower right corner
-		read: string;
-		arrows: string;
-		// Category entry icon
-		next: string;
+	/* Sidebar config */
+	sidebar?: AsyncTheme.SidebarConfig;
 
-		// // Date of article details
-		// calendar: string
-		// // Article details time
-		// clock: string
-		// // Author of article details
-		// user: string
+	/* Footer config */
+	footer?: AsyncTheme.FooterConfig;
 
-		// // close icon
-		// close: string
-		// // search icon
-		// search: string
-		// // reward icon
-		// reward: string
-		// // User information and article directory switch
-		// user_tag: string
+	/* The icon used by the theme */
+	icons?: AsyncTheme.IconsConfig;
 
-		// Code highlight fold icon
-		// double_arrows: string
-		// // Code copy icon
-		// copy: string
-	};
+	/* Customize the cover image */
+	cover?: AsyncTheme.ConverConfig;
 
-	// Customize the cover image
-	cover?: {
-		default: string;
-		type: 'img' | 'date' | 'random';
-	};
+	/* */
+	rightside?: AsyncTheme.FixedBtnConfig;
 
-	rightside?: {
-		readmode?: boolean;
-		aside?: boolean;
-	};
+	/* About page Config */
+	about?: AsyncTheme.AboutPageConfig;
 
-	// about page
-	about?: {
-		title?: string;
-		introduction?: string;
-		blog?: string;
-		privacy?: string;
-	};
+	/* Links */
+	links?: AsyncTheme.LinksConfig;
+
+	/* Reward */
+	reward?: AsyncTheme.RewardConfig;
+
+	/* Creative Commons 4.0 International License.
+	https://creativecommons.org/licenses/
+	Available values of license: by | by-nc | by-nc-nd | by-nc-sa | by-nd | by-sa | zero
+	You can set a language value if you prefer a translated version of CC license.
+	CC licenses are available in 39 languages, where you can find the specific and correct abbreviation you need.
+	Valid values of language: deed.zh, deed.en, deed.ja, etc. */
+	creative_commons?: AsyncTheme.CreativeCommonsConfig;
 }
 
 export * from './shim.d.ts';
-
+export * from './theme.d.ts';
 export default theme;

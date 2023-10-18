@@ -16,6 +16,7 @@ const onScrollTo = () => {
 
 <template>
 	<div class="trm-banner">
+		<slot name="banner-top" />
 		<TrmBannerBg :banner="banner" />
 		<div class="trm-banner-content trm-overlay">
 			<div class="container">
@@ -25,7 +26,7 @@ const onScrollTo = () => {
 						<!-- banner title -->
 						<div :class="!singleColumn ? 'trm-banner-text' : 'trm-banner-text trm-text-center'">
 							<div class="trm-label trm-mb-20">{{ banner?.bannerText }}</div>
-							<h1 class="trm-mb-30 trm-hsmb-font" v-html="page.title"></h1>
+							<h1 class="trm-mb-30 trm-hsmb-font" v-html="page.title.replace(/\\n/gs, '<br>')"></h1>
 							<ul class="trm-breadcrumbs trm-label">
 								<li>
 									<a href="/" class="trm-anima-link">Home</a>
@@ -48,5 +49,6 @@ const onScrollTo = () => {
 				</div>
 			</div>
 		</div>
+		<slot name="banner-bottom" />
 	</div>
 </template>
