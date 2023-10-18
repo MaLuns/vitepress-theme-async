@@ -21,16 +21,22 @@ const setSidebarWidth = function () {
 	}
 };
 
+const observer = new MutationObserver(() => {
+	setSidebarWidth();
+});
+
 onMounted(() => {
 	window.addEventListener("resize", setSidebarWidth);
 	window.addEventListener("scroll", scrollFun);
 	scrollFun();
 	setSidebarWidth();
+	sidebarRef.value && observer.observe(document.body, { attributeFilter: ["style", "class"] });
 });
 
 onUnmounted(() => {
 	window.removeEventListener("resize", setSidebarWidth);
 	window.removeEventListener("scroll", scrollFun);
+	observer.disconnect();
 });
 </script>
 <template>

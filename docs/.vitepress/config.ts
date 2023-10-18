@@ -71,5 +71,9 @@ export default defineConfigWithTheme<AsyncThemeConfig>({
 				},
 			],
 		},
+		rightside: {
+			readmode: true,
+			aside: true,
+		},
 	},
 });

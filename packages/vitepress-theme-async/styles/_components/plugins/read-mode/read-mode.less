@@ -92,6 +92,25 @@
 	color: var(--fixed-button-color);
 
 	&:hover {
-		color: var(--primary);
+		&::before,
+		&::after {
+			background-color: var(--primary);
+		}
+	}
+
+	&::before,
+	&::after {
+		content: "";
+		position: absolute;
+		width: 4px;
+		height: 20px;
+		border-radius: 4px;
+		background-color: var(--fixed-button-color);
+		transform: rotate(-45deg);
+		transition: background-color 0.3s;
+	}
+
+	&::before {
+		transform: rotate(45deg);
 	}
 }

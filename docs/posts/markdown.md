@@ -6,11 +6,12 @@ katex: true
 ---
 
 主题 Hexo-theme-async 文章页面适配预览。
+
 <!--more-->
 
-## Markdown 基础语法 
+## Markdown 基础语法
 
-###  标题
+### 标题
 
 ## 二级标题
 
@@ -28,9 +29,9 @@ katex: true
 
 **这个是粗体**
 
-*这个是斜体*
+_这个是斜体_
 
-***这个是粗体加斜体***
+**_这个是粗体加斜体_**
 
 ~~这里想用删除线~~
 
@@ -52,7 +53,6 @@ katex: true
   - 无序列表 2.2
     - 无序列表 2.2.1
     - 无序列表 2.2.2
-
 
 ### 有序列表
 
@@ -82,9 +82,6 @@ katex: true
 
 ![](https://markdown.com.cn/images/i-am-svg.svg)
 
-<img src="https://hexo-theme-async.imalun.com/github_star.png" align="left">
-<img src="https://hexo-theme-async.imalun.com/github_star.png" align="right">
-
 <div class="row">
   <div class="col-lg-4">
     <img src="https://hexo-theme-async.imalun.com/github_star.png">
@@ -107,12 +104,11 @@ katex: true
 
 可以使用冒号来定义表格的对齐方式，如下：
 
-| 姓名   | 年龄 |     工作 |
-| :----- | :--: | -------: |
-| 小可爱 |  18  | 吃可爱多 |
-| 小小勇敢 |  20  | 爬棵勇敢树 |
+| 姓名       | 年龄 |         工作 |
+| :--------- | :--: | -----------: |
+| 小可爱     |  18  |     吃可爱多 |
+| 小小勇敢   |  20  |   爬棵勇敢树 |
 | 小小小机智 |  22  | 看一本机智书 |
-
 
 ## 特殊语法
 
@@ -154,7 +150,6 @@ diff 不能同时和其他语言的高亮同时显示，使用效果如下:
 
 $$H(D_2) = -\left(\frac{2}{4}\log_2 \frac{2}{4} + \frac{2}{4}\log_2 \frac{2}{4}\right) = 1$$
 
-
 ### 定义列表
 
 First Term
@@ -171,21 +166,27 @@ Second Term
 - [ ] Contact the media
 
 ## HTML
+
 ### 注音标签
 
 <ruby>喜大普奔<rt>hē hē hē hē</rt></ruby>
 
-``` html
-<ruby>喜大普奔<rt>hē hē hē hē</rt></ruby>
+```html
+<ruby>
+	喜大普奔
+	<rt>hē hē hē hē</rt>
+</ruby>
 ```
 
 ### details
+
 <details>
   <summary>Async 安装方法</summary>
 
 进入您的 Hexo 博客根目录，执行：
 
-``` bash
+```bash
 npm i hexo-theme-async@latest
 ```
+
 </details>

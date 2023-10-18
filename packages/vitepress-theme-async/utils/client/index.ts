@@ -103,7 +103,6 @@ export const switchReadMode = () => {
 	newEle.type = 'button';
 	newEle.title = '退出阅读模式';
 	newEle.className = `trm-exit-readmode trm-glow`;
-	newEle.innerHTML = '退出';
 
 	type Flag = { el: HTMLElement; ratio?: number } | void;
 
@@ -172,3 +171,17 @@ export const backTop = (smooth?: boolean) => window.scrollTo({ top: 0, behavior:
  * @returns
  */
 export const formatDate = (d: Date | number | string | undefined, fmt: string = 'yyyy-MM-dd hh:mm:ss'): string => dayjs(d).format(fmt);
+
+/**
+ * 获取图标
+ * @param icon
+ * @param type
+ * @returns
+ */
+export const iconHTML = (icon: string, type: 'symbol' | 'font' = 'font') => {
+	if (type === 'symbol') {
+		return `<svg class="symbol-icon " aria-hidden="true"><use xlink:href="#${icon}"></use></svg>`;
+	} else {
+		return `<i class="iconfont ${icon}"></i>`;
+	}
+};

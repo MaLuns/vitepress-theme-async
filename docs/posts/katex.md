@@ -14,7 +14,7 @@ categories: 测试分类
 > <span>$\{x | Ax = b\}$</span>
 ```
 
-<span>$\mathcal{X}_{c^*}<1, \mathcal{X}_{q^*}<1$</span>
+
 
 $E = mc^2$
 
