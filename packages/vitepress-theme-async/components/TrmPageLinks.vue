@@ -36,15 +36,13 @@ const theme = useTheme();
 		</div>
 		<div v-for="item in theme.links" :key="item.url" class="col-lg-6">
 			<a :href="item.url" target="_blank" rel="nofollow">
-				<div class="trm-service-icon-box trm-scroll-animation trm-p-20">
-					<div class="trm-service-content">
-						<div class="trm-icon">
-							<img draggable="false" :alt="item.name" :src="item.image" />
-						</div>
-						<div class="trm-service-text">
-							<h6 class="trm-mb-10">{{ item.name }}</h6>
-							<div>{{ item.desc ? truncate(item.desc, { length: 32 }) : "" }}</div>
-						</div>
+				<div class="trm-link-box trm-scroll-animation">
+					<div class="trm-link-avatar">
+						<img draggable="false" :alt="item.name" :src="item.image" />
+					</div>
+					<div class="trm-link-text">
+						<h6 class="trm-mb-10">{{ item.name }}</h6>
+						<div>{{ item.desc ? truncate(item.desc, { length: 32 }) : "" }}</div>
 					</div>
 				</div>
 			</a>

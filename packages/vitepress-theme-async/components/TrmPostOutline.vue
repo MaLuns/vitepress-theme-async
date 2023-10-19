@@ -1,33 +1,33 @@
 <script setup lang="ts">
 import { AsyncThemeConfig } from "types";
-import { computed, ref, shallowRef } from "vue";
+import { ref, shallowRef } from "vue";
 import { onContentUpdated, useData } from "vitepress";
 import { getHeader, useActiveAnchor, resolveTitle } from "../composables/outline";
-import { useIsPost } from "../composables/index";
+import { useHasOutline } from "../composables/index";
 
 import TrmIcon from "./TrmIcon.vue";
 import TrmPostOutlineItem from "./TrmPostOutlineItem.vue";
+import { onClickOutside } from "@vueuse/core";
 
 const show = ref(false);
-const isPost = useIsPost();
 const headers = shallowRef<AsyncTheme.MenuItem[]>([]);
 const { frontmatter, theme } = useData<AsyncThemeConfig>();
+const hasOutline = useHasOutline();
+
+const container = ref();
+const marker = ref();
 
 onContentUpdated(() => {
 	headers.value = getHeader(frontmatter.value.outline ?? theme.value.outline);
 });
 
-const hasOutline = computed(() => {
-	return isPost && headers.value.length && frontmatter.value.outline !== false;
-});
-
-const container = ref();
-const marker = ref();
-
 useActiveAnchor(container, marker);
+onClickOutside(container, () => {
+	show.value = false;
+});
 </script>
 <template>
-	<div v-if="hasOutline" class="trm-fixed-btn post-toc-btn" data-title="文章目录" @click="show = !show">
+	<div v-if="hasOutline && headers.length" class="trm-fixed-btn post-toc-btn" data-title="文章目录" @click="show = !show">
 		<TrmIcon :icon="theme.icons!.toc_tag" />
 		<Teleport to="body">
 			<div ref="container" class="trm-outline" :class="show ? 'active' : ''" role="navigation">

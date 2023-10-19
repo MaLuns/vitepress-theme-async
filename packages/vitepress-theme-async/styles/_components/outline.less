@@ -74,13 +74,15 @@
 		white-space: nowrap;
 		overflow: hidden;
 		text-overflow: ellipsis;
-		transition: color 0.5s;
+		transition: color 0.3s;
 		font-weight: 400;
 
 		&.active {
 			color: var(--primary);
 		}
-
+		&:hover {
+			color: var(--primary);
+		}
 		&.nested {
 			padding-left: 13px;
 		}

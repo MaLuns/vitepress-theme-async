@@ -2,6 +2,7 @@ import { AsyncThemeConfig } from 'types';
 import { throttleAndDebounce } from '../utils/shared';
 import { DefaultTheme } from 'vitepress';
 import { Ref, onMounted, onUnmounted } from 'vue';
+import { useHasOutline } from './index';
 
 const PAGE_OFFSET = 100;
 
@@ -63,9 +64,16 @@ export const getHeader = (range?: DefaultTheme.Outline | false) => {
 };
 
 export const useActiveAnchor = (container: Ref<HTMLElement>, marker: Ref<HTMLElement>) => {
+	const hasOutline = useHasOutline();
 	let prevActiveLink: HTMLElement | null = null;
 
 	const setActiveLink = () => {
+		console.log(hasOutline.value);
+
+		if (!hasOutline.value) {
+			return;
+		}
+
 		const links = (<HTMLAnchorElement[]>[]).slice.call(container.value.querySelectorAll('.outline-link'));
 		const anchors = (<HTMLAnchorElement[]>[]).slice.call(document.querySelectorAll('.trm-publication .header-anchor')).filter(anchor => {
 			return links.some(link => {
@@ -75,7 +83,7 @@ export const useActiveAnchor = (container: Ref<HTMLElement>, marker: Ref<HTMLEle
 		const scrollY = window.scrollY;
 		const innerHeight = window.innerHeight;
 		const offsetHeight = document.body.offsetHeight;
-		const isBottom = Math.abs(scrollY + innerHeight - offsetHeight) < 1 && scrollY > 0;
+		const isBottom = Math.abs(scrollY + innerHeight - offsetHeight) < 1 && parseInt(scrollY.toFixed(0)) > 0;
 
 		// page bottom - highlight last one
 		if (anchors.length && isBottom) {

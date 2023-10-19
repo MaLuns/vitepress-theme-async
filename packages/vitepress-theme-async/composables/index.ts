@@ -6,6 +6,7 @@ import { groupBy, sortBy } from '../utils/shared';
 
 import bannerImg from '../assets/banner.png';
 import { computed } from 'vue';
+import { useMediaQuery } from '@vueuse/core';
 
 // import failureImg from '../assets/img/failure.ico'
 
@@ -30,6 +31,16 @@ export const useBanner = () => {
 			...(theme.value.banner || {}),
 			...(frontmatter.value.banner || {}),
 		};
+	});
+};
+
+//
+export const useHasOutline = () => {
+	const { frontmatter } = useData<AsyncThemeConfig>();
+	const isPost = useIsPost();
+	const is768 = useMediaQuery('(min-width: 768px)');
+	return computed(() => {
+		return isPost.value && frontmatter.value.outline !== false && is768.value;
 	});
 };
 
