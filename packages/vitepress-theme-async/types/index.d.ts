@@ -1,4 +1,4 @@
-import { Theme } from 'vitepress';
+import { Theme, DefaultTheme } from 'vitepress';
 
 declare const theme: Theme;
 
@@ -68,6 +68,9 @@ export declare interface AsyncThemeConfig {
 	CC licenses are available in 39 languages, where you can find the specific and correct abbreviation you need.
 	Valid values of language: deed.zh, deed.en, deed.ja, etc. */
 	creative_commons?: AsyncTheme.CreativeCommonsConfig;
+
+	outline?: DefaultTheme.Outline;
+	outlineTitle?: string;
 }
 
 export * from './shim.d.ts';

@@ -14,8 +14,21 @@ import TrmPageArchive from "../components/TrmPageArchive.vue";
 import TrmPageAbout from "../components/TrmPageAbout.vue";
 import TrmPageLinks from "../components/TrmPageLinks.vue";
 import { useData } from "vitepress";
+import { useIsPost } from "../composables";
+import { watch } from "vue";
 
 const { frontmatter, page } = useData();
+const isPost = useIsPost();
+
+watch(
+	() => isPost.value,
+	val => {
+		console.log(val);
+	},
+	{
+		immediate: true,
+	},
+);
 </script>
 
 <template>
@@ -31,7 +44,7 @@ const { frontmatter, page } = useData();
 				<template #topbar-right-after><slot name="topbar-right-after" /></template>
 			</TrmTopBar>
 			<!-- 指定唯一 key, 确保组件更新 -->
-			<div v-if="!page.isNotFound" class="trm-content-start" :key="page.filePath">
+			<div v-if="!page.isNotFound" class="trm-content-start">
 				<TrmBanner>
 					<template #banner-top><slot name="banner-top" /></template>
 					<template #banner-bottom><slot name="banner-bottom" /></template>

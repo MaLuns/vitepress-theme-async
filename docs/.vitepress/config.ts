@@ -75,5 +75,8 @@ export default defineConfigWithTheme<AsyncThemeConfig>({
 			readmode: true,
 			aside: true,
 		},
+		outline: {
+			level: [2, 6],
+		},
 	},
 });

@@ -166,3 +166,15 @@ export const sortBy = <T extends AnyObject>(data: T[], orderby: AsyncTheme.Order
 		return 0;
 	});
 };
+
+export const throttleAndDebounce = (fn: () => void, delay: number) => {
+	let timeoutId: any;
+	let called = false;
+	return () => {
+		if (timeoutId) clearTimeout(timeoutId);
+		if (!called) {
+			fn();
+			(called = true) && setTimeout(() => (called = false), delay);
+		} else timeoutId = setTimeout(fn, delay);
+	};
+};

@@ -13,23 +13,24 @@ const singleColumn = useSingleColumn();
 const scrollFun = () => {
 	const top = getScrollTop();
 	isFixed.value = top >= 70;
+	if (isFixed.value) {
+		setSidebarWidth();
+	}
 };
 
 const setSidebarWidth = function () {
 	if (sidebarRef.value) {
-		sidebarRef.value.style.width = window.innerWidth > 992 ? `${sidebarRef.value.parentElement!.clientWidth - 40}px` : "auto";
+		sidebarRef.value.style.width = isFixed.value && window.innerWidth > 992 ? `${sidebarRef.value.parentElement!.clientWidth - 40}px` : "auto";
 	}
 };
 
-const observer = new MutationObserver(() => {
-	setSidebarWidth();
-});
+const observer = new MutationObserver(() => setSidebarWidth());
 
 onMounted(() => {
 	window.addEventListener("resize", setSidebarWidth);
 	window.addEventListener("scroll", scrollFun);
 	scrollFun();
-	setSidebarWidth();
+	// fix: 阅读模式或单栏模式时 sidebar 宽度为 0, 监听 body class 变动, 移除后重设宽度
 	sidebarRef.value && observer.observe(document.body, { attributeFilter: ["style", "class"] });
 });
 

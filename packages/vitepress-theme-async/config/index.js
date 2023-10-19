@@ -127,6 +127,10 @@ export default async () => {
 				post: true,
 				clipboard: false,
 			},
+			outline: {
+				level: [2, 3],
+				label: '目录列表',
+			},
 		},
 	};
 };

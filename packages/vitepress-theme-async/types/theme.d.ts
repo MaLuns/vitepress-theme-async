@@ -89,6 +89,13 @@ declare namespace AsyncTheme {
 		image: string;
 		desc?: string;
 	}
+
+	interface MenuItem {
+		title: string;
+		link: string;
+		level: number;
+		children?: MenuItem[];
+	}
 }
 
 declare namespace AsyncTheme {

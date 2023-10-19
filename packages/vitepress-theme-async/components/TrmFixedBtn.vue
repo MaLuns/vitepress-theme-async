@@ -1,11 +1,12 @@
 <script setup lang="ts">
-import { computed, onMounted, onUnmounted, ref } from "vue";
+import { onMounted, onUnmounted, ref } from "vue";
 import { AsyncThemeConfig } from "types";
 import { useIsPost } from "../composables/index";
 import { useData } from "vitepress";
 import { getScrollTop, backTop, switchThemeMode, switchReadMode, switchSingleColumn } from "../utils/client";
 
 import TrmIcon from "./TrmIcon.vue";
+import TrmPostOutline from "./TrmPostOutline.vue";
 
 const offset = ref(false);
 const ratio = ref(0);
@@ -18,10 +19,6 @@ const scrollFun = () => {
 	offset.value = scrollTop >= 420;
 	ratio.value = parseInt(((scrollTop / (scrollHeight - clientHeight)) * 100).toString());
 };
-
-const hasToc = computed(() => {
-	return isPost;
-});
 
 onMounted(() => {
 	window.addEventListener("scroll", scrollFun);
@@ -36,9 +33,7 @@ onUnmounted(() => {
 <template>
 	<div class="trm-fixed-container" :class="offset ? 'offset' : ''">
 		<slot name="fixed-btn-top" />
-		<div v-if="hasToc" class="trm-fixed-btn post-toc-btn" data-title="文章目录">
-			<TrmIcon :icon="theme.icons!.toc_tag" />
-		</div>
+		<TrmPostOutline />
 		<div class="trm-fixed-btn" data-title="切换主题模式" @click="switchThemeMode()">
 			<TrmIcon class="trm-dark-icon" :icon="theme.icons!.sun" />
 			<TrmIcon class="trm-light-icon" :icon="theme.icons!.moon" />
