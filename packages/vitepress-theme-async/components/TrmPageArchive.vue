@@ -81,5 +81,6 @@ const onFilter = (item: string) => {
 <style scoped>
 .trm-list-item {
 	margin: 6px 0;
+	cursor: pointer;
 }
 </style>

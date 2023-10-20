@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { AsyncThemeConfig } from "types/index";
-import { useData } from "vitepress";
+import { useData, withBase } from "vitepress";
 import { isActive } from "../utils/shared";
 
 const { theme, page } = useData<AsyncThemeConfig>();
@@ -17,18 +17,12 @@ const { theme, page } = useData<AsyncThemeConfig>();
 						'current-menu-item': isActive(page.relativePath, element.activeMatch || element.url, !!element.activeMatch),
 					}"
 				>
-					<a :href="element.url ? element.url : 'javascript:void(0)'" :target="element?.target" :rel="element?.rel">
+					<a :href="element.url ? withBase(element.url) : 'javascript:void(0)'" :target="element?.target" :rel="element?.rel">
 						{{ element.title }}
 					</a>
 					<ul v-if="element.children?.length">
-						<li
-							v-for="(item, idx) in element.children"
-							:key="idx"
-							:class="{
-								'current-item': isActive(page.relativePath, item.activeMatch || item.url, !!item.activeMatch),
-							}"
-						>
-							<a :href="item.url" :target="item.target" :rel="item.rel">
+						<li v-for="(item, idx) in element.children" :key="idx" :class="{ 'current-item': isActive(page.relativePath, item.activeMatch || item.url, !!item.activeMatch) }">
+							<a :href="withBase(item.url)" :target="item.target" :rel="item.rel">
 								{{ item.title }}
 							</a>
 						</li>

@@ -8,10 +8,7 @@ declare module '*.vue' {
 declare module 'vitepress-theme-async/config' {
 	import { AsyncThemeConfig } from 'vitepress-theme-async';
 	import { UserConfig } from 'vitepress';
-	const config: UserConfig<AsyncThemeConfig>;
-	export default config;
-}
 
-declare interface Window {
-	changeGiscusTheme: () => void;
+	export const defineConfig: (config: UserConfig<AsyncThemeConfig>) => UserConfig<AsyncThemeConfig>;
+	export const defaultConfig: AsyncThemeConfig;
 }

@@ -96,16 +96,18 @@
 	}
 }
 
-/* 自定义块 */
-.trm-note {
+/* custom-block */
+.custom-block {
 	border-radius: 4px;
 	border: 1px solid transparent;
 	padding: 16px 16px 8px;
-	background-color: var(--note-info-bg-color);
 	margin: 1rem 0;
 
-	.trm-note-title {
+	.custom-block-title {
 		font-weight: 600;
+		line-height: 24px;
+		font-size: 14px;
+		margin: 0;
 	}
 
 	&.info {
@@ -127,23 +129,33 @@
 	p {
 		margin: 8px 0;
 	}
+
+	div[class*="language-"] {
+		margin: 8px 0;
+		border-radius: 8px;
+
+		code {
+			font-weight: 400;
+			background-color: transparent;
+		}
+	}
 }
 
 details {
 	margin: 1rem 0;
-	padding: 16px 16px 8px;
+	padding: 16px 16px !important;
 	border-radius: 4px;
-	border: 1px solid var(--tab-border-color);
+	background: var(--note-details-bg-color);
+	border: 1px solid var(--note-details-bg-color);
 
 	&[open] {
 		summary {
-			margin: -16px -16px 16px;
+			margin: -16px -16px 0;
 		}
 	}
 
 	summary {
-		background: var(--tab-botton-bg-color);
-		color: var(--tab-botton-color);
+		background: var(--note-details-bg-color);
 		padding: 16px 16px;
 		margin: -16px;
 		cursor: pointer;
@@ -189,5 +201,376 @@ blockquote {
 		bottom: -16px;
 		right: 16px;
 		font-size: 54px;
+	}
+}
+
+/**
+ * Code
+ * -------------------------------------------------------------------------- */
+
+/* inline code */
+.trm-publication {
+	:not(pre, h1, h2, h3, h4, h5, h6) > code {
+		font-size: var(--code-font-size);
+		color: var(--code-color);
+	}
+
+	:not(pre) > code {
+		border-radius: 4px;
+		padding: 3px 6px;
+		background-color: var(--code-bg);
+		transition:
+			color 0.25s,
+			background-color 0.5s;
+	}
+
+	a > code {
+		color: var(--code-link-color);
+	}
+
+	a:hover > code {
+		color: var(--code-link-hover-color);
+	}
+
+	h1 > code,
+	h2 > code,
+	h3 > code {
+		font-size: 0.9em;
+	}
+}
+
+div[class*="language-"] + div[class*="language-"],
+div[class$="-api"] + div[class*="language-"],
+div[class*="language-"] + div[class$="-api"] > div[class*="language-"] {
+	margin-top: -8px;
+}
+
+[class*="language-"] {
+	pre,
+	code {
+		/*rtl:ignore*/
+		direction: ltr;
+		/*rtl:ignore*/
+		text-align: left;
+		white-space: pre;
+		word-spacing: normal;
+		word-break: normal;
+		word-wrap: normal;
+		-moz-tab-size: 4;
+		-o-tab-size: 4;
+		tab-size: 4;
+		-webkit-hyphens: none;
+		-moz-hyphens: none;
+		-ms-hyphens: none;
+		hyphens: none;
+	}
+
+	pre {
+		position: relative;
+		z-index: 1;
+		margin: 0;
+		padding: 20px 0;
+		background: transparent;
+		overflow-x: auto;
+	}
+
+	code {
+		display: block;
+		padding: 0 24px;
+		width: fit-content;
+		min-width: 100%;
+		line-height: var(--code-line-height);
+		font-size: var(--code-font-size);
+		color: var(--code-block-color);
+		transition: color 0.5s;
+
+		.highlighted {
+			background-color: var(--code-line-highlight-color);
+			transition: background-color 0.5s;
+			margin: 0 -24px;
+			padding: 0 24px;
+			width: calc(100% + 2 * 24px);
+			display: inline-block;
+
+			&.error {
+				background-color: var(--code-line-error-color);
+			}
+
+			&.warning {
+				background-color: var(--code-line-warning-color);
+			}
+		}
+
+		.diff {
+			transition: background-color 0.5s;
+			margin: 0 -24px;
+			padding: 0 24px;
+			width: calc(100% + 2 * 24px);
+			display: inline-block;
+
+			&::before {
+				position: absolute;
+				left: 10px;
+			}
+
+			&.remove {
+				background-color: var(--code-line-diff-remove-color);
+				opacity: 0.7;
+
+				&::before {
+					content: "-";
+					color: var(--code-line-diff-remove-symbol-color);
+				}
+			}
+
+			.add {
+				background-color: var(--code-line-diff-add-color);
+
+				&::before {
+					content: "+";
+					color: var(--code-line-diff-add-symbol-color);
+				}
+			}
+		}
+	}
+
+	.has-focused-lines {
+		.line:not(.has-focus) {
+			filter: blur(0.095rem);
+			opacity: 0.4;
+			transition:
+				filter 0.35s,
+				opacity 0.35s;
+		}
+
+		.line:not(.has-focus) {
+			opacity: 0.7;
+			transition:
+				filter 0.35s,
+				opacity 0.35s;
+		}
+	}
+
+	&:hover {
+		.has-focused-lines {
+			.line:not(.has-focus) {
+				filter: blur(0);
+				opacity: 1;
+			}
+		}
+	}
+
+	> button.copy {
+		/*rtl:ignore*/
+		direction: ltr;
+		position: absolute;
+		top: 12px;
+		/*rtl:ignore*/
+		right: 12px;
+		z-index: 3;
+		border: 1px solid var(--code-copy-code-border-color);
+		border-radius: 4px;
+		width: 40px;
+		height: 40px;
+		background-color: var(--code-copy-code-bg);
+		opacity: 0;
+		cursor: pointer;
+		background-image: var(--code-icon-copy);
+		background-position: 50%;
+		background-size: 20px;
+		background-repeat: no-repeat;
+		transition:
+			border-color 0.25s,
+			background-color 0.25s,
+			opacity 0.25s;
+	}
+
+	&:hover > button.copy,
+	& > button.copy:focus {
+		opacity: 1;
+	}
+
+	& > button.copy:hover,
+	& > button.copy.copied {
+		border-color: var(--code-copy-code-hover-border-color);
+		background-color: var(--code-copy-code-hover-bg);
+	}
+
+	& > button.copy.copied,
+	& > button.copy:hover.copied {
+		/*rtl:ignore*/
+		border-radius: 0 4px 4px 0;
+		background-color: var(--code-copy-code-hover-bg);
+		background-image: var(--code-icon-copied);
+	}
+
+	& > button.copy.copied::before,
+	& > button.copy:hover.copied::before {
+		position: relative;
+		top: -1px;
+		/*rtl:ignore*/
+		transform: translateX(calc(-100% - 1px));
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		border: 1px solid var(--code-copy-code-hover-border-color);
+		/*rtl:ignore*/
+		border-right: 0;
+		border-radius: 4px 0 0 4px;
+		padding: 0 10px;
+		width: fit-content;
+		height: 40px;
+		text-align: center;
+		font-size: 12px;
+		font-weight: 500;
+		color: var(--code-copy-code-active-text);
+		background-color: var(--code-copy-code-hover-bg);
+		white-space: nowrap;
+		content: var(--code-copy-copied-text-content);
+	}
+
+	> span.lang {
+		position: absolute;
+		top: 2px;
+		/*rtl:ignore*/
+		right: 8px;
+		z-index: 2;
+		font-size: 12px;
+		font-weight: 500;
+		color: var(--code-lang-color);
+		transition:
+			color 0.4s,
+			opacity 0.4s;
+	}
+
+	&:hover > button.copy + span.lang,
+	& > button.copy:focus + span.lang {
+		opacity: 0;
+	}
+
+	.line-numbers-wrapper {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		/*rtl:ignore*/
+		left: 0;
+		z-index: 3;
+		/*rtl:ignore*/
+		border-right: 1px solid var(--code-block-divider-color);
+		padding-top: 20px;
+		width: 32px;
+		text-align: center;
+		font-family: var(--vp-font-family-mono);
+		line-height: var(--code-line-height);
+		font-size: var(--code-font-size);
+		color: var(--code-line-number-color);
+		transition:
+			border-color 0.5s,
+			color 0.5s;
+	}
+}
+
+div[class*="language-"] {
+	position: relative;
+	margin: 16px -24px;
+	background-color: var(--code-block-bg);
+	overflow-x: auto;
+	transition: background-color 0.5s;
+
+	&.line-numbers-mode {
+		/*rtl:ignore*/
+		padding-left: 32px;
+	}
+
+	@media (min-width: 640px) {
+		border-radius: 8px;
+		margin: 16px 0;
+	}
+}
+
+@media (max-width: 639px) {
+	li div[class*="language-"] {
+		border-radius: 8px 0 0 8px;
+	}
+}
+
+/* group code */
+.vp-code-group {
+	margin-top: 16px;
+
+	.tabs {
+		position: relative;
+		display: flex;
+		margin-right: -24px;
+		margin-left: -24px;
+		padding: 0 12px;
+		background-color: var(--code-tab-bg);
+		overflow-x: auto;
+		overflow-y: hidden;
+		box-shadow: inset 0 -1px var(--code-tab-divider);
+
+		input {
+			position: fixed;
+			opacity: 0;
+			pointer-events: none;
+
+			&:checked + label {
+				color: var(--code-tab-active-text-color);
+			}
+
+			&:checked + label::after {
+				background-color: var(--code-tab-active-bar-color);
+			}
+		}
+
+		label {
+			position: relative;
+			display: inline-block;
+			border-bottom: 1px solid transparent;
+			padding: 0 12px;
+			line-height: 48px;
+			font-size: 14px;
+			font-weight: 500;
+			color: var(--code-tab-text-color);
+			white-space: nowrap;
+			cursor: pointer;
+			transition: color 0.25s;
+
+			&::after {
+				position: absolute;
+				right: 8px;
+				bottom: -1px;
+				left: 8px;
+				z-index: 1;
+				height: 2px;
+				border-radius: 2px;
+				content: "";
+				background-color: transparent;
+				transition: background-color 0.25s;
+			}
+
+			&:hover {
+				color: var(--code-tab-hover-text-color);
+			}
+		}
+	}
+
+	@media (min-width: 640px) {
+		.tabs {
+			margin-right: 0;
+			margin-left: 0;
+			border-radius: 8px 8px 0 0;
+		}
+	}
+
+	div[class*="language-"] {
+		display: none;
+		margin-top: 0 !important;
+		border-top-left-radius: 0 !important;
+		border-top-right-radius: 0 !important;
+
+		&.active {
+			display: block;
+		}
 	}
 }

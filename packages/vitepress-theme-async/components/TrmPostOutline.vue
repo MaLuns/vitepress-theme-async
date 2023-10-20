@@ -29,17 +29,19 @@ onClickOutside(container, () => {
 <template>
 	<div v-if="hasOutline && headers.length" class="trm-fixed-btn post-toc-btn" data-title="文章目录" @click="show = !show">
 		<TrmIcon :icon="theme.icons!.toc_tag" />
-		<Teleport to="body">
-			<div ref="container" class="trm-outline" :class="show ? 'active' : ''" role="navigation">
-				<div ref="marker" class="trm-outline-mask"></div>
-				<div class="trm-outline-title">
-					{{ resolveTitle(theme) }}
+		<ClientOnly>
+			<Teleport to="body">
+				<div ref="container" class="trm-outline" :class="show ? 'active' : ''" role="navigation">
+					<div ref="marker" class="trm-outline-mask"></div>
+					<div class="trm-outline-title">
+						{{ resolveTitle(theme) }}
+					</div>
+					<nav aria-labelledby="doc-outline-aria-label">
+						<TrmPostOutlineItem :headers="headers" :root="true" />
+					</nav>
 				</div>
-				<nav aria-labelledby="doc-outline-aria-label">
-					<TrmPostOutlineItem :headers="headers" :root="true" />
-				</nav>
-			</div>
-		</Teleport>
+			</Teleport>
+		</ClientOnly>
 	</div>
 </template>
 <style lang="less" scoped></style>

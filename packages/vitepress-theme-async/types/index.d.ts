@@ -5,12 +5,13 @@ declare const theme: Theme;
 // async-theme-config -----------------------------------------------------------------------
 
 export declare interface AsyncThemeConfig {
+	/* author */
 	author?: string;
 
 	/* */
 	timeZone?: number;
 
-	/* */
+	/*  */
 	postDir?: string;
 
 	/* built in page path config */

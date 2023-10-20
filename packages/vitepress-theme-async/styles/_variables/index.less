@@ -77,10 +77,54 @@
 	--note-tip-bg-color: #646cff29;
 	--note-warning-bg-color: #eab30829;
 	--note-danger-bg-color: #f43f5e29;
+	--note-details-bg-color: #eaeaea;
 
 	// ::selection
 	--selection-bg-color: #1f2d3d;
 	--selection-color: #f1f1f1;
+
+	// Code
+	--code-line-height: 1.7;
+	--code-font-size: 0.875em;
+	--code-color: #3451b2;
+	--code-link-color: #3451b2;
+	--code-link-hover-color: #3a5ccc;
+	--code-bg: rgba(142, 150, 170, 0.14);
+
+	--code-block-color: rgba(60, 60, 67, 0.78);
+	--code-block-bg: #f6f6f7;
+	--code-block-divider-color: #e2e2e3;
+
+	--code-lang-color: rgba(60, 60, 67, 0.56);
+
+	--code-line-highlight-color: rgba(142, 150, 170, 0.14);
+	--code-line-number-color: rgba(60, 60, 67, 0.56);
+
+	--code-line-diff-add-color: rgba(16, 185, 129, 0.14);
+	--code-line-diff-add-symbol-color: #18794e;
+
+	--code-line-diff-remove-color: rgba(244, 63, 94, 0.14);
+	--code-line-diff-remove-symbol-color: #b8272c;
+
+	--code-line-warning-color: rgba(234, 179, 8, 0.14);
+	--code-line-error-color: rgba(244, 63, 94, 0.14);
+
+	--code-copy-code-border-color: #e2e2e3;
+	--code-copy-code-bg: #f6f6f7;
+	--code-copy-code-hover-border-color: #e2e2e3;
+	--code-copy-code-hover-bg: #ffffff;
+	--code-copy-code-active-text: rgba(60, 60, 67, 0.78);
+	--code-copy-copied-text-content: "Copied";
+
+	--code-tab-divider: #e2e2e3;
+	--code-tab-text-color: rgba(60, 60, 67, 0.78);
+	--code-tab-bg: #f6f6f7;
+	--code-tab-hover-text-color: rgba(60, 60, 67);
+	--code-tab-active-text-color: rgba(60, 60, 67);
+	--code-tab-active-bar-color: #3451b2;
+
+	--code-icon-copy: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' height='20' width='20' stroke='rgba(128,128,128,1)' stroke-width='2' viewBox='0 0 24 24'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2'/%3E%3C/svg%3E");
+	--code-icon-copied: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' height='20' width='20' stroke='rgba(128,128,128,1)' stroke-width='2' viewBox='0 0 24 24'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2m-6 9 2 2 4-4'/%3E%3C/svg%3E");
 }
 
 .dark() {
@@ -128,20 +172,55 @@
 	// scroll progress
 	--scroll-progress-bg-color: linear-gradient(#82df7a80, #82df7a80);
 
+	// note
+	--note-details-bg-color: #272a2f;
+
 	// ::selection
 	--selection-bg-color: #f1f1f1;
 	--selection-color: #1f2d3d;
+
+	// code
+	--code-color: #a8b1ff;
+	--code-link-color: #a8b1ff;
+	--code-link-hover-color: #5c73e7;
+	--code-bg: rgba(101, 117, 133, 0.16);
+
+	--code-block-color: rgba(235, 235, 245, 0.6);
+	--code-block-bg: #161618;
+	--code-block-divider-color: #000000;
+
+	--code-lang-color: rgba(235, 235, 245, 0.38);
+
+	--code-line-highlight-color: rgba(101, 117, 133, 0.16);
+	--code-line-number-color: rgba(235, 235, 245, 0.38);
+
+	--code-line-diff-add-color: rgba(16, 185, 129, 0.16);
+	--code-line-diff-add-symbol-color: #3dd68c;
+
+	--code-line-diff-remove-color: rgba(244, 63, 94, 0.16);
+	--code-line-diff-remove-symbol-color: #f66f81;
+
+	--code-line-warning-color: rgba(234, 179, 8, 0.16);
+	--code-line-error-color: rgba(244, 63, 94, 0.16);
+
+	--code-copy-code-border-color: #2e2e32;
+	--code-copy-code-bg: #202127;
+	--code-copy-code-hover-border-color: #2e2e32;
+	--code-copy-code-hover-bg: #1b1b1f;
+	--code-copy-code-active-text: rgba(235, 235, 245, 0.6);
+	--code-copy-copied-text-content: "Copied";
+
+	--code-tab-divider: #000000;
+	--code-tab-text-color: rgba(235, 235, 245, 0.6);
+	--code-tab-bg: #161618;
+	--code-tab-hover-text-color: rgba(255, 255, 245, 0.86);
+	--code-tab-active-text-color: rgba(255, 255, 245, 0.86);
+	--code-tab-active-bar-color: #a8b1ff;
 }
 
 :root.dark {
 	.dark();
 }
-
-/* @media (prefers-color-scheme: dark) {
-    :root {
-        .dark()
-    }
-} */
 
 @media (max-width: 768px) {
 	:root {
@@ -174,4 +253,12 @@
 	display: -webkit-box;
 	-webkit-box-orient: vertical;
 	-webkit-line-clamp: @line;
+}
+
+.dark .vp-code-light {
+	display: none;
+}
+
+html:not(.dark) .vp-code-dark {
+	display: none;
 }

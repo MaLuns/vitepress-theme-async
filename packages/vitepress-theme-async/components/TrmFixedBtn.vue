@@ -3,7 +3,7 @@ import { onMounted, onUnmounted, ref } from "vue";
 import { AsyncThemeConfig } from "types";
 import { useIsPost } from "../composables/index";
 import { useData } from "vitepress";
-import { getScrollTop, backTop, switchThemeMode, switchReadMode, switchSingleColumn } from "../utils/client";
+import { getScrollTop, backTop, themeLoading, switchReadMode, switchSingleColumn, setThemeColor } from "../utils/client";
 
 import TrmIcon from "./TrmIcon.vue";
 import TrmPostOutline from "./TrmPostOutline.vue";
@@ -11,7 +11,7 @@ import TrmPostOutline from "./TrmPostOutline.vue";
 const offset = ref(false);
 const ratio = ref(0);
 const isPost = useIsPost();
-const { theme, frontmatter } = useData<AsyncThemeConfig>();
+const { theme, frontmatter, isDark } = useData<AsyncThemeConfig>();
 
 const scrollFun = () => {
 	const scrollTop = getScrollTop();
@@ -23,11 +23,20 @@ const scrollFun = () => {
 onMounted(() => {
 	window.addEventListener("scroll", scrollFun);
 	scrollFun();
+
+	onUnmounted(() => {
+		window.removeEventListener("scroll", scrollFun);
+	});
 });
 
-onUnmounted(() => {
-	window.removeEventListener("scroll", scrollFun);
-});
+const switchThemeMode = () => {
+	themeLoading().then(() => {
+		const fun = isDark.value ? "add" : "remove";
+		document.querySelector(".trm-mode-swich-animation")?.classList[fun]("trm-active");
+		isDark.value = !isDark.value;
+		setThemeColor();
+	});
+};
 </script>
 
 <template>

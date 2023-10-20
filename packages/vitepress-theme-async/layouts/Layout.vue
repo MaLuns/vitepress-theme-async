@@ -14,21 +14,8 @@ import TrmPageArchive from "../components/TrmPageArchive.vue";
 import TrmPageAbout from "../components/TrmPageAbout.vue";
 import TrmPageLinks from "../components/TrmPageLinks.vue";
 import { useData } from "vitepress";
-import { useIsPost } from "../composables";
-import { watch } from "vue";
 
 const { frontmatter, page } = useData();
-const isPost = useIsPost();
-
-watch(
-	() => isPost.value,
-	val => {
-		console.log(val);
-	},
-	{
-		immediate: true,
-	},
-);
 </script>
 
 <template>

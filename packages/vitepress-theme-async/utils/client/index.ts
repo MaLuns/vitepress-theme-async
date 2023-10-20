@@ -79,22 +79,6 @@ export const themeLoading = (wait: number = 600): Promise<void> => {
 };
 
 /**
- * 切换主题
- * @param type
- */
-export const switchThemeMode = () => {
-	themeLoading().then(() => {
-		const type = document.documentElement.classList.contains('dark') ? 'style-light' : 'style-dark';
-		const fun = type === 'style-dark' ? 'add' : 'remove';
-		document.querySelector('.trm-mode-swich-animation')?.classList[fun]('trm-active');
-		document.documentElement.classList[fun]('dark');
-
-		localStorage.setItem('theme-mode', type);
-		setThemeColor();
-	});
-};
-
-/**
  * 阅读模式切换
  */
 export const switchReadMode = () => {

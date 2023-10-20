@@ -63,13 +63,12 @@ export const getHeader = (range?: DefaultTheme.Outline | false) => {
 	return resolveHeaders(headers, range);
 };
 
+// 设置目录锚点
 export const useActiveAnchor = (container: Ref<HTMLElement>, marker: Ref<HTMLElement>) => {
 	const hasOutline = useHasOutline();
 	let prevActiveLink: HTMLElement | null = null;
 
 	const setActiveLink = () => {
-		console.log(hasOutline.value);
-
 		if (!hasOutline.value) {
 			return;
 		}
@@ -126,10 +125,10 @@ export const useActiveAnchor = (container: Ref<HTMLElement>, marker: Ref<HTMLEle
 	onMounted(() => {
 		requestAnimationFrame(setActiveLink);
 		window.addEventListener('scroll', onScroll);
-	});
 
-	onUnmounted(() => {
-		window.removeEventListener('scroll', onScroll);
+		onUnmounted(() => {
+			window.removeEventListener('scroll', onScroll);
+		});
 	});
 };
 

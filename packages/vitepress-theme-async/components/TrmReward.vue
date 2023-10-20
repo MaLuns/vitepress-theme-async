@@ -20,7 +20,7 @@ const theme = useTheme();
 				<a rel="noopener noreferrer" :href="method.link ? method.link : method.path" target="_blank">
 					<img :src="method.path" :alt="method.name" loading="lazy" />
 				</a>
-				<p>{{ method.name }}></p>
+				<p>{{ method.name }}</p>
 			</div>
 		</div>
 	</div>

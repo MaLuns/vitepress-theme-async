@@ -1,10 +1,9 @@
 <script setup lang="ts">
-import { useData } from "vitepress";
-import { AsyncThemeConfig } from "types/index";
+import { useData, withBase } from "vitepress";
 import { useBanner, useSingleColumn } from "../composables/index";
 import TrmBannerBg from "./TrmBannerBg.vue";
 
-const { page } = useData<AsyncThemeConfig>();
+const { page } = useData();
 const banner = useBanner();
 const singleColumn = useSingleColumn();
 
@@ -26,10 +25,10 @@ const onScrollTo = () => {
 						<!-- banner title -->
 						<div :class="!singleColumn ? 'trm-banner-text' : 'trm-banner-text trm-text-center'">
 							<div class="trm-label trm-mb-20">{{ banner?.bannerText }}</div>
-							<h1 class="trm-mb-30 trm-hsmb-font" v-html="page.title.replace(/\\n/gs, '<br>')"></h1>
+							<h1 class="trm-mb-30 trm-hsmb-font" v-html="banner?.bannerTitle"></h1>
 							<ul class="trm-breadcrumbs trm-label">
 								<li>
-									<a href="/" class="trm-anima-link">Home</a>
+									<a :href="withBase('/')" class="trm-anima-link">Home</a>
 								</li>
 								<li>
 									<span>

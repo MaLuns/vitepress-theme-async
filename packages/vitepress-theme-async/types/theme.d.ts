@@ -133,6 +133,7 @@ declare namespace AsyncTheme {
 	interface BannerConfig {
 		type?: 'img' | 'video';
 		bgurl?: string;
+		bannerTitle?: string;
 		bannerText?: string;
 		position?: string;
 		fit?: string;

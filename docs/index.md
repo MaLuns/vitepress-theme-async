@@ -1,4 +1,4 @@
 ---
-title: 树深时见鹿，\n溪午不闻钟。
+title: 首页
 index: true
 ---

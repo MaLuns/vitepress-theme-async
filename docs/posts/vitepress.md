@@ -2,6 +2,7 @@
 title: Markdown Extensions
 date: 2023-09-21 15:25:29
 categories: 测试分类
+single_column: true
 ---
 
 ## Using custom anchors {#my-anchor}
@@ -60,6 +61,8 @@ console.log("Hello, VitePress!");
 
 :::
 
+## Code Blocks
+
 ### Syntax Highlighting in Code Blocks
 
 ```js
@@ -68,6 +71,14 @@ export default {
 	// ...
 };
 ```
+
+```html
+<ul>
+	<li v-for="todo in todos" :key="todo.id">{{ todo.text }}</li>
+</ul>
+```
+
+### Line Highlighting in Code Blocks
 
 ```js{1,4,6-8}
 export default { // Highlighted
@@ -83,23 +94,13 @@ export default { // Highlighted
 }
 ```
 
-```js
-export default {
-	data() {
-		return {
-			msg: "Highlighted!", // [!code  hl]
-		};
-	},
-};
-```
-
 ### Focus in Code Blocks
 
 ```js
 export default {
 	data() {
 		return {
-			msg: "Focused!", // [!code  focus]
+			msg: "Focused!", // [!code focus]
 		};
 	},
 };
@@ -111,8 +112,8 @@ export default {
 export default {
   data () {
     return {
-      msg: 'Removed' // [!code  --]
-      msg: 'Added' // [!code  ++]
+      msg: 'Removed' // [!code --]
+      msg: 'Added' // [!code ++]
     }
   }
 }
@@ -124,11 +125,31 @@ export default {
 export default {
 	data() {
 		return {
-			msg: "Error", // [!code  error]
-			msg: "Warning", // [!code  warning]
+			msg: "Error", // [!code error]
+			msg: "Warning", // [!code warning]
 		};
 	},
 };
+```
+
+### Line Numbers
+
+```ts {1}
+// line-numbers is disabled by default
+const line2 = "This is line 2";
+const line3 = "This is line 3";
+```
+
+```ts:line-numbers {1}
+// line-numbers is enabled
+const line2 = 'This is line 2'
+const line3 = 'This is line 3'
+```
+
+```ts:line-numbers=2 {1}
+// line-numbers is enabled and start from 2
+const line3 = 'This is line 3'
+const line4 = 'This is line 4'
 ```
 
 ### Code Groups

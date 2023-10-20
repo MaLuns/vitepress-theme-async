@@ -24,20 +24,19 @@ const setSidebarWidth = function () {
 	}
 };
 
-const observer = new MutationObserver(() => setSidebarWidth());
-
 onMounted(() => {
+	const observer = new MutationObserver(() => setSidebarWidth());
 	window.addEventListener("resize", setSidebarWidth);
 	window.addEventListener("scroll", scrollFun);
 	scrollFun();
 	// fix: 阅读模式或单栏模式时 sidebar 宽度为 0, 监听 body class 变动, 移除后重设宽度
 	sidebarRef.value && observer.observe(document.body, { attributeFilter: ["style", "class"] });
-});
 
-onUnmounted(() => {
-	window.removeEventListener("resize", setSidebarWidth);
-	window.removeEventListener("scroll", scrollFun);
-	observer.disconnect();
+	onUnmounted(() => {
+		window.removeEventListener("resize", setSidebarWidth);
+		window.removeEventListener("scroll", scrollFun);
+		observer.disconnect();
+	});
 });
 </script>
 <template>

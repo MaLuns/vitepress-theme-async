@@ -1,9 +1,6 @@
-import { defineConfigWithTheme } from 'vitepress';
-import { AsyncThemeConfig } from 'vitepress-theme-async';
-import Config from 'vitepress-theme-async/config';
+import { defineConfig } from 'vitepress-theme-async/config';
 
-export default defineConfigWithTheme<AsyncThemeConfig>({
-	extends: Config,
+export default defineConfig({
 	cleanUrls: true,
 	vite: {
 		css: {
@@ -12,6 +9,7 @@ export default defineConfigWithTheme<AsyncThemeConfig>({
 			},
 		},
 	},
+	titleTemplate: ':title | Async',
 	themeConfig: {
 		top_bars: [
 			{ title: 'Home', url: '/' },
@@ -77,6 +75,15 @@ export default defineConfigWithTheme<AsyncThemeConfig>({
 		},
 		outline: {
 			level: [2, 6],
+		},
+		favicon: {
+			logo: '/favicon.svg',
+			icon16: '/favicon.svg',
+			icon32: '/favicon.svg',
+		},
+		creative_commons: {
+			post: true,
+			clipboard: true,
 		},
 	},
 });

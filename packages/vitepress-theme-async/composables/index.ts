@@ -24,12 +24,16 @@ export const useSingleColumn = () => {
 
 // 获取页面 banner 配置
 export const useBanner = () => {
-	const { theme, frontmatter } = useData<AsyncThemeConfig>();
+	const { theme, frontmatter, page } = useData<AsyncThemeConfig>();
+	const isPost = useIsPost();
 	return computed(() => {
-		return <AsyncThemeConfig['banner']>{
+		return <AsyncTheme.BannerConfig>{
 			bgurl: bannerImg,
 			...(theme.value.banner || {}),
 			...(frontmatter.value.banner || {}),
+			bannerTitle: isPost.value
+				? page.value.title || frontmatter.value.banner?.bannerTitle || theme.value.banner?.bannerTitle
+				: frontmatter.value.banner?.bannerTitle || page.value.title || theme.value.banner?.bannerTitle,
 		};
 	});
 };
