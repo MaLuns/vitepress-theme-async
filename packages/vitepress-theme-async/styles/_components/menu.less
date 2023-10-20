@@ -8,7 +8,7 @@
 			padding: 0;
 
 			li {
-				height: 80px;
+				height: var(--top-bar-height);
 				position: relative;
 				list-style-type: none;
 				display: flex;
@@ -31,7 +31,7 @@
 					height: 100%;
 					width: 100%;
 					padding: 0 20px;
-					line-height: 80px;
+					line-height: var(--top-bar-height);
 					color: var(--theme-color, #00283a);
 					text-transform: uppercase;
 					font-size: 11px;
@@ -51,7 +51,7 @@
 					opacity: 0;
 					transform: translateY(20px);
 					height: auto;
-					top: 80px;
+					top: var(--top-bar-height);
 					// left: -10px;
 					border-radius: 0 0 10px 10px;
 					box-shadow: var(--box-shadow2, 0 2px 4px -2px rgba(0, 0, 0, 0.15));

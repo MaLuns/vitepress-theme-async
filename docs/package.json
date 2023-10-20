@@ -5,6 +5,7 @@
 	"type": "module",
 	"devDependencies": {
 		"vitepress": "^1.0.0-rc.21",
+		"markdown-it-task-lists": "^2.1.1",
 		"vitepress-theme-async": "1.0.0"
 	}
 }

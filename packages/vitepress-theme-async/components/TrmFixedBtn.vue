@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref } from "vue";
+import { useData } from "vitepress";
 import { AsyncThemeConfig } from "types";
 import { useIsPost } from "../composables/index";
-import { useData } from "vitepress";
 import { getScrollTop, backTop, themeLoading, switchReadMode, switchSingleColumn, setThemeColor } from "../utils/client";
+import { throttleAndDebounce } from "../utils/shared";
 
 import TrmIcon from "./TrmIcon.vue";
 import TrmPostOutline from "./TrmPostOutline.vue";
@@ -21,15 +22,17 @@ const scrollFun = () => {
 };
 
 onMounted(() => {
-	window.addEventListener("scroll", scrollFun);
 	scrollFun();
+	window.addEventListener("scroll", scrollFun);
 
 	onUnmounted(() => {
 		window.removeEventListener("scroll", scrollFun);
 	});
 });
 
-const switchThemeMode = () => {
+const onSwitchReadMode = throttleAndDebounce(switchReadMode, 500);
+
+const onSwitchThemeMode = () => {
 	themeLoading().then(() => {
 		const fun = isDark.value ? "add" : "remove";
 		document.querySelector(".trm-mode-swich-animation")?.classList[fun]("trm-active");
@@ -43,11 +46,11 @@ const switchThemeMode = () => {
 	<div class="trm-fixed-container" :class="offset ? 'offset' : ''">
 		<slot name="fixed-btn-top" />
 		<TrmPostOutline />
-		<div class="trm-fixed-btn" data-title="切换主题模式" @click="switchThemeMode()">
+		<div class="trm-fixed-btn" data-title="切换主题模式" @click="onSwitchThemeMode">
 			<TrmIcon class="trm-dark-icon" :icon="theme.icons!.sun" />
 			<TrmIcon class="trm-light-icon" :icon="theme.icons!.moon" />
 		</div>
-		<div v-if="isPost && theme.rightside?.readmode" class="trm-fixed-btn" data-title="阅读模式" @click="switchReadMode()">
+		<div v-if="isPost && theme.rightside?.readmode" class="trm-fixed-btn" data-title="阅读模式" @click="onSwitchReadMode()">
 			<TrmIcon :icon="theme.icons!.read" />
 		</div>
 		<div v-if="theme.rightside?.aside && !frontmatter.single_column" class="trm-fixed-btn hidden-md" data-title="切换单双栏" @click="switchSingleColumn()">

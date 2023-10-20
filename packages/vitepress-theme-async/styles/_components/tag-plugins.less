@@ -1,102 +1,7 @@
-/* 标签页 */
-.trm-tabs {
-	position: relative;
-	margin: 0 0 20px;
-	border-right: 1px solid var(--tab-border-color);
-	border-bottom: 1px solid var(--tab-border-color);
-	border-left: 1px solid var(--tab-border-color);
+/**
+ * custom-block 
+ * -------------------------------------------------------------------------- */
 
-	.trm-nav-tabs {
-		background: var(--tab-botton-bg-color);
-		display: flex;
-		flex-wrap: wrap;
-		margin: 0;
-		padding: 0;
-
-		.trm-tab {
-			margin: 0;
-			padding: 0;
-
-			button {
-				border: none;
-				background: var(--tab-botton-bg-color);
-				border-top: 2px solid var(--tab-border-color);
-				color: var(--tab-botton-color);
-				display: block;
-				line-height: 2;
-				padding: 8px 18px;
-				width: 100%;
-				.transition-mixin();
-
-				i {
-					width: 1.5em;
-				}
-			}
-
-			&::before {
-				content: none;
-			}
-
-			&:not(.active) {
-				button {
-					&:hover {
-						background: var(--tab-button-hover-bg-color);
-						border-top: 2px solid var(--tab-button-hover-bg-color);
-					}
-				}
-			}
-
-			&.active {
-				button {
-					background: var(--tab-button-active-bg-color);
-					border-top: 2px solid var(--primary);
-					cursor: default;
-				}
-			}
-		}
-	}
-
-	.trm-tab-contents {
-		background: var(--tab-button-active-bg-color);
-
-		.trm-tab-item-content {
-			display: none;
-			padding: 20px;
-			position: relative;
-
-			&.active {
-				display: block;
-			}
-		}
-	}
-}
-
-/* 相册排版 */
-.fj-gallery {
-	position: relative;
-	overflow: hidden;
-
-	&::after {
-		content: "";
-		display: block;
-		clear: both;
-	}
-
-	.fj-gallery-item {
-		float: left;
-		top: 0;
-		left: 0;
-
-		> img {
-			display: block;
-			width: 100%;
-			height: auto;
-			border-radius: 0;
-		}
-	}
-}
-
-/* custom-block */
 .custom-block {
 	border-radius: 4px;
 	border: 1px solid transparent;
@@ -201,6 +106,26 @@ blockquote {
 		bottom: -16px;
 		right: 16px;
 		font-size: 54px;
+	}
+}
+
+/**
+ * task-list
+ * -------------------------------------------------------------------------- */
+.contains-task-list {
+	list-style: none;
+	padding-left: 0;
+
+	.contains-task-list {
+		padding-left: 16px;
+	}
+
+	.task-list-item {
+		padding-left: 0;
+
+		&::before {
+			content: unset;
+		}
 	}
 }
 

@@ -1,4 +1,5 @@
 import { defineConfig } from 'vitepress-theme-async/config';
+import taskLists from 'markdown-it-task-lists';
 
 export default defineConfig({
 	cleanUrls: true,
@@ -7,6 +8,11 @@ export default defineConfig({
 			preprocessorOptions: {
 				less: {},
 			},
+		},
+	},
+	markdown: {
+		config(md) {
+			md.use(taskLists);
 		},
 	},
 	titleTemplate: ':title | Async',
@@ -80,6 +86,7 @@ export default defineConfig({
 			logo: '/favicon.svg',
 			icon16: '/favicon.svg',
 			icon32: '/favicon.svg',
+			visibilitychange: true,
 		},
 		creative_commons: {
 			post: true,

@@ -3,7 +3,7 @@
 	left: 0;
 	right: 0;
 	z-index: 9;
-	height: 80px;
+	height: var(--top-bar-height);
 	border-radius: var(--card-border-radius, 10px);
 	box-shadow: var(--top-bar-box-shadow, 0 2px 4px 0 rgba(0, 0, 0, 0.15));
 	background-color: var(--theme-bg-color, #fcfcfe);
@@ -34,7 +34,7 @@
 			.trm-logo-frame {
 				display: flex;
 				align-items: center;
-				height: 80px;
+				height: var(--top-bar-height);
 
 				.trm-logo-text {
 					position: relative;
@@ -90,7 +90,7 @@
 				background-color: var(--theme-bg-color, #fcfcfe);
 				position: absolute;
 				z-index: -1;
-				top: 80px;
+				top: var(--top-bar-height);
 				left: 0;
 				height: auto;
 				width: 100%;

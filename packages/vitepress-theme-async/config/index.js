@@ -1,7 +1,7 @@
 import { mergeConfig as mergeViteConfig } from 'vite';
 
 /**
- * @type {import('../types').AsyncThemeConfig}
+ * @type {import('vitepress').UserConfig<import('../types').AsyncThemeConfig>}
  */
 export const defaultConfig = {
 	themeConfig: {

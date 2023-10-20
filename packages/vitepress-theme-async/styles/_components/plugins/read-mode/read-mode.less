@@ -16,7 +16,6 @@
 	.trm-post-info,
 	.trm-post-next-prev,
 	.footer-divider,
-	.trm-fixed-container,
 	footer {
 		display: none;
 	}
@@ -62,7 +61,7 @@
 		max-width: 100%;
 
 		.trm-content {
-			margin: 0;
+			margin: 0 !important;
 
 			> .trm-card {
 				padding: 10px 0 0;
@@ -72,45 +71,5 @@
 
 	.trm-card {
 		box-shadow: none;
-	}
-}
-
-.trm-exit-readmode {
-	position: fixed;
-	bottom: 30px;
-	right: 20px;
-	z-index: 100;
-	font-size: 1.2rem;
-	width: 2.5rem;
-	height: 2.5rem;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	border-radius: 6px;
-	border: none;
-	background-color: var(--fixed-button-bg-color);
-	color: var(--fixed-button-color);
-
-	&:hover {
-		&::before,
-		&::after {
-			background-color: var(--primary);
-		}
-	}
-
-	&::before,
-	&::after {
-		content: "";
-		position: absolute;
-		width: 4px;
-		height: 20px;
-		border-radius: 4px;
-		background-color: var(--fixed-button-color);
-		transform: rotate(-45deg);
-		transition: background-color 0.3s;
-	}
-
-	&::before {
-		transform: rotate(45deg);
 	}
 }

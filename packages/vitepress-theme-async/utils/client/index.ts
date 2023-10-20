@@ -83,10 +83,6 @@ export const themeLoading = (wait: number = 600): Promise<void> => {
  */
 export const switchReadMode = () => {
 	const $body = document.body;
-	const newEle = document.createElement('button');
-	newEle.type = 'button';
-	newEle.title = '退出阅读模式';
-	newEle.className = `trm-exit-readmode trm-glow`;
 
 	type Flag = { el: HTMLElement; ratio?: number } | void;
 
@@ -121,19 +117,8 @@ export const switchReadMode = () => {
 		}
 	};
 
-	const clickFn = () => {
-		getScrollFlag().then(data => {
-			$body.classList.remove('trm-read-mode');
-			newEle.removeEventListener('click', clickFn);
-			newEle.remove();
-			setScroll(data);
-		});
-	};
-
 	getScrollFlag().then(data => {
-		$body.classList.add('trm-read-mode');
-		$body.appendChild(newEle);
-		newEle.addEventListener('click', clickFn);
+		$body.classList.toggle('trm-read-mode');
 		setScroll(data);
 	});
 };
