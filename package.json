@@ -8,9 +8,9 @@
 	"private": true,
 	"type": "module",
 	"scripts": {
-		"doc:dev": "vitepress dev doc",
-		"doc:build": "vitepress build doc",
-		"doc:preview": "vitepress preview doc",
+		"docs:dev": "vitepress dev docs",
+		"docs:build": "vitepress build docs",
+		"docs:preview": "vitepress preview docs",
 		"demo:dev": "vitepress dev demo",
 		"demo:build": "vitepress build demo",
 		"demo:preview": "vitepress preview demo",
