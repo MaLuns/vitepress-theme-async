@@ -8,9 +8,12 @@
 	"private": true,
 	"type": "module",
 	"scripts": {
-		"docs:dev": "vitepress dev docs",
-		"docs:build": "vitepress build docs",
-		"docs:preview": "vitepress preview docs",
+		"doc:dev": "vitepress dev doc",
+		"doc:build": "vitepress build doc",
+		"doc:preview": "vitepress preview doc",
+		"demo:dev": "vitepress dev demo",
+		"demo:build": "vitepress build demo",
+		"demo:preview": "vitepress preview demo",
 		"lint": "eslint --cache --max-warnings 0  \"**/*.{js,jsx,vue,ts,tsx}\" --fix",
 		"prettier": "prettier --write \"**/*.{js,jsx,vue,ts,tsx,json,less}\"",
 		"prepare": "husky install"
@@ -30,7 +33,7 @@
 		"vue-eslint-parser": "^9.3.2"
 	},
 	"workspaces": [
-		"docs",
+		"demo",
 		"packages/*"
 	],
 	"lint-staged": {
