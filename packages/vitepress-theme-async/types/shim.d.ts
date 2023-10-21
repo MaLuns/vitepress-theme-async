@@ -1,3 +1,6 @@
+declare const __VP_LOCAL_SEARCH__: boolean;
+declare const __ALGOLIA__: boolean;
+
 declare module '*.vue' {
 	import { DefineComponent } from 'vue';
 	// eslint-disable-next-line @typescript-eslint/ban-types
@@ -5,10 +8,7 @@ declare module '*.vue' {
 	export default component;
 }
 
-declare module 'vitepress-theme-async/config' {
-	import { AsyncThemeConfig } from 'vitepress-theme-async';
-	import { UserConfig } from 'vitepress';
-
-	export const defineConfig: (config: UserConfig<AsyncThemeConfig>) => UserConfig<AsyncThemeConfig>;
-	export const defaultConfig: AsyncThemeConfig;
+declare module '@localSearchIndex' {
+	const data: Record<string, () => Promise<{ default: string }>>;
+	export default data;
 }

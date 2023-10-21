@@ -204,10 +204,11 @@ declare namespace AsyncTheme {
 		// reward icon
 		reward: string;
 
-		// // close icon
-		// close: string
-		// // search icon
-		// search: string
+		// close icon
+		close: string;
+		// search icon
+		search: string;
+
 		// // User information and article directory switch
 		// user_tag: string
 
@@ -282,4 +283,12 @@ declare namespace AsyncTheme {
 		post?: boolean;
 		clipboard?: boolean;
 	}
+}
+
+declare module 'vitepress-theme-async/config' {
+	import { AsyncThemeConfig } from 'vitepress-theme-async';
+	import { UserConfig } from 'vitepress';
+
+	export const defineConfig: (config: UserConfig<AsyncThemeConfig>) => UserConfig<AsyncThemeConfig>;
+	export const defaultConfig: AsyncThemeConfig;
 }

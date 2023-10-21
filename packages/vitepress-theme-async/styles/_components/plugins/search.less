@@ -1,0 +1,225 @@
+.trm-search-popup {
+	position: fixed;
+	z-index: 100;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	display: flex;
+
+	.backdrop {
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		background: rgba(47, 47, 47, 0.6);
+		transition: opacity 0.5s;
+		backdrop-filter: blur(10px);
+	}
+
+	.trm-search-wrapper {
+		position: relative;
+		margin: 64px auto;
+		display: flex;
+		flex-direction: column;
+		background: var(--theme-bg2-color);
+		width: ~"min(100vw - 60px, 900px)";
+		height: min-content;
+		max-height: ~"min(100vh - 128px, 900px)";
+		border-radius: 6px;
+		box-shadow: 0 0 0 0 #00000024;
+		overflow: hidden;
+
+		.trm-search-form {
+			margin: 10px;
+			width: calc(100% - 20px);
+			display: flex;
+			align-items: center;
+			border: 1px solid var(--body-color-30);
+			border-radius: 4px;
+			display: flex;
+			align-items: center;
+			padding: 0 12px;
+			cursor: text;
+			.transition-mixin(border);
+
+			&:active,
+			&:hover {
+				border: 1px solid var(--primary);
+			}
+
+			.trm-search-input {
+				font-size: 14px;
+				box-shadow: none;
+				padding: 0 12px;
+				border: unset;
+				background-color: transparent;
+				margin-bottom: 0;
+			}
+
+			svg {
+				display: block;
+			}
+
+			button {
+				&.detailed-list,
+				&:not([disabled]):hover {
+					color: var(--primary);
+				}
+
+				&:disabled {
+					opacity: 0.37;
+				}
+
+				color: inherit;
+				padding: 8px;
+				border: 0;
+				font-family: inherit;
+				background-color: transparent;
+				background-image: none;
+			}
+		}
+
+		.trm-search-result-container {
+			min-height: 76px;
+			padding: 0 12px;
+			margin: 0 0 12px 0;
+			color: var(--theme-color, #00283a);
+			list-style: none;
+			display: flex;
+			flex-direction: column;
+			gap: 6px;
+			overflow-x: hidden;
+			overflow-y: auto;
+			overscroll-behavior: contain;
+
+			mark {
+				color: var(--theme-color, #00283a);
+				background: var(--primary-50, #afb42b);
+				font-weight: 600;
+			}
+
+			.trm-result {
+				display: flex;
+				flex-direction: column;
+				gap: 8px;
+				border-radius: 4px;
+				transition: none;
+				line-height: 1rem;
+				border: solid 2px var(--body-color-30);
+				padding: 12px;
+				overflow: hidden;
+
+				&:active,
+				&:hover {
+					border-color: var(--primary);
+				}
+
+				.titles {
+					display: flex;
+					flex-wrap: wrap;
+					gap: 4px;
+					position: relative;
+					z-index: 1001;
+					padding: 2px 0;
+
+					.title {
+						display: flex;
+						align-items: center;
+						gap: 4px;
+					}
+
+					.title-icon {
+						opacity: 0.5;
+						font-weight: 500;
+					}
+				}
+
+				.excerpt-wrapper {
+					position: relative;
+
+					.excerpt {
+						pointer-events: none;
+						max-height: 140px;
+						overflow: hidden;
+						position: relative;
+						opacity: 0.8;
+
+						* {
+							font-size: 0.8rem !important;
+							line-height: 130% !important;
+						}
+					}
+				}
+
+				mark {
+					background-color: transparent;
+					color: var(--primary);
+					border-radius: 2px;
+					padding: 0 2px;
+				}
+			}
+		}
+
+		.trm-search-footer {
+			height: 44px;
+			box-shadow: -1px -1px 6px 0 #00000024;
+			background: var(--theme-bg-color);
+			padding: 0 12px;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			font-size: 12px;
+
+			.command-palette-commands-key {
+				align-items: center;
+				background-color: var(--theme-bg2-color);
+				border-radius: 4px;
+				display: flex;
+				justify-content: center;
+				padding: 2px;
+				border: 0;
+				margin-left: 0;
+				margin-right: 0.4em;
+				width: 20px;
+			}
+
+			.trm-search-commands {
+				display: flex;
+				list-style: none;
+				margin: 0;
+				padding: 0;
+
+				li {
+					display: flex;
+					align-items: center;
+					margin-left: 0.8em;
+				}
+			}
+		}
+	}
+}
+
+@media (max-width: 768px) {
+	.trm-search-popup {
+		.trm-search-wrapper {
+			position: fixed;
+			z-index: 100;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			left: 0;
+			margin: 0;
+			border-radius: 0;
+			width: 100%;
+			height: 100%;
+			max-width: 100%;
+			max-height: 100%;
+
+			.trm-search-footer {
+				display: none;
+			}
+		}
+	}
+}

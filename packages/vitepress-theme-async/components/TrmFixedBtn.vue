@@ -8,6 +8,7 @@ import { throttleAndDebounce } from "../utils/shared";
 
 import TrmIcon from "./TrmIcon.vue";
 import TrmPostOutline from "./TrmPostOutline.vue";
+import TrmSearchBtn from "./TrmSearchBtn.vue";
 
 const offset = ref(false);
 const ratio = ref(0);
@@ -45,6 +46,7 @@ const onSwitchThemeMode = () => {
 <template>
 	<div class="trm-fixed-container" :class="offset ? 'offset' : ''">
 		<slot name="fixed-btn-top" />
+		<TrmSearchBtn />
 		<TrmPostOutline />
 		<div class="trm-fixed-btn" data-title="切换主题模式" @click="onSwitchThemeMode">
 			<TrmIcon class="trm-dark-icon" :icon="theme.icons!.sun" />

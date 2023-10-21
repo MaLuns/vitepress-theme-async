@@ -8,6 +8,8 @@ export declare interface AsyncThemeConfig {
 	/* author */
 	author?: string;
 
+	search?: { provider: 'local'; options?: DefaultTheme.LocalSearchOptions };
+
 	/* */
 	timeZone?: number;
 
@@ -74,6 +76,5 @@ export declare interface AsyncThemeConfig {
 	outlineTitle?: string;
 }
 
-export * from './shim.d.ts';
 export * from './theme.d.ts';
 export default theme;
