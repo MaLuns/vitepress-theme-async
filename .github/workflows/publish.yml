@@ -27,7 +27,7 @@ jobs:
         run: |
           cp ./README_zh-CN.md ./packages/vitepress-theme-async
           cp ./README.md ./packages/vitepress-theme-async
-          node ./scripts/publish
+          node ./scripts/publish.mjs
           zip -r vitepress-theme-async ./packages/vitepress-theme-async
         env:
           RELEASE_VERSION: ${{ github.ref }}

@@ -37,7 +37,7 @@ onMounted(() => {
 		<div v-if="theme?.footer?.powered?.enable" class="trm-footer-item">
 			<span>
 				由
-				<a href="https://hexo.io" target="_blank" rel="noopener">Vitepress</a>
+				<a href="https://vitepress.dev" target="_blank" rel="noopener">Vitepress</a>
 				驱动
 			</span>
 			<span class="footer-separator" data-separator=" | "></span>

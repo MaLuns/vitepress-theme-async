@@ -3,6 +3,8 @@ import taskLists from 'markdown-it-task-lists';
 
 export default defineConfig({
 	cleanUrls: true,
+	base: 'demosite',
+	outDir: '../dist/demosite',
 	vite: {
 		css: {
 			preprocessorOptions: {

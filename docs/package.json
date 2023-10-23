@@ -1,5 +1,5 @@
 {
-	"name": "hexo-theme-async-docs",
+	"name": "vitepress-theme-async-docs",
 	"version": "0.0.0",
 	"private": true,
 	"type": "module",

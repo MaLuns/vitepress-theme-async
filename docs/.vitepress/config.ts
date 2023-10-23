@@ -1,6 +1,7 @@
 import { defineConfig } from 'vitepress';
 
 export default defineConfig({
+	outDir: '../dist',
 	lang: 'zh-CN',
 	title: 'Vitepress-Theme-Async',
 	description: '🎈 A simple, lightweight vitepress blog theme',
