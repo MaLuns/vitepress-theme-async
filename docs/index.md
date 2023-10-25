@@ -6,7 +6,7 @@ hero:
   name: Blog-Theme-Async
   image:
     src: /logo.gif
-  tagline: 🎈 A simple & lightweight theme for Hexo.
+  tagline: 🎈 A simple & lightweight theme for Vitepress.
   actions:
     - text: 🚀 Get Started
       link: /guide/
