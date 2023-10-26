@@ -23,6 +23,7 @@ onMounted(() => {
 
 <template>
 	<footer class="trm-footer trm-scroll-animation">
+		<slot name="footer-content-before" />
 		<div v-if="theme?.footer?.beian?.enable" class="trm-footer-item">
 			<a rel="noopener" href="https://beian.miit.gov.cn/" target="_blank">
 				{{ theme.footer.beian.icp }}
@@ -33,7 +34,6 @@ onMounted(() => {
 			<span class="footer-separator" data-separator=" · "></span>
 			<span class="trm-accent-color">{{ theme.user?.name }}</span>
 		</div>
-
 		<div v-if="theme?.footer?.powered?.enable" class="trm-footer-item">
 			<span>
 				由
@@ -50,5 +50,6 @@ onMounted(() => {
 		<div v-if="theme?.footer?.live_time?.enable" class="trm-footer-item">
 			<span id="since" class="trm-accent-color">博客已萌萌哒运行 {{ day }} 天</span>
 		</div>
+		<slot name="footer-content-after" />
 	</footer>
 </template>

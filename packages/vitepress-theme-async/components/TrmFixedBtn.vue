@@ -45,7 +45,7 @@ const onSwitchThemeMode = () => {
 
 <template>
 	<div class="trm-fixed-container" :class="offset ? 'offset' : ''">
-		<slot name="fixed-btn-top" />
+		<slot name="fixed-btn-before" />
 		<TrmSearchBtn />
 		<TrmPostOutline />
 		<div class="trm-fixed-btn" data-title="切换主题模式" @click="onSwitchThemeMode">
@@ -58,7 +58,7 @@ const onSwitchThemeMode = () => {
 		<div v-if="theme.rightside?.aside && !frontmatter.single_column" class="trm-fixed-btn hidden-md" data-title="切换单双栏" @click="switchSingleColumn()">
 			<TrmIcon :icon="theme.icons!.arrows" />
 		</div>
-		<slot name="fixed-btn-bottom" />
+		<slot name="fixed-btn-after" />
 		<div class="trm-fixed-btn trm-back-top" :style="`background-size:100% ${ratio}%;`" data-title="返回顶部" @click="backTop()">
 			<TrmIcon :icon="theme.icons!.back_top" />
 		</div>

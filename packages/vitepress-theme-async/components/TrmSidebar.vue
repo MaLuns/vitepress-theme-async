@@ -40,14 +40,20 @@ onMounted(() => {
 });
 </script>
 <template>
+	<slot name="sidebar-before" />
 	<div v-if="!singleColumn" class="trm-page-sidebar col-lg-4 hidden-sm">
 		<div ref="sidebarRef" class="trm-sidebar-card" :class="isFixed ? 'fixed' : ''">
 			<div class="trm-sidebar-main">
+				<slot name="sidebar-user-before" />
 				<TrmSidebarUser />
+				<slot name="sidebar-social-before" />
 				<TrmSidebarSocial />
+				<slot name="sidebar-info-before" />
 				<TrmSidebarInfo />
+				<slot name="sidebar-email-before" />
 				<TrmSidebarEmail />
 			</div>
 		</div>
 	</div>
+	<slot name="sidebar-after" />
 </template>

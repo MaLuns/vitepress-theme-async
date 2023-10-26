@@ -6,6 +6,7 @@ let i = 0;
 const theme = useTheme();
 </script>
 <template>
+	<slot name="links-before" />
 	<div v-if="theme.user?.ruleText" class="row trm-scroll-animation" style="margin-bottom: var(--card-bottom-card)">
 		<div class="col-lg-12">
 			<blockquote>
@@ -15,6 +16,7 @@ const theme = useTheme();
 			</blockquote>
 		</div>
 	</div>
+	<slot name="links-siteinfo-before" />
 	<div class="row trm-scroll-animation">
 		<div class="col-lg-12">
 			<TrmDividerTitle title="本站信息" :index="`0${++i}`" />
@@ -30,6 +32,7 @@ const theme = useTheme();
 			</div>
 		</div>
 	</div>
+	<slot name="links-list-before" />
 	<div v-if="theme.links?.length" class="row trm-scroll-animation">
 		<div class="col-lg-12">
 			<TrmDividerTitle title="友情链接" :index="`0${++i}`" />
@@ -48,4 +51,5 @@ const theme = useTheme();
 			</a>
 		</div>
 	</div>
+	<slot name="links-after" />
 </template>

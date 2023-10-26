@@ -13,6 +13,7 @@ const control = usePrevNext();
 const theme = useTheme();
 </script>
 <template>
+	<slot name="post-before" />
 	<div class="trm-post-info row hidden-sm">
 		<div class="col-sm-4">
 			<div class="trm-card trm-label trm-label-light text-center">
@@ -33,13 +34,21 @@ const theme = useTheme();
 			</div>
 		</div>
 	</div>
+	<slot name="post-info-after" />
 	<div class="trm-card">
+		<slot name="post-container-before" />
 		<article id="article-container" class="trm-publication">
+			<slot name="post-content-before" />
 			<Content />
+			<slot name="post-content-after" />
 		</article>
+		<slot name="post-copyright-before" />
 		<TrmPostCopyright />
+		<slot name="post-reward-before" />
 		<TrmReward />
+		<slot name="post-reward-after" />
 	</div>
+	<slot name="post-pagination-before" />
 	<div v-if="theme.post_pagination!.enable && (control.prev || control.next)" class="trm-post-next-prev row">
 		<div class="col-lg-12">
 			<TrmDividerTitle title="其他文章" index="01" />
@@ -53,4 +62,5 @@ const theme = useTheme();
 			<TrmCardPostMini v-else :post="control.next" />
 		</div>
 	</div>
+	<slot name="post-after" />
 </template>

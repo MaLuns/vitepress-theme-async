@@ -38,25 +38,57 @@ const { frontmatter, page } = useData();
 				</TrmBanner>
 				<div class="container">
 					<div class="row">
-						<TrmSidebar></TrmSidebar>
+						<TrmSidebar>
+							<template #sidebar-before><slot name="sidebar-before" /></template>
+							<template #sidebar-user-before><slot name="sidebar-user-before" /></template>
+							<template #sidebar-social-before><slot name="sidebar-social-before" /></template>
+							<template #sidebar-info-before><slot name="sidebar-info-before" /></template>
+							<template #sidebar-email-before><slot name="sidebar-email-before" /></template>
+							<template #sidebar-after><slot name="sidebar-after" /></template>
+						</TrmSidebar>
 						<TrmPageContent>
 							<slot name="page-content-top" />
 							<TrmPageIndex v-if="frontmatter.index" />
 							<TrmPageArchive v-else-if="['tags', 'archives', 'categories'].includes(frontmatter.layout)" :type="frontmatter.layout" :key="frontmatter.layout" />
-							<TrmPageAbout v-else-if="frontmatter.layout === 'about'" />
-							<TrmPageLinks v-else-if="frontmatter.layout === 'links'" />
-							<TrmPagePost v-else></TrmPagePost>
+							<TrmPageAbout v-else-if="frontmatter.layout === 'about'">
+								<template #about-before><slot name="about-before" /></template>
+								<template #about-introduction-before><slot name="about-introduction-before" /></template>
+								<template #about-blog-before><slot name="about-blog-before" /></template>
+								<template #about-privacy-before><slot name="about-privacy-before" /></template>
+								<template #about-after><slot name="about-after" /></template>
+							</TrmPageAbout>
+							<TrmPageLinks v-else-if="frontmatter.layout === 'links'">
+								<template #links-before><slot name="links-before" /></template>
+								<template #links-siteinfo-before><slot name="links-siteinfo-before" /></template>
+								<template #links-list-before><slot name="links-list-before" /></template>
+								<template #links-after><slot name="links-after" /></template>
+							</TrmPageLinks>
+							<TrmPagePost v-else>
+								<template #post-before><slot name="post-before" /></template>
+								<template #post-info-after><slot name="post-info-after" /></template>
+								<template #post-container-before><slot name="post-container-before" /></template>
+								<template #post-content-before><slot name="post-content-before" /></template>
+								<template #post-content-after><slot name="post-content-after" /></template>
+								<template #post-copyright-before><slot name="post-copyright-before" /></template>
+								<template #post-reward-before><slot name="post-reward-before" /></template>
+								<template #post-reward-after><slot name="post-reward-after" /></template>
+								<template #post-pagination-before><slot name="post-pagination-before" /></template>
+								<template #post-after><slot name="post-after" /></template>
+							</TrmPagePost>
 							<slot name="page-content-bottom" />
 							<div class="trm-divider footer-divider"></div>
-							<slot name="footer-top" />
-							<TrmFooter />
-							<slot name="footer-bottom" />
+							<slot name="footer-before" />
+							<TrmFooter>
+								<template #footer-content-before><slot name="footer-content-before" /></template>
+								<template #footer-content-after><slot name="footer-content-after" /></template>
+							</TrmFooter>
+							<slot name="footer-after" />
 						</TrmPageContent>
 					</div>
 				</div>
 				<TrmFixedBtn>
-					<template #fixed-btn-top><slot name="fixed-btn-top" /></template>
-					<template #fixed-btn-bottom><slot name="fixed-btn-bottom" /></template>
+					<template #fixed-btn-before><slot name="fixed-btn-before" /></template>
+					<template #fixed-btn-after><slot name="fixed-btn-after" /></template>
 				</TrmFixedBtn>
 			</div>
 			<Content v-else />
