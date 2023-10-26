@@ -13,11 +13,20 @@ export default defineConfig({
 		search: {
 			provider: 'local',
 		},
+		socialLinks: [
+			{
+				icon: 'github',
+				link: 'https://github.com/MaLuns/vitepress-theme-async',
+			},
+		],
 		editLink: {
 			pattern: 'https://github.com/Maluns/vitepress-theme-async/edit/master/docs/:path',
 			text: '帮助改善此页面！( ￣□￣)/',
 		},
-		nav: [{ text: 'Guide', link: '/guide/' }],
+		nav: [
+			{ text: 'Guide', link: '/guide/' },
+			{ text: 'DemoSites', link: '/demo/' },
+		],
 		sidebar: {
 			'/': [
 				{

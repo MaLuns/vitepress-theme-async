@@ -58,35 +58,76 @@ declare namespace AsyncTheme {
 	}
 
 	interface NavItemWithLink {
+		/**
+		 * 标题
+		 */
 		title: string;
+		/**
+		 * 链接
+		 */
 		url: string;
 		/**
+		 * 激活匹配规则
 		 * `activeMatch` is expected to be a regex string. We can't use actual
 		 * RegExp object here because it isn't serializable
 		 */
 		activeMatch?: string;
+		/**
+		 * 打开方式
+		 */
 		target?: string;
+		/**
+		 * HTML rel
+		 */
 		rel?: string;
 		children?: never;
 	}
 
 	interface NavItemWithChildren {
+		/**
+		 * 标题
+		 */
 		title?: string;
+		/**
+		 * 链接
+		 */
 		url?: string;
 		/**
+		 * 激活匹配规则
 		 * `activeMatch` is expected to be a regex string. We can't use actual
 		 * RegExp object here because it isn't serializable
 		 */
 		activeMatch?: string;
+		/**
+		 * 打开方式
+		 */
 		target?: string;
+		/**
+		 * HTML rel
+		 */
 		rel?: string;
+		/**
+		 * 子级
+		 */
 		children: NavItemWithLink[];
 	}
 
 	interface Links {
+		/**
+		 * 昵称
+		 */
 		name: string;
+		/**
+		 * 链接
+		 */
 		url: string;
+		/**
+		 * 头像
+		 */
 		image: string;
+		/**
+		 * 描述
+		 */
 		desc?: string;
 	}
 
@@ -99,54 +140,145 @@ declare namespace AsyncTheme {
 }
 
 declare namespace AsyncTheme {
-	// Configure the icon information of the blog
+	/**
+	 * 网站图标配置 || Configure the icon information of the blog
+	 */
 	interface FaviconConfig {
+		/**
+		 * logo
+		 */
 		logo?: string;
+		/**
+		 *  dark 下使用
+		 */
 		dark_logo?: string;
+		/**
+		 * 网站图标
+		 */
 		icon16?: string;
+		/**
+		 * 网站图标
+		 */
 		icon32?: string;
+		/**
+		 * iOS 添加到主屏幕使用图标
+		 */
 		appleTouchIcon?: string;
+		/**
+		 * 网站清单配置
+		 */
 		webmanifest?: string;
+		/**
+		 * 是否监听选项卡可见事件
+		 */
 		visibilitychange?: boolean;
-		hidden?: string; // Displays an icon when not visible
+		/**
+		 * 选项卡不可见时显示角标
+		 */
+		hidden?: string;
+		/**
+		 * 选项卡不可见 显示文案
+		 */
 		showText?: string;
+		/**
+		 * 选项卡由不可见切换为可见时显示文案
+		 */
 		hideText?: string;
 	}
 
-	// User config
+	/**
+	 * 用户配置 || User config
+	 */
 	interface UserConfig {
+		/**
+		 * 站点昵称
+		 */
 		name?: string;
 		first_name?: string;
 		last_name?: string;
+		/**
+		 * 邮箱
+		 */
 		email?: string;
+		/**
+		 * 域名
+		 */
 		domain?: string;
+		/**
+		 * 头像
+		 */
 		avatar?: string;
+		/**
+		 * dark 下使用
+		 */
 		dark_avatar?: string;
+		/**
+		 * 站点简介
+		 */
 		describe?: string;
+		/**
+		 * 友情链接规则
+		 */
 		ruleText?: string;
 	}
 
-	// Layout top bars
+	/**
+	 * 顶部导航栏 || Layout top bars
+	 */
 	declare type TobBarsConfig = Array<AsyncTheme.NavItemWithLink | AsyncTheme.NavItemWithChildren>;
 
-	// Layout banner config
+	/**
+	 * 横幅配置 || Layout banner config
+	 */
 	interface BannerConfig {
+		/**
+		 * 横幅类型
+		 */
 		type?: 'img' | 'video';
+		/**
+		 * 横幅资源路径地址
+		 */
 		bgurl?: string;
+		/**
+		 * 横幅标题
+		 */
 		bannerTitle?: string;
+		/**
+		 * 横幅描述
+		 */
 		bannerText?: string;
+		/**
+		 * 同 CSS object-position
+		 */
 		position?: string;
+		/**
+		 * 同 CSS object-fit
+		 */
 		fit?: string;
 	}
 
-	// Layout sidebar config
+	/**
+	 * 侧栏配置 || Layout sidebar config
+	 */
 	interface SidebarConfig {
+		/**
+		 * 打字动画固定前缀
+		 */
 		typedTextPrefix?: string;
+		/**
+		 * 打字动画切换文案
+		 */
 		typedText?: string[];
+		/**
+		 * 个人信息
+		 */
 		info?: {
 			key: string;
 			val: string;
 		}[];
+		/**
+		 * 社交地址图标链接
+		 */
 		social?: {
 			name: string;
 			icon: string;
@@ -154,13 +286,19 @@ declare namespace AsyncTheme {
 		}[];
 	}
 
-	// Layout footer config
+	/**
+	 * 页脚配置 || Layout footer config
+	 */
 	interface FooterConfig {
-		// theme link (Powered by vitepress).
+		/**
+		 * 是否显示 vitepress 和 主题
+		 * theme link (Powered by vitepress).
+		 */
 		powered?: {
 			enable: boolean;
 		};
 		/**
+		 * 备案信息
 		 * Beian icp information for Chinese users. In China, every legal website should have a beian icp in website footer.
 		 * https://beian.miit.gov.cn/
 		 */
@@ -168,18 +306,29 @@ declare namespace AsyncTheme {
 			enable: boolean;
 			icp?: string;
 		};
-		// copyright date
+		/**
+		 * 版权开始年号
+		 */
 		copyright_year?: string;
-		// run day
+		/**
+		 * 运行时长
+		 */
 		live_time?: {
 			enable?: boolean;
+			/**
+			 * 前缀
+			 */
 			prefix?: string;
+			/**
+			 * 运行计算开始时间
+			 */
 			start_time?: string;
 		};
-		custom_text?: string;
 	}
 
-	// Theme use icon
+	/**
+	 * 主题使用图标 || Theme use icon
+	 */
 	interface IconsConfig {
 		type: 'font' | 'symbol';
 		// Theme switch icon
@@ -208,79 +357,161 @@ declare namespace AsyncTheme {
 		close: string;
 		// search icon
 		search: string;
-
-		// // User information and article directory switch
-		// user_tag: string
-
-		// Code highlight fold icon
-		// double_arrows: string
-		// // Code copy icon
-		// copy: string
 	}
 
-	// About page config
+	/**
+	 * 关于页 || About page config
+	 */
 	interface AboutPageConfig {
+		/**
+		 * 标题
+		 */
 		title?: string;
+		/**
+		 * 个人简单描述
+		 */
 		introduction?: string;
+		/**
+		 * 博客信息
+		 */
 		blog?: string;
+		/**
+		 * 隐私权说明
+		 */
 		privacy?: string;
 	}
 
-	// Links config
+	/**
+	 * 友情链接列表 || Links config
+	 */
 	declare type LinksConfig = Links[];
 
-	// Post cover image
+	/**
+	 * 文章封面图 || Post cover image
+	 */
 	interface ConverConfig {
 		default: string;
 		type: 'img' | 'date' | 'random';
 	}
 
-	// [index | archives | categorys | tags] page sort paging config
+	/**
+	 * 页面分页配置 || [index | archives | categorys | tags] page sort paging config
+	 */
 	interface PaginationConfig {
+		/**
+		 * 分页大小
+		 */
 		per_page?: number;
+		/**
+		 * 排序方式
+		 */
 		order_by?: string;
+		/**
+		 * 归档时日期格式
+		 */
 		date_fmt?: string;
 	}
 
-	// built in page path config
+	/**
+	 * 内置页面跳转地址 || built in page path config
+	 */
 	interface BuiltPageConfig {
-		/** archive page url */
+		/**
+		 * 归档页地址 || archive page url
+		 */
 		archives?: string;
-		/** category page url */
+		/**
+		 * 分类页地址 || category page url
+		 */
 		categorys?: string;
-		/** tag page url */
+		/**
+		 * 标签页地址 || tag page url
+		 */
 		tags?: string;
 	}
 
-	// Fixed button config on the right
+	/**
+	 * 固定按钮显示配置 || Fixed button config on the right
+	 */
 	interface FixedBtnConfig {
+		/**
+		 * 阅读模式按钮
+		 */
 		readmode?: boolean;
+		/**
+		 * 单双栏切换按钮
+		 */
 		aside?: boolean;
 	}
 
-	/* the upper and lower pages of the article */
+	/**
+	 * 文章上下页 || the upper and lower pages of the article
+	 */
 	interface PostPaginationConfig {
+		/**
+		 * 文章底部是否显示上下篇
+		 */
 		enable?: boolean;
+		/**
+		 * 上下篇卡片样式
+		 */
 		type?: 'large' | 'small';
 	}
 
-	/* Reward config */
+	/**
+	 * 打赏配置 || Reward config
+	 */
 	interface RewardConfig {
+		/**
+		 * 是否显示打赏按钮
+		 */
 		enable?: boolean;
+		/**
+		 * 打赏按钮下的描述
+		 */
 		comment?: string;
+		/**
+		 * 打赏链接（当开启打赏链接时，将自动跳转您的外部链接而不是展开二维码）
+		 */
 		url?: string;
+		/**
+		 * 打赏二维码
+		 */
 		methods?: {
-			link?: string;
+			/**
+			 * 二维码地址
+			 */
 			path: string;
+			/**
+			 * 二维码描述
+			 */
 			name: string;
+			/**
+			 * 点击二维码跳转链接
+			 */
+			link?: string;
 		}[];
 	}
 
-	/* Creative commons config */
+	/**
+	 * 文章版权信息 || Creative commons config
+	 */
 	interface CreativeCommonsConfig {
+		/**
+		 * 设置证书 (by | by-nc | by-nc-nd | by-nc-sa | by-nd | by-sa | zero)
+		 */
 		license?: string;
+		/**
+		 * 设置语言 (deed.zh | deed.en | deed.ja ｜ ...)
+		 */
 		language?: string;
+		/**
+		 * 在每篇文章末尾显示
+		 */
 		post?: boolean;
+		/**
+		 * 是否在复制文章时，在剪贴板中追加版权信息（默认关闭）
+		 */
 		clipboard?: boolean;
 	}
 }

@@ -8,130 +8,262 @@
 
 参考 vitepress 配置。
 
+## 搜索 Search
+
+参考 vitepress 配置，目前仅支持本地搜索
+
 ## 网站图标 Favicon
 
 用于 logo、icon 安装图标配置。
 
-- `logo`：顶部 logo
-- `dark_logo`：顶部 logo，暗黑模式时显示
-- `icon16`：icon 16\*16
-- `icon32`：icon 32\*32
-- `appleTouchIcon`：iOS 添加到桌面时显示图标
-- `visibilitychange`：是否在离开窗口时切换标题显示
-- `hidden`：离开窗口时显示图标
-- `showText`：激活窗口时显示文字
-- `hideText`：离开窗口显示文字
+```ts
+interface FaviconConfig {
+	/**
+	 * logo
+	 */
+	logo?: string;
+	/**
+	 *  dark 下使用
+	 */
+	dark_logo?: string;
+	/**
+	 * 网站图标
+	 */
+	icon16?: string;
+	/**
+	 * 网站图标
+	 */
+	icon32?: string;
+	/**
+	 * iOS 添加到主屏幕使用图标
+	 */
+	appleTouchIcon?: string;
+	/**
+	 * 网站清单配置
+	 */
+	webmanifest?: string;
+	/**
+	 * 是否监听选项卡可见事件
+	 */
+	visibilitychange?: boolean;
+	/**
+	 * 选项卡不可见时显示角标
+	 */
+	hidden?: string;
+	/**
+	 * 选项卡不可见 显示文案
+	 */
+	showText?: string;
+	/**
+	 * 选项卡由不可见切换为可见时显示文案
+	 */
+	hideText?: string;
+}
+```
 
 ## 用户信息 User
 
-用户基本信息，用于博主名称、头像、友链交换规则、站点运行计时等等。
+用户基本信息，用于博主名称、头像、友链交换规则等等。
 
-- `name`：昵称，用于侧栏或其他区域标识
-- `first_name`：名，用于顶部将姓和名分别显示
-- `last_name`：姓，
-- `email`：邮箱
-- `domain`：域名
-- `avatar`：头像
-- `dark_avatar`：头像，黑暗主题时显示
-- `describe`：网站简介
-- `ruleText`：友链交换规则
+```ts
+interface UserConfig {
+	/**
+	 * 站点昵称
+	 */
+	name?: string;
+	first_name?: string;
+	last_name?: string;
+	/**
+	 * 邮箱
+	 */
+	email?: string;
+	/**
+	 * 域名
+	 */
+	domain?: string;
+	/**
+	 * 头像
+	 */
+	avatar?: string;
+	/**
+	 * dark 下使用
+	 */
+	dark_avatar?: string;
+	/**
+	 * 站点简介
+	 */
+	describe?: string;
+	/**
+	 * 友情链接规则
+	 */
+	ruleText?: string;
+}
+```
+
+## 顶部导航 TopBar
+
+导航栏右侧菜单配置，左侧 logo 在网站图标中进行配置
+
+```ts
+type TobBarsConfig = Array<AsyncTheme.NavItemWithLink | AsyncTheme.NavItemWithChildren>;
+
+interface NavItemWithLink {
+	/**
+	 * 标题
+	 */
+	title: string;
+	/**
+	 * 链接
+	 */
+	url: string;
+	/**
+	 * 激活匹配规则
+	 */
+	activeMatch?: string;
+	/**
+	 * 打开方式
+	 */
+	target?: string;
+	/**
+	 * HTML rel
+	 */
+	rel?: string;
+}
+
+interface NavItemWithChildren {
+	/**
+	 * 标题
+	 */
+	title?: string;
+	/**
+	 * 链接
+	 */
+	url?: string;
+	/**
+	 * 激活匹配规则
+	 */
+	activeMatch?: string;
+	/**
+	 * 打开方式
+	 */
+	target?: string;
+	/**
+	 * HTML rel
+	 */
+	rel?: string;
+	/**
+	 * 子级
+	 */
+	children: NavItemWithLink[];
+}
+```
 
 ## 侧栏 Sidebar
 
-### 社交图标
+包含 社交图标、打字动画、侧栏信息配置
 
-默认内置 Font-Awesome Brand 图标，可根据您的需求添加，您可以通过在头部引入自定义图标资源来获取更多图标。
-
-- `name`：链接名称
-- `icon`：图标 class
-- `url`：链接
-
-```yaml [修改示例]
-sidebar:
-  social: # 社交地址
-    - name: github
-      icon: fab fa-github
-      url: https://github.com
-    - name: gitee
-      icon: iconfont cg-gitee
-      url: https://gitee.com
-```
-
-如果您不想放置任何链接，仅需在 `sidebar` 中设置：
-
-```yaml
-sidebar:
-  social:
-```
-
-### 打字动画
-
-- `typedTextPrefix`：为固定前缀
-- `typedText`：为打字效果切换条目，可设置多条，按顺序切换。
-
-```yaml
-sidebar:
-  typedTextPrefix: I`m
-  typedText: ["Web Developer"]
-```
-
-### 侧栏信息
-
-侧栏信息是一个数组，里面元素 key-val 形式的。
-
-```yaml
-sidebar:
-  info: # 个人信息
-    - key: 地址
-      val: 火星
-    - key: 年龄
-      val: 18
+```ts
+interface SidebarConfig {
+	/**
+	 * 打字动画固定前缀
+	 */
+	typedTextPrefix?: string;
+	/**
+	 * 打字动画切换文案
+	 */
+	typedText?: string[];
+	/**
+	 * 个人信息
+	 */
+	info?: {
+		key: string;
+		val: string;
+	}[];
+	/**
+	 * 社交地址图标链接
+	 */
+	social?: {
+		name: string;
+		icon: string;
+		url: string;
+	}[];
+}
 ```
 
 ## 横幅 Banner
 
 每个页面横幅都可以自定义不同背景图、标语等，当您需要视频背景的时候，您的视频格式需要为 MP4、WebM 、Ogg 等格式。
 
-- `type`：横幅类型 img、slideshow、video
-- `bgurl`：背景图地址，如果 type 是 slideshow，必须为数组。如果 type 是 img 时，可为字符串或数组，如果数组长度为 2 则会根据主题自动切换。
-- `bannerTitle`：横幅上标题
-- `bannerText`：横幅描述
-- `position`： 同 CSS object-position
-- `fit`：同 CSS object-fit
-
-```yaml{4} [修改示例]
-banner:
-  index:
-    type: img
-    bgurl: https://pic1.zhimg.com/v2-b3c2c6745b9421a13a3c4706b19223b3_r.jpg?source=1940ef5c
-    bannerTitle: 树深时见鹿，<br>溪午不闻钟。
-    bannerText: Hi my new friend!
+```ts
+interface BannerConfig {
+	/**
+	 * 横幅类型
+	 */
+	type?: "img" | "video";
+	/**
+	 * 横幅资源路径地址
+	 */
+	bgurl?: string;
+	/**
+	 * 横幅标题
+	 */
+	bannerTitle?: string;
+	/**
+	 * 横幅描述
+	 */
+	bannerText?: string;
+	/**
+	 * 同 CSS object-position
+	 */
+	position?: string;
+	/**
+	 * 同 CSS object-fit
+	 */
+	fit?: string;
+}
 ```
 
 ## 页脚 Footer
 
 页脚所有配置预览：
 
-```yaml
-footer:
-  powered:
-    enable: true
-  beian:
-    enable: false
-    icp:
-  copyrightYear:
-  live_time:
-    enable: false
-    prefix: footer.tips
-    start_time: 04/10/2022 17:00:00
-  custom_text:
-```
-
-### 起始年份
-
-```yaml
-footer:
-  copyrightYear: 2020
+```ts
+interface FooterConfig {
+	/**
+	 * 是否显示 vitepress 和 主题
+	 * theme link (Powered by vitepress).
+	 */
+	powered?: {
+		enable: boolean;
+	};
+	/**
+	 * 备案信息
+	 * Beian icp information for Chinese users. In China, every legal website should have a beian icp in website footer.
+	 * https://beian.miit.gov.cn/
+	 */
+	beian?: {
+		enable: boolean;
+		icp?: string;
+	};
+	/**
+	 * 版权开始年号
+	 */
+	copyright_year?: string;
+	/**
+	 * 运行时长
+	 */
+	live_time?: {
+		enable?: boolean;
+		/**
+		 * 前缀
+		 */
+		prefix?: string;
+		/**
+		 * 运行计算开始时间
+		 */
+		start_time?: string;
+	};
+}
 ```
 
 ### 驱动
@@ -142,54 +274,31 @@ footer:
 
 让更多人知道 Vitepress 与主题 Vitepress-Theme-Async，这有利于开源社区进一步发展。
 
-```yaml {3}
-footer:
-  powered:
-    enable: true
-```
-
 ### 备案
 
 国内用户可以提供备案号，开启备案显示。
 
 备案信息默认链接为：<https://beian.miit.gov.cn/>
 
-- `enable`: 开启备案
-- `icp`: 备案号
-
-```yaml
-footer:
-  beian:
-    enable: true
-    icp: 苏ICP备xxxxxxxx号
-```
-
 ### 运行时间
 
-默认关闭。
+默认关闭。示例: `本博客已萌萌哒地运行 442 天`
 
-`本博客已萌萌哒地运行 442 天`
+## 固定按钮 FixedBtn
 
-- `enable`: 开启运行计时
-- `prefix`: 计时文案，如果需要自定义，请覆盖语言文件里 footer.tips ，个性化语言 [参考这里](#语言-language)
-- `start_time`: 计时开始时间，浏览器支持的日期格式即可
+右下角按钮区域部分按钮配置
 
-```yaml
-footer:
-  live_time:
-    enable: false
-    prefix: footer.tips
-    start_time: 04/10/2022 17:00:00
-```
-
-### 自定义文本
-
-`custom_text` 为自定义页脚，可以包含 HTML。
-譬如有时使用其他服务商进行托管页面，或一些 ICP 之外的备案信息。
-
-```yaml
-footer:
-  custom_text: Hosted by <a href="https://github.com" rel="noopener" target="_blank">Github Pages</a>
+```ts
+interface FixedBtnConfig {
+	/**
+	 * 阅读模式按钮
+	 */
+	readmode?: boolean;
+	/**
+	 * 单双栏切换按钮
+	 */
+	aside?: boolean;
+}
 ```
 
 ## 文章 Article
@@ -200,29 +309,38 @@ footer:
 
 开启后，将在每篇文章 `post` 末尾显示打赏按钮。
 
-- `enable`: 开启打赏
-- `url`: 您的打赏链接（当您开启打赏链接时，将自动跳转您的外部链接而不是展开二维码）
-- `comment`: 在打赏按钮下显示您想说的话
-- `methods`: 数组，打赏方式
-
-#### 打赏二维码
-
-- `name`: 打赏方式
-- `path`: 图片路径
-
-```yaml{3-6} [修改示例]
-reward:
-  enable: true
-  comment: I'm so cute. Please give me money.
-  methods:
-    - name: 支付宝
-      path: 二维码地址
-```
-
-您也可以在某篇文章的首部单独设置是否开启打赏。
-
-```yaml
-reward: true
+```ts
+interface RewardConfig {
+	/**
+	 * 是否显示打赏按钮
+	 */
+	enable?: boolean;
+	/**
+	 * 打赏按钮下的描述
+	 */
+	comment?: string;
+	/**
+	 * 打赏链接（当开启打赏链接时，将自动跳转您的外部链接而不是展开二维码）
+	 */
+	url?: string;
+	/**
+	 * 打赏二维码
+	 */
+	methods?: {
+		/**
+		 * 二维码地址
+		 */
+		path: string;
+		/**
+		 * 二维码描述
+		 */
+		name: string;
+		/**
+		 * 点击二维码跳转链接
+		 */
+		link?: string;
+	}[];
+}
 ```
 
 ### 版权信息
@@ -232,15 +350,148 @@ reward: true
 > [关于许可协议](https://creativecommons.org/licenses/)
 > 默认使用 署名-非商业性使用-相同方式共享 4.0，即 [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)。
 
-- `license`：设置证书 (by | by-nc | by-nc-nd | by-nc-sa | by-nd | by-sa | zero)
-- `language`：设置语言 (deed.zh | deed.en | deed.ja ｜ ...)
-- `post`：在每篇文章末尾显示
-- `clipboard`：是否在复制文章时，在剪贴板中追加版权信息（默认关闭）
-
-```yaml{5} [修改示例]
-creative_commons:
-  license: by-nc-sa
-  language: deed.zh
-  post: false
-  clipboard: true
+```ts
+interface CreativeCommonsConfig {
+	/**
+	 * 设置证书 (by | by-nc | by-nc-nd | by-nc-sa | by-nd | by-sa | zero)
+	 */
+	license?: string;
+	/**
+	 * 设置语言 (deed.zh | deed.en | deed.ja ｜ ...)
+	 */
+	language?: string;
+	/**
+	 * 在每篇文章末尾显示
+	 */
+	post?: boolean;
+	/**
+	 * 是否在复制文章时，在剪贴板中追加版权信息（默认关闭）
+	 */
+	clipboard?: boolean;
+}
 ```
+
+### 上下篇 Pagination
+
+```ts
+interface PaginationConfig {
+	/**
+	 * 分页大小
+	 */
+	per_page?: number;
+	/**
+	 * 排序方式
+	 */
+	order_by?: string;
+	/**
+	 * 归档时日期格式
+	 */
+	date_fmt?: string;
+}
+```
+
+### 文章封面
+
+```ts
+interface ConverConfig {
+	default: string;
+	type: "img" | "date" | "random";
+}
+```
+
+## 友情链接 Links
+
+在 layout 为 `links` 时，根据配置渲染列表
+
+```ts
+type LinksConfig = Links[];
+
+interface Links {
+	/**
+	 * 昵称
+	 */
+	name: string;
+	/**
+	 * 链接
+	 */
+	url: string;
+	/**
+	 * 头像
+	 */
+	image: string;
+	/**
+	 * 描述
+	 */
+	desc?: string;
+}
+```
+
+## 关于页
+
+在 layout 为 `about` 时，根据配置生成页面
+
+```ts
+interface AboutPageConfig {
+	/**
+	 * 标题
+	 */
+	title?: string;
+	/**
+	 * 个人简单描述
+	 */
+	introduction?: string;
+	/**
+	 * 博客信息
+	 */
+	blog?: string;
+	/**
+	 * 隐私权说明
+	 */
+	privacy?: string;
+}
+```
+
+## 归档 Archives
+
+在 layout 为 `archives` 视为归档页
+
+为确保其他页跳转归档页正常，需要配置 `归档页` 对应地址
+
+```ts
+interface BuiltPageConfig {
+	/**
+	 * 归档页地址 || archive page url
+	 */
+	archives?: string;
+	/**
+	 * 分类页地址 || category page url
+	 */
+	categorys?: string;
+	/**
+	 * 标签页地址 || tag page url
+	 */
+	tags?: string;
+}
+```
+
+## 标签页 TagPage
+
+在 layout 为 `tags` 视为标签页
+
+## 分类 Categories
+
+在 layout 为 `categories` 视为分类页
+
+## 插槽 Slot
+
+待整理
+
+## 自定义样式 Style
+
+参考 vitepress 自定义主题。
+
+主题内置 css 变量参考 `packages\vitepress-theme-async\styles\_variables\index.less` 文件
+
+## 自定义组件 Components
+
+参考 vitepress 覆盖组件使用方式。

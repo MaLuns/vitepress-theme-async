@@ -74,7 +74,6 @@ export const defaultConfig = {
 				prefix: 'footer.tips',
 				start_time: '04/10/2022 17:00:00',
 			},
-			custom_text: null,
 		},
 		cover: {
 			type: 'img',

@@ -1,4 +1,6 @@
 ---
-title: 树深时见鹿，\n溪午不闻钟。
+title: 归档
 layout: archives
+banner:
+	bannerTitle: 云间连下榻，<br>天上接行杯。
 ---

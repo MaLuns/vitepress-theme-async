@@ -1,4 +1,6 @@
 ---
-title: 分类页
+title: 分类
 layout: categories
+banner:
+	bannerTitle: 云间连下榻，<br>天上接行杯。
 ---

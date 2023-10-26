@@ -1,0 +1,17 @@
+[
+	{
+		"large_version": "v0.0.x",
+		"children": [
+			{
+				"version": "0.0.1",
+				"date": "2023-10-25",
+				"logs": [
+					{
+						"type": "feat",
+						"text": "基础功能实现"
+					}
+				]
+			}
+		]
+	}
+]

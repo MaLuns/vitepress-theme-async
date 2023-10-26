@@ -50,6 +50,5 @@ onMounted(() => {
 		<div v-if="theme?.footer?.live_time?.enable" class="trm-footer-item">
 			<span id="since" class="trm-accent-color">博客已萌萌哒运行 {{ day }} 天</span>
 		</div>
-		<div v-if="theme?.footer?.custom_text" class="trm-footer-item" v-html="theme?.footer?.custom_text"></div>
 	</footer>
 </template>

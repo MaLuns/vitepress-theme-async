@@ -17,6 +17,6 @@
 
 ### Project
 
-- [Hexo-Theme-Async](https://github.com/maluns/hexo-theme-async)
 - [VitePress](https://github.com/vuejs/vitepress)
-- [vuvueusee](https://vueuse.org/)
+- [Vueuse](https://vueuse.org/)
+- [Hexo-Theme-Async](https://github.com/maluns/hexo-theme-async)
