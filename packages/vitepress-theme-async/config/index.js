@@ -97,8 +97,8 @@ export const defaultConfig = {
  * @type {(config: import('vitepress').UserConfig<import('../types').AsyncThemeConfig>) => import('vitepress').UserConfig<import('../types').AsyncThemeConfig>}
  */
 export const defineConfig = config => {
-	if (Array.isArray(config.themeConfig.outline.level)) {
-		delete defaultConfig.outline.level;
+	if (Array.isArray(config.themeConfig?.outline?.level)) {
+		defaultConfig.themeConfig.outline.level = [];
 	}
 	config = mergeConfig(defaultConfig, config);
 	config.head = config.head ?? [];

@@ -1,4 +1,4 @@
-import dayjs from 'dayjs';
+import * as dayjs from 'dayjs';
 import { AsyncThemeConfig } from 'types/index';
 import { useData, withBase } from 'vitepress';
 import { data as allPosts } from './posts.data';
@@ -102,7 +102,7 @@ export const useCategories = () => sortBy(groupBy(allPosts, 'categories'), { 1: 
 export const useArchives = () => {
 	const theme = useTheme();
 	return sortBy(
-		groupBy(allPosts, 'date', date => dayjs(date).format(theme.value.archive_generator?.date_fmt || 'YYYY')),
+		groupBy(allPosts, 'date', date => dayjs.default(date).format(theme.value.archive_generator?.date_fmt || 'YYYY')),
 		{ 0: -1 },
 	);
 };
