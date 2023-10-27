@@ -1,0 +1,22 @@
+{
+	"name": "vitepress-blog",
+	"version": "1.0.0",
+	"private": true,
+	"author": "白云苍狗",
+	"license": "MIT",
+	"scripts": {
+		"dev": "vitepress dev ./",
+		"build": "vitepress build ./",
+		"serve": "vitepress serve ./"
+	},
+	"dependencies": {
+		"vitepress-theme-async": "^0.0.2"
+	},
+	"directories": {
+		"doc": "docs"
+	},
+	"devDependencies": {
+		"typescript": "^5.1.6",
+		"vitepress": "1.0.0-rc.20"
+	}
+}
