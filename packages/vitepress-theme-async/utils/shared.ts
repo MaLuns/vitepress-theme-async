@@ -1,5 +1,6 @@
 import { isObject } from '@vueuse/core';
 
+export const EXTERNAL_URL_RE = /^[a-z]+:/i;
 export const HASH_RE = /#.*$/;
 export const EXT_RE = /(index)?\.(md|html)$/;
 export const inBrowser = typeof document !== 'undefined';
@@ -167,6 +168,12 @@ export const sortBy = <T extends AnyObject>(data: T[], orderby: AsyncTheme.Order
 	});
 };
 
+/**
+ * 节流防抖
+ * @param fn
+ * @param delay
+ * @returns
+ */
 export const throttleAndDebounce = (fn: () => void, delay: number) => {
 	let timeoutId: any;
 	let called = false;
@@ -178,3 +185,9 @@ export const throttleAndDebounce = (fn: () => void, delay: number) => {
 		} else timeoutId = setTimeout(fn, delay);
 	};
 };
+
+export const withBase = (base: string, path: string) => {
+	return EXTERNAL_URL_RE.test(path) || !path.startsWith('/') ? path : joinPath(base, path);
+};
+
+export const joinPath = (base: string, path: string) => `${base}${path}`.replace(/\/+/g, '/');

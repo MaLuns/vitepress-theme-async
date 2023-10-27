@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useData, withBase } from "vitepress";
+import { useData } from "vitepress";
 import { formatDate } from "../utils/client";
 import { usePageUrl } from "../composables";
 import TrmSwichImgs from "./TrmSwichImgs.vue";
@@ -32,7 +32,7 @@ const pageUrl = usePageUrl();
 		<div v-if="page.frontmatter.index && post.sticky && post.sticky > 0" class="trm-top">置顶</div>
 		<div class="trm-card-descr">
 			<div class="trm-label trm-category trm-mb-20">
-				<a :href="post.categories?.length ? withBase(pageUrl.categorys + '/' + post.categories[0]) : '#.'">
+				<a :href="post.categories?.length ? pageUrl.categorys + '?q=' + post.categories[0] : '#.'">
 					{{ post.categories?.length ? post.categories[0] : "未设置" }}
 				</a>
 			</div>

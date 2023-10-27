@@ -118,5 +118,10 @@ export default defineConfig({
 			// double_arrows: 'fas fa-angle-double-down',
 			// copy: 'fas fa-copy',
 		},
+		page: {
+			archives: '/archives',
+			tags: '/tags',
+			categorys: '/categories',
+		},
 	},
 });

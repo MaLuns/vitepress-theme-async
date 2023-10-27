@@ -7,7 +7,7 @@ import matter from 'gray-matter';
 import path from 'node:path';
 import fs from 'node:fs';
 import { getFileBirthTime, getFileLastUpdateTime, slash } from '../utils/node';
-import { sortBy } from '../utils/shared';
+import { sortBy, withBase } from '../utils/shared';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const config: SiteConfig<AsyncThemeConfig> = (globalThis as any).VITEPRESS_CONFIG;
@@ -105,7 +105,7 @@ export default <LoaderModule>{
 			const data = {
 				excerpt: renderedExcerpt,
 				...meta,
-				url,
+				url: withBase(config.site.base, url),
 				filePath: slash(path.relative(config.srcDir, file)),
 			};
 			cache.set(file, { data, timestamp });

@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { withBase } from "vitepress";
 import { usePageUrl, useTheme } from "../composables";
 import TrmIcon from "./TrmIcon.vue";
 
@@ -19,7 +18,7 @@ const pageUrl = usePageUrl();
 			<span class="trm-number">{{ length }}</span>
 		</h6>
 		<div class="trm-divider trm-mb-20 trm-mt-20"></div>
-		<a :href="withBase(pageUrl.categorys + '/' + name)" class="trm-label">
+		<a :href="pageUrl.categorys + '?q=' + name" class="trm-label">
 			更多
 			<TrmIcon :icon="theme.icons?.next" class="arrow-right" />
 			<!-- <%- icon(theme.icons.next, 'arrow-right') %> -->

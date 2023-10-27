@@ -30,7 +30,6 @@ const { frontmatter, page } = useData();
 				<template #topbar-right-before><slot name="topbar-right-before" /></template>
 				<template #topbar-right-after><slot name="topbar-right-after" /></template>
 			</TrmTopBar>
-			<!-- 指定唯一 key, 确保组件更新 -->
 			<div v-if="!page.isNotFound" class="trm-content-start">
 				<TrmBanner>
 					<template #banner-top><slot name="banner-top" /></template>

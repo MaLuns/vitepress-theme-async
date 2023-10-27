@@ -1,6 +1,13 @@
 {
 	"name": "vitepress-theme-async",
-	"version": "1.0.0",
+	"version": "0.0.0",
+	"repository": "git@github.com:MaLuns/vitepress-theme-async.git",
+	"author": "白云苍狗 <admin@imalun.com>",
+	"homepage": "https://vitepress-theme-async.imalun.com",
+	"bugs": {
+		"url": "https://github.com/MaLuns/vitepress-theme-async/issues"
+	},
+	"license": "MIT",
 	"type": "module",
 	"main": "./index.ts",
 	"types": "./types/index.d.ts",

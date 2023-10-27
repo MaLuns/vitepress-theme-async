@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref } from "vue";
+import { computed, onMounted, ref } from "vue";
 import { useTags, useArchives, useCategories, useAllPosts, useTheme } from "../composables";
 
 import TrmPagination from "./TrmPagination.vue";
@@ -57,6 +57,13 @@ const onFilter = (item: string) => {
 	filter.value = item;
 	currentPageIndex.value = 1;
 };
+
+onMounted(() => {
+	const { searchParams } = new URL(location.href);
+	if (searchParams.has("q")) {
+		filter.value = searchParams.get("q") ?? "";
+	}
+});
 </script>
 <template>
 	<div class="row">
