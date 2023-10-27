@@ -35,6 +35,13 @@ export default defineConfig({
 		],
 		sidebar: {
 			typedText: ['Web Developer', 'UI Designer'],
+			social: [
+				{
+					name: 'vue',
+					url: 'https://cn.vuejs.org/',
+					icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M356.9 64.3H280l-56 88.6-48-88.6H0L224 448 448 64.3h-91.1zm-301.2 32h53.8L224 294.5 338.4 96.3h53.8L224 384.5 55.7 96.3z"/></svg>`,
+				},
+			],
 		},
 		user: {
 			email: 'admin@imalun.com',
@@ -96,27 +103,6 @@ export default defineConfig({
 		},
 		search: {
 			provider: 'local',
-		},
-		icons: {
-			type: 'font',
-			sun: 'far fa-sun',
-			moon: 'far fa-moon',
-			email: 'far fa-envelope',
-			next: 'fas fa-arrow-right',
-			calendar: 'far fa-calendar-alt',
-			clock: 'far fa-clock',
-			user: 'far fa-user',
-			back_top: 'fas fa-arrow-up',
-			close: 'fas fa-times',
-			search: 'fas fa-search',
-			reward: 'fas fa-hand-holding-usd',
-			toc_tag: 'fas fa-th-list',
-			read: 'fas fa-book-reader',
-			arrows: 'fas fa-arrows-alt-h',
-			// play: 'fas fa-play',
-			// user_tag: 'fas fa-user-alt',
-			// double_arrows: 'fas fa-angle-double-down',
-			// copy: 'fas fa-copy',
 		},
 		page: {
 			archives: '/archives',

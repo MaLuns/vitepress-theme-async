@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { useTheme } from "../composables";
-import TrmIcon from "./TrmIcon.vue";
+import TrmIconReward from "./icons/TrmIconReward.vue";
 
 const show = ref(false);
 const theme = useTheme();
@@ -9,10 +9,10 @@ const theme = useTheme();
 <template>
 	<div v-if="theme.reward?.enable" class="trm-reward">
 		<a v-if="theme.reward?.url" rel="noopener noreferrer" :href="theme.reward.url" target="_blank" class="trm-reward-btn trm-glow">
-			<TrmIcon :icon="theme.icons?.reward" />
+			<TrmIconReward />
 		</a>
 		<span v-else class="trm-reward-btn trm-glow" @click="show = !show">
-			<TrmIcon :icon="theme.icons?.reward" />
+			<TrmIconReward />
 		</span>
 		<p class="trm-reward-comment">我很可爱请给我钱</p>
 		<div v-if="show && theme.reward?.methods">

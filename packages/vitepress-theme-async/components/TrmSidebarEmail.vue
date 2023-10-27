@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useTheme } from "../composables/index";
-import TrmIcon from "./TrmIcon.vue";
+import TrmIconEmail from "./icons/TrmIconEmail.vue";
 const theme = useTheme();
 </script>
 <template>
@@ -10,7 +10,7 @@ const theme = useTheme();
 		<div class="text-center">
 			<a :href="`mailto:${theme.user.email}`" class="trm-btn">
 				联系我
-				<TrmIcon :icon="theme.icons?.email" />
+				<TrmIconEmail />
 			</a>
 		</div>
 		<!-- action button end -->

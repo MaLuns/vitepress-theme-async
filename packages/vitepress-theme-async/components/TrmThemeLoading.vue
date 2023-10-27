@@ -1,18 +1,16 @@
 <script setup lang="ts">
-import { useTheme } from "../composables/index";
-import TrmIcon from "./TrmIcon.vue";
-
-const theme = useTheme();
+import TrmIconMoon from "./icons/TrmIconMoon.vue";
+import TrmIconSun from "./icons/TrmIconSun.vue";
 </script>
 <template>
 	<div class="trm-mode-swich-animation-frame">
 		<div class="trm-mode-swich-animation">
 			<i class="i-sun">
-				<TrmIcon :icon="theme.icons!.sun"></TrmIcon>
+				<TrmIconSun />
 			</i>
 			<div class="trm-horizon"></div>
 			<i class="i-moon">
-				<TrmIcon :icon="theme.icons!.moon"></TrmIcon>
+				<TrmIconMoon />
 			</i>
 		</div>
 	</div>

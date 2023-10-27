@@ -2,12 +2,14 @@
 import { formatDate } from "../utils/client";
 import { usePrevNext, useTheme } from "../composables";
 
-import TrmIcon from "./TrmIcon.vue";
 import TrmDividerTitle from "./TrmDividerTitle.vue";
 import TrmCardPost from "./TrmCardPost.vue";
 import TrmCardPostMini from "./TrmCardPostMini.vue";
 import TrmReward from "./TrmReward.vue";
 import TrmPostCopyright from "./TrmPostCopyright.vue";
+import TrmIconCalendar from "./icons/TrmIconCalendar.vue";
+import TrmIconClock from "./icons/TrmIconClock.vue";
+import TrmIconUser from "./icons/TrmIconUser.vue";
 
 const control = usePrevNext();
 const theme = useTheme();
@@ -17,19 +19,19 @@ const theme = useTheme();
 	<div class="trm-post-info row hidden-sm">
 		<div class="col-sm-4">
 			<div class="trm-card trm-label trm-label-light text-center">
-				<TrmIcon class="trm-icon" :icon="theme.icons!.calendar"></TrmIcon>
+				<TrmIconCalendar />
 				{{ formatDate(control.post.date, "YYYY-MM-DD") }}
 			</div>
 		</div>
 		<div class="col-sm-4">
 			<div class="trm-card trm-label trm-label-light text-center">
-				<TrmIcon class="trm-icon" :icon="theme.icons!.clock"></TrmIcon>
+				<TrmIconClock />
 				{{ formatDate(control.post.date, "HH:mm") }}
 			</div>
 		</div>
 		<div class="col-sm-4">
 			<div class="trm-card trm-label trm-label-light text-center">
-				<TrmIcon class="trm-icon" :icon="theme.icons!.user"></TrmIcon>
+				<TrmIconUser />
 				{{ control.post.author || theme.author }}
 			</div>
 		</div>

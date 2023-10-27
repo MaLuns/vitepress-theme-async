@@ -4,10 +4,10 @@ import { ref, shallowRef } from "vue";
 import { onContentUpdated, useData } from "vitepress";
 import { getHeader, useActiveAnchor, resolveTitle } from "../composables/outline";
 import { useHasOutline } from "../composables/index";
-
-import TrmIcon from "./TrmIcon.vue";
-import TrmPostOutlineItem from "./TrmPostOutlineItem.vue";
 import { onClickOutside } from "@vueuse/core";
+
+import TrmPostOutlineItem from "./TrmPostOutlineItem.vue";
+import TrmIconTocTag from "./icons/TrmIconTocTag.vue";
 
 const show = ref(false);
 const headers = shallowRef<AsyncTheme.MenuItem[]>([]);
@@ -28,7 +28,7 @@ onClickOutside(container, () => {
 </script>
 <template>
 	<div v-if="hasOutline && headers.length" class="trm-fixed-btn post-toc-btn" data-title="文章目录" @click="show = !show">
-		<TrmIcon :icon="theme.icons!.toc_tag" />
+		<TrmIconTocTag />
 		<ClientOnly>
 			<Teleport to="body">
 				<div ref="container" class="trm-outline" :class="show ? 'active' : ''" role="navigation">

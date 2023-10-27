@@ -46,19 +46,6 @@ export const defaultConfig = {
 		sidebar: {
 			typedTextPrefix: 'I`m',
 			typedText: null,
-			info: [
-				{
-					key: 'sidebar.residence',
-					val: 'Mars',
-				},
-			],
-			social: [
-				{
-					name: 'Github',
-					icon: 'fab fa-github',
-					url: 'https://github.com',
-				},
-			],
 		},
 		footer: {
 			powered: {
@@ -110,6 +97,9 @@ export const defaultConfig = {
  * @type {(config: import('vitepress').UserConfig<import('../types').AsyncThemeConfig>) => import('vitepress').UserConfig<import('../types').AsyncThemeConfig>}
  */
 export const defineConfig = config => {
+	if (Array.isArray(config.themeConfig.outline.level)) {
+		delete defaultConfig.outline.level;
+	}
 	config = mergeConfig(defaultConfig, config);
 	config.head = config.head ?? [];
 

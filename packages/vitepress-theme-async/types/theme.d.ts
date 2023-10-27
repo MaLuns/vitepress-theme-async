@@ -280,8 +280,17 @@ declare namespace AsyncTheme {
 		 * 社交地址图标链接
 		 */
 		social?: {
+			/**
+			 * 名称
+			 */
 			name: string;
+			/**
+			 * svg  eg: icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M356.9 64.3H280l-56 88.6-48-88.6H0L224 448 448 64.3h-91.1zm-301.2 32h53.8L224 294.5 338.4 96.3h53.8L224 384.5 55.7 96.3z"/></svg>`
+			 */
 			icon: string;
+			/**
+			 * 链接
+			 */
 			url: string;
 		}[];
 	}
@@ -324,39 +333,6 @@ declare namespace AsyncTheme {
 			 */
 			start_time?: string;
 		};
-	}
-
-	/**
-	 * 主题使用图标 || Theme use icon
-	 */
-	interface IconsConfig {
-		type: 'font' | 'symbol';
-		// Theme switch icon
-		sun: string;
-		moon: string;
-		// email icon
-		email: string;
-		// Return to the top icon
-		back_top: string;
-		toc_tag: string;
-		// Secure the button in the lower right corner
-		read: string;
-		arrows: string;
-		// Category entry icon
-		next: string;
-		// Date of article details
-		calendar: string;
-		// Article details time
-		clock: string;
-		// Author of article details
-		user: string;
-		// reward icon
-		reward: string;
-
-		// close icon
-		close: string;
-		// search icon
-		search: string;
 	}
 
 	/**

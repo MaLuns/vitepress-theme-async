@@ -46,9 +46,6 @@ export declare interface AsyncThemeConfig {
 	/* Footer config */
 	footer?: AsyncTheme.FooterConfig;
 
-	/* The icon used by the theme */
-	icons?: AsyncTheme.IconsConfig;
-
 	/* Customize the cover image */
 	cover?: AsyncTheme.ConverConfig;
 

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useTheme } from "../composables/index";
-import TrmIcon from "./TrmIcon.vue";
+
 const theme = useTheme();
 </script>
 
@@ -10,7 +10,7 @@ const theme = useTheme();
 		<div class="trm-social">
 			<template v-for="item in theme.sidebar.social" :key="item.url">
 				<a :href="item.url" :title="item.name" rel="nofollow" target="_blank">
-					<TrmIcon :icon="item.icon"></TrmIcon>
+					<i class="symbol-icon" v-html="item.icon"></i>
 				</a>
 			</template>
 		</div>

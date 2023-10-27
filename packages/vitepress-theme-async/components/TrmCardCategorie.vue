@@ -1,13 +1,12 @@
 <script setup lang="ts">
-import { usePageUrl, useTheme } from "../composables";
-import TrmIcon from "./TrmIcon.vue";
+import { usePageUrl } from "../composables";
+import TrmIconNext from "./icons/TrmIconNext.vue";
 
 defineProps<{
 	name: string;
 	length: number;
 }>();
 
-const theme = useTheme();
 const pageUrl = usePageUrl();
 </script>
 
@@ -20,8 +19,7 @@ const pageUrl = usePageUrl();
 		<div class="trm-divider trm-mb-20 trm-mt-20"></div>
 		<a :href="pageUrl.categorys + '?q=' + name" class="trm-label">
 			更多
-			<TrmIcon :icon="theme.icons?.next" class="arrow-right" />
-			<!-- <%- icon(theme.icons.next, 'arrow-right') %> -->
+			<TrmIconNext class="arrow-right" />
 		</a>
 	</div>
 </template>
