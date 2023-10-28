@@ -4,10 +4,11 @@
 	"private": true,
 	"author": "白云苍狗",
 	"license": "MIT",
+	"type": "module",
 	"scripts": {
 		"dev": "vitepress dev ./",
 		"build": "vitepress build ./",
-		"serve": "vitepress serve ./"
+		"preview": "vitepress preview ./"
 	},
 	"dependencies": {
 		"vitepress-theme-async": "^0.0.2"
