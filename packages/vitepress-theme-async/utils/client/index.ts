@@ -1,4 +1,4 @@
-import dayjs from 'dayjs';
+import * as dayjs from 'dayjs';
 
 /**
  * 窗体已滚动距离
@@ -139,7 +139,7 @@ export const backTop = (smooth?: boolean) => window.scrollTo({ top: 0, behavior:
  * @param format
  * @returns
  */
-export const formatDate = (d: Date | number | string | undefined, fmt: string = 'yyyy-MM-dd hh:mm:ss'): string => dayjs(d).format(fmt);
+export const formatDate = (d: Date | number | string | undefined, fmt: string = 'yyyy-MM-dd hh:mm:ss'): string => dayjs.default(d).format(fmt);
 
 /**
  * 获取图标
