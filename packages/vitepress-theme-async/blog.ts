@@ -1,11 +1,10 @@
 import { AsyncThemeConfig } from 'types';
 import { useData, useRouter, withBase } from 'vitepress';
-import { Component, InjectionKey, Ref, defineComponent, h, inject, onMounted, provide, ref } from 'vue';
+import { Component, defineComponent, h, inject, onMounted, provide, ref } from 'vue';
 import failure from './assets/failure.ico';
 
-export const currentPageIndexSymbol: InjectionKey<Ref<number>> = Symbol('current-page-index');
-
-export const showMenuSymbol: InjectionKey<Ref<boolean>> = Symbol('show-menu');
+// export const currentPageIndexSymbol: InjectionKey<Ref<number>> = Symbol('current-page-index');
+// export const showMenuSymbol: InjectionKey<Ref<boolean>> = Symbol('show-menu');
 
 export function withConfigProvider(App: Component) {
 	return defineComponent({
@@ -16,8 +15,10 @@ export function withConfigProvider(App: Component) {
 			const currentPageIndex = ref(1);
 			const showMenu = ref(false);
 
-			provide(currentPageIndexSymbol, currentPageIndex);
-			provide(showMenuSymbol, showMenu);
+			// fix: 通过 npm 安装, 在 dev 模式时 vue 会提示 injection "Symbol(current-page-index)" not found.
+			// 未找到具体原因 暂时用字符替代
+			provide('currentPageIndexSymbol', currentPageIndex);
+			provide('showMenuSymbol', showMenu);
 
 			onMounted(() => {
 				const beforeRoute = router.onBeforeRouteChange;
@@ -98,5 +99,5 @@ export function withConfigProvider(App: Component) {
 	});
 }
 
-export const useCurrentPageIndex = () => inject(currentPageIndexSymbol)!;
-export const useShowMenu = () => inject(showMenuSymbol)!;
+export const useCurrentPageIndex = () => inject('currentPageIndexSymbol')!;
+export const useShowMenu = () => inject('showMenuSymbol')!;

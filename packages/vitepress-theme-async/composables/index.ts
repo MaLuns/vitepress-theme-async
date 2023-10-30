@@ -1,12 +1,12 @@
-import * as dayjs from 'dayjs';
 import { AsyncThemeConfig } from 'types/index';
+import { computed } from 'vue';
 import { useData, withBase } from 'vitepress';
+import { useMediaQuery } from '@vueuse/core';
 import { data as allPosts } from './posts.data';
 import { groupBy, sortBy } from '../utils/shared';
+import { formatDate } from '../utils/client';
 
 import bannerImg from '../assets/banner.png';
-import { computed } from 'vue';
-import { useMediaQuery } from '@vueuse/core';
 
 // import failureImg from '../assets/img/failure.ico'
 
@@ -102,7 +102,7 @@ export const useCategories = () => sortBy(groupBy(allPosts, 'categories'), { 1: 
 export const useArchives = () => {
 	const theme = useTheme();
 	return sortBy(
-		groupBy(allPosts, 'date', date => dayjs.default(date).format(theme.value.archive_generator?.date_fmt || 'YYYY')),
+		groupBy(allPosts, 'date', date => formatDate(date, theme.value.archive_generator?.date_fmt || 'YYYY')),
 		{ 0: -1 },
 	);
 };
