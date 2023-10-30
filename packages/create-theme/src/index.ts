@@ -16,11 +16,15 @@ console.log();
 
 function createThemeProject(destination: string) {
 	const templatePath = path.join(__dirname, 'template');
+	if (fs.existsSync(destination)) {
+		console.log(`❌ The ${projectName} folder already exists.!`);
+		console.log();
+		return;
+	}
 
 	fs.copy(templatePath, destination, async err => {
 		// 同步创建.gitignore文件和配置文件
 		await fs.copy(path.join(__dirname, 'move/gitignore'), path.join(destination, '.gitignore'));
-
 		await fs.copy(path.join(__dirname, 'move/package'), path.join(destination, 'package.json'));
 
 		const sourceRc = isBun ? 'bunfig.toml' : 'npmrc';
@@ -38,6 +42,9 @@ function createThemeProject(destination: string) {
 			console.error('An error occurred while copying template files:', err);
 		} else {
 			console.log('🎉 🎉 created successfully!');
+			console.log();
+
+			console.log('📚 📚 docs: https://vitepress-theme-async.imalun.com');
 			console.log();
 
 			console.log(`project in ${destination}`);

@@ -1,12 +1,13 @@
 {
-	"name": "async-cli",
+	"name": "create-async-theme",
 	"version": "0.0.0",
 	"repository": "git@github.com:MaLuns/vitepress-theme-async.git",
 	"author": "白云苍狗 <admin@imalun.com>",
 	"license": "MIT",
 	"keywords": [
 		"vitepress-theme",
-		"blog-theme"
+		"blog-theme",
+		"create-theme"
 	],
 	"bin": {
 		"async-cli": "./dist/index.js"
