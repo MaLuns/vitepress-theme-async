@@ -11,7 +11,7 @@
 		"preview": "vitepress preview ./"
 	},
 	"dependencies": {
-		"vitepress-theme-async": "^0.0.2"
+		"vitepress-theme-async": "latest"
 	},
 	"directories": {
 		"doc": "docs"
