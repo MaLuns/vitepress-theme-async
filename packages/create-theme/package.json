@@ -10,7 +10,7 @@
 		"create-theme"
 	],
 	"bin": {
-		"async-cli": "./dist/index.js"
+		"create-async-theme": "./dist/index.js"
 	},
 	"files": [
 		"dist"
