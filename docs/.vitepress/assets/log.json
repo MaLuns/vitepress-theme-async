@@ -3,6 +3,28 @@
 		"large_version": "v0.0.x",
 		"children": [
 			{
+				"version": "0.0.4",
+				"date": "2023-10-30",
+				"logs": [
+					{
+						"type": "feat",
+						"text": "增加页面插槽"
+					},
+					{
+						"type": "perf",
+						"text": "移除字体图标, 使用 svg"
+					},
+					{
+						"type": "fix",
+						"text": "修复设置 base 后路径生成错误"
+					},
+					{
+						"type": "fix",
+						"text": "修复一些 bug "
+					}
+				]
+			},
+			{
 				"version": "0.0.1",
 				"date": "2023-10-25",
 				"logs": [

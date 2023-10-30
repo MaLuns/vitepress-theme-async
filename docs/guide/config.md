@@ -484,13 +484,25 @@ interface BuiltPageConfig {
 
 ## 插槽 Slot
 
-待整理
+插槽位置主要分布在 :
+
+- 顶部导航栏 (TrmTopBar)
+- 横幅 (TrmBanner)
+- 侧栏 (TrmSidebar)
+- 内容区域 (TrmPageContent)，内容区域除了公用插槽外，文章页、关于页、友链页会存在特有的插槽。
+- 固定按钮块 (TrmFixedBtn)
+
+## 自定义图标 Icon
+
+主题内置图标是通过组件方式使用的，参考 vitepress 覆盖组件使用方式。
+
+主题内置图标位置 `vitepress-theme-async/components/icons`
 
 ## 自定义样式 Style
 
 参考 vitepress 自定义主题。
 
-主题内置 css 变量参考 `packages\vitepress-theme-async\styles\_variables\index.less` 文件
+主题内置 css 变量参考 `vitepress-theme-async/styles/_variables/index.less` 文件
 
 ## 自定义组件 Components
 

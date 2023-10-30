@@ -1,6 +1,6 @@
 import { AsyncThemeConfig } from 'types';
 import { useData, useRouter, withBase } from 'vitepress';
-import { Component, defineComponent, h, inject, onMounted, provide, ref } from 'vue';
+import { Component, defineComponent, Ref, h, inject, onMounted, provide, ref } from 'vue';
 import failure from './assets/failure.ico';
 
 // export const currentPageIndexSymbol: InjectionKey<Ref<number>> = Symbol('current-page-index');
@@ -99,5 +99,5 @@ export function withConfigProvider(App: Component) {
 	});
 }
 
-export const useCurrentPageIndex = () => inject('currentPageIndexSymbol')!;
-export const useShowMenu = () => inject('showMenuSymbol')!;
+export const useCurrentPageIndex = () => inject<Ref<number>>('currentPageIndexSymbol')!;
+export const useShowMenu = () => inject<Ref<boolean>>('showMenuSymbol')!;
