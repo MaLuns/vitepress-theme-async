@@ -1,8 +1,26 @@
 # 主题配置
 
+## 文章目录 Posts
+
+默认情况下，主题默认会在您指定的根目录下取去寻找 `posts` 目录，并将目录下的所有 `.md` 文件视为文章进行加载。可修改 `postDir` 自定义文章目录
+
+```ts
+  themeConfig: {
+    postDir: 'posts',
+  }
+```
+
+::: warning 注意
+
+vitepress 中存在根目录和源目录，默认情况下两者是相等的，如果您对 `srcDir` 进行了修改，则也同时需要对 `postDir` 进行修改。
+
+了解根目录和源目录的区别 [请看这里](https://vitepress.dev/guide/routing#root-and-source-directory)
+
+:::
+
 ## 语言 Language
 
-主题内置文本语言切换，等待支持。
+主题内置文本语言切换，待支持。
 
 ## 主题模式 ThemeMode
 
@@ -14,7 +32,7 @@
 
 ## 网站图标 Favicon
 
-用于 logo、icon 安装图标配置。
+用于 logo、icon、安装图标配置，通过 `favicon` 字段配置。
 
 ```ts
 interface FaviconConfig {
@@ -63,7 +81,7 @@ interface FaviconConfig {
 
 ## 用户信息 User
 
-用户基本信息，用于博主名称、头像、友链交换规则等等。
+用户基本信息，用于博主名称、头像、友链交换规则等等，通过 `user` 字段配置。
 
 ```ts
 interface UserConfig {
@@ -102,7 +120,9 @@ interface UserConfig {
 
 ## 顶部导航 TopBar
 
-导航栏右侧菜单配置，左侧 logo 在网站图标中进行配置
+导航栏右侧菜单配置，通过 `top_bars` 字段配置。
+
+左侧 logo 在网站图标中进行配置。
 
 ```ts
 type TobBarsConfig = Array<AsyncTheme.NavItemWithLink | AsyncTheme.NavItemWithChildren>;
@@ -160,7 +180,7 @@ interface NavItemWithChildren {
 
 ## 侧栏 Sidebar
 
-包含 社交图标、打字动画、侧栏信息配置
+包含 社交图标、打字动画、侧栏信息配置，通过 `sidebar` 字段配置。
 
 ```ts
 interface SidebarConfig {
@@ -286,7 +306,7 @@ interface FooterConfig {
 
 ## 固定按钮 FixedBtn
 
-右下角按钮区域部分按钮配置
+右下角按钮区域部分按钮配置，通过 `rightside` 字段配置
 
 ```ts
 interface FixedBtnConfig {
@@ -301,13 +321,61 @@ interface FixedBtnConfig {
 }
 ```
 
+## 分页 Pagination
+
+首页和归档分页可单独配置，分为 `index_generator` 和 `archive_generator`。
+
+```ts
+interface PaginationConfig {
+	/**
+	 * 分页大小
+	 */
+	per_page?: number;
+	/**
+	 * 排序方式
+	 */
+	order_by?: string;
+	/**
+	 * 归档时日期格式
+	 */
+	date_fmt?: string;
+}
+```
+
 ## 文章 Article
 
 这里是一些关于文章相关配置合集。
 
+### Frontmatter
+
+在 `md` 文件中除了 vitepress 默认可使用字段以外，主题新增了一些可使用配置
+
+- `sticky`：首页排序值，值越大越靠前
+- `banner`：文章页横幅背景，参考全局横幅配置
+- `cover`：文章封面图，可为字符串或数组或对象，如果数组长度为 2 则会根据主题自动切换。
+- `single_column`：单栏显示详情页，为 true 时生效。
+- `author`：文章作者，未配置时取全局配置
+- `categories`：文章分类，仅支持单个
+- `tags`：文章标签，支持多个
+
+```yaml
+---
+sticky: 0
+banner:
+  type: img
+  bgurl: https://pic1.zhimg.com/v2-b3c2c6745b9421a13a3c4706b19223b3_r.jpg
+  bannerText: Hi my new friend!
+cover: https://www.logosc.cn/uploads/resources/2018/11/29/1543459457_thumb.jpg
+author: 张三
+single_column: true
+categories: 分类一
+tags: [标签一, 标签二]
+---
+```
+
 ### 打赏 Reward
 
-开启后，将在每篇文章 `post` 末尾显示打赏按钮。
+通过 `reward` 字段配置，开启后，将在每篇文章 `post` 末尾显示打赏按钮。
 
 ```ts
 interface RewardConfig {
@@ -343,12 +411,14 @@ interface RewardConfig {
 }
 ```
 
-### 版权信息
+### 版权信息 Licenses
 
 设置您的文章的分享版权
 
 > [关于许可协议](https://creativecommons.org/licenses/)
 > 默认使用 署名-非商业性使用-相同方式共享 4.0，即 [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)。
+
+通过 `creative_commons` 字段配置
 
 ```ts
 interface CreativeCommonsConfig {
@@ -373,24 +443,24 @@ interface CreativeCommonsConfig {
 
 ### 上下篇 Pagination
 
+文章详情页中上下篇配置，通过 `post_pagination` 字段配置
+
 ```ts
-interface PaginationConfig {
+interface PostPaginationConfig {
 	/**
-	 * 分页大小
+	 * 文章底部是否显示上下篇
 	 */
-	per_page?: number;
+	enable?: boolean;
 	/**
-	 * 排序方式
+	 * 上下篇卡片样式
 	 */
-	order_by?: string;
-	/**
-	 * 归档时日期格式
-	 */
-	date_fmt?: string;
+	type?: "large" | "small";
 }
 ```
 
-### 文章封面
+### 文章封面 Conver
+
+通过配置 `cover` 字段，来选择默认文章封面样式
 
 ```ts
 interface ConverConfig {
@@ -399,9 +469,9 @@ interface ConverConfig {
 }
 ```
 
-## 友情链接 Links
+## 友接页 Links
 
-在 layout 为 `links` 时，根据配置渲染列表
+在 layout 为 `links` 时为友链页，页面会根据 `links` 配置渲染列表。
 
 ```ts
 type LinksConfig = Links[];
@@ -426,9 +496,9 @@ interface Links {
 }
 ```
 
-## 关于页
+## 关于页 About
 
-在 layout 为 `about` 时，根据配置生成页面
+在 layout 为 `about` 时，根据配置生成页面。
 
 ```ts
 interface AboutPageConfig {
@@ -451,11 +521,11 @@ interface AboutPageConfig {
 }
 ```
 
-## 归档 Archives
+## 归档页 Archives
 
-在 layout 为 `archives` 视为归档页
+在 layout 为 `archives` 视为归档页。
 
-为确保其他页跳转归档页正常，需要配置 `归档页` 对应地址
+为确保其他页跳转归档页正常，需要配置 `归档页` 对应地址。
 
 ```ts
 interface BuiltPageConfig {
@@ -476,11 +546,11 @@ interface BuiltPageConfig {
 
 ## 标签页 TagPage
 
-在 layout 为 `tags` 视为标签页
+在 layout 为 `tags` 视为标签页。
 
-## 分类 Categories
+## 分类页 Categories
 
-在 layout 为 `categories` 视为分类页
+在 layout 为 `categories` 视为分类页。
 
 ## 插槽 Slot
 
@@ -491,6 +561,8 @@ interface BuiltPageConfig {
 - 侧栏 (TrmSidebar)
 - 内容区域 (TrmPageContent)，内容区域除了公用插槽外，文章页、关于页、友链页会存在特有的插槽。
 - 固定按钮块 (TrmFixedBtn)
+
+具体插槽 [请看这里](https://github.com/maluns/vitepress-theme-async/packages/vitepress-theme-async/layouts/Layout.vue)
 
 ## 自定义图标 Icon
 

@@ -19,32 +19,52 @@
 
 ## 安装主题 Install
 
-#### 通过 Npm 方式
+### 初始化新博客
 
-进入您的博客根目录，执行：
+如果您的是新建博客，可以通过如下命令快速安装。根据您的包管理器，选择对应命令进行初始化
+
+#### npm
+
+```bash
+npm create async-theme@latest my-first-blog
+```
+
+#### yarn
+
+```bash
+yarn create async-theme@latest my-first-blog
+```
+
+#### pnpm
+
+```bash
+pnpm create async-theme@latest my-first-blog
+```
+
+#### bun
+
+```bash
+bunx create-async-theme@latest my-first-blog --bun
+```
+
+### 在已有客安装
+
+如果您需要将已有项目中使用主题，可以通过如下几种方式安装
+
+#### 安装 Npm 包方式
+
+进入您的博客根目录，添加 `vitepress-theme-async`
 
 ```bash
 npm i vitepress-theme-async@latest
 ```
 
-#### 复制到本地方式
+#### 将主题包复制到本地
 
 将 `package/vitepress-theme-async` 目录下代码复制到 `.vitepress/theme` 目录中即可。
 
 ::: danger
-不推荐直接使用这种方式安装，会导致 bug 版本定位和后续升级比较麻烦。如果您需要通过插槽或者覆盖主题组件来个性话您的博客，如果以上方式无法满足您的需求时，且不在需要升级时可选择通过这种方式安装。
-:::
-
-#### 通过 npm 安装预览版
-
-进入您的博客根目录，执行：
-
-```bash
-npm i vitepress-theme-async@beta
-```
-
-::: warning
-预览版本仅在主版本更新时使用，预览版还处于功能开发和 bug 修复阶段。如果您想提前尝试新功能，可以安装它，顺便能帮忙找找 Bug 🤣
+不推荐直接使用这种方式安装，会导致 bug 版本定位和后续升级比较麻烦。您可以优先通过插槽或者覆盖主题组件来个性话您的博客，如果以上方式无法满足您的需求时，且不在需要升级时可选择通过这种方式安装。
 :::
 
 ## 启用主题 Use
@@ -78,7 +98,7 @@ export default {
 如果您是将文件复制到本地，将 `.vitepress/config.ts` 改为:
 
 ```ts
-import { defineConfig } from ".theme/config";
+import { defineConfig } from "./theme/config";
 
 export default defineConfig({
 	themeConfig: {

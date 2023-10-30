@@ -65,5 +65,8 @@ export default defineConfig({
 			message: 'Released under the SATA | MIT License.',
 			copyright: 'Copyright © 2023-PRESENT MaLuns',
 		},
+		outline: {
+			level: [2, 4],
+		},
 	},
 });

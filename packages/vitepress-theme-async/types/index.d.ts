@@ -5,60 +5,61 @@ declare const theme: Theme;
 // async-theme-config -----------------------------------------------------------------------
 
 export declare interface AsyncThemeConfig {
-	/* author */
+	/* 作者 | author */
 	author?: string;
 
+	/** 搜索 | search */
 	search?: { provider: 'local'; options?: DefaultTheme.LocalSearchOptions };
 
-	/* */
+	/* 时区 | timeZone*/
 	timeZone?: number;
 
-	/*  */
+	/* 文章目录 | post folder */
 	postDir?: string;
 
-	/* built in page path config */
+	/* 内置页地址配置 | built in page path config */
 	page?: AsyncTheme.BuiltPageConfig;
 
-	/* Home page setting */
+	/* 首页分页 | Index page generator */
 	index_generator?: Omit<AsyncTheme.PaginationConfig, 'date_fmt'>;
 
-	/* */
+	/* 归档页 | Archive generator */
 	archive_generator?: AsyncTheme.PaginationConfig;
 
-	/* */
+	/* 上下页 | Post pagination */
 	post_pagination?: AsyncTheme.PostPaginationConfig;
 
-	/* Layout top bars */
+	/* 导航栏 | Layout top bars */
 	top_bars?: AsyncTheme.TobBarsConfig;
 
-	/* User info */
+	/* 用户信息 | User info */
 	user?: AsyncTheme.UserConfig;
 
-	/* Configure the icon information of the site */
+	/* 站点图标 | Configure the icon information of the site */
 	favicon?: AsyncTheme.FaviconConfig;
 
-	/* Banner config */
+	/* 横幅 | Banner config */
 	banner?: AsyncTheme.BannerConfig;
 
-	/* Sidebar config */
+	/* 侧栏 | Sidebar config */
 	sidebar?: AsyncTheme.SidebarConfig;
 
-	/* Footer config */
+	/* 页脚 | Footer config */
 	footer?: AsyncTheme.FooterConfig;
 
-	/* Customize the cover image */
+	/* 自定义封面 | Customize the cover image */
 	cover?: AsyncTheme.ConverConfig;
 
-	/* */
+	/* 固定按钮 | Fixed button */
 	rightside?: AsyncTheme.FixedBtnConfig;
 
-	/* About page Config */
+	/* 关于页 | About page Config */
 	about?: AsyncTheme.AboutPageConfig;
 
-	/* Links */
+	/* 友情链接 | Links */
 	links?: AsyncTheme.LinksConfig;
 
-	/* Reward */
+	/* 打赏 | Reward */
 	reward?: AsyncTheme.RewardConfig;
 
 	/* Creative Commons 4.0 International License.
@@ -69,6 +70,7 @@ export declare interface AsyncThemeConfig {
 	Valid values of language: deed.zh, deed.en, deed.ja, etc. */
 	creative_commons?: AsyncTheme.CreativeCommonsConfig;
 
+	/** 目录 | outline */
 	outline?: DefaultTheme.Outline;
 	outlineTitle?: string;
 }
