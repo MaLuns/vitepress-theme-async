@@ -3,9 +3,12 @@ import { computed } from 'vue';
 import { useData, withBase } from 'vitepress';
 import { useMediaQuery } from '@vueuse/core';
 import { data as allPosts } from './posts.data';
-import { groupBy, sortBy } from '../utils/shared';
+import { data as allLanguages } from './languages.data';
+import { groupBy, sortBy, dataPath, mergeObj } from '../utils/shared';
 import { formatDate } from '../utils/client';
+import { useLang } from '../blog';
 
+import zhCN from '../languages/zh_cn';
 import bannerImg from '../assets/banner.png';
 
 // import failureImg from '../assets/img/failure.ico'
@@ -105,4 +108,15 @@ export const useArchives = () => {
 		groupBy(allPosts, 'date', date => formatDate(date, theme.value.archive_generator?.date_fmt || 'YYYY')),
 		{ 0: -1 },
 	);
+};
+
+// 获取当前页面 lang
+export const useCurrentLang = () => {
+	const lang = useLang();
+	return mergeObj(zhCN, allLanguages[lang.value] ?? {});
+};
+
+export const useLangText = (k: DeepKeys<AsyncTheme.Language>) => {
+	const langData = useCurrentLang();
+	return dataPath<string>(langData, k) ?? k;
 };

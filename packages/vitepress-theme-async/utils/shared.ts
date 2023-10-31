@@ -62,7 +62,7 @@ export const normalize = (path: string) => {
  * @param paths
  * @returns
  */
-export const dataPath = (data: any, paths: string) => {
+export const dataPath = <T>(data: any, paths: string): T | undefined => {
 	const keys = paths.split('.');
 	if (!isObject(data)) return;
 	const len = keys.length;
@@ -186,8 +186,40 @@ export const throttleAndDebounce = (fn: () => void, delay: number) => {
 	};
 };
 
+/**
+ * 添加基路径
+ * @param base
+ * @param path
+ */
 export const withBase = (base: string, path: string) => {
 	return EXTERNAL_URL_RE.test(path) || !path.startsWith('/') ? path : joinPath(base, path);
 };
 
 export const joinPath = (base: string, path: string) => `${base}${path}`.replace(/\/+/g, '/');
+
+/**
+ * 合并对象
+ * @param a
+ * @param b
+ */
+export const mergeObj = <T extends AnyObject>(a: T, b: T): T => {
+	const merged = { ...a };
+	for (const key in b) {
+		const value = b[key];
+		if (value == null) {
+			continue;
+		}
+		const existing = merged[key];
+		if (Array.isArray(existing) && Array.isArray(value)) {
+			// @ts-ignore
+			merged[key] = [...existing, ...value];
+			continue;
+		}
+		if (isObject(existing) && isObject(value)) {
+			merged[key] = mergeObj(existing, value);
+			continue;
+		}
+		merged[key] = value;
+	}
+	return merged;
+};

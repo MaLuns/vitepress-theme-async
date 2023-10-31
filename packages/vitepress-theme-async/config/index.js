@@ -4,6 +4,7 @@ import { mergeConfig as mergeViteConfig } from 'vite';
  * @type {import('vitepress').UserConfig<import('../types').AsyncThemeConfig>}
  */
 export const defaultConfig = {
+	lang: 'zh_cn',
 	themeConfig: {
 		author: 'async',
 		postDir: 'posts',

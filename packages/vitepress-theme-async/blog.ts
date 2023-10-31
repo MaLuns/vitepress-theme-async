@@ -10,15 +10,17 @@ export function withConfigProvider(App: Component) {
 	return defineComponent({
 		name: 'ConfigProvider',
 		setup(_, { slots }) {
-			const { theme } = useData<AsyncThemeConfig>();
+			const { theme, site } = useData<AsyncThemeConfig>();
 			const router = useRouter();
 			const currentPageIndex = ref(1);
 			const showMenu = ref(false);
+			const language = ref(site.value.lang ?? 'zh_cn');
 
 			// fix: 通过 npm 安装, 在 dev 模式时 vue 会提示 injection "Symbol(current-page-index)" not found.
 			// 未找到具体原因 暂时用字符替代
 			provide('currentPageIndexSymbol', currentPageIndex);
 			provide('showMenuSymbol', showMenu);
+			provide('languageSymbol', language);
 
 			onMounted(() => {
 				const beforeRoute = router.onBeforeRouteChange;
@@ -101,3 +103,4 @@ export function withConfigProvider(App: Component) {
 
 export const useCurrentPageIndex = () => inject<Ref<number>>('currentPageIndexSymbol')!;
 export const useShowMenu = () => inject<Ref<boolean>>('showMenuSymbol')!;
+export const useLang = () => inject<Ref<string>>('languageSymbol')!;

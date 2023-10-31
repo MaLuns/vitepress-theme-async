@@ -8,7 +8,15 @@ declare module '*.vue' {
 	export default component;
 }
 
+declare module 'vue' {
+	interface ComponentCustomProperties {
+		$t: (key: DeepKeys<AsyncTheme.Language>) => string | DeepKeys<AsyncTheme.Language>;
+	}
+}
+
 declare module '@localSearchIndex' {
 	const data: Record<string, () => Promise<{ default: string }>>;
 	export default data;
 }
+
+export {};

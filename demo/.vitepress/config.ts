@@ -17,6 +17,7 @@ export default defineConfig({
 			md.use(taskLists);
 		},
 	},
+	lang: 'zh_cn',
 	titleTemplate: ':title | Async',
 	themeConfig: {
 		top_bars: [

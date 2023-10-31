@@ -3,6 +3,7 @@ declare type AnyObject = Record<string, any>;
 declare namespace AsyncTheme {
 	declare type OrderByArg = string | Record<string | number, 1 | -1>;
 
+	/** 文章基础信息 */
 	interface PostData {
 		/**
 		 * 文件地址
@@ -57,6 +58,7 @@ declare namespace AsyncTheme {
 		};
 	}
 
+	/** 导航栏链接 */
 	interface NavItemWithLink {
 		/**
 		 * 标题
@@ -112,6 +114,7 @@ declare namespace AsyncTheme {
 		children: NavItemWithLink[];
 	}
 
+	/** 友情链接 */
 	interface Links {
 		/**
 		 * 昵称
@@ -131,11 +134,103 @@ declare namespace AsyncTheme {
 		desc?: string;
 	}
 
+	/** 文章目录 */
 	interface MenuItem {
 		title: string;
 		link: string;
 		level: number;
 		children?: MenuItem[];
+	}
+
+	/** 语言文件 */
+	interface Language {
+		site: {
+			title: string;
+			webmaster: string;
+			domain: string;
+			avatar: string;
+			describe: string;
+			ruleText: string;
+		};
+
+		// 页面模块小标题
+		title: {
+			links: string;
+			new_publish: string;
+			comment: string;
+			author: string;
+			blog: string;
+			privacy: string;
+			more: string;
+			all_archives: string;
+			year_archives: string;
+			other_articles: string;
+			unclassified: string;
+		};
+
+		// 菜单
+		menu: {
+			home: string;
+			categorys: string;
+			archives: string;
+			tags: string;
+			links: string;
+			about: string;
+		};
+
+		favicon: {
+			showText: string;
+			hideText: string;
+		};
+
+		// 文章内容
+		post: {
+			sticky: string;
+			more: string;
+			reward_comment: string;
+			copyright: {
+				author: string;
+				link: string;
+				license_title: string;
+				license_content: string;
+			};
+		};
+
+		// 按钮块
+		rightside: {
+			search: string;
+			back_to_top: string;
+			theme: {
+				dark: string;
+				light: string;
+			};
+			aside: {
+				open: string;
+				exit: string;
+			};
+			read_mode: {
+				open: string;
+				exit: string;
+			};
+		};
+
+		// 页脚
+		footer: {
+			powered: string;
+			theme: string;
+			tips: string;
+			day: string;
+			hour: string;
+			minute: string;
+			seconds: string;
+		};
+
+		// 符号
+		symbol: {
+			comma: string;
+			period: string;
+			colon: string;
+		};
 	}
 }
 
@@ -499,3 +594,9 @@ declare module 'vitepress-theme-async/config' {
 	export const defineConfig: (config: UserConfig<AsyncThemeConfig>) => UserConfig<AsyncThemeConfig>;
 	export const defaultConfig: AsyncThemeConfig;
 }
+
+declare type DeepKeys<T> = T extends object
+	? {
+			[K in keyof T]-?: K extends string ? (T[K] extends object ? `${K}.${DeepKeys<T[K]>}` : `${K}`) : never;
+	  }[keyof T]
+	: never;

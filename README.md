@@ -34,28 +34,26 @@ A simple & lightweight theme for Vitepress.
 </p>
 
 <p align="center">
-  <img width="80%" style="border-radius:8px;" src="docs/public/imgs/demo2.png" alt="demo.png" border="0" />
+  <img width="80%" style="border-radius:8px;" src="docs/public/imgs/demo.png" alt="demo.png" border="0" />
 </p>
 
 ## Docs
 
 A detailed usage document can solve most of your unclear points 🤣
 
-- Chinese documentation: 
-    - <https://vitepress-theme-async.imalun.com> (dev)
-- English documentation: 
-    - <https://vitepress-theme-async.imalun.com/en/guide/> (dev)
+- <https://vitepress-theme-async.imalun.com>
 
 ## Installation
+
 In your blog folder:
 
-``` bash
+```bash
 npm install --save vitepress-theme-async
 ```
 
 or
 
-``` bash
+```bash
 yarn add --save vitepress-theme-async
 ```
 
@@ -63,10 +61,12 @@ yarn add --save vitepress-theme-async
 
 You just need to execute:
 
-``` bash
+```bash
 npm install vitepress-theme-async@latest
 ```
+
 ## Contribution
+
 Your contribution is very welcome. You can build it together in the following ways :smiley:
 
 - Use [Issue](https://github.com/MaLuns/vitepress-theme-async/issues) to report bugs or consult.

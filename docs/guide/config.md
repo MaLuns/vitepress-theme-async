@@ -348,15 +348,15 @@ interface PaginationConfig {
 
 ### Frontmatter
 
-在 `md` 文件中除了 vitepress 默认可使用字段以外，主题新增了一些可使用配置
+在 `md` 文件中除了 vitepress 默认可使用字段以外，主题新增了一些可使用配置。
 
-- `sticky`：首页排序值，值越大越靠前
-- `banner`：文章页横幅背景，参考全局横幅配置
+- `sticky`：首页排序值，值越大越靠前。
+- `banner`：文章页横幅背景，参考全局横幅配置。
 - `cover`：文章封面图，可为字符串或数组或对象，如果数组长度为 2 则会根据主题自动切换。
 - `single_column`：单栏显示详情页，为 true 时生效。
-- `author`：文章作者，未配置时取全局配置
-- `categories`：文章分类，仅支持单个
-- `tags`：文章标签，支持多个
+- `author`：文章作者，未配置时取全局配置。
+- `categories`：文章分类，仅支持单个。
+- `tags`：文章标签，支持多个。
 
 ```yaml
 ---
@@ -372,6 +372,10 @@ categories: 分类一
 tags: [标签一, 标签二]
 ---
 ```
+
+### 摘要 Excerpt
+
+在文章中添加 `<!--more-->` 标签，在此之前的内容将会视为摘要部分。
 
 ### 打赏 Reward
 
