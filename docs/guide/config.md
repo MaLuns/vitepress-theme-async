@@ -5,9 +5,9 @@
 默认情况下，主题默认会在您指定的根目录下取去寻找 `posts` 目录，并将目录下的所有 `.md` 文件视为文章进行加载。可修改 `postDir` 自定义文章目录
 
 ```ts
-  themeConfig: {
-    postDir: 'posts',
-  }
+themeConfig: {
+	postDir: 'posts',
+}
 ```
 
 ::: warning 注意
@@ -20,7 +20,34 @@ vitepress 中存在根目录和源目录，默认情况下两者是相等的，�
 
 ## 语言 Language
 
-主题内置文本语言切换，待支持。
+主题内置文本语言切换，支持 `zh-Hans` 和 `en`，修改 `vitepress` 配置中 `lang` 即可切换。
+
+```ts
+export default defineConfig({
+	lang: "en",
+});
+```
+
+您也可以覆盖和扩展内置语言文件，在和 `postDir` 同级添加 `languages` 目录，在其内增加对应语言文件即可。
+
+例如: 覆盖现在中文文件
+
+- 在 `languages` 新增 `zh-Hans.json`
+- 在 `zh-Hans.json` 添加如下代码
+
+```json
+{
+	"title": {
+		"newPublish": "覆盖首页的最近发布小标题"
+	}
+}
+```
+
+- 刷新页面可以看到首页中原 `最近发布` 变为了 `覆盖首页的最近发布小标题`
+
+增加新的语言文件也是一样方式，在 `languages` 新增 `xxx.json` 文件，修改 `vitepress` 配置中 `lang` 为 `xxx` (与 `json` 文件同名)，主题会优先加载 `xxx.json` 中配置
+
+语言文件定义 [请看这里](https://github.com/maluns/vitepress-theme-async/packages/vitepress-theme-async/languages)
 
 ## 主题模式 ThemeMode
 
@@ -43,7 +70,7 @@ interface FaviconConfig {
 	/**
 	 *  dark 下使用
 	 */
-	dark_logo?: string;
+	darkLogo?: string;
 	/**
 	 * 网站图标
 	 */
@@ -89,8 +116,14 @@ interface UserConfig {
 	 * 站点昵称
 	 */
 	name?: string;
-	first_name?: string;
-	last_name?: string;
+	/**
+	 * 名
+	 */
+	firstName?: string;
+	/**
+	 * 姓
+	 */
+	lastName?: string;
 	/**
 	 * 邮箱
 	 */
@@ -106,7 +139,7 @@ interface UserConfig {
 	/**
 	 * dark 下使用
 	 */
-	dark_avatar?: string;
+	darkAvatar?: string;
 	/**
 	 * 站点简介
 	 */
@@ -120,7 +153,7 @@ interface UserConfig {
 
 ## 顶部导航 TopBar
 
-导航栏右侧菜单配置，通过 `top_bars` 字段配置。
+导航栏右侧菜单配置，通过 `topBars` 字段配置。
 
 左侧 logo 在网站图标中进行配置。
 
@@ -268,11 +301,11 @@ interface FooterConfig {
 	/**
 	 * 版权开始年号
 	 */
-	copyright_year?: string;
+	copyrightYear?: string;
 	/**
 	 * 运行时长
 	 */
-	live_time?: {
+	liveTime?: {
 		enable?: boolean;
 		/**
 		 * 前缀
@@ -281,7 +314,7 @@ interface FooterConfig {
 		/**
 		 * 运行计算开始时间
 		 */
-		start_time?: string;
+		startTime?: string;
 	};
 }
 ```
@@ -290,7 +323,7 @@ interface FooterConfig {
 
 自豪地显示当前使用的博客框架 Vitepress 与主题 Async 的名字及版本。
 
-如：`由 Vitepress 驱动 v5.4.2 | 主题 - Async v1.1.7`
+如：`由 Vitepress 驱动 v1.0.0-rc.24 | 主题 - Async v0.0.5`
 
 让更多人知道 Vitepress 与主题 Vitepress-Theme-Async，这有利于开源社区进一步发展。
 
@@ -323,22 +356,22 @@ interface FixedBtnConfig {
 
 ## 分页 Pagination
 
-首页和归档分页可单独配置，分为 `index_generator` 和 `archive_generator`。
+首页和归档分页可单独配置，分为 `indexGenerator` 和 `archiveGenerator`。
 
 ```ts
 interface PaginationConfig {
 	/**
 	 * 分页大小
 	 */
-	per_page?: number;
+	perPage?: number;
 	/**
 	 * 排序方式
 	 */
-	order_by?: string;
+	orderBy?: string;
 	/**
 	 * 归档时日期格式
 	 */
-	date_fmt?: string;
+	dateFmt?: string;
 }
 ```
 
@@ -422,7 +455,7 @@ interface RewardConfig {
 > [关于许可协议](https://creativecommons.org/licenses/)
 > 默认使用 署名-非商业性使用-相同方式共享 4.0，即 [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)。
 
-通过 `creative_commons` 字段配置
+通过 `creativeCommons` 字段配置
 
 ```ts
 interface CreativeCommonsConfig {
@@ -447,7 +480,7 @@ interface CreativeCommonsConfig {
 
 ### 上下篇 Pagination
 
-文章详情页中上下篇配置，通过 `post_pagination` 字段配置
+文章详情页中上下篇配置，通过 `postPagination` 字段配置
 
 ```ts
 interface PostPaginationConfig {

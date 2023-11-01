@@ -3,6 +3,20 @@
 		"large_version": "v0.0.x",
 		"children": [
 			{
+				"version": "0.0.5",
+				"date": "2023-11-01",
+				"logs": [
+					{
+						"type": "feat",
+						"text": "增加 i18n 扩展"
+					},
+					{
+						"type": "refactor",
+						"text": "统一配置命名格式，由"
+					}
+				]
+			},
+			{
 				"version": "0.0.4",
 				"date": "2023-10-30",
 				"logs": [
