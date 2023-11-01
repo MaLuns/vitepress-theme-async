@@ -7,7 +7,7 @@ const theme = useTheme();
 
 <template>
 	<a href="/" class="trm-logo-frame trm-anima-link">
-		<TrmSwichImgs v-if="theme.favicon?.logo" :src="[theme?.favicon?.logo, theme?.favicon?.dark_logo]" />
+		<TrmSwichImgs v-if="theme.favicon?.logo" :src="[theme?.favicon?.logo, theme?.favicon?.darkLogo]" />
 		<div class="trm-logo-text">
 			{{ theme?.user?.lastName }}
 			<span>{{ theme?.user?.firstName }}</span>

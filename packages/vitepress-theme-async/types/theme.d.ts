@@ -250,7 +250,7 @@ declare namespace AsyncTheme {
 		/**
 		 *  dark 下使用
 		 */
-		dark_logo?: string;
+		darkLogo?: string;
 		/**
 		 * 网站图标
 		 */
@@ -312,7 +312,7 @@ declare namespace AsyncTheme {
 		/**
 		 * dark 下使用
 		 */
-		dark_avatar?: string;
+		darkAvatar?: string;
 		/**
 		 * 站点简介
 		 */

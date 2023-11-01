@@ -70,7 +70,7 @@ onMounted(() => {
 <template>
 	<div class="trm-mc-header">
 		<div class="trm-avatar-frame trm-mb-20">
-			<TrmSwichImgs :src="[theme.user?.avatar || avatarImg, theme.user?.dark_avatar]" :attrs="{ alt: 'Avatar', class: 'trm-avatar' }" />
+			<TrmSwichImgs :src="[theme.user?.avatar || avatarImg, theme.user?.darkAvatar]" :attrs="{ alt: 'Avatar', class: 'trm-avatar' }" />
 		</div>
 		<h5 class="trm-name trm-mb-15">
 			{{ theme.user?.name }}

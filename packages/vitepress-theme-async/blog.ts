@@ -4,8 +4,8 @@ import { Component, defineComponent, Ref, h, inject, onMounted, provide, ref } f
 import { getLangText } from './composables';
 import failure from './assets/failure.ico';
 
-// export const currentPageIndexSymbol: InjectionKey<Ref<number>> = Symbol('current-page-index');
-// export const showMenuSymbol: InjectionKey<Ref<boolean>> = Symbol('show-menu');
+// export const AsyncCurrentPageIndexSymbol: InjectionKey<Ref<number>> = Symbol('current-page-index');
+// export const AsyncShowMenuSymbol: InjectionKey<Ref<boolean>> = Symbol('show-menu');
 
 export function withConfigProvider(App: Component) {
 	return defineComponent({
@@ -19,9 +19,9 @@ export function withConfigProvider(App: Component) {
 
 			// fix: 通过 npm 安装, 在 dev 模式时 vue 会提示 injection "Symbol(current-page-index)" not found.
 			// 未找到具体原因 暂时用字符替代
-			provide('currentPageIndexSymbol', currentPageIndex);
-			provide('showMenuSymbol', showMenu);
-			provide('languageSymbol', language);
+			provide('AsyncCurrentPageIndexSymbol', currentPageIndex);
+			provide('AsyncShowMenuSymbol', showMenu);
+			provide('AsyncLanguageSymbol', language);
 
 			onMounted(() => {
 				const beforeRoute = router.onBeforeRouteChange;
@@ -102,6 +102,6 @@ export function withConfigProvider(App: Component) {
 	});
 }
 
-export const useCurrentPageIndex = () => inject<Ref<number>>('currentPageIndexSymbol')!;
-export const useShowMenu = () => inject<Ref<boolean>>('showMenuSymbol')!;
-export const useLang = () => inject<Ref<string>>('languageSymbol')!;
+export const useCurrentPageIndex = () => inject<Ref<number>>('AsyncCurrentPageIndexSymbol')!;
+export const useShowMenu = () => inject<Ref<boolean>>('AsyncShowMenuSymbol')!;
+export const useLang = () => inject<Ref<string>>('AsyncLanguageSymbol')!;
