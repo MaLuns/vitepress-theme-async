@@ -1,8 +1,10 @@
-import { AsyncThemeConfig } from 'types';
-import type { LoaderModule, SiteConfig } from 'vitepress';
-import { normalizePath } from 'vite';
 import path from 'node:path';
 import fs from 'node:fs';
+import type { LoaderModule, SiteConfig } from 'vitepress';
+import { AsyncThemeConfig } from 'types';
+import { normalizePath } from 'vite';
+import languages from '../languages';
+import { mergeObj } from '../utils/shared';
 
 type Lang = { [k: string]: AsyncTheme.Language };
 
@@ -17,7 +19,9 @@ const cache = /* @__PURE__ */ new Map();
 export default <LoaderModule>{
 	watch: [`languages/*.json`].map(p => normalizePath(path.join(config.root, p))),
 	async load(files) {
-		const raw: Lang = {};
+		const raw: Lang = {
+			...languages,
+		};
 
 		for (const file of files) {
 			if (!file.endsWith('.json')) {
@@ -34,7 +38,11 @@ export default <LoaderModule>{
 			}
 
 			const fileContent = fs.readFileSync(file, 'utf-8');
-			const language = JSON.parse(fileContent);
+			let language = JSON.parse(fileContent);
+
+			if (languages[fileName]) {
+				language = mergeObj(languages[fileName], language);
+			}
 
 			raw[fileName] = language;
 			cache.set(fileName, { data: language, timestamp });

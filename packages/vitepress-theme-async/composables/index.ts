@@ -4,11 +4,10 @@ import { useData, withBase } from 'vitepress';
 import { useMediaQuery } from '@vueuse/core';
 import { data as allPosts } from './posts.data';
 import { data as allLanguages } from './languages.data';
-import { groupBy, sortBy, dataPath, mergeObj, stringFormat } from '../utils/shared';
+import { groupBy, sortBy, dataPath, stringFormat } from '../utils/shared';
 import { formatDate } from '../utils/client';
 import { useLang } from '../blog';
 
-import zhCN from '../languages/zh_cn';
 import bannerImg from '../assets/banner.png';
 
 // import failureImg from '../assets/img/failure.ico'
@@ -113,7 +112,7 @@ export const useArchives = () => {
 // 获取当前页面 lang
 export const useCurrentLang = () => {
 	const lang = useLang();
-	return mergeObj(zhCN, allLanguages[lang.value] ?? {});
+	return allLanguages[lang.value] ?? allLanguages['zh-Hans'];
 };
 
 // 获取 i18n 文本

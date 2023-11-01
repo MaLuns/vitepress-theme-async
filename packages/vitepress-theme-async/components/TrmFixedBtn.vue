@@ -53,14 +53,14 @@ const onSwitchThemeMode = () => {
 		<slot name="fixed-btn-before" />
 		<TrmSearchBtn />
 		<TrmPostOutline />
-		<div class="trm-fixed-btn" data-title="切换主题模式" @click="onSwitchThemeMode">
+		<div class="trm-fixed-btn" :data-title="$t('rightside.theme.dark')" @click="onSwitchThemeMode">
 			<TrmIconSun class="trm-dark-icon" />
 			<TrmIconMoon class="trm-light-icon" />
 		</div>
-		<div v-if="isPost && theme.rightside?.readmode" class="trm-fixed-btn" data-title="阅读模式" @click="onSwitchReadMode()">
+		<div v-if="isPost && theme.rightside?.readmode" class="trm-fixed-btn" :data-title="$t(isDark ? 'rightside.theme.light' : 'rightside.readMode.open')" @click="onSwitchReadMode()">
 			<TrmIconRead />
 		</div>
-		<div v-if="theme.rightside?.aside && !frontmatter.single_column" class="trm-fixed-btn hidden-md" data-title="切换单双栏" @click="switchSingleColumn()">
+		<div v-if="theme.rightside?.aside && !frontmatter.single_column" class="trm-fixed-btn hidden-md" :data-title="$t('rightside.aside.open')" @click="switchSingleColumn()">
 			<TrmIconArrows />
 		</div>
 		<slot name="fixed-btn-after" />
