@@ -6,18 +6,19 @@ const lang: AsyncTheme.Language = {
 		avatar: '网站头像',
 		describe: '网站简介',
 		ruleText: '友链要求',
+		contactMe: '联系我',
 	},
 	title: {
 		links: '友情链接',
-		new_publish: '最近发布',
+		newPublish: '最近发布',
 		comment: '留言板',
 		author: '作者',
 		blog: '博客',
 		privacy: '隐私权及评论',
 		more: '查看分类',
-		all_archives: '所有归档',
-		year_archives: '{0} 年的归档',
-		other_articles: '其他文章',
+		allArchives: '所有归档',
+		yearArchives: '{0} 年的归档',
+		otherArticles: '其他文章',
 		unclassified: '未分类',
 	},
 	menu: {
@@ -34,18 +35,18 @@ const lang: AsyncTheme.Language = {
 	},
 	post: {
 		sticky: '置顶',
-		more: '更多',
-		reward_comment: '我很可爱，请给我钱',
+		rewardComment: '我很可爱，请给我钱',
 		copyright: {
 			author: '本文作者',
 			link: '本文链接',
-			license_title: '版权声明',
-			license_content: '本博客所有文章除特别声明外，均默认采用 {0} 许可协议。',
+			licenseTitle: '版权声明',
+			licenseContent: '本博客所有文章除特别声明外，均默认采用 {0} 许可协议。',
 		},
 	},
 	rightside: {
 		search: '搜索',
-		back_to_top: '返回顶部',
+		backToTop: '返回顶部',
+		toc: '文章目录',
 		theme: {
 			dark: '切换到暗黑模式',
 			light: '切换到明亮模式',
@@ -54,7 +55,7 @@ const lang: AsyncTheme.Language = {
 			open: '切换单栏模式',
 			exit: '退出单栏模式',
 		},
-		read_mode: {
+		readMode: {
 			open: '进入阅读模式',
 			exit: '退出阅读模式',
 		},

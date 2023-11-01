@@ -10,7 +10,7 @@ import TrmDividerTitle from "./TrmDividerTitle.vue";
 
 const theme = useTheme();
 const currentPageIndex = useCurrentPageIndex();
-const pageSize = theme.value.index_generator?.per_page || 10;
+const pageSize = theme.value.indexGenerator?.perPage || 10;
 const allPosts = useAllPosts();
 
 const categories = useCategories()
@@ -31,7 +31,7 @@ const pageList = computed(() => {
 	</div>
 	<div class="row">
 		<div class="col-lg-12" v-if="categories.length > 0">
-			<TrmDividerTitle title="最近发布" index="01" />
+			<TrmDividerTitle :title="$t('title.newPublish')" index="01" />
 		</div>
 		<div class="col-lg-6" v-for="item in pageList" :key="item.url">
 			<TrmCardPost :post="item" />

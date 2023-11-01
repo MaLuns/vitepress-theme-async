@@ -8,8 +8,8 @@ const theme = useTheme();
 	<ul class="trm-table trm-mb-20">
 		<template v-if="theme.sidebar?.info">
 			<li v-for="(item, idx) in theme.sidebar?.info" :key="idx">
-				<div class="trm-label">{{ item.key }}:</div>
-				<div class="trm-label trm-label-light">{{ item.val }}</div>
+				<div class="trm-label">{{ $t(<"none">item.key) }}:</div>
+				<div class="trm-label trm-label-light">{{ $t(<"none">item.val) }}</div>
 			</li>
 		</template>
 	</ul>

@@ -9,8 +9,8 @@ const theme = useTheme();
 	<a href="/" class="trm-logo-frame trm-anima-link">
 		<TrmSwichImgs v-if="theme.favicon?.logo" :src="[theme?.favicon?.logo, theme?.favicon?.dark_logo]" />
 		<div class="trm-logo-text">
-			{{ theme?.user?.last_name }}
-			<span>{{ theme?.user?.first_name }}</span>
+			{{ theme?.user?.lastName }}
+			<span>{{ theme?.user?.firstName }}</span>
 		</div>
 	</a>
 </template>

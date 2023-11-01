@@ -64,7 +64,7 @@ const onSwitchThemeMode = () => {
 			<TrmIconArrows />
 		</div>
 		<slot name="fixed-btn-after" />
-		<div class="trm-fixed-btn trm-back-top" :style="`background-size:100% ${ratio}%;`" data-title="返回顶部" @click="backTop()">
+		<div class="trm-fixed-btn trm-back-top" :style="`background-size:100% ${ratio}%;`" :data-title="$t('rightside.backToTop')" @click="backTop()">
 			<TrmIconBackTop />
 		</div>
 	</div>

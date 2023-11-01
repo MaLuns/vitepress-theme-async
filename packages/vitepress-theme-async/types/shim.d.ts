@@ -1,6 +1,3 @@
-declare const __VP_LOCAL_SEARCH__: boolean;
-declare const __ALGOLIA__: boolean;
-
 declare module '*.vue' {
 	import { DefineComponent } from 'vue';
 	// eslint-disable-next-line @typescript-eslint/ban-types
@@ -10,13 +7,8 @@ declare module '*.vue' {
 
 declare module 'vue' {
 	interface ComponentCustomProperties {
-		$t: (key: DeepKeys<AsyncTheme.Language>) => string | DeepKeys<AsyncTheme.Language>;
+		$t: (key: DeepKeys<AsyncTheme.Language> | 'none', ...pars: string[]) => string | DeepKeys<AsyncTheme.Language>;
 	}
-}
-
-declare module '@localSearchIndex' {
-	const data: Record<string, () => Promise<{ default: string }>>;
-	export default data;
 }
 
 export {};

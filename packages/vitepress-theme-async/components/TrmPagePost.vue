@@ -51,16 +51,16 @@ const theme = useTheme();
 		<slot name="post-reward-after" />
 	</div>
 	<slot name="post-pagination-before" />
-	<div v-if="theme.post_pagination!.enable && (control.prev || control.next)" class="trm-post-next-prev row">
+	<div v-if="theme.postPagination!.enable && (control.prev || control.next)" class="trm-post-next-prev row">
 		<div class="col-lg-12">
-			<TrmDividerTitle title="其他文章" index="01" />
+			<TrmDividerTitle :title="$t('title.otherArticles')" index="01" />
 		</div>
 		<div class="col-lg-6" v-if="control.prev">
-			<TrmCardPost v-if="theme.post_pagination?.type === 'large'" :post="control.prev" />
+			<TrmCardPost v-if="theme.postPagination?.type === 'large'" :post="control.prev" />
 			<TrmCardPostMini v-else :post="control.prev" />
 		</div>
 		<div class="col-lg-6" v-if="control.next">
-			<TrmCardPost v-if="theme.post_pagination?.type === 'large'" :post="control.next" />
+			<TrmCardPost v-if="theme.postPagination?.type === 'large'" :post="control.next" />
 			<TrmCardPostMini v-else :post="control.next" />
 		</div>
 	</div>

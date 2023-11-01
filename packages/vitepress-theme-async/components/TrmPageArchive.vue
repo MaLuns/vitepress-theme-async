@@ -10,16 +10,16 @@ import { useCurrentPageIndex } from "../blog";
 
 const theme = useTheme();
 const currentPageIndex = useCurrentPageIndex();
-const pageSize = theme.value.archive_generator?.per_page || 10;
+const pageSize = theme.value.archiveGenerator?.perPage || 10;
 const props = defineProps<{ type: "tags" | "archives" | "categories" }>();
 
-const allPosts = useAllPosts(theme.value.archive_generator?.order_by || "-date", item => {
+const allPosts = useAllPosts(theme.value.archiveGenerator?.orderBy || "-date", item => {
 	if (["tags", "categories"].includes(props.type)) {
 		//@ts-ignore
 		return item[props.type].length > 0;
 	} else {
 		//@ts-ignore
-		item.archive_date = formatDate(item.date, theme.value.archive_generator?.date_fmt || "YYYY");
+		item.archive_date = formatDate(item.date, theme.value.archiveGenerator?.dateFmt || "YYYY");
 		return true;
 	}
 });

@@ -27,7 +27,7 @@ onClickOutside(container, () => {
 });
 </script>
 <template>
-	<div v-if="hasOutline && headers.length" class="trm-fixed-btn post-toc-btn" data-title="文章目录" @click="show = !show">
+	<div v-if="hasOutline && headers.length" class="trm-fixed-btn post-toc-btn" :data-title="$t('rightside.toc')" @click="show = !show">
 		<TrmIconTocTag />
 		<ClientOnly>
 			<Teleport to="body">

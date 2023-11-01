@@ -111,6 +111,6 @@ export default <LoaderModule>{
 			cache.set(file, { data, timestamp });
 			raw.push(data);
 		}
-		return sortBy(raw, `-sticky  ${theme.index_generator?.order_by || '-date'}`) as AsyncTheme.PostData[];
+		return sortBy(raw, `-sticky  ${theme.indexGenerator?.orderBy || '-date'}`) as AsyncTheme.PostData[];
 	},
 };

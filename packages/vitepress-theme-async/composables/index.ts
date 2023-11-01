@@ -4,7 +4,7 @@ import { useData, withBase } from 'vitepress';
 import { useMediaQuery } from '@vueuse/core';
 import { data as allPosts } from './posts.data';
 import { data as allLanguages } from './languages.data';
-import { groupBy, sortBy, dataPath, mergeObj } from '../utils/shared';
+import { groupBy, sortBy, dataPath, mergeObj, stringFormat } from '../utils/shared';
 import { formatDate } from '../utils/client';
 import { useLang } from '../blog';
 
@@ -105,7 +105,7 @@ export const useCategories = () => sortBy(groupBy(allPosts, 'categories'), { 1: 
 export const useArchives = () => {
 	const theme = useTheme();
 	return sortBy(
-		groupBy(allPosts, 'date', date => formatDate(date, theme.value.archive_generator?.date_fmt || 'YYYY')),
+		groupBy(allPosts, 'date', date => formatDate(date, theme.value.archiveGenerator?.dateFmt || 'YYYY')),
 		{ 0: -1 },
 	);
 };
@@ -116,7 +116,12 @@ export const useCurrentLang = () => {
 	return mergeObj(zhCN, allLanguages[lang.value] ?? {});
 };
 
-export const useLangText = (k: DeepKeys<AsyncTheme.Language>) => {
+// 获取 i18n 文本
+export const getLangText = (k: DeepKeys<AsyncTheme.Language> | 'none', ...pars: string[]) => {
 	const langData = useCurrentLang();
-	return dataPath<string>(langData, k) ?? k;
+	let text = dataPath<string>(langData, k) ?? k;
+	if (pars.length) {
+		text = stringFormat(text, ...pars);
+	}
+	return text;
 };

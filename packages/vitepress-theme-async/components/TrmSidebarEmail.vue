@@ -9,7 +9,7 @@ const theme = useTheme();
 		<!-- action button -->
 		<div class="text-center">
 			<a :href="`mailto:${theme.user.email}`" class="trm-btn">
-				联系我
+				{{ $t("site.contactMe") }}
 				<TrmIconEmail />
 			</a>
 		</div>

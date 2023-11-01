@@ -3,6 +3,7 @@ import { AsyncThemeConfig } from "types/index";
 import { useData } from "vitepress";
 import { ref, onMounted } from "vue";
 import { formatDate } from "../utils/client";
+import pkg from "../package.json";
 
 const { theme } = useData<AsyncThemeConfig>();
 const day = ref<number>(0);
@@ -17,7 +18,7 @@ const showDateTime = (date: string) => {
 };
 
 onMounted(() => {
-	theme.value.footer?.live_time?.start_time && showDateTime(theme.value.footer?.live_time?.start_time);
+	theme.value.footer?.liveTime?.startTime && showDateTime(theme.value.footer?.liveTime?.startTime);
 });
 </script>
 
@@ -29,26 +30,24 @@ onMounted(() => {
 				{{ theme.footer.beian.icp }}
 			</a>
 		</div>
-		<div v-if="theme?.footer?.copyright_year" class="trm-footer-item">
-			<span>© {{ theme.footer.copyright_year }} - {{ formatDate(new Date(), "YYYY") }}</span>
+		<div v-if="theme?.footer?.copyrightYear" class="trm-footer-item">
+			<span>© {{ theme.footer.copyrightYear }} - {{ formatDate(new Date(), "YYYY") }}</span>
 			<span class="footer-separator" data-separator=" · "></span>
 			<span class="trm-accent-color">{{ theme.user?.name }}</span>
 		</div>
 		<div v-if="theme?.footer?.powered?.enable" class="trm-footer-item">
-			<span>
-				由
-				<a href="https://vitepress.dev" target="_blank" rel="noopener">Vitepress</a>
-				驱动
-			</span>
+			<span v-html="$t('footer.powered', `<a href='https://vitepress.dev' target='_blank' rel='noopener'>Vitepress</a>`)"></span>
 			<span class="footer-separator" data-separator=" | "></span>
 			<span>
-				主题 -
+				{{ $t("footer.theme") }} -
 				<a rel="noopener" href="https://github.com/MaLuns/vitepress-theme-async" target="_blank">Async</a>
-				v0.0.1
+				v{{ pkg.version }}
 			</span>
 		</div>
-		<div v-if="theme?.footer?.live_time?.enable" class="trm-footer-item">
-			<span id="since" class="trm-accent-color">博客已萌萌哒运行 {{ day }} 天</span>
+		<div v-if="theme?.footer?.liveTime?.enable" class="trm-footer-item">
+			<span id="since" class="trm-accent-color">
+				{{ $t("footer.tips", day.toString()) }}
+			</span>
 		</div>
 		<slot name="footer-content-after" />
 	</footer>

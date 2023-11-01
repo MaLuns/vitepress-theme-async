@@ -18,7 +18,7 @@ const pageUrl = usePageUrl();
 		</h6>
 		<div class="trm-divider trm-mb-20 trm-mt-20"></div>
 		<a :href="pageUrl.categorys + '?q=' + name" class="trm-label">
-			更多
+			{{ $t("title.more") }}
 			<TrmIconNext class="arrow-right" />
 		</a>
 	</div>

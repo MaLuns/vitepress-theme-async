@@ -1,6 +1,7 @@
 import { AsyncThemeConfig } from 'types';
 import { useData, useRouter, withBase } from 'vitepress';
 import { Component, defineComponent, Ref, h, inject, onMounted, provide, ref } from 'vue';
+import { getLangText } from './composables';
 import failure from './assets/failure.ico';
 
 // export const currentPageIndexSymbol: InjectionKey<Ref<number>> = Symbol('current-page-index');
@@ -54,13 +55,13 @@ export function withConfigProvider(App: Component) {
 							iconEls.forEach(item => {
 								item.href = withBase(favicon?.hidden ?? failure);
 							});
-							document.title = favicon?.hideText ?? '';
+							document.title = getLangText(<'none'>favicon?.hideText) ?? '';
 							clearTimeout(titleTime);
 						} else {
 							iconEls.forEach((item, index) => {
 								item.href = icons[index];
 							});
-							document.title = favicon.showText + originTitle;
+							document.title = getLangText(<'none'>favicon.showText) + originTitle;
 							titleTime = setTimeout(function () {
 								document.title = originTitle;
 							}, 2000);
@@ -68,7 +69,7 @@ export function withConfigProvider(App: Component) {
 					});
 				}
 
-				if (theme.value.creative_commons?.clipboard) {
+				if (theme.value.creativeCommons?.clipboard) {
 					document.addEventListener('copy', function (event: ClipboardEvent) {
 						const clipboardData = event.clipboardData;
 						if (!clipboardData) {
@@ -82,8 +83,8 @@ export function withConfigProvider(App: Component) {
 							if (authorEl) {
 								author = authorEl.innerText.replace('\n', '');
 							}
-							const license = theme.value.creative_commons?.license || 'by-nc-sa';
-							const ccVersion = theme.value.creative_commons?.license == 'zero' ? '1.0' : '4.0';
+							const license = theme.value.creativeCommons?.license || 'by-nc-sa';
+							const ccVersion = theme.value.creativeCommons?.license == 'zero' ? '1.0' : '4.0';
 							let originalLink = location.href;
 							const originalLinkEl = document.getElementById('original-link');
 							if (originalLinkEl) {

@@ -1,9 +1,6 @@
-import { Theme, DefaultTheme } from 'vitepress';
-
-declare const theme: Theme;
+import { DefaultTheme } from 'vitepress';
 
 // async-theme-config -----------------------------------------------------------------------
-
 export declare interface AsyncThemeConfig {
 	/* 作者 | author */
 	author?: string;
@@ -21,16 +18,16 @@ export declare interface AsyncThemeConfig {
 	page?: AsyncTheme.BuiltPageConfig;
 
 	/* 首页分页 | Index page generator */
-	index_generator?: Omit<AsyncTheme.PaginationConfig, 'date_fmt'>;
+	indexGenerator?: Omit<AsyncTheme.PaginationConfig, 'date_fmt'>;
 
 	/* 归档页 | Archive generator */
-	archive_generator?: AsyncTheme.PaginationConfig;
+	archiveGenerator?: AsyncTheme.PaginationConfig;
 
 	/* 上下页 | Post pagination */
-	post_pagination?: AsyncTheme.PostPaginationConfig;
+	postPagination?: AsyncTheme.PostPaginationConfig;
 
 	/* 导航栏 | Layout top bars */
-	top_bars?: AsyncTheme.TobBarsConfig;
+	topBars?: AsyncTheme.TobBarsConfig;
 
 	/* 用户信息 | User info */
 	user?: AsyncTheme.UserConfig;
@@ -68,12 +65,13 @@ export declare interface AsyncThemeConfig {
 	You can set a language value if you prefer a translated version of CC license.
 	CC licenses are available in 39 languages, where you can find the specific and correct abbreviation you need.
 	Valid values of language: deed.zh, deed.en, deed.ja, etc. */
-	creative_commons?: AsyncTheme.CreativeCommonsConfig;
+	creativeCommons?: AsyncTheme.CreativeCommonsConfig;
 
 	/** 目录 | outline */
 	outline?: DefaultTheme.Outline;
 	outlineTitle?: string;
 }
+// -----------------------------------------------------------------------
 
 export * from './theme.d.ts';
-export default theme;
+export * from '../index';

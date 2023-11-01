@@ -1,3 +1,5 @@
+import { isString } from '../shared';
+
 /**
  * 窗体已滚动距离
  * @returns
@@ -137,22 +139,25 @@ export const backTop = (smooth?: boolean) => window.scrollTo({ top: 0, behavior:
  * @param format
  * @returns
  */
-export const formatDate = (d: Date | number | string | undefined, fmt: string = 'yyyy-MM-dd hh:mm:ss'): string => {
+export const formatDate = (d: Date | number | string | undefined, fmt: string = 'yyyy-MM-dd HH:mm:ss'): string => {
 	if (!(d instanceof Date)) {
+		if (isString(d)) {
+			d = d.replace(/-/gs, '/');
+		}
 		d = d ? new Date(d) : new Date();
 	}
 
 	const o = {
 		'M+': d.getMonth() + 1,
-		'd+': d.getDate(),
-		'h+': d.getHours(),
+		'(d|D)+': d.getDate(),
+		'(h|H)+': d.getHours(),
 		'm+': d.getMinutes(),
 		's+': d.getSeconds(),
 		'q+': Math.floor((d.getMonth() + 3) / 3),
 		S: d.getMilliseconds(),
 	};
 
-	if (/(y+)/.test(fmt)) {
+	if (/((Y|y)+)/.test(fmt)) {
 		fmt = fmt.replace(RegExp.$1, (d.getFullYear() + '').substring(4 - RegExp.$1.length));
 	}
 
@@ -164,18 +169,4 @@ export const formatDate = (d: Date | number | string | undefined, fmt: string = 
 	}
 
 	return fmt;
-};
-
-/**
- * 获取图标
- * @param icon
- * @param type
- * @returns
- */
-export const iconHTML = (icon: string, type: 'symbol' | 'font' = 'font') => {
-	if (type === 'symbol') {
-		return `<svg class="symbol-icon " aria-hidden="true"><use xlink:href="#${icon}"></use></svg>`;
-	} else {
-		return `<i class="iconfont ${icon}"></i>`;
-	}
 };

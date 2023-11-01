@@ -5,6 +5,11 @@ export const HASH_RE = /#.*$/;
 export const EXT_RE = /(index)?\.(md|html)$/;
 export const inBrowser = typeof document !== 'undefined';
 
+/**
+ * 字符截断
+ * @param str
+ * @param options
+ */
 export const truncate = (str: string, options: { length?: number; omission?: string; separator?: string } = {}) => {
 	if (typeof str !== 'string') throw new TypeError('str must be a string!');
 
@@ -223,3 +228,14 @@ export const mergeObj = <T extends AnyObject>(a: T, b: T): T => {
 	}
 	return merged;
 };
+
+/**
+ * 字符格式化
+ * @param str
+ * @param vals
+ */
+export const stringFormat = (str: string, ...vals: string[]): string => {
+	return vals.reduce((s, v, i) => s.replace(new RegExp('\\{' + i + '\\}', 'g'), v), str);
+};
+
+export const isString = (value: unknown): value is string => Object.prototype.toString.call(value) === '[object String]';

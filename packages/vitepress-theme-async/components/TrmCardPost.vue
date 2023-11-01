@@ -29,11 +29,13 @@ const pageUrl = usePageUrl();
 				<TrmSwichImgs :src="post.cover.default || defImage" :attrs="{ alt: 'cover', class: 'no-fancybox' }" />
 			</template>
 		</a>
-		<div v-if="page.frontmatter.index && post.sticky && post.sticky > 0" class="trm-top">置顶</div>
+		<div v-if="page.frontmatter.index && post.sticky && post.sticky > 0" class="trm-top">
+			{{ $t("post.sticky") }}
+		</div>
 		<div class="trm-card-descr">
 			<div class="trm-label trm-category trm-mb-20">
 				<a :href="post.categories?.length ? pageUrl.categorys + '?q=' + post.categories[0] : '#.'">
-					{{ post.categories?.length ? post.categories[0] : "未设置" }}
+					{{ post.categories?.length ? post.categories[0] : $t("title.unclassified") }}
 				</a>
 			</div>
 			<h5>

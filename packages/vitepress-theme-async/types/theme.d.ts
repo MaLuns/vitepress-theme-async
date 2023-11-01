@@ -1,3 +1,6 @@
+declare const __ALGOLIA__: boolean;
+declare const __VP_LOCAL_SEARCH__: boolean;
+
 declare type AnyObject = Record<string, any>;
 
 declare namespace AsyncTheme {
@@ -89,7 +92,7 @@ declare namespace AsyncTheme {
 		/**
 		 * 标题
 		 */
-		title?: string;
+		title: string;
 		/**
 		 * 链接
 		 */
@@ -151,20 +154,21 @@ declare namespace AsyncTheme {
 			avatar: string;
 			describe: string;
 			ruleText: string;
+			contactMe: string;
 		};
 
 		// 页面模块小标题
 		title: {
 			links: string;
-			new_publish: string;
+			newPublish: string;
 			comment: string;
 			author: string;
 			blog: string;
 			privacy: string;
 			more: string;
-			all_archives: string;
-			year_archives: string;
-			other_articles: string;
+			allArchives: string;
+			yearArchives: string;
+			otherArticles: string;
 			unclassified: string;
 		};
 
@@ -186,20 +190,20 @@ declare namespace AsyncTheme {
 		// 文章内容
 		post: {
 			sticky: string;
-			more: string;
-			reward_comment: string;
+			rewardComment: string;
 			copyright: {
 				author: string;
 				link: string;
-				license_title: string;
-				license_content: string;
+				licenseTitle: string;
+				licenseContent: string;
 			};
 		};
 
 		// 按钮块
 		rightside: {
 			search: string;
-			back_to_top: string;
+			backToTop: string;
+			toc: string;
 			theme: {
 				dark: string;
 				light: string;
@@ -208,7 +212,7 @@ declare namespace AsyncTheme {
 				open: string;
 				exit: string;
 			};
-			read_mode: {
+			readMode: {
 				open: string;
 				exit: string;
 			};
@@ -289,8 +293,10 @@ declare namespace AsyncTheme {
 		 * 站点昵称
 		 */
 		name?: string;
-		first_name?: string;
-		last_name?: string;
+		/** 名 */
+		firstName?: string;
+		/** 姓 */
+		lastName?: string;
 		/**
 		 * 邮箱
 		 */
@@ -413,11 +419,11 @@ declare namespace AsyncTheme {
 		/**
 		 * 版权开始年号
 		 */
-		copyright_year?: string;
+		copyrightYear?: string;
 		/**
 		 * 运行时长
 		 */
-		live_time?: {
+		liveTime?: {
 			enable?: boolean;
 			/**
 			 * 前缀
@@ -426,7 +432,7 @@ declare namespace AsyncTheme {
 			/**
 			 * 运行计算开始时间
 			 */
-			start_time?: string;
+			startTime?: string;
 		};
 	}
 
@@ -472,15 +478,15 @@ declare namespace AsyncTheme {
 		/**
 		 * 分页大小
 		 */
-		per_page?: number;
+		perPage?: number;
 		/**
 		 * 排序方式
 		 */
-		order_by?: string;
+		orderBy?: string;
 		/**
 		 * 归档时日期格式
 		 */
-		date_fmt?: string;
+		dateFmt?: string;
 	}
 
 	/**
@@ -593,6 +599,11 @@ declare module 'vitepress-theme-async/config' {
 
 	export const defineConfig: (config: UserConfig<AsyncThemeConfig>) => UserConfig<AsyncThemeConfig>;
 	export const defaultConfig: AsyncThemeConfig;
+}
+
+declare module '@localSearchIndex' {
+	const data: Record<string, () => Promise<{ default: string }>>;
+	export default data;
 }
 
 declare type DeepKeys<T> = T extends object

@@ -11,19 +11,19 @@ const { theme, page } = useData<AsyncThemeConfig>();
 		<nav>
 			<ul>
 				<li
-					v-for="(element, index) in theme.top_bars"
+					v-for="(element, index) in theme.topBars"
 					:key="index"
 					:class="{
 						'current-menu-item': isActive(page.relativePath, element.activeMatch || element.url, !!element.activeMatch),
 					}"
 				>
 					<a :href="element.url ? withBase(element.url) : 'javascript:void(0)'" :target="element?.target" :rel="element?.rel">
-						{{ element.title }}
+						{{ $t(<"none">element.title) }}
 					</a>
 					<ul v-if="element.children?.length">
 						<li v-for="(item, idx) in element.children" :key="idx" :class="{ 'current-item': isActive(page.relativePath, item.activeMatch || item.url, !!item.activeMatch) }">
 							<a :href="withBase(item.url)" :target="item.target" :rel="item.rel">
-								{{ item.title }}
+								{{ $t(<"none">item.title) }}
 							</a>
 						</li>
 					</ul>

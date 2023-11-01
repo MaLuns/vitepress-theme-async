@@ -20,7 +20,7 @@ export default defineConfig({
 	lang: 'zh_cn',
 	titleTemplate: ':title | Async',
 	themeConfig: {
-		top_bars: [
+		topBars: [
 			{ title: 'Home', url: '/' },
 			{
 				title: 'Demo',
@@ -48,10 +48,10 @@ export default defineConfig({
 			email: 'admin@imalun.com',
 		},
 		footer: {
-			copyright_year: '2023',
-			live_time: {
+			copyrightYear: '2023',
+			liveTime: {
 				enable: true,
-				start_time: '2023/10/01',
+				startTime: '2023/10/01',
 			},
 		},
 		links: [
@@ -98,7 +98,7 @@ export default defineConfig({
 			icon32: '/favicon.svg',
 			visibilitychange: true,
 		},
-		creative_commons: {
+		creativeCommons: {
 			post: true,
 			clipboard: true,
 		},

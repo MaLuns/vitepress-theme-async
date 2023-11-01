@@ -23,7 +23,7 @@ defineProps<{
 				<li>{{ formatDate(post.date, "YY-MM-DD") }}</li>
 				<li>{{ formatDate(post.date, "HH:mm") }}</li>
 				<li>
-					{{ post.categories?.length ? post.categories[0] : "未设置" }}
+					{{ post.categories?.length ? post.categories[0] : $t("title.unclassified") }}
 				</li>
 			</ul>
 		</div>
