@@ -5,7 +5,24 @@ import { mergeConfig as mergeViteConfig } from 'vite';
  */
 export const defaultConfig = {
 	lang: 'zh-Hans',
+	vite: {
+		css: {
+			preprocessorOptions: {
+				less: {
+					globalVars: {
+						isReadmode: true,
+						isAside: true,
+						isReward: true,
+						isSearch: true,
+						isNoticeOutdate: true,
+					},
+				},
+			},
+		},
+	},
 	themeConfig: {
+		pageLoading: true,
+		themeLoading: true,
 		author: 'async',
 		postDir: 'posts',
 		indexGenerator: {
@@ -100,6 +117,7 @@ export const defineConfig = config => {
 	if (Array.isArray(config.themeConfig?.outline?.level)) {
 		defaultConfig.themeConfig.outline.level = [];
 	}
+
 	config = mergeConfig(defaultConfig, config);
 	config.head = config.head ?? [];
 
@@ -144,6 +162,12 @@ export const defineConfig = config => {
 			},
 		]);
 	}
+
+	// 处理 less 配置
+	config.vite.css.preprocessorOptions.less.globalVars.isReadmode = Boolean(config.themeConfig.rightside.readmode);
+	config.vite.css.preprocessorOptions.less.globalVars.isAside = Boolean(config.themeConfig.rightside.aside);
+	config.vite.css.preprocessorOptions.less.globalVars.isReward = Boolean(config.themeConfig.reward.enable);
+	config.vite.css.preprocessorOptions.less.globalVars.isSearch = Boolean(config.themeConfig?.search?.provider === 'local');
 
 	return config;
 };

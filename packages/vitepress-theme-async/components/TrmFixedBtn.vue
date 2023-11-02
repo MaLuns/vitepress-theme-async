@@ -39,12 +39,17 @@ onMounted(() => {
 const onSwitchReadMode = throttleAndDebounce(switchReadMode, 500);
 
 const onSwitchThemeMode = () => {
-	themeLoading().then(() => {
-		const fun = isDark.value ? "add" : "remove";
-		document.querySelector(".trm-mode-swich-animation")?.classList[fun]("trm-active");
+	if (theme.value.themeLoading) {
+		themeLoading().then(() => {
+			const fun = isDark.value ? "add" : "remove";
+			document.querySelector(".trm-mode-swich-animation")?.classList[fun]("trm-active");
+			isDark.value = !isDark.value;
+			setThemeColor();
+		});
+	} else {
 		isDark.value = !isDark.value;
 		setThemeColor();
-	});
+	}
 };
 </script>
 

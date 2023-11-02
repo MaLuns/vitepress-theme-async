@@ -14,13 +14,14 @@ import TrmPageArchive from "../components/TrmPageArchive.vue";
 import TrmPageAbout from "../components/TrmPageAbout.vue";
 import TrmPageLinks from "../components/TrmPageLinks.vue";
 import { useData } from "vitepress";
+import { AsyncThemeConfig } from "types";
 
-const { frontmatter, page } = useData();
+const { frontmatter, page, theme } = useData<AsyncThemeConfig>();
 </script>
 
 <template>
-	<TrmPageLoading />
-	<TrmThemeLoading />
+	<TrmPageLoading v-if="theme.pageLoading" />
+	<TrmThemeLoading v-if="theme.themeLoading" />
 	<div v-if="frontmatter.layout !== false" class="trm-app-frame">
 		<div id="trm-dynamic-content" class="trm-swup-animation">
 			<!-- <div id="trm-scroll-container" class="trm-scroll-container"> -->

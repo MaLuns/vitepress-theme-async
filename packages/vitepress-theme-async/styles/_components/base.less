@@ -279,6 +279,37 @@ form,
 	overflow: hidden;
 }
 
+.trm-glow {
+	animation-duration: 2s;
+	animation-iteration-count: infinite;
+	animation-name: glowing;
+	animation-direction: alternate;
+}
+
+.trm-divider {
+	height: 1px;
+	border-bottom: var(--border-dotted, dotted 2px rgba(225, 225, 235, 0.9));
+	width: 100%;
+
+	&.footer-divider {
+		margin-bottom: var(--card-bottom-card);
+	}
+
+	+ .trm-divider {
+		display: none;
+	}
+}
+
+@keyframes glowing {
+	0% {
+		box-shadow: 0 0 0 transparent;
+	}
+
+	100% {
+		box-shadow: 0 0 20px var(--primary-30, #afb42b);
+	}
+}
+
 // 定义 margin padding 变量
 @marginKey: 10, 15, 20, 25, 30, 35, 40;
 

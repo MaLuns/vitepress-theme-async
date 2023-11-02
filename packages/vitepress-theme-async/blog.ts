@@ -24,25 +24,27 @@ export function withConfigProvider(App: Component) {
 			provide('AsyncLanguageSymbol', language);
 
 			onMounted(() => {
-				const beforeRoute = router.onBeforeRouteChange;
-				let lastDate: number;
-				router.onBeforeRouteChange = function (to) {
-					if (beforeRoute && beforeRoute(to) === false) {
-						return false;
-					}
-					showMenu.value = false;
+				if (theme.value.pageLoading) {
+					const beforeRoute = router.onBeforeRouteChange;
+					let lastDate: number;
+					router.onBeforeRouteChange = function (to) {
+						if (beforeRoute && beforeRoute(to) === false) {
+							return false;
+						}
+						showMenu.value = false;
 
-					document.documentElement.classList.add('page-animating');
-					lastDate = new Date().getTime();
-				};
+						document.documentElement.classList.add('page-animating');
+						lastDate = new Date().getTime();
+					};
 
-				const afterRoute = router.onAfterRouteChanged;
-				router.onAfterRouteChanged = function (to) {
-					afterRoute && afterRoute(to);
+					const afterRoute = router.onAfterRouteChanged;
+					router.onAfterRouteChanged = function (to) {
+						afterRoute && afterRoute(to);
 
-					const times = Math.max(600 - (new Date().getTime() - lastDate), 0);
-					setTimeout(() => document.documentElement.classList.remove('page-animating'), times);
-				};
+						const times = Math.max(600 - (new Date().getTime() - lastDate), 0);
+						setTimeout(() => document.documentElement.classList.remove('page-animating'), times);
+					};
+				}
 
 				const favicon = theme.value.favicon;
 				if (favicon?.visibilitychange) {

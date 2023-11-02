@@ -1,3 +1,15 @@
-@import "./read-mode/index.less";
-@import "./reward/index.less";
-@import "./search.less";
+& when(@isSearch) {
+	@import "./search.less";
+}
+
+& when (@isReadmode) {
+	@import "./read-mode.less";
+}
+
+& when (@isAside) {
+	@import "./single-column.less";
+}
+
+& when (@isReward) {
+	@import "./reward.less";
+}
