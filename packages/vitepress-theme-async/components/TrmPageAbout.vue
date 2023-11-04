@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useTheme } from "../composables";
-import TrmDividerTitle from "./TrmDividerTitle.vue";
+import TrmDividerTitle from "./global/TrmDividerTitle.vue";
 let i = 0;
 const theme = useTheme();
 </script>

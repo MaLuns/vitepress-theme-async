@@ -4,8 +4,10 @@
 // };
 
 import { defineTheme } from 'vitepress-theme-async';
+import layout from './layout.vue';
 
 export default defineTheme({
+	Layout: layout,
 	enhanceApp(_ctx) {
 		//
 	},

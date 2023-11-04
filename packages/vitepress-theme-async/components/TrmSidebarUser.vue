@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useTheme } from "../composables/index";
-import TrmSwichImgs from "./TrmSwichImgs.vue";
+import TrmSwichImgs from "./global/TrmSwichImgs.vue";
 import avatarImg from "../assets/avatar.jpg";
 import { onMounted, ref } from "vue";
 

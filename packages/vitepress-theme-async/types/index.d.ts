@@ -8,6 +8,12 @@ export declare interface AsyncThemeConfig {
 	/** 主题切换动画 | theme transition animations */
 	themeLoading?: boolean;
 
+	/** 自定义文章样式 */
+	customMdStyle?: boolean;
+
+	/** 将主题组件注册到全局 | register the global component */
+	globalComponents?: boolean | Array<string>;
+
 	/** 作者 | author */
 	author?: string;
 
@@ -76,8 +82,14 @@ export declare interface AsyncThemeConfig {
 	/** 目录 | outline */
 	outline?: DefaultTheme.Outline;
 	outlineTitle?: string;
+
+	/** 过期提示 | notice outdate */
+	noticeOutdate?: AsyncTheme.NoticeOutdateConfig;
 }
 // -----------------------------------------------------------------------
 
-export * from './theme.d.ts';
-export * from '../index';
+import './theme.d.ts';
+import Theme, { defineTheme } from '../index';
+
+export default Theme;
+export { defineTheme };

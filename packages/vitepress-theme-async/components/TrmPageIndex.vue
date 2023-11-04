@@ -1,17 +1,20 @@
 <script setup lang="ts">
 import { computed } from "vue";
-import { useAllPosts, useCategories, useTheme } from "../composables";
+import { useData } from "vitepress";
+import { AsyncThemeConfig } from "types";
+import { useAllPosts, useCategories, usePageUrl } from "../composables";
 import { useCurrentPageIndex } from "../blog";
 
-import TrmCardCategorie from "./TrmCardCategorie.vue";
-import TrmCardPost from "./TrmCardPost.vue";
+import TrmCardCategorie from "./global/TrmCardCategorie.vue";
+import TrmCardPost from "./global/TrmCardPost.vue";
 import TrmPagination from "./TrmPagination.vue";
-import TrmDividerTitle from "./TrmDividerTitle.vue";
+import TrmDividerTitle from "./global/TrmDividerTitle.vue";
 
-const theme = useTheme();
+const { page, theme } = useData<AsyncThemeConfig>();
+const pageUrl = usePageUrl();
 const currentPageIndex = useCurrentPageIndex();
-const pageSize = theme.value.indexGenerator?.perPage || 10;
 const allPosts = useAllPosts();
+const pageSize = theme.value.indexGenerator?.perPage || 10;
 
 const categories = useCategories()
 	.sort((a, b) => b[1] - a[1])
@@ -26,7 +29,7 @@ const pageList = computed(() => {
 <template>
 	<div v-if="categories.length > 0" class="row hidden-sm">
 		<div v-for="(item, index) in categories" class="col-lg-6" :key="index">
-			<TrmCardCategorie :name="item[0]" :length="item[1]" />
+			<TrmCardCategorie :name="item[0]" :length="item[1]" :category-url="pageUrl.categorys + '?q=' + item[0]" />
 		</div>
 	</div>
 	<div class="row">
@@ -34,7 +37,7 @@ const pageList = computed(() => {
 			<TrmDividerTitle :title="$t('title.newPublish')" index="01" />
 		</div>
 		<div class="col-lg-6" v-for="item in pageList" :key="item.url">
-			<TrmCardPost :post="item" />
+			<TrmCardPost :post="item" :category-url="pageUrl.categorys" :sticky="page.frontmatter.index && item.sticky && item.sticky > 0" />
 		</div>
 	</div>
 	<TrmPagination :total="allPosts.length" :size="pageSize" />

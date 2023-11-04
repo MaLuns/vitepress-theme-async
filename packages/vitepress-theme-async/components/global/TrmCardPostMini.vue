@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { formatDate } from "../utils/client";
+import { formatDate } from "../../utils/client";
 import TrmSwichImgs from "./TrmSwichImgs.vue";
-import defImage from "../assets/block.jpg";
+import defImage from "../../assets/block.jpg";
 
 defineProps<{
 	post: AsyncTheme.PostData;

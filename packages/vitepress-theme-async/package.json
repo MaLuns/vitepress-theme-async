@@ -11,6 +11,15 @@
 	"type": "module",
 	"main": "./index.ts",
 	"types": "./types/index.d.ts",
+	"exports": {
+		".": {
+			"default": "./index.ts",
+			"types": "./types/index.d.ts"
+		},
+		"./config": {
+			"default": "./config/index.js"
+		}
+	},
 	"keywords": [
 		"vitepress-theme",
 		"blog-theme"

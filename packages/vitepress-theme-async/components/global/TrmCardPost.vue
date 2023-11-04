@@ -1,16 +1,18 @@
 <script setup lang="ts">
-import { useData } from "vitepress";
-import { formatDate } from "../utils/client";
-import { usePageUrl } from "../composables";
+import { formatDate } from "../../utils/client";
+import defImage from "../../assets/block.jpg";
 import TrmSwichImgs from "./TrmSwichImgs.vue";
-import defImage from "../assets/block.jpg";
 
-defineProps<{
-	post: AsyncTheme.PostData;
-}>();
-
-const { page } = useData();
-const pageUrl = usePageUrl();
+withDefaults(
+	defineProps<{
+		post: AsyncTheme.PostData;
+		categoryUrl: string;
+		sticky?: boolean;
+	}>(),
+	{
+		sticky: false,
+	},
+);
 </script>
 
 <template>
@@ -29,12 +31,12 @@ const pageUrl = usePageUrl();
 				<TrmSwichImgs :src="post.cover.default || defImage" :attrs="{ alt: 'cover', class: 'no-fancybox' }" />
 			</template>
 		</a>
-		<div v-if="page.frontmatter.index && post.sticky && post.sticky > 0" class="trm-top">
+		<div v-if="sticky" class="trm-top">
 			{{ $t("post.sticky") }}
 		</div>
 		<div class="trm-card-descr">
 			<div class="trm-label trm-category trm-mb-20">
-				<a :href="post.categories?.length ? pageUrl.categorys + '?q=' + post.categories[0] : '#.'">
+				<a :href="post.categories?.length ? categoryUrl + '?q=' + post.categories[0] : '#.'">
 					{{ post.categories?.length ? post.categories[0] : $t("title.unclassified") }}
 				</a>
 			</div>

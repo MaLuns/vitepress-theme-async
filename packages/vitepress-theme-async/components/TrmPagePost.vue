@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { formatDate } from "../utils/client";
-import { usePrevNext, useTheme } from "../composables";
+import { usePageUrl, usePrevNext, useTheme } from "../composables";
 
-import TrmDividerTitle from "./TrmDividerTitle.vue";
-import TrmCardPost from "./TrmCardPost.vue";
-import TrmCardPostMini from "./TrmCardPostMini.vue";
+import TrmDividerTitle from "./global/TrmDividerTitle.vue";
+import TrmCardPost from "./global/TrmCardPost.vue";
+import TrmCardPostMini from "./global/TrmCardPostMini.vue";
 import TrmReward from "./TrmReward.vue";
 import TrmPostCopyright from "./TrmPostCopyright.vue";
 import TrmOutdateNotice from "./TrmOutdateNotice.vue";
@@ -14,6 +14,7 @@ import TrmIconUser from "./icons/TrmIconUser.vue";
 
 const control = usePrevNext();
 const theme = useTheme();
+const pageUrl = usePageUrl();
 </script>
 <template>
 	<slot name="post-before" />
@@ -59,11 +60,11 @@ const theme = useTheme();
 			<TrmDividerTitle :title="$t('title.otherArticles')" index="01" />
 		</div>
 		<div class="col-lg-6" v-if="control.prev">
-			<TrmCardPost v-if="theme.postPagination?.type === 'large'" :post="control.prev" />
+			<TrmCardPost v-if="theme.postPagination?.type === 'large'" :post="control.prev" :category-url="pageUrl.categorys" :sticky="false" />
 			<TrmCardPostMini v-else :post="control.prev" />
 		</div>
 		<div class="col-lg-6" v-if="control.next">
-			<TrmCardPost v-if="theme.postPagination?.type === 'large'" :post="control.next" />
+			<TrmCardPost v-if="theme.postPagination?.type === 'large'" :post="control.next" :category-url="pageUrl.categorys" :sticky="false" />
 			<TrmCardPostMini v-else :post="control.next" />
 		</div>
 	</div>

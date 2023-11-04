@@ -19,6 +19,7 @@ export default defineConfig({
 	},
 	titleTemplate: ':title | Async',
 	themeConfig: {
+		globalComponents: ['TrmDividerTitle'],
 		topBars: [
 			{ title: 'Home', url: '/' },
 			{
@@ -108,6 +109,12 @@ export default defineConfig({
 			archives: '/archives',
 			tags: '/tags',
 			categorys: '/categories',
+		},
+		noticeOutdate: {
+			enable: true,
+			limitDay: 1,
+			style: 'flat',
+			position: 'bottom',
 		},
 	},
 });

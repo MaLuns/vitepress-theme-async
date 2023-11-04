@@ -2,9 +2,9 @@
 import { computed, onMounted, ref } from "vue";
 import { useTags, useArchives, useCategories, useAllPosts, useTheme } from "../composables";
 
+import TrmTimeline from "./global/TrmTimeline.vue";
+import TrmDividerTitle from "./global/TrmDividerTitle.vue";
 import TrmPagination from "./TrmPagination.vue";
-import TrmTimeLine from "./TrmTimeline.vue";
-import TrmDividerTitle from "./TrmDividerTitle.vue";
 import { formatDate } from "../utils/client";
 import { useCurrentPageIndex } from "../blog";
 
@@ -80,7 +80,7 @@ onMounted(() => {
 			<TrmDividerTitle :title="filter || 'All'" index="01" />
 		</div>
 		<div class="col-lg-12">
-			<TrmTimeLine :list="pageList" />
+			<TrmTimeline :list="pageList" />
 		</div>
 	</div>
 	<TrmPagination :total="filterList.length" :size="pageSize" />
