@@ -7,6 +7,7 @@ import TrmCardPost from "./TrmCardPost.vue";
 import TrmCardPostMini from "./TrmCardPostMini.vue";
 import TrmReward from "./TrmReward.vue";
 import TrmPostCopyright from "./TrmPostCopyright.vue";
+import TrmOutdateNotice from "./TrmOutdateNotice.vue";
 import TrmIconCalendar from "./icons/TrmIconCalendar.vue";
 import TrmIconClock from "./icons/TrmIconClock.vue";
 import TrmIconUser from "./icons/TrmIconUser.vue";
@@ -41,7 +42,9 @@ const theme = useTheme();
 		<slot name="post-container-before" />
 		<article id="article-container" class="trm-publication">
 			<slot name="post-content-before" />
+			<TrmOutdateNotice v-if="theme.noticeOutdate?.enable && theme.noticeOutdate.position === 'top'" :date="control.post.date" />
 			<Content />
+			<TrmOutdateNotice v-if="theme.noticeOutdate?.enable && theme.noticeOutdate.position === 'bottom'" :date="control.post.date" />
 			<slot name="post-content-after" />
 		</article>
 		<slot name="post-copyright-before" />

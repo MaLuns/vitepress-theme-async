@@ -27,3 +27,25 @@ const link = `<a href="${ccURL}" target="_blank" rel="noopener" title="CC ${lice
 		</li>
 	</ul>
 </template>
+<style lang="less">
+.trm-post-copyright {
+	list-style: none;
+	font-size: 0.9rem;
+	padding: 0.5rem 1rem;
+	border-left: 4px solid var(--primary, #afb42b);
+	background-color: var(--body-color-5, #7b7b7d);
+	list-style: none;
+	word-break: break-all;
+	position: relative;
+	overflow: hidden;
+	line-height: 2;
+
+	li {
+		list-style: none;
+	}
+
+	a {
+		color: var(--primary, #afb42b);
+	}
+}
+</style>

@@ -238,4 +238,51 @@ export const stringFormat = (str: string, ...vals: string[]): string => {
 	return vals.reduce((s, v, i) => s.replace(new RegExp('\\{' + i + '\\}', 'g'), v), str);
 };
 
+/**
+ * 是否是字符串
+ * @param value
+ */
 export const isString = (value: unknown): value is string => Object.prototype.toString.call(value) === '[object String]';
+
+/**
+ * 计算时间
+ * @param d
+ * @param more
+ * @param suffix
+ */
+export function diffDate(d: string | number, more: false, suffix?: DiffDateSuffix): number;
+export function diffDate(d: string | number, more: true, suffix?: DiffDateSuffix): string;
+export function diffDate(d: string | number, more: boolean, suffix?: DiffDateSuffix) {
+	const dateNow = new Date();
+	const datePost = new Date(d);
+	const dateDiff = dateNow.getTime() - datePost.getTime();
+	const minute = 1000 * 60;
+	const hour = minute * 60;
+	const day = hour * 24;
+	const month = day * 30;
+
+	if (more) {
+		suffix = suffix ?? { month: '个月前', day: '天前', hour: '小时前', min: '分钟前', just: '刚刚' };
+		const monthCount = dateDiff / month;
+		const dayCount = dateDiff / day;
+		const hourCount = dateDiff / hour;
+		const minuteCount = dateDiff / minute;
+		let result: string;
+		if (monthCount > 12) {
+			result = datePost.toISOString().slice(0, 10);
+		} else if (monthCount >= 1) {
+			result = parseInt(monthCount.toString()) + ' ' + suffix.month;
+		} else if (dayCount >= 1) {
+			result = parseInt(dayCount.toString()) + ' ' + suffix.day;
+		} else if (hourCount >= 1) {
+			result = parseInt(hourCount.toString()) + ' ' + suffix.hour;
+		} else if (minuteCount >= 1) {
+			result = parseInt(minuteCount.toString()) + ' ' + suffix.min;
+		} else {
+			result = suffix.just;
+		}
+		return result;
+	} else {
+		return parseInt((dateDiff / day).toString());
+	}
+}

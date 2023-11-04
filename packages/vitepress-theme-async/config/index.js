@@ -15,6 +15,7 @@ export const defaultConfig = {
 						isReward: true,
 						isSearch: true,
 						isNoticeOutdate: true,
+						isCustomMdStyle: false,
 					},
 				},
 			},
@@ -23,6 +24,7 @@ export const defaultConfig = {
 	themeConfig: {
 		pageLoading: true,
 		themeLoading: true,
+		customMdStyle: false,
 		author: 'async',
 		postDir: 'posts',
 		indexGenerator: {
@@ -107,6 +109,11 @@ export const defaultConfig = {
 			level: [2, 3],
 			label: '目录列表',
 		},
+		noticeOutdate: {
+			style: 'simple',
+			limitDay: 365,
+			position: 'top',
+		},
 	},
 };
 
@@ -168,6 +175,7 @@ export const defineConfig = config => {
 	config.vite.css.preprocessorOptions.less.globalVars.isAside = Boolean(config.themeConfig.rightside.aside);
 	config.vite.css.preprocessorOptions.less.globalVars.isReward = Boolean(config.themeConfig.reward.enable);
 	config.vite.css.preprocessorOptions.less.globalVars.isSearch = Boolean(config.themeConfig?.search?.provider === 'local');
+	config.vite.css.preprocessorOptions.less.globalVars.isCustomMdStyle = Boolean(config.themeConfig.customMdStyle);
 
 	return config;
 };

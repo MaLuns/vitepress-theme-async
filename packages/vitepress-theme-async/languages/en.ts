@@ -36,6 +36,7 @@ const lang: AsyncTheme.Language = {
 	post: {
 		sticky: 'TOP',
 		rewardComment: "I'm so cute. Please give me money.",
+		noticeOutdateMessage: 'It has been {0} days since the last update, the content of the article may be outdated.',
 		copyright: {
 			author: 'Post author',
 			link: 'Post link',

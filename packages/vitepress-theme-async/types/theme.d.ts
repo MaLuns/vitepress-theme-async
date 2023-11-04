@@ -191,6 +191,7 @@ declare namespace AsyncTheme {
 		post: {
 			sticky: string;
 			rewardComment: string;
+			noticeOutdateMessage: string;
 			copyright: {
 				author: string;
 				link: string;
@@ -591,6 +592,28 @@ declare namespace AsyncTheme {
 		 */
 		clipboard?: boolean;
 	}
+
+	/**
+	 * 过期提取 || notice outdate
+	 */
+	interface NoticeOutdateConfig {
+		/**
+		 * 是否启用
+		 */
+		enable?: boolean;
+		/**
+		 * 样式
+		 */
+		style?: 'simple' | 'flat';
+		/**
+		 * 距离今天多少天时显示
+		 */
+		limitDay?: number;
+		/**
+		 * 现实在文章中位置
+		 */
+		position?: 'top' | 'bottom';
+	}
 }
 
 declare module 'vitepress-theme-async/config' {
@@ -611,3 +634,11 @@ declare type DeepKeys<T> = T extends object
 			[K in keyof T]-?: K extends string ? (T[K] extends object ? `${K}.${DeepKeys<T[K]>}` : `${K}`) : never;
 	  }[keyof T]
 	: never;
+
+declare type DiffDateSuffix = {
+	month: string;
+	day: string;
+	hour: string;
+	min: string;
+	just: string;
+};

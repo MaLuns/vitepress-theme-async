@@ -35,6 +35,7 @@ const lang: AsyncTheme.Language = {
 	},
 	post: {
 		sticky: '置顶',
+		noticeOutdateMessage: '距离上次更新已经 {0} 天了, 文章内容可能已经过时。',
 		rewardComment: '我很可爱，请给我钱',
 		copyright: {
 			author: '本文作者',
