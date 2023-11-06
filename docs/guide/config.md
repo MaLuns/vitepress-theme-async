@@ -506,6 +506,31 @@ interface ConverConfig {
 }
 ```
 
+### 过期提醒 NoticeOutdate
+
+通过配置 `noticeOutdate` 字段使用，`enable` 为 `true` 时，会根据文章发布时间计算已经过去多少天，如果超出 `limitDay` 配置天数，则会显示过期提醒标识
+
+```ts
+interface NoticeOutdateConfig {
+	/**
+	 * 是否启用
+	 */
+	enable?: boolean;
+	/**
+	 * 样式
+	 */
+	style?: "simple" | "flat";
+	/**
+	 * 距离今天多少天时显示
+	 */
+	limitDay?: number;
+	/**
+	 * 现实在文章中位置
+	 */
+	position?: "top" | "bottom";
+}
+```
+
 ## 友接页 Links
 
 在 layout 为 `links` 时为友链页，页面会根据 `links` 配置渲染列表。
@@ -600,6 +625,14 @@ interface BuiltPageConfig {
 - 固定按钮块 (TrmFixedBtn)
 
 具体插槽 [请看这里](https://github.com/maluns/vitepress-theme-async/packages/vitepress-theme-async/layouts/Layout.vue)
+
+## 全局组件 Global Components
+
+主题中将页面中部分模块拆分单独的组件，位于 `vitepress-theme-async/components/global` 目录中。可通过 `globalComponents` 字段配置是否需要将组件注册为全局组件使用，设置为 `true` 默认会将所有组件注册为全局组件，也可一传递组件名称 `['TrmDividerTitle']` 选择性的注册。
+
+```ts
+globalComponents?: boolean | Array<string>;
+```
 
 ## 自定义图标 Icon
 

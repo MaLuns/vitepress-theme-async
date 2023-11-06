@@ -171,11 +171,11 @@ export const defineConfig = config => {
 	}
 
 	// 处理 less 配置
-	config.vite.css.preprocessorOptions.less.globalVars.isReadmode = Boolean(config.themeConfig.rightside.readmode);
-	config.vite.css.preprocessorOptions.less.globalVars.isAside = Boolean(config.themeConfig.rightside.aside);
-	config.vite.css.preprocessorOptions.less.globalVars.isReward = Boolean(config.themeConfig.reward.enable);
+	config.vite.css.preprocessorOptions.less.globalVars.isReadmode = Boolean(config.themeConfig?.rightside?.readmode);
+	config.vite.css.preprocessorOptions.less.globalVars.isAside = Boolean(config.themeConfig?.rightside?.aside);
+	config.vite.css.preprocessorOptions.less.globalVars.isReward = Boolean(config.themeConfig?.reward?.enable);
 	config.vite.css.preprocessorOptions.less.globalVars.isSearch = Boolean(config.themeConfig?.search?.provider === 'local');
-	config.vite.css.preprocessorOptions.less.globalVars.isCustomMdStyle = Boolean(config.themeConfig.customMdStyle);
+	config.vite.css.preprocessorOptions.less.globalVars.isCustomMdStyle = Boolean(config.themeConfig?.customMdStyle);
 
 	return config;
 };
