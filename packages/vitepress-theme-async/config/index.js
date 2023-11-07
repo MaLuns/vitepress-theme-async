@@ -114,6 +114,10 @@ export const defaultConfig = {
 			limitDay: 365,
 			position: 'top',
 		},
+		rss: {
+			enable: false,
+			limit: 20,
+		},
 	},
 };
 
@@ -176,6 +180,14 @@ export const defineConfig = config => {
 	config.vite.css.preprocessorOptions.less.globalVars.isReward = Boolean(config.themeConfig?.reward?.enable);
 	config.vite.css.preprocessorOptions.less.globalVars.isSearch = Boolean(config.themeConfig?.search?.provider === 'local');
 	config.vite.css.preprocessorOptions.less.globalVars.isCustomMdStyle = Boolean(config.themeConfig?.customMdStyle);
+
+	if (config.themeConfig.rss) {
+		const selfBuildEnd = config.buildEnd;
+		config.buildEnd = async siteConfig => {
+			await selfBuildEnd?.(siteConfig);
+			(await import('../plugin/rss.js'))?.genFeed(siteConfig);
+		};
+	}
 
 	return config;
 };

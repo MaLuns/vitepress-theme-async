@@ -85,6 +85,9 @@ export declare interface AsyncThemeConfig {
 
 	/** 过期提示 | notice outdate */
 	noticeOutdate?: AsyncTheme.NoticeOutdateConfig;
+
+	/** rss */
+	rss?: AsyncTheme.RSSConfig;
 }
 // -----------------------------------------------------------------------
 

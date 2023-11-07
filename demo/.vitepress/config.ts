@@ -17,6 +17,8 @@ export default defineConfig({
 			md.use(taskLists);
 		},
 	},
+	title: 'Vitepress Theme Async',
+	description: '一个简洁、优雅、轻量、美观的 vitepress 主题',
 	titleTemplate: ':title | Async',
 	themeConfig: {
 		globalComponents: ['TrmDividerTitle'],
@@ -115,6 +117,10 @@ export default defineConfig({
 			limitDay: 1,
 			style: 'flat',
 			position: 'bottom',
+		},
+		rss: {
+			enable: true,
+			baseUrl: 'https://vitepress-theme-async.imalun.com',
 		},
 	},
 });
