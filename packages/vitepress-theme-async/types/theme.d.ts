@@ -56,7 +56,7 @@ declare namespace AsyncTheme {
 		 * 封面
 		 */
 		cover?: {
-			default: string;
+			default: string | string[];
 			type: 'img' | 'date' | 'random';
 		};
 	}
@@ -613,6 +613,33 @@ declare namespace AsyncTheme {
 		 * 现实在文章中位置
 		 */
 		position?: 'top' | 'bottom';
+	}
+
+	/**
+	 * RSS 生成
+	 */
+	interface RSSConfig {
+		/**
+		 * 是否启用
+		 */
+		enable?: boolean;
+		/**
+		 * 你的站点地址 eg: https://www.imalun.com
+		 */
+		baseUrl: string;
+		/**
+		 * 限制输出文件包含的文章数量
+		 * @description (0 不限制；> 1 会按照日期排序对输出内容进行调整)
+		 */
+		limit?: number;
+		/**
+		 * 生成文件名
+		 */
+		fileName?: string;
+		/**
+		 * Feed 配置项
+		 */
+		feedOptions?: import('feed').FeedOptions;
 	}
 }
 

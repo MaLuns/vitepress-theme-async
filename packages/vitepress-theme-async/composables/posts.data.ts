@@ -69,7 +69,7 @@ export default <LoaderModule>{
 
 			// 封面
 			const cover = theme.cover;
-			if (isString(meta.cover) && Array.isArray(meta.cover)) {
+			if (isString(meta.cover) || Array.isArray(meta.cover)) {
 				meta.cover = {
 					type: cover?.type,
 					default: meta.cover,
