@@ -1,7 +1,7 @@
 import { AsyncThemeConfig } from 'types';
 import { useData, useRouter, withBase } from 'vitepress';
 import { Component, defineComponent, Ref, h, inject, onMounted, provide, ref } from 'vue';
-import { getLangText } from './composables';
+import { getLangTextByLang } from './composables';
 import failure from './assets/failure.ico';
 
 // export const AsyncCurrentPageIndexSymbol: InjectionKey<Ref<number>> = Symbol('current-page-index');
@@ -15,7 +15,7 @@ export function withConfigProvider(App: Component) {
 			const router = useRouter();
 			const currentPageIndex = ref(1);
 			const showMenu = ref(false);
-			const language = ref(site.value.lang ?? 'zh_cn');
+			const language = ref(site.value.lang ?? 'zh-Hans');
 
 			// fix: 通过 npm 安装, 在 dev 模式时 vue 会提示 injection "Symbol(current-page-index)" not found.
 			// 未找到具体原因 暂时用字符替代
@@ -57,13 +57,13 @@ export function withConfigProvider(App: Component) {
 							iconEls.forEach(item => {
 								item.href = withBase(favicon?.hidden ?? failure);
 							});
-							document.title = getLangText(<'none'>favicon?.hideText) ?? '';
+							document.title = getLangTextByLang(language.value, <'none'>favicon?.hideText) ?? '';
 							clearTimeout(titleTime);
 						} else {
 							iconEls.forEach((item, index) => {
 								item.href = icons[index];
 							});
-							document.title = getLangText(<'none'>favicon.showText) + originTitle;
+							document.title = getLangTextByLang(language.value, <'none'>favicon.showText) + originTitle;
 							titleTime = setTimeout(function () {
 								document.title = originTitle;
 							}, 2000);

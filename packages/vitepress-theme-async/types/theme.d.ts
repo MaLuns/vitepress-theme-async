@@ -4,7 +4,7 @@ declare const __VP_LOCAL_SEARCH__: boolean;
 declare type AnyObject = Record<string, any>;
 
 declare namespace AsyncTheme {
-	declare type OrderByArg = string | Record<string | number, 1 | -1>;
+	type OrderByArg = string | Record<string | number, 1 | -1>;
 
 	/** 文章基础信息 */
 	interface PostData {
@@ -327,7 +327,7 @@ declare namespace AsyncTheme {
 	/**
 	 * 顶部导航栏 || Layout top bars
 	 */
-	declare type TobBarsConfig = Array<AsyncTheme.NavItemWithLink | AsyncTheme.NavItemWithChildren>;
+	type TobBarsConfig = Array<AsyncTheme.NavItemWithLink | AsyncTheme.NavItemWithChildren>;
 
 	/**
 	 * 横幅配置 || Layout banner config
@@ -462,7 +462,7 @@ declare namespace AsyncTheme {
 	/**
 	 * 友情链接列表 || Links config
 	 */
-	declare type LinksConfig = Links[];
+	type LinksConfig = Links[];
 
 	/**
 	 * 文章封面图 || Post cover image

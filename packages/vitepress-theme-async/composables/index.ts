@@ -115,6 +115,16 @@ export const useCurrentLang = () => {
 	return allLanguages[lang.value] ?? allLanguages['zh-Hans'];
 };
 
+// 指定 lang 获取对应文本
+export const getLangTextByLang = (lang: string, k: DeepKeys<AsyncTheme.Language> | 'none', ...pars: string[]) => {
+	const langData = allLanguages[lang] ?? allLanguages['zh-Hans'];
+	let text = dataPath<string>(langData, k) ?? k;
+	if (pars.length) {
+		text = stringFormat(text, ...pars);
+	}
+	return text;
+};
+
 // 获取 i18n 文本
 export const getLangText = (k: DeepKeys<AsyncTheme.Language> | 'none', ...pars: string[]) => {
 	const langData = useCurrentLang();
