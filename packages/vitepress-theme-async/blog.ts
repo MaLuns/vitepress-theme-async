@@ -1,11 +1,29 @@
 import { AsyncThemeConfig } from 'types';
 import { useData, useRouter, withBase } from 'vitepress';
 import { Component, defineComponent, Ref, h, inject, onMounted, provide, ref } from 'vue';
-import { getLangTextByLang } from './composables';
 import failure from './assets/failure.ico';
+import { dataPath, stringFormat } from './utils/shared';
 
 // export const AsyncCurrentPageIndexSymbol: InjectionKey<Ref<number>> = Symbol('current-page-index');
 // export const AsyncShowMenuSymbol: InjectionKey<Ref<boolean>> = Symbol('show-menu');
+
+export const useCurrentPageIndex = () => inject<Ref<number>>('AsyncCurrentPageIndexSymbol')!;
+export const useShowMenu = () => inject<Ref<boolean>>('AsyncShowMenuSymbol')!;
+export const useLang = () => inject<Ref<string>>('AsyncLanguageSymbol')!;
+export const useCurrentLang = () => {
+	const lang = useLang();
+	const { theme } = useData<AsyncThemeConfig>();
+	const languages = theme.value.languages ?? {};
+	const langData = languages[lang.value] ?? languages['zh-Hans'];
+	return langData;
+};
+
+export const getLangText = (k: string, ...pras: string[]) => {
+	const langData = useCurrentLang();
+	let text = dataPath<string>(langData, k) ?? k;
+	if (pras.length) text = stringFormat(text, ...pras);
+	return text;
+};
 
 export function withConfigProvider(App: Component) {
 	return defineComponent({
@@ -57,13 +75,13 @@ export function withConfigProvider(App: Component) {
 							iconEls.forEach(item => {
 								item.href = withBase(favicon?.hidden ?? failure);
 							});
-							document.title = getLangTextByLang(language.value, <'none'>favicon?.hideText) ?? '';
+							document.title = getLangText(favicon.hideText ?? '') ?? '';
 							clearTimeout(titleTime);
 						} else {
 							iconEls.forEach((item, index) => {
 								item.href = icons[index];
 							});
-							document.title = getLangTextByLang(language.value, <'none'>favicon.showText) + originTitle;
+							document.title = getLangText(favicon.showText ?? '') + originTitle;
 							titleTime = setTimeout(function () {
 								document.title = originTitle;
 							}, 2000);
@@ -103,7 +121,3 @@ export function withConfigProvider(App: Component) {
 		},
 	});
 }
-
-export const useCurrentPageIndex = () => inject<Ref<number>>('AsyncCurrentPageIndexSymbol')!;
-export const useShowMenu = () => inject<Ref<boolean>>('AsyncShowMenuSymbol')!;
-export const useLang = () => inject<Ref<string>>('AsyncLanguageSymbol')!;

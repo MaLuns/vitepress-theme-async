@@ -88,6 +88,9 @@ export declare interface AsyncThemeConfig {
 
 	/** rss */
 	rss?: AsyncTheme.RSSConfig;
+
+	/** 语言 | i18n */
+	languages?: Record<string, AsyncTheme.Language>;
 }
 // -----------------------------------------------------------------------
 

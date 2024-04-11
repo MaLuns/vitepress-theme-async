@@ -3,10 +3,8 @@ import { computed } from 'vue';
 import { useData, withBase } from 'vitepress';
 import { useMediaQuery } from '@vueuse/core';
 import { data as allPosts } from './posts.data';
-import { data as allLanguages } from './languages.data';
-import { groupBy, sortBy, dataPath, stringFormat } from '../utils/shared';
+import { groupBy, sortBy } from '../utils/shared';
 import { formatDate } from '../utils/client';
-import { useLang } from '../blog';
 
 import bannerImg from '../assets/banner.png';
 
@@ -107,30 +105,4 @@ export const useArchives = () => {
 		groupBy(allPosts, 'date', date => formatDate(date, theme.value.archiveGenerator?.dateFmt || 'YYYY')),
 		{ 0: -1 },
 	);
-};
-
-// 获取当前页面 lang
-export const useCurrentLang = () => {
-	const lang = useLang();
-	return allLanguages[lang.value] ?? allLanguages['zh-Hans'];
-};
-
-// 指定 lang 获取对应文本
-export const getLangTextByLang = (lang: string, k: DeepKeys<AsyncTheme.Language> | 'none', ...pars: string[]) => {
-	const langData = allLanguages[lang] ?? allLanguages['zh-Hans'];
-	let text = dataPath<string>(langData, k) ?? k;
-	if (pars.length) {
-		text = stringFormat(text, ...pars);
-	}
-	return text;
-};
-
-// 获取 i18n 文本
-export const getLangText = (k: DeepKeys<AsyncTheme.Language> | 'none', ...pars: string[]) => {
-	const langData = useCurrentLang();
-	let text = dataPath<string>(langData, k) ?? k;
-	if (pars.length) {
-		text = stringFormat(text, ...pars);
-	}
-	return text;
 };

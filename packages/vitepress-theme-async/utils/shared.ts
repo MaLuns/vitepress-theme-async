@@ -286,3 +286,16 @@ export function diffDate(d: string | number, more: boolean, suffix?: DiffDateSuf
 		return parseInt((dateDiff / day).toString());
 	}
 }
+
+/**
+ * 获取语言配置文本
+ * @param langData
+ * @param k
+ * @param pras
+ * @returns
+ */
+// export const getLangText = (langData: AsyncTheme.Language, k: string, ...pras: string[]) => {
+// 	let text = dataPath<string>(langData, k) ?? k;
+// 	if (pras.length) text = stringFormat(text, ...pras);
+// 	return text;
+// };

@@ -4,8 +4,7 @@ import { Component } from 'vue';
 import './styles/index.less';
 import Layout from './layouts/Layout.vue';
 import NotFound from './layouts/NotFound.vue';
-import { withConfigProvider } from './blog';
-import { getLangText } from './composables';
+import { withConfigProvider, getLangText } from './blog';
 
 // export * from './config/index.js'
 

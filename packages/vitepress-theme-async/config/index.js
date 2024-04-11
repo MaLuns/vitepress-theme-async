@@ -89,8 +89,8 @@ export const defaultConfig = {
 			introduction:
 				'大家好，我是 <strong>Async</strong>，很高兴您能在浩瀚如烟的互联网世界里发现这个博客，更感谢您能够饶有兴致地浏览这个页面。建立这个 Blog 是出于兴趣爱好，我将在此分会分享一些学习笔记，可能还会分享少许图片、视频以及其他有趣东西的链接。',
 			blog: `<ul class="trm-list">
-				<li>程序：Hexo </li>
-				<li>主题：Hexo-theme-async </li>
+				<li>程序：Vitepress </li>
+				<li>主题：vitepress-theme-async </li>
 			</ul>`,
 			privacy:
 				'本网站不会追踪访客行为，且不要求访客提供任何敏感信息（比如真实姓名、身份证号码、手机号等），因而也不存在任何隐私泄漏问题。访客参与评论，必须遵守法律法规和基本道德规范，文明礼貌。严禁发布任何有关淫秽、反动、暴力、博彩、恐吓、低俗的内容或违法信息，在尊重言论自由的同时请保持和平与理性。请勿对他人采取不友好的评论或其它过激行为。',
@@ -117,6 +117,164 @@ export const defaultConfig = {
 		rss: {
 			enable: false,
 			limit: 20,
+		},
+		languages: {
+			'zh-Hans': {
+				site: {
+					title: '本站信息',
+					webmaster: '网站名称',
+					domain: '网站链接',
+					avatar: '网站头像',
+					describe: '网站简介',
+					ruleText: '友链要求',
+					contactMe: '联系我',
+				},
+				title: {
+					links: '友情链接',
+					newPublish: '最近发布',
+					comment: '留言板',
+					author: '作者',
+					blog: '博客',
+					privacy: '隐私权及评论',
+					more: '查看分类',
+					allArchives: '所有归档',
+					yearArchives: '{0} 年的归档',
+					otherArticles: '其他文章',
+					unclassified: '未分类',
+				},
+				menu: {
+					home: '首页',
+					archives: '归档',
+					categorys: '分类',
+					tags: '标签',
+					links: '友链',
+					about: '关于',
+				},
+				favicon: {
+					showText: '(/≧▽≦/)咦！又好了！',
+					hideText: '(●—●)喔哟，崩溃啦！',
+				},
+				post: {
+					sticky: '置顶',
+					noticeOutdateMessage: '距离上次更新已经 {0} 天了, 文章内容可能已经过时。',
+					rewardComment: '我很可爱，请给我钱',
+					copyright: {
+						author: '本文作者',
+						link: '本文链接',
+						licenseTitle: '版权声明',
+						licenseContent: '本博客所有文章除特别声明外，均默认采用 {0} 许可协议。',
+					},
+				},
+				rightside: {
+					search: '搜索',
+					backToTop: '返回顶部',
+					toc: '文章目录',
+					theme: {
+						dark: '切换到暗黑模式',
+						light: '切换到明亮模式',
+					},
+					aside: {
+						open: '切换单栏模式',
+						exit: '退出单栏模式',
+					},
+					readMode: {
+						open: '进入阅读模式',
+						exit: '退出阅读模式',
+					},
+				},
+				footer: {
+					powered: '由 {0} 驱动',
+					theme: '主题',
+					tips: '博客已萌萌哒运行 {0} 天',
+					day: '天',
+					hour: '时',
+					minute: '分',
+					seconds: '秒',
+				},
+				symbol: {
+					comma: '，',
+					period: '。',
+					colon: '：',
+				},
+			},
+			en: {
+				site: {
+					title: 'Site Information',
+					webmaster: 'Webmaster',
+					domain: 'Domain',
+					avatar: 'Avatar',
+					describe: 'Describe',
+					ruleText: 'Friend chain requirements',
+					contactMe: 'Contact Me',
+				},
+				title: {
+					links: 'Friendly Link',
+					newPublish: 'Newest Publications',
+					comment: 'Message',
+					author: 'Author',
+					blog: 'Blog Application',
+					privacy: 'Privacy and Comments',
+					more: 'Read More',
+					allArchives: 'All Archives',
+					yearArchives: 'Archive for {0}',
+					otherArticles: 'Other Articles',
+					unclassified: 'Unclassified',
+				},
+				menu: {
+					home: 'Home',
+					archives: 'Archives',
+					categorys: 'Categorys',
+					tags: 'Tags',
+					links: 'Links',
+					about: 'About',
+				},
+				favicon: {
+					showText: '(/≧▽≦/)Hey! Good again!',
+					hideText: '(●—●)Oh, crash!',
+				},
+				post: {
+					sticky: 'TOP',
+					rewardComment: "I'm so cute. Please give me money.",
+					noticeOutdateMessage: 'It has been {0} days since the last update, the content of the article may be outdated.',
+					copyright: {
+						author: 'Post author',
+						link: 'Post link',
+						licenseTitle: 'Copyright notice',
+						licenseContent: 'All articles in this blog are licensed under {0} unless otherwise stated.',
+					},
+				},
+				rightside: {
+					search: 'Search',
+					backToTop: 'Back To Top',
+					toc: 'Article table of contents',
+					theme: {
+						dark: 'Switch to dark mode',
+						light: 'Switch to light mode',
+					},
+					aside: {
+						open: 'Enter single column mode',
+						exit: 'Exit single column mode',
+					},
+					readMode: {
+						open: 'Enter reading mode',
+						exit: 'Exit reading mode',
+					},
+				},
+				footer: {
+					powered: 'Powered by {0}',
+					theme: 'Theme',
+					tips: 'The blog has been lovely to run {0} day',
+					day: 'day',
+					hour: 'hour',
+					minute: 'minute',
+					seconds: 'seconds',
+				},
+				symbol: {
+					comma: ', ',
+					period: '. ',
+					colon: ': ',
+				},
+			},
 		},
 	},
 };

@@ -21,6 +21,13 @@ export default defineConfig({
 	description: '一个简洁、优雅、轻量、美观的 vitepress 主题',
 	titleTemplate: ':title | Async',
 	themeConfig: {
+		languages: {
+			'zh-Hans': {
+				title: {
+					links: '友情链接',
+				},
+			},
+		},
 		globalComponents: ['TrmDividerTitle'],
 		topBars: [
 			{ title: 'Home', url: '/' },
