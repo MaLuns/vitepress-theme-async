@@ -11,7 +11,7 @@ hero:
     - text: 🚀 Get Started
       link: /guide/
     - text: 💻 Online demo
-      link: https://stackblitz.com/edit/node-tshsxq?embed=1&theme=dark&view=editor
+      link: https://stackblitz.com/edit/vitejs-vite-fwgwrx?embed=1&theme=dark&view=editor
       theme: alt
 
 features:

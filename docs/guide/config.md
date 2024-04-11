@@ -28,26 +28,102 @@ export default defineConfig({
 });
 ```
 
-您也可以覆盖和扩展内置语言文件，在和 `postDir` 同级添加 `languages` 目录，在其内增加对应语言文件即可。
+可以通过 `languages` 字段配置，覆盖默认文字。
 
-例如: 覆盖现在中文文件
+```ts
+/** 语言文件 */
+interface Language {
+	site: {
+		title: string;
+		webmaster: string;
+		domain: string;
+		avatar: string;
+		describe: string;
+		ruleText: string;
+		contactMe: string;
+	};
 
-- 在 `languages` 新增 `zh-Hans.json`
-- 在 `zh-Hans.json` 添加如下代码
+	// 页面模块小标题
+	title: {
+		links: string;
+		newPublish: string;
+		comment: string;
+		author: string;
+		blog: string;
+		privacy: string;
+		more: string;
+		allArchives: string;
+		yearArchives: string;
+		otherArticles: string;
+		unclassified: string;
+	};
 
-```json
-{
-	"title": {
-		"newPublish": "覆盖首页的最近发布小标题"
-	}
+	// 菜单
+	menu: {
+		home: string;
+		categorys: string;
+		archives: string;
+		tags: string;
+		links: string;
+		about: string;
+	};
+
+	favicon: {
+		showText: string;
+		hideText: string;
+	};
+
+	// 文章内容
+	post: {
+		sticky: string;
+		rewardComment: string;
+		noticeOutdateMessage: string;
+		copyright: {
+			author: string;
+			link: string;
+			licenseTitle: string;
+			licenseContent: string;
+		};
+	};
+
+	// 按钮块
+	rightside: {
+		search: string;
+		backToTop: string;
+		toc: string;
+		theme: {
+			dark: string;
+			light: string;
+		};
+		aside: {
+			open: string;
+			exit: string;
+		};
+		readMode: {
+			open: string;
+			exit: string;
+		};
+	};
+
+	// 页脚
+	footer: {
+		powered: string;
+		theme: string;
+		tips: string;
+		day: string;
+		hour: string;
+		minute: string;
+		seconds: string;
+	};
+
+	// 符号
+	symbol: {
+		comma: string;
+		period: string;
+		colon: string;
+	};
 }
 ```
-
-- 刷新页面可以看到首页中原 `最近发布` 变为了 `覆盖首页的最近发布小标题`
-
-增加新的语言文件也是一样方式，在 `languages` 新增 `xxx.json` 文件，修改 `vitepress` 配置中 `lang` 为 `xxx` (与 `json` 文件同名)，主题会优先加载 `xxx.json` 中配置
-
-语言文件定义 [请看这里](https://github.com/maluns/vitepress-theme-async/packages/vitepress-theme-async/languages)
 
 ## 主题模式 ThemeMode
 
@@ -624,7 +700,7 @@ interface BuiltPageConfig {
 - 内容区域 (TrmPageContent)，内容区域除了公用插槽外，文章页、关于页、友链页会存在特有的插槽。
 - 固定按钮块 (TrmFixedBtn)
 
-具体插槽 [请看这里](https://github.com/maluns/vitepress-theme-async/packages/vitepress-theme-async/layouts/Layout.vue)
+具体插槽 [请看这里](https://github.com/MaLuns/vitepress-theme-async/blob/main/packages/vitepress-theme-async/layouts/Layout.vue)
 
 ## 全局组件 Global Components
 
