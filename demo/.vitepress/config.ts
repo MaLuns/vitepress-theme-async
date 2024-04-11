@@ -41,7 +41,6 @@ export default defineConfig({
 			},
 			{ title: 'Links', url: '/links' },
 			{ title: 'About', url: '/about' },
-			{ title: 'HexoEditor', url: 'https://web-hexo-editor.imalun.com/' },
 		],
 		sidebar: {
 			typedText: ['Web Developer', 'UI Designer'],
@@ -82,15 +81,15 @@ export default defineConfig({
 			methods: [
 				{
 					name: '微信',
-					path: 'https://mp-8b005489-7724-4f8c-afdd-30192ff4f7ae.cdn.bspapp.com/cloudstorage/61a57135-2e65-4d51-8be1-03b8bd1c595e.jpg',
+					path: 'https://www.imalun.com/images/reward/wx_pay.jpg',
 				},
 				{
 					name: '支付宝',
-					path: 'https://mp-8b005489-7724-4f8c-afdd-30192ff4f7ae.cdn.bspapp.com/cloudstorage/a21e9954-22f2-43fe-b3b0-3dba1fdde3ed.jpg',
+					path: 'https://www.imalun.com/images/reward/alipay.jpg',
 				},
 				{
 					name: 'QQ',
-					path: 'https://mp-8b005489-7724-4f8c-afdd-30192ff4f7ae.cdn.bspapp.com/cloudstorage/69fb1903-d0dc-4169-9a02-1e76ec8e7761.jpg',
+					path: 'https://www.imalun.com/images/reward/qq_pay.jpg',
 				},
 			],
 		},

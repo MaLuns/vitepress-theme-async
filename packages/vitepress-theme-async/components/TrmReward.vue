@@ -15,7 +15,7 @@ const theme = useTheme();
 			<TrmIconReward />
 		</span>
 		<p class="trm-reward-comment">{{ $t("post.rewardComment") }}</p>
-		<div v-if="show && theme.reward?.methods">
+		<div v-if="show && theme.reward?.methods" id="qr">
 			<div v-for="(method, idx) in theme.reward.methods" style="display: inline-block" :key="idx">
 				<a :href="method.link ? method.link : method.path" rel="noopener noreferrer" target="_blank">
 					<img :src="method.path" :alt="method.name" loading="lazy" />

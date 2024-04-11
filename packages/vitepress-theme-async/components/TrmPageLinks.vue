@@ -13,7 +13,7 @@ const theme = useTheme();
 			<blockquote>
 				{{ $t("site.ruleText") }}{{ $t("symbol.colon") }}
 				<br />
-				{{ theme.user?.ruleText }} %>
+				{{ theme.user?.ruleText }}
 			</blockquote>
 		</div>
 	</div>
