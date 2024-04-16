@@ -41,9 +41,10 @@ const onSwitchReadMode = throttleAndDebounce(switchReadMode, 500);
 const onSwitchThemeMode = () => {
 	if (theme.value.themeLoading) {
 		themeLoading().then(() => {
-			const fun = isDark.value ? "add" : "remove";
-			document.querySelector(".trm-mode-swich-animation")?.classList[fun]("trm-active");
-			isDark.value = !isDark.value;
+			document.querySelector(".trm-mode-swich-animation")?.classList.toggle("trm-active");
+			// isDark.value = !isDark.value
+			// fix: 打包后 isDark 赋值影响原过渡动画，dev 模式正常，暂时改为延迟更新
+			setTimeout(() => (isDark.value = !isDark.value), 600);
 			setThemeColor();
 		});
 	} else {

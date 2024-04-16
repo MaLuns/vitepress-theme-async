@@ -182,75 +182,77 @@ onKeyStroke("Escape", () => {
 });
 </script>
 <template>
-	<Teleport to="body">
-		<div ref="el" class="trm-search-popup">
-			<div class="backdrop" @click="$emit('close')"></div>
+	<ClientOnly>
+		<Teleport to="body">
+			<div ref="el" class="trm-search-popup">
+				<div class="backdrop" @click="$emit('close')"></div>
 
-			<div class="trm-search-wrapper">
-				<div class="form trm-search-form">
-					<label id="localsearch-label" for="localsearch-input">
-						<svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
-							<g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
-								<circle cx="11" cy="11" r="8" />
-								<path d="m21 21l-4.35-4.35" />
-							</g>
-						</svg>
-					</label>
-					<input v-model="filterText" ref="searchInput" id="localsearch-input" aria-labelledby="localsearch-label" class="trm-search-input" type="text" placeholder="内容搜索" />
-					<button type="button" class="trm-toggle-layout-button" :class="{ 'detailed-list': showDetailedList }" @click="showDetailedList = !showDetailedList">
-						<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
-							<path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 14h7v7H3zM3 3h7v7H3zm11 1h7m-7 5h7m-7 6h7m-7 5h7" />
-						</svg>
-					</button>
-					<button @click="resetSearch" :disabled="disableReset" class="trm-clear-button" type="reset">
-						<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
-							<path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 5H9l-7 7l7 7h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2Zm-2 4l-6 6m0-6l6 6" />
-						</svg>
-					</button>
-				</div>
+				<div class="trm-search-wrapper">
+					<div class="form trm-search-form">
+						<label id="localsearch-label" for="localsearch-input">
+							<svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
+								<g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+									<circle cx="11" cy="11" r="8" />
+									<path d="m21 21l-4.35-4.35" />
+								</g>
+							</svg>
+						</label>
+						<input v-model="filterText" ref="searchInput" id="localsearch-input" aria-labelledby="localsearch-label" class="trm-search-input" type="text" placeholder="内容搜索" />
+						<button type="button" class="trm-toggle-layout-button" :class="{ 'detailed-list': showDetailedList }" @click="showDetailedList = !showDetailedList">
+							<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
+								<path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 14h7v7H3zM3 3h7v7H3zm11 1h7m-7 5h7m-7 6h7m-7 5h7" />
+							</svg>
+						</button>
+						<button @click="resetSearch" :disabled="disableReset" class="trm-clear-button" type="reset">
+							<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
+								<path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 5H9l-7 7l7 7h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2Zm-2 4l-6 6m0-6l6 6" />
+							</svg>
+						</button>
+					</div>
 
-				<ul ref="resultsEl" class="trm-search-result-container">
-					<li v-for="p in results" :key="p.id" role="option">
-						<a class="trm-result" :href="p.id" @click="$emit('close')">
-							<div class="titles">
-								<span class="title-icon">#</span>
-								<span v-for="(t, index) in p.titles" :key="index" class="title">
-									<span class="text" v-html="t" />
-									<svg width="18" height="18" viewBox="0 0 24 24">
-										<path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m9 18l6-6l-6-6" />
-									</svg>
-								</span>
-								<span class="title main">
-									<span class="text" v-html="p.title" />
-								</span>
-							</div>
-							<div v-if="showDetailedList" class="excerpt-wrapper">
-								<div v-if="p.text" class="excerpt" inert>
-									<div class="trm-publication" v-html="p.text" />
+					<ul ref="resultsEl" class="trm-search-result-container">
+						<li v-for="p in results" :key="p.id" role="option">
+							<a class="trm-result" :href="p.id" @click="$emit('close')">
+								<div class="titles">
+									<span class="title-icon">#</span>
+									<span v-for="(t, index) in p.titles" :key="index" class="title">
+										<span class="text" v-html="t" />
+										<svg width="18" height="18" viewBox="0 0 24 24">
+											<path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m9 18l6-6l-6-6" />
+										</svg>
+									</span>
+									<span class="title main">
+										<span class="text" v-html="p.title" />
+									</span>
 								</div>
-							</div>
-						</a>
-					</li>
-				</ul>
-
-				<div class="trm-search-footer">
-					<div class="trm-search-stats"></div>
-					<ul class="trm-search-commands">
-						<li>
-							<kbd class="command-palette-commands-key">
-								<svg width="15" height="15" aria-label="Escape key" role="img">
-									<g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2">
-										<path
-											d="M13.6167 8.936c-.1065.3583-.6883.962-1.4875.962-.7993 0-1.653-.9165-1.653-2.1258v-.5678c0-1.2548.7896-2.1016 1.653-2.1016.8634 0 1.3601.4778 1.4875 1.0724M9 6c-.1352-.4735-.7506-.9219-1.46-.8972-.7092.0246-1.344.57-1.344 1.2166s.4198.8812 1.3445.9805C8.465 7.3992 8.968 7.9337 9 8.5c.032.5663-.454 1.398-1.4595 1.398C6.6593 9.898 6 9 5.963 8.4851m-1.4748.5368c-.2635.5941-.8099.876-1.5443.876s-1.7073-.6248-1.7073-2.204v-.4603c0-1.0416.721-2.131 1.7073-2.131.9864 0 1.6425 1.031 1.5443 2.2492h-2.956"
-										></path>
-									</g>
-								</svg>
-							</kbd>
-							<span class="command-palette-Label">to close</span>
+								<div v-if="showDetailedList" class="excerpt-wrapper">
+									<div v-if="p.text" class="excerpt" inert>
+										<div class="trm-publication" v-html="p.text" />
+									</div>
+								</div>
+							</a>
 						</li>
 					</ul>
+
+					<div class="trm-search-footer">
+						<div class="trm-search-stats"></div>
+						<ul class="trm-search-commands">
+							<li>
+								<kbd class="command-palette-commands-key">
+									<svg width="15" height="15" aria-label="Escape key" role="img">
+										<g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2">
+											<path
+												d="M13.6167 8.936c-.1065.3583-.6883.962-1.4875.962-.7993 0-1.653-.9165-1.653-2.1258v-.5678c0-1.2548.7896-2.1016 1.653-2.1016.8634 0 1.3601.4778 1.4875 1.0724M9 6c-.1352-.4735-.7506-.9219-1.46-.8972-.7092.0246-1.344.57-1.344 1.2166s.4198.8812 1.3445.9805C8.465 7.3992 8.968 7.9337 9 8.5c.032.5663-.454 1.398-1.4595 1.398C6.6593 9.898 6 9 5.963 8.4851m-1.4748.5368c-.2635.5941-.8099.876-1.5443.876s-1.7073-.6248-1.7073-2.204v-.4603c0-1.0416.721-2.131 1.7073-2.131.9864 0 1.6425 1.031 1.5443 2.2492h-2.956"
+											></path>
+										</g>
+									</svg>
+								</kbd>
+								<span class="command-palette-Label">to close</span>
+							</li>
+						</ul>
+					</div>
 				</div>
 			</div>
-		</div>
-	</Teleport>
+		</Teleport>
+	</ClientOnly>
 </template>
