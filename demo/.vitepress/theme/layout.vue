@@ -5,7 +5,8 @@ const { Layout } = Theme;
 <template>
 	<Layout>
 		<template #links-after>
-			<TrmDividerTitle title="asdasd" index="01" />
+			<TrmDividerTitle title="插槽示例" index="01" />
+			这是自定义插槽
 		</template>
 	</Layout>
 </template>

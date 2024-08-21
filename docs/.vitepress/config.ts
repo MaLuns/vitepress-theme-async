@@ -6,10 +6,17 @@ export default defineConfig({
 	title: 'Vitepress-Theme-Async',
 	description: '🎈 A simple, lightweight vitepress blog theme',
 	lastUpdated: true,
-	head: [['link', { rel: 'icon', href: '/favicon.svg' }]],
+	head: [
+		['link', { rel: 'icon', href: '/logo@64x64.png' }],
+		['meta', { property: 'og:type', content: 'website' }],
+		['meta', { property: 'og:title', content: 'hexo-theme-async 主题' }],
+		['meta', { property: 'og:image', content: '/logo@64x64.png' }],
+		['meta', { property: 'og:url', content: 'https://www.imalun.com' }],
+		['meta', { property: 'og:description', content: '一个简单而轻量级的 Hexo 主题' }],
+	],
 	cleanUrls: true,
 	themeConfig: {
-		logo: '/logo.svg',
+		logo: '/logo@128x128.png',
 		search: {
 			provider: 'local',
 		},

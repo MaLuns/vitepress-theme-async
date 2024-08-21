@@ -3,9 +3,35 @@
 		"large_version": "v0.0.x",
 		"children": [
 			{
-				"version": "0.0.6",
+				"version": "0.0.8",
+				"date": "2024-08-21",
+				"logs": [
+					{
+						"type": "fix",
+						"text": "更新 CC 默认语言标识"
+					},
+					{
+						"type": "fix",
+						"text": "文本截断修改 #1"
+					},
+					{
+						"type": "fix",
+						"text": "优化主题切换动画"
+					}
+				]
+			},
+			{
+				"version": "0.0.7",
 				"date": "2024-04-11",
 				"logs": [
+					{
+						"type": "fix",
+						"text": "修复文章封面单独设置无效"
+					},
+					{
+						"type": "fix",
+						"text": "修复打赏样式问题"
+					},
 					{
 						"type": "fix",
 						"text": "主要修复 npm 安装，开发模式下问题 <a href='https://github.com/vuejs/vitepress/issues/3185'>(参考 issues)</a>"
@@ -13,6 +39,16 @@
 					{
 						"type": "feat",
 						"text": "增加 RSS 插件"
+					}
+				]
+			},
+			{
+				"version": "0.0.6",
+				"date": "2023-11-06",
+				"logs": [
+					{
+						"type": "feat",
+						"text": "增加文章过期提醒"
 					}
 				]
 			},
@@ -26,7 +62,7 @@
 					},
 					{
 						"type": "refactor",
-						"text": "统一配置命名格式，由"
+						"text": "统一配置命名格式"
 					}
 				]
 			},

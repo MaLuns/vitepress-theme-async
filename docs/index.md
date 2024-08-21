@@ -24,6 +24,15 @@ features:
   - title: 极速
     icon: 🚀
     details: 基于 Vitepress 构建更快速。
+  - title: 个性化
+    icon: 🌈
+    details: 高度可配置，可自定义主题色调
+  - title: 模块化
+    icon: 🧱
+    details: 所有模块皆可替代，快速个性化局部模块
+  - title: 示例
+    icon: 🌼
+    details: 提供完整文档，以及个性化示例
 
 footer:
   license: MIT Licensed
