@@ -62,6 +62,9 @@ const { frontmatter, page, theme } = useData<AsyncThemeConfig>();
 								<template #links-list-before><slot name="links-list-before" /></template>
 								<template #links-after><slot name="links-after" /></template>
 							</TrmPageLinks>
+							<template v-else-if="frontmatter.layout === 'custom'">
+								<Content />
+							</template>
 							<TrmPagePost v-else>
 								<template #post-before><slot name="post-before" /></template>
 								<template #post-info-after><slot name="post-info-after" /></template>
