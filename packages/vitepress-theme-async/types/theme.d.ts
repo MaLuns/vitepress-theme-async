@@ -580,7 +580,7 @@ declare namespace AsyncTheme {
 		 */
 		license?: string;
 		/**
-		 * 设置语言 (deed.zh | deed.en | deed.ja ｜ ...)
+		 * 设置语言 (deed.zh-hans | deed.en | deed.ja ｜ ...)
 		 */
 		language?: string;
 		/**

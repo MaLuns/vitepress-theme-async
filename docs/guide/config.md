@@ -529,7 +529,7 @@ interface RewardConfig {
 设置您的文章的分享版权
 
 > [关于许可协议](https://creativecommons.org/licenses/)
-> 默认使用 署名-非商业性使用-相同方式共享 4.0，即 [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)。
+> 默认使用 署名-非商业性使用-相同方式共享 4.0，即 [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans)。
 
 通过 `creativeCommons` 字段配置
 
@@ -540,7 +540,7 @@ interface CreativeCommonsConfig {
 	 */
 	license?: string;
 	/**
-	 * 设置语言 (deed.zh | deed.en | deed.ja ｜ ...)
+	 * 设置语言 (deed.zh-hans | deed.en | deed.ja ｜ ...)
 	 */
 	language?: string;
 	/**

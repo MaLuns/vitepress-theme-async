@@ -101,7 +101,7 @@ export const defaultConfig = {
 		},
 		creativeCommons: {
 			license: 'by-nc-sa',
-			language: 'deed.zh',
+			language: 'deed.zh-hans',
 			post: true,
 			clipboard: false,
 		},

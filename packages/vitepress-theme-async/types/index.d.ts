@@ -76,7 +76,7 @@ export declare interface AsyncThemeConfig {
 	Available values of license: by | by-nc | by-nc-nd | by-nc-sa | by-nd | by-sa | zero
 	You can set a language value if you prefer a translated version of CC license.
 	CC licenses are available in 39 languages, where you can find the specific and correct abbreviation you need.
-	Valid values of language: deed.zh, deed.en, deed.ja, etc. */
+	Valid values of language: deed.zh-hans, deed.en, deed.ja, etc. */
 	creativeCommons?: AsyncTheme.CreativeCommonsConfig;
 
 	/** 目录 | outline */

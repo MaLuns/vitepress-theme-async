@@ -6,7 +6,7 @@ const { theme, frontmatter, page } = useData<AsyncThemeConfig>();
 const license = theme.value.creativeCommons?.license || "by-nc-sa";
 const ccVersion = theme.value.creativeCommons?.license == "zero" ? "1.0" : "4.0";
 const ccPrefix = theme.value.creativeCommons?.license == "zero" ? "publicdomain" : "licenses";
-const ccURL = "https://creativecommons.org/" + ccPrefix + "/" + license + "/" + ccVersion + "/" + theme.value.creativeCommons?.language || "deed.zh";
+const ccURL = "https://creativecommons.org/" + ccPrefix + "/" + license + "/" + ccVersion + "/" + theme.value.creativeCommons?.language || "deed.zh-hans";
 const link = `<a href="${ccURL}" target="_blank" rel="noopener" title="CC ${license.toUpperCase() + " " + ccVersion}">CC ${license.toUpperCase() + " " + ccVersion}</a>`;
 </script>
 <template>
