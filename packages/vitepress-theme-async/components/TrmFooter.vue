@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { AsyncThemeConfig } from "types/index";
 import { useData } from "vitepress";
 import { ref, onMounted } from "vue";
 import { formatDate } from "../utils/client";

@@ -1,4 +1,3 @@
-import { AsyncThemeConfig } from 'types/index';
 import { computed } from 'vue';
 import { useData, withBase } from 'vitepress';
 import { useMediaQuery } from '@vueuse/core';

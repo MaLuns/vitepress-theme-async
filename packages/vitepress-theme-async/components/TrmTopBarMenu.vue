@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { AsyncThemeConfig } from "types/index";
 import { useData, withBase } from "vitepress";
 import { isActive } from "../utils/shared";
 
@@ -69,7 +68,7 @@ const { theme, page } = useData<AsyncThemeConfig>();
 					line-height: var(--top-bar-height);
 					color: var(--theme-color, #00283a);
 					text-transform: uppercase;
-					font-size: 11px;
+					font-size: 12px;
 					letter-spacing: 2px;
 					font-weight: 700;
 					transition: all 0.4s ease-in-out;

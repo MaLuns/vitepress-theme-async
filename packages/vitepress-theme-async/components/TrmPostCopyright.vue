@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { AsyncThemeConfig } from "types/index";
 import { useData } from "vitepress";
 
 const { theme, frontmatter, page } = useData<AsyncThemeConfig>();

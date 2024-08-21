@@ -62,7 +62,7 @@ defineProps<{ list: DataItem[] }>();
 			background: var(--primary-weak, #afb42b);
 			position: absolute;
 			top: 15px;
-			left: -11px;
+			left: -12px;
 			width: 26px;
 			height: 26px;
 			opacity: 0;
