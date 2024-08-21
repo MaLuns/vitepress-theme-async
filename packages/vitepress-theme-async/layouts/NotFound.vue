@@ -1,5 +1,5 @@
 <template>
-	<div class="trm-content-start">
+	<div class="trm-content-start" style="top: 50vh; position: absolute; transform: translateY(-50%); margin: auto; left: 0; right: 0">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-6 align-self-center">
