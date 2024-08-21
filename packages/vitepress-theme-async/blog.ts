@@ -1,4 +1,3 @@
-import { AsyncThemeConfig } from 'types';
 import { useData, useRouter, withBase } from 'vitepress';
 import { Component, defineComponent, Ref, h, inject, onMounted, provide, ref } from 'vue';
 import failure from './assets/failure.ico';

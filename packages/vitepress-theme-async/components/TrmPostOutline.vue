@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { AsyncThemeConfig } from "types";
 import { ref, shallowRef } from "vue";
 import { onContentUpdated, useData } from "vitepress";
 import { getHeader, useActiveAnchor, resolveTitle } from "../composables/outline";

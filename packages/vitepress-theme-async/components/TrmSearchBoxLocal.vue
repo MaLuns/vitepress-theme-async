@@ -3,7 +3,6 @@ import localSearchIndex from "@localSearchIndex";
 import MiniSearch, { type SearchResult } from "minisearch";
 // @ts-ignore
 import Mark from "mark.js/src/vanilla.js";
-import { AsyncThemeConfig } from "types";
 import { computedAsync, debouncedWatch, onKeyStroke } from "@vueuse/core";
 import { Ref, computed, createApp, markRaw, nextTick, ref, shallowRef } from "vue";
 import { dataSymbol, useData } from "vitepress";

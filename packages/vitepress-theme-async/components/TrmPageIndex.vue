@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import { useData } from "vitepress";
-import { AsyncThemeConfig } from "types";
 import { useAllPosts, useCategories, usePageUrl } from "../composables";
 import { useCurrentPageIndex } from "../blog";
 

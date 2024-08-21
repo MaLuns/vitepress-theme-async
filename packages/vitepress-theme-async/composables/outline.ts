@@ -1,4 +1,3 @@
-import { AsyncThemeConfig } from 'types';
 import { throttleAndDebounce } from '../utils/shared';
 import { DefaultTheme } from 'vitepress';
 import { Ref, onMounted, onUnmounted } from 'vue';

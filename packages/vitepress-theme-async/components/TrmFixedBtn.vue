@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref } from "vue";
 import { useData } from "vitepress";
-import { AsyncThemeConfig } from "types";
 import { useIsPost } from "../composables/index";
 import { getScrollTop, backTop, themeLoading, switchReadMode, switchSingleColumn, setThemeColor } from "../utils/client";
 import { throttleAndDebounce } from "../utils/shared";

@@ -24,7 +24,7 @@ function isString(value) {
 
 /**
  *
- * @param {import('vitepress').SiteConfig<import('../types').AsyncThemeConfig>} config
+ * @param {import('vitepress').SiteConfig<AsyncThemeConfig>} config
  */
 export const genFeed = async config => {
 	const { themeConfig, base, title, description } = config.site;

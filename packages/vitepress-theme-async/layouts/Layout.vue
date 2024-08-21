@@ -14,7 +14,6 @@ import TrmPageArchive from "../components/TrmPageArchive.vue";
 import TrmPageAbout from "../components/TrmPageAbout.vue";
 import TrmPageLinks from "../components/TrmPageLinks.vue";
 import { useData } from "vitepress";
-import { AsyncThemeConfig } from "types";
 
 const { frontmatter, page, theme } = useData<AsyncThemeConfig>();
 </script>

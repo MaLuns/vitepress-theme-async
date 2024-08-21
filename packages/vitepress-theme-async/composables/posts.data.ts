@@ -1,13 +1,11 @@
-import { AsyncThemeConfig } from 'types';
 import { createMarkdownRenderer } from 'vitepress';
 import type { LoaderModule, MarkdownRenderer, SiteConfig } from 'vitepress';
-import { isObject, isString } from '@vueuse/core';
 import { normalizePath } from 'vite';
 import matter from 'gray-matter';
 import path from 'node:path';
 import fs from 'node:fs';
 import { getFileBirthTime, getFileLastUpdateTime, slash } from '../utils/node';
-import { sortBy, withBase } from '../utils/shared';
+import { isObject, isString, sortBy, withBase } from '../utils/shared';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const config: SiteConfig<AsyncThemeConfig> = (globalThis as any).VITEPRESS_CONFIG;

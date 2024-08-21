@@ -1,7 +1,7 @@
 import { mergeConfig as mergeViteConfig } from 'vite';
 
 /**
- * @type {import('vitepress').UserConfig<import('../types').AsyncThemeConfig>}
+ * @type {import('vitepress').UserConfig<AsyncThemeConfig>}
  */
 export const defaultConfig = {
 	lang: 'zh-Hans',
@@ -280,7 +280,7 @@ export const defaultConfig = {
 };
 
 /**
- * @type {(config: import('vitepress').UserConfig<import('../types').AsyncThemeConfig>) => import('vitepress').UserConfig<import('../types').AsyncThemeConfig>}
+ * @type {(config: import('vitepress').UserConfig<AsyncThemeConfig>) => import('vitepress').UserConfig<AsyncThemeConfig>}
  */
 export const defineConfig = config => {
 	if (Array.isArray(config.themeConfig?.outline?.level)) {

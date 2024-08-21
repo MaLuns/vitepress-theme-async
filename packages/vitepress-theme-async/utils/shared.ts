@@ -1,5 +1,3 @@
-import { isObject } from '@vueuse/core';
-
 export const EXTERNAL_URL_RE = /^[a-z]+:/i;
 export const HASH_RE = /#.*$/;
 export const EXT_RE = /(index)?\.(md|html)$/;
@@ -243,6 +241,13 @@ export const stringFormat = (str: string, ...vals: string[]): string => {
  * @param value
  */
 export const isString = (value: unknown): value is string => Object.prototype.toString.call(value) === '[object String]';
+
+/**
+ * 是否是对象
+ * @param val
+ * @returns
+ */
+export const isObject = (val: unknown): val is object => Object.prototype.toString.call(val) === '[object Object]';
 
 /**
  * 计算时间
