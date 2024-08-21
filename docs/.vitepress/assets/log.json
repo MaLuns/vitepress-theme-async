@@ -3,6 +3,24 @@
 		"large_version": "v0.0.x",
 		"children": [
 			{
+				"version": "0.0.9",
+				"date": "2024-08-21",
+				"logs": [
+					{
+						"type": "style",
+						"text": "字体过小调整"
+					},
+					{
+						"type": "fix",
+						"text": "修复 defineConfig 类型提示不生效"
+					},
+					{
+						"type": "fix",
+						"text": "修复文章 sticky 排序失效"
+					}
+				]
+			},
+			{
 				"version": "0.0.8",
 				"date": "2024-08-21",
 				"logs": [
