@@ -104,6 +104,7 @@ export default <LoaderModule>{
 			const renderedExcerpt = excerpt ? md.render(excerpt) : void 0;
 			const data = {
 				excerpt: renderedExcerpt,
+				sticky: 0,
 				...meta,
 				url: withBase(config.site.base, url),
 				filePath: slash(path.relative(config.srcDir, file)),
