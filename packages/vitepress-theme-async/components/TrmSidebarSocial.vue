@@ -10,7 +10,7 @@ const theme = useTheme();
 		<div class="trm-social">
 			<template v-for="item in theme.sidebar.social" :key="item.url">
 				<a :href="item.url" :title="item.name" rel="nofollow" target="_blank">
-					<i class="symbol-icon" v-html="item.icon"></i>
+					<i v-html="item.icon"></i>
 				</a>
 			</template>
 		</div>

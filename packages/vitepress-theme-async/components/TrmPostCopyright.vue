@@ -12,7 +12,7 @@ const link = `<a href="${ccURL}" target="_blank" rel="noopener" title="CC ${lice
 	<ul v-if="theme.creativeCommons?.post" class="trm-post-copyright">
 		<li class="trm-post-copyright-author">
 			<strong>{{ $t("post.copyright.author") }}{{ $t("symbol.colon") }}</strong>
-			{{ frontmatter.author || theme.author }}
+			<span>{{ frontmatter.author || theme.author }}</span>
 		</li>
 		<li class="trm-post-copyright-link">
 			<strong>{{ $t("post.copyright.link") }}{{ $t("symbol.colon") }}</strong>
