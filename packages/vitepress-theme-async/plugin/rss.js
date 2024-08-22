@@ -119,6 +119,11 @@ export const genFeed = async config => {
 		const author = meta?.author || themeConfig.author || '';
 		const link = `${themeConfig.rss.baseUrl}${url}`;
 
+		let cover = meta?.cover;
+		if (cover && !/^http|^\/\//.test(cover)) {
+			cover = `${rss.baseUrl}${(config.site.base + cover).replace('//', '/')}`;
+		}
+
 		feed.addItem({
 			title: title,
 			id: link,
@@ -130,7 +135,7 @@ export const genFeed = async config => {
 					name: author,
 				},
 			],
-			image: meta?.cover,
+			image: cover,
 			date: new Date(date),
 		});
 	}

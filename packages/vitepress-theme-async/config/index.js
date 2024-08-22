@@ -339,7 +339,7 @@ export const defineConfig = config => {
 	config.vite.css.preprocessorOptions.less.globalVars.isSearch = Boolean(config.themeConfig?.search?.provider === 'local');
 	config.vite.css.preprocessorOptions.less.globalVars.isCustomMdStyle = Boolean(config.themeConfig?.customMdStyle);
 
-	if (config.themeConfig.rss) {
+	if (config.themeConfig.rss.enable) {
 		const selfBuildEnd = config.buildEnd;
 		config.buildEnd = async siteConfig => {
 			await selfBuildEnd?.(siteConfig);
