@@ -93,11 +93,9 @@ export default <LoaderModule>{
 			meta.tags = typeof meta.tags === 'string' ? [meta.tags] : meta.tags || [];
 			meta.categories = typeof meta.categories === 'string' ? [meta.categories.trim()] : meta.categories || [];
 
-			const url =
-				'/' +
-				normalizePath(path.relative(config.srcDir, file))
-					.replace(/(^|\/)index\.md$/, '$1')
-					.replace(/\.md$/, config.cleanUrls ? '' : '.html');
+			let url = normalizePath(path.relative(config.srcDir, file));
+			url = config.rewrites.map[url] ?? url;
+			url = '/' + url.replace(/(^|\/)index\.md$/, '$1').replace(/\.md$/, config.cleanUrls ? '' : '.html');
 
 			const renderedExcerpt = excerpt ? md.render(excerpt) : void 0;
 			const data = {

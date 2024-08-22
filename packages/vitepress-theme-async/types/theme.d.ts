@@ -739,6 +739,9 @@ declare interface AsyncThemeConfig {
 
 	/** 语言 | i18n */
 	languages?: Record<string, DeepPartial<AsyncTheme.Language>>;
+
+	/** 路径去除文章文件夹 eg: /posts/demo.md => demo.md => demo.html  */
+	rewritePost?: boolean;
 }
 // -----------------------------------------------------------------------
 

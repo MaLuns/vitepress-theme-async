@@ -331,6 +331,12 @@ export const defineConfig = config => {
 			},
 		]);
 	}
+	if (config.themeConfig.rewritePost) {
+		config.rewrites = {
+			...(config.rewrites ?? {}),
+			[`${config.themeConfig.postDir}/(.*)`]: '(.*)',
+		};
+	}
 
 	// 处理 less 配置
 	config.vite.css.preprocessorOptions.less.globalVars.isReadmode = Boolean(config.themeConfig?.rightside?.readmode);
