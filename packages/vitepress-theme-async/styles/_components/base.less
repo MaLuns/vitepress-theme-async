@@ -72,7 +72,11 @@ body {
 		outline: var(--body-bg-color) solid 10px;
 	}
 
-	@media (max-width: 768px) {
+	@media (max-width: 992px) {
+		background-color: var(--theme-bg2-color, #f4f5f7);
+		overflow: hidden auto;
+		padding: 0;
+
 		&::before {
 			content: unset;
 		}

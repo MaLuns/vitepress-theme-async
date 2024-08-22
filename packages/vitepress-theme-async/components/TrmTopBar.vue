@@ -34,8 +34,8 @@ const onChangState = () => {
 <style lang="less">
 .trm-top-bar {
 	position: fixed;
-	left: 0;
-	right: 0;
+	left: 10px;
+	right: 10px;
 	z-index: 9;
 	height: var(--top-bar-height);
 	border-radius: var(--card-border-radius, 10px);
@@ -138,6 +138,8 @@ const onChangState = () => {
 	@media (max-width: 992px) {
 		border-radius: 0;
 		width: 100%;
+		left: 0;
+		right: 0;
 	}
 }
 
@@ -193,10 +195,8 @@ const onChangState = () => {
 		backface-visibility: hidden;
 		transition: all 0.4s ease-in-out;
 	}
-}
 
-@media (max-width: 1200px) {
-	.trm-menu-btn {
+	@media (max-width: 1200px) {
 		display: flex;
 	}
 }
