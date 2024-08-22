@@ -3,6 +3,20 @@
 		"large_version": "v0.0.x",
 		"children": [
 			{
+				"version": "0.0.10",
+				"date": "2024-08-22",
+				"logs": [
+					{
+						"type": "style",
+						"text": "优化部分样式问题"
+					},
+					{
+						"type": "fix",
+						"text": "rss 封面图相对路径处理"
+					}
+				]
+			},
+			{
 				"version": "0.0.9",
 				"date": "2024-08-21",
 				"logs": [
