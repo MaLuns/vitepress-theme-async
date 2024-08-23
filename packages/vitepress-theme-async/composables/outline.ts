@@ -6,7 +6,7 @@ import { useHasOutline } from './index';
 const PAGE_OFFSET = 100;
 
 export function resolveTitle(theme: AsyncThemeConfig) {
-	return (typeof theme.outline === 'object' && !Array.isArray(theme.outline) && theme.outline.label) || theme.outlineTitle || 'On this page';
+	return (typeof theme.outline === 'object' && !Array.isArray(theme.outline) && theme.outline.label) || 'On this page';
 }
 
 const serializeHeader = (h: Element) => {

@@ -4,5 +4,11 @@
 		"url": "https://vitepress-theme-async.imalun.com/demosite/",
 		"avatar": "https://vitepress-theme-async.imalun.com/logo.svg",
 		"desc": "主题默认示例"
+	},
+	{
+		"name": "白云苍狗",
+		"url": "https://www.imalun.com",
+		"avatar": "https://www.imalun.com/images/avatar.jpg",
+		"desc": "醒，亦在人间；梦，亦在人间。"
 	}
 ]

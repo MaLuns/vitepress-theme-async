@@ -48,6 +48,10 @@ export default defineConfig({
 							link: '/guide/config',
 						},
 						{
+							text: '页面配置',
+							link: '/guide/page',
+						},
+						{
 							text: '更新日志',
 							link: '/guide/change-log',
 						},

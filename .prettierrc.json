@@ -6,5 +6,6 @@
 	"proseWrap": "preserve",
 	"htmlWhitespaceSensitivity": "ignore",
 	"endOfLine": "lf",
-	"arrowParens": "avoid"
+	"arrowParens": "avoid",
+	"embeddedLanguageFormatting": "off"
 }

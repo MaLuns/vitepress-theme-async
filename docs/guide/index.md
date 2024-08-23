@@ -23,29 +23,25 @@
 
 如果您的是新建博客，可以通过如下命令快速安装。根据您的包管理器，选择对应命令进行初始化
 
-#### npm
+::: code-group
 
-```bash
+```bash [npm]
 npm create async-theme@latest my-first-blog
 ```
 
-#### yarn
-
-```bash
+```bash [yarn]
 yarn create async-theme@latest my-first-blog
 ```
 
-#### pnpm
-
-```bash
+```bash [pnpm]
 pnpm create async-theme@latest my-first-blog
 ```
 
-#### bun
-
-```bash
+```bash [bun]
 bunx create-async-theme@latest my-first-blog --bun
 ```
+
+:::
 
 ### 在已有客安装
 
@@ -98,7 +94,8 @@ export default {
 如果您是将文件复制到本地，将 `.vitepress/config.ts` 改为:
 
 ```ts
-import { defineConfig } from "./theme/config";
+import { defineConfig } from "vitepress-theme-async/config";  // [!code --]
+import { defineConfig } from "./theme/config";  // [!code ++]
 
 export default defineConfig({
 	themeConfig: {

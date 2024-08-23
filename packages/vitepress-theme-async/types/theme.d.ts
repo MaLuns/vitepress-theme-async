@@ -121,6 +121,7 @@ declare namespace AsyncTheme {
 		children: NavItemWithLink[];
 	}
 
+	//#region Links
 	/** 友情链接 */
 	interface Links {
 		/**
@@ -140,6 +141,7 @@ declare namespace AsyncTheme {
 		 */
 		desc?: string;
 	}
+	//#endregion Links
 
 	/** 文章目录 */
 	interface MenuItem {
@@ -149,6 +151,7 @@ declare namespace AsyncTheme {
 		children?: MenuItem[];
 	}
 
+	//#region Language
 	/** 语言文件 */
 	interface Language {
 		site: {
@@ -241,10 +244,12 @@ declare namespace AsyncTheme {
 			colon: string;
 		};
 	}
+	//#endregion Language
 }
 
 /** 仅配置相关 */
 declare namespace AsyncTheme {
+	//#region FaviconConfig
 	/**
 	 * 网站图标配置 || Configure the icon information of the blog
 	 */
@@ -290,7 +295,9 @@ declare namespace AsyncTheme {
 		 */
 		hideText?: string;
 	}
+	//#endregion FaviconConfig
 
+	//#region UserConfig
 	/**
 	 * 用户配置 || User config
 	 */
@@ -328,12 +335,14 @@ declare namespace AsyncTheme {
 		 */
 		ruleText?: string;
 	}
+	//#endregion UserConfig
 
 	/**
 	 * 顶部导航栏 || Layout top bars
 	 */
 	type TobBarsConfig = Array<AsyncTheme.NavItemWithLink | AsyncTheme.NavItemWithChildren>;
 
+	//#region BannerConfig
 	/**
 	 * 横幅配置 || Layout banner config
 	 */
@@ -363,7 +372,9 @@ declare namespace AsyncTheme {
 		 */
 		fit?: string;
 	}
+	//#endregion BannerConfig
 
+	//#region SidebarConfig
 	/**
 	 * 侧栏配置 || Layout sidebar config
 	 */
@@ -401,7 +412,9 @@ declare namespace AsyncTheme {
 			url: string;
 		}[];
 	}
+	//#endregion SidebarConfig
 
+	//#region FooterConfig
 	/**
 	 * 页脚配置 || Layout footer config
 	 */
@@ -441,6 +454,7 @@ declare namespace AsyncTheme {
 			startTime?: string;
 		};
 	}
+	//#endregion FooterConfig
 
 	/**
 	 * 关于页 || About page config
@@ -469,6 +483,7 @@ declare namespace AsyncTheme {
 	 */
 	type LinksConfig = Links[];
 
+	//#region ConverConfig
 	/**
 	 * 文章封面图 || Post cover image
 	 */
@@ -476,6 +491,7 @@ declare namespace AsyncTheme {
 		default?: string;
 		type?: 'img' | 'date' | 'random';
 	}
+	//#endregion ConverConfig
 
 	/**
 	 * 页面分页配置 || [index | archives | categorys | tags] page sort paging config
@@ -495,6 +511,7 @@ declare namespace AsyncTheme {
 		dateFmt?: string;
 	}
 
+	//#region BuiltPageConfig
 	/**
 	 * 内置页面跳转地址 || built in page path config
 	 */
@@ -512,7 +529,9 @@ declare namespace AsyncTheme {
 		 */
 		tags?: string;
 	}
+	//#endregion BuiltPageConfig
 
+	//#region FixedBtnConfig
 	/**
 	 * 固定按钮显示配置 || Fixed button config on the right
 	 */
@@ -526,7 +545,9 @@ declare namespace AsyncTheme {
 		 */
 		aside?: boolean;
 	}
+	//#endregion FixedBtnConfig
 
+	//#region PostPaginationConfig
 	/**
 	 * 文章上下页 || the upper and lower pages of the article
 	 */
@@ -540,7 +561,9 @@ declare namespace AsyncTheme {
 		 */
 		type?: 'large' | 'small';
 	}
+	//#endregion PostPaginationConfig
 
+	//#region RewardConfig
 	/**
 	 * 打赏配置 || Reward config
 	 */
@@ -575,7 +598,9 @@ declare namespace AsyncTheme {
 			link?: string;
 		}[];
 	}
+	//#endregion RewardConfig
 
+	//#region CreativeCommonsConfig
 	/**
 	 * 文章版权信息 || Creative commons config
 	 */
@@ -597,7 +622,9 @@ declare namespace AsyncTheme {
 		 */
 		clipboard?: boolean;
 	}
+	//#endregion CreativeCommonsConfig
 
+	//#region NoticeOutdateConfig
 	/**
 	 * 过期提取 || notice outdate
 	 */
@@ -619,6 +646,7 @@ declare namespace AsyncTheme {
 		 */
 		position?: 'top' | 'bottom';
 	}
+	//#endregion NoticeOutdateConfig
 
 	/**
 	 * RSS 生成
@@ -764,7 +792,6 @@ declare interface AsyncThemeConfig {
 
 	/** 目录 | outline */
 	outline?: import('vitepress').DefaultTheme.Outline;
-	outlineTitle?: string;
 
 	/** 过期提示 | notice outdate */
 	noticeOutdate?: AsyncTheme.NoticeOutdateConfig;
