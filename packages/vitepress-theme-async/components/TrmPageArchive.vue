@@ -80,7 +80,7 @@ onMounted(() => {
 			<TrmDividerTitle :title="filter || 'All'" index="01" />
 		</div>
 		<div class="col-lg-12">
-			<TrmTimeline :list="pageList" />
+			<TrmTimeline :list="pageList" :excerpt="theme.archiveGenerator?.style !== 'less'" />
 		</div>
 	</div>
 	<TrmPagination :total="filterList.length" :size="pageSize" />

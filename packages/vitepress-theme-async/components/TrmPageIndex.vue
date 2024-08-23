@@ -51,7 +51,7 @@ const categorieList = computed(() => {
 			<TrmDividerTitle :title="$t('title.newPublish')" index="01" />
 		</div>
 		<div class="col-lg-6" v-for="item in pageList" :key="item.url">
-			<TrmCardPost :post="item" :category-url="pageUrl.categorys" :sticky="page.frontmatter.index && item.sticky && item.sticky > 0" />
+			<TrmCardPost :post="item" :category-url="pageUrl.categorys" :sticky="Boolean(page.frontmatter.index && item.sticky && item.sticky > 0)" />
 		</div>
 	</div>
 	<TrmPagination :total="allPosts.length" :size="pageSize" />

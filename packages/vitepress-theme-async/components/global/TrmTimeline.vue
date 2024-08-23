@@ -8,7 +8,9 @@ type DataItem = {
 	excerpt?: string;
 };
 
-defineProps<{ list: DataItem[] }>();
+withDefaults(defineProps<{ list: DataItem[]; excerpt?: boolean }>(), {
+	excerpt: false,
+});
 </script>
 <template>
 	<div class="trm-timeline">
@@ -35,7 +37,7 @@ defineProps<{ list: DataItem[] }>();
 						</div>
 					</div>
 				</div>
-				<div v-if="item.excerpt" class="trm-publication trm-mt-15" v-html="item.excerpt"></div>
+				<div v-if="excerpt && item.excerpt" class="trm-publication trm-mt-15" v-html="item.excerpt"></div>
 			</div>
 		</div>
 	</div>

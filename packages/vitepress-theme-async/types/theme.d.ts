@@ -650,7 +650,7 @@ declare namespace AsyncTheme {
 	/**
 	 * 首页中显示的分类卡片
 	 */
-	interface CategorieCard {
+	interface CategorieCardConfig {
 		/**
 		 * 是否启用
 		 */
@@ -663,6 +663,23 @@ declare namespace AsyncTheme {
 		 * 固定显示分类
 		 */
 		list?: string[];
+	}
+
+	/**
+	 * 搜索配置
+	 */
+	interface SearchConfig {
+		provider: 'local';
+		options?: import('vitepress').DefaultTheme.LocalSearchOptions;
+	}
+
+	/**
+	 * 归档页生成和配置
+	 */
+	interface ArchiveGeneratorConfig extends AsyncTheme.PaginationConfig {
+		/**
+		 * 归档页时间轴卡片样式 */
+		style?: 'less' | 'more';
 	}
 }
 
@@ -684,7 +701,7 @@ declare interface AsyncThemeConfig {
 	author?: string;
 
 	/** 搜索 | search */
-	search?: { provider: 'local'; options?: import('vitepress').DefaultTheme.LocalSearchOptions };
+	search?: AsyncTheme.SearchConfig;
 
 	/** 时区 | timeZone*/
 	timeZone?: number;
@@ -695,11 +712,11 @@ declare interface AsyncThemeConfig {
 	/** 内置页地址配置 | built in page path config */
 	page?: AsyncTheme.BuiltPageConfig;
 
-	/** 首页生成配置 | Index page generator */
+	/** 首页生成 | Index page generator */
 	indexGenerator?: Omit<AsyncTheme.PaginationConfig, 'date_fmt'>;
 
-	/** 归档页生成配置 | Archive generator */
-	archiveGenerator?: AsyncTheme.PaginationConfig;
+	/** 归档页生成 | Archive generator */
+	archiveGenerator?: AsyncTheme.ArchiveGeneratorConfig;
 
 	/** 上下页 | Post pagination */
 	postPagination?: AsyncTheme.PostPaginationConfig;
@@ -761,8 +778,8 @@ declare interface AsyncThemeConfig {
 	/** 路径去除文章文件夹 eg: /posts/demo.md => demo.md => demo.html  */
 	rewritePost?: boolean;
 
-	/** 分类卡片 | categorie card */
-	categorieCard?: AsyncTheme.CategorieCard;
+	/** 首页分类卡片 | categorie card */
+	categorieCard?: AsyncTheme.CategorieCardConfig;
 }
 // -----------------------------------------------------------------------
 
