@@ -15,24 +15,39 @@ const currentPageIndex = useCurrentPageIndex();
 const allPosts = useAllPosts();
 const pageSize = theme.value.indexGenerator?.perPage || 10;
 
-const categories = useCategories()
-	.sort((a, b) => b[1] - a[1])
-	.slice(0, 2);
+const allCategories = useCategories();
+const categories = allCategories.sort((a, b) => b[1] - a[1]).slice(0, theme.value.categorieCard?.len || 2);
 
 const pageList = computed(() => {
 	const startIdx = (currentPageIndex.value - 1) * pageSize;
 	const endIdx = startIdx + pageSize;
 	return allPosts.slice(startIdx, endIdx);
 });
+
+const hasCategorieCard = computed(() => {
+	const cc = theme.value.categorieCard;
+	return cc?.enable && (categories.length > 0 || (Array.isArray(cc.list) && cc.list.length > 0));
+});
+
+const categorieList = computed(() => {
+	if (!hasCategorieCard.value) {
+		return [];
+	}
+	const cc = theme.value.categorieCard;
+	if (Array.isArray(cc?.list) && cc.list.length > 0) {
+		return allCategories.filter(item => cc.list!.includes(item[0]));
+	}
+	return categories;
+});
 </script>
 <template>
-	<div v-if="categories.length > 0" class="row hidden-sm">
-		<div v-for="(item, index) in categories" class="col-lg-6" :key="index">
+	<div v-if="hasCategorieCard" class="row hidden-sm">
+		<div v-for="(item, index) in categorieList" class="col-lg-6" :key="index">
 			<TrmCardCategorie :name="item[0]" :length="item[1]" :category-url="pageUrl.categorys + '?q=' + item[0]" />
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-lg-12" v-if="categories.length > 0">
+		<div class="col-lg-12" v-if="hasCategorieCard">
 			<TrmDividerTitle :title="$t('title.newPublish')" index="01" />
 		</div>
 		<div class="col-lg-6" v-for="item in pageList" :key="item.url">

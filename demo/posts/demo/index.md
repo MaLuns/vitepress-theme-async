@@ -2,8 +2,7 @@
 title: Hello Theme Async
 date: 2022-09-21 15:08:29
 cover: [https://vitepress-theme-async.imalun.com/imgs/demo.png]
-sticky: 1
-categories: 分类二
+categories: 分类一
 ---
 
 ![1663833969157.png](https://vitepress-theme-async.imalun.com/imgs/demo.png)_示例图_

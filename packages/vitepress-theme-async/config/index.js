@@ -1,7 +1,12 @@
 import { mergeConfig as mergeViteConfig } from 'vite';
 
 /**
- * @type {import('vitepress').UserConfig<AsyncThemeConfig>}
+ * @type {import('../types/theme')}
+ * @typedef {import('vitepress').UserConfig<AsyncThemeConfig>} Config
+ */
+
+/**
+ * @type {Config}
  */
 export const defaultConfig = {
 	lang: 'zh-Hans',
@@ -117,6 +122,10 @@ export const defaultConfig = {
 		rss: {
 			enable: false,
 			limit: 20,
+		},
+		categorieCard: {
+			enable: true,
+			len: 2,
 		},
 		languages: {
 			'zh-Hans': {
@@ -280,7 +289,8 @@ export const defaultConfig = {
 };
 
 /**
- * @type {(config: import('vitepress').UserConfig<AsyncThemeConfig>) => import('vitepress').UserConfig<AsyncThemeConfig>}
+ * @param {Config} config
+ * @returns {Config}
  */
 export const defineConfig = config => {
 	if (Array.isArray(config.themeConfig?.outline?.level)) {

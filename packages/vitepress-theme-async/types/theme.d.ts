@@ -646,6 +646,24 @@ declare namespace AsyncTheme {
 		 */
 		feedOptions?: import('feed').FeedOptions;
 	}
+
+	/**
+	 * 首页中显示的分类卡片
+	 */
+	interface CategorieCard {
+		/**
+		 * 是否启用
+		 */
+		enable?: boolean;
+		/**
+		 * 需要显示分类数量，默认为 2 个
+		 */
+		len?: number;
+		/**
+		 * 固定显示分类
+		 */
+		list?: string[];
+	}
 }
 
 // async-theme-config -----------------------------------------------------------------------
@@ -677,10 +695,10 @@ declare interface AsyncThemeConfig {
 	/** 内置页地址配置 | built in page path config */
 	page?: AsyncTheme.BuiltPageConfig;
 
-	/** 首页分页 | Index page generator */
+	/** 首页生成配置 | Index page generator */
 	indexGenerator?: Omit<AsyncTheme.PaginationConfig, 'date_fmt'>;
 
-	/** 归档页 | Archive generator */
+	/** 归档页生成配置 | Archive generator */
 	archiveGenerator?: AsyncTheme.PaginationConfig;
 
 	/** 上下页 | Post pagination */
@@ -742,6 +760,9 @@ declare interface AsyncThemeConfig {
 
 	/** 路径去除文章文件夹 eg: /posts/demo.md => demo.md => demo.html  */
 	rewritePost?: boolean;
+
+	/** 分类卡片 | categorie card */
+	categorieCard?: AsyncTheme.CategorieCard;
 }
 // -----------------------------------------------------------------------
 
