@@ -37,11 +37,12 @@ export default <LoaderModule>{
 			}
 
 			const fileContent = fs.readFileSync(file, 'utf-8');
-			const { data: meta, excerpt } = matter(fileContent, {
-				excerpt: text => {
+			let excerpt = '';
+			const { data: meta } = matter<string, any>(fileContent, {
+				excerpt: ({ content }: matter.GrayMatterFile<string>) => {
 					const reg = /<!--\s*more\s*-->/gs;
-					const rpt = reg.exec(text);
-					return rpt ? text.substring(0, rpt.index) : '';
+					const rpt = reg.exec(content);
+					excerpt = rpt ? content.substring(0, rpt.index) : '';
 				},
 			});
 

@@ -40,11 +40,12 @@ export const genFeed = async config => {
 	for (const file of files) {
 		const filePath = config.root + '/' + file;
 		const fileContent = fs.readFileSync(filePath, 'utf-8');
-		const { data: meta, excerpt } = matter(fileContent, {
-			excerpt: text => {
+		let excerpt = '';
+		const { data: meta } = matter(fileContent, {
+			excerpt: ({ content }) => {
 				const reg = /<!--\s*more\s*-->/gs;
-				const rpt = reg.exec(text);
-				return rpt ? text.substring(0, rpt.index) : '';
+				const rpt = reg.exec(content);
+				excerpt = rpt ? content.substring(0, rpt.index) : '';
 			},
 		});
 
@@ -142,8 +143,9 @@ export const genFeed = async config => {
 
 	const RSSFilename = rss.fileName || 'feed.rss';
 	const RSSFilepath = path.join(config.outDir, RSSFilename);
-	fs.writeFileSync(RSSFilepath, feed.rss2());
+	fs.writeFileSync(RSSFilepath, /\.rss$/.test(RSSFilename) ? feed.rss2() : /\.xml$/.test(RSSFilename) ? feed.atom1() : /\.json$/.test(RSSFilename) ? feed.json1() : feed.rss2());
 
+	console.log();
 	console.log('🎉 RSS generated', RSSFilename);
 	console.log('✅ rss filepath:', RSSFilepath);
 	console.log('✅ rss url:', `${rss.baseUrl}${config.site.base + RSSFilename}`);
