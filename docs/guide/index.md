@@ -67,9 +67,11 @@ npm i vitepress-theme-async@latest
 
 - 使用 Npm 安装方式
 
-在 `.vitepress/config.ts` 增加如下代码
+在如下文件下添加对应代码
 
-```ts
+::: code-group
+
+```ts [.vitepress/config.ts]
 import { defineConfig } from "vitepress-theme-async/config";
 
 export default defineConfig({
@@ -79,21 +81,21 @@ export default defineConfig({
 });
 ```
 
-然后再 `.vitepress/theme/index.ts` 添加如下代码
-
-```ts
+```ts [.vitepress/theme/index.ts]
 import ThemeAsync from "vitepress-theme-async";
 
-export default {
-	...ThemeAsync,
-};
+export default ThemeAsync;
 ```
+
+:::
 
 - 复制到本地方式
 
-如果您是将文件复制到本地，将 `.vitepress/config.ts` 改为:
+如果您是将文件复制到本地，修改如下:
 
-```ts
+::: code-group
+
+```ts [.vitepress/config.ts]
 import { defineConfig } from "vitepress-theme-async/config";  // [!code --]
 import { defineConfig } from "./theme/config";  // [!code ++]
 
@@ -103,6 +105,15 @@ export default defineConfig({
 	},
 });
 ```
+
+```ts [.vitepress/theme/index.ts]
+import ThemeAsync from "vitepress-theme-async"; // [!code --]
+import ThemeAsync from "./main";  // [!code ++]
+
+export default ThemeAsync;
+```
+
+:::
 
 ## 配置主题 Config
 

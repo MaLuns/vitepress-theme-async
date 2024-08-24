@@ -3,6 +3,46 @@
 		"large_version": "v0.0.x",
 		"children": [
 			{
+				"version": "0.0.12",
+				"date": "2024-08-24",
+				"logs": [
+					{
+						"type": "feat",
+						"text": "数据加载自动获取 srcDir 目录"
+					},
+					{
+						"type": "feat",
+						"text": "404 自定义文案"
+					},
+					{
+						"type": "docs",
+						"text": "文档完善"
+					}
+				]
+			},
+			{
+				"version": "0.0.11",
+				"date": "2024-08-24",
+				"logs": [
+					{
+						"type": "feat",
+						"text": "支持时间轴样式配置"
+					},
+					{
+						"type": "feat",
+						"text": "首页分类卡片配置"
+					},
+					{
+						"type": "fix",
+						"text": "文章路径兼容 rewrites 设置"
+					},
+					{
+						"type": "fix",
+						"text": "gray-matter 类型错误导致 excerpt 截取失效"
+					}
+				]
+			},
+			{
 				"version": "0.0.10",
 				"date": "2024-08-22",
 				"logs": [

@@ -14,7 +14,7 @@ export default defineConfig({
 
 ::: warning 注意
 
-vitepress 中存在根目录和源目录，默认情况下两者是相等的，如果您对 `srcDir` 进行了修改，则也同时需要对 `postDir` 进行修改。
+~~vitepress 中存在根目录和源目录，默认情况下两者是相等的，如果您对 `srcDir` 进行了修改，则也同时需要对 `postDir` 进行修改。~~ v0.0.12 后版本数据加载自动获取 srcDir 目录进行同步
 
 了解根目录和源目录的区别 [请看这里](https://vitepress.dev/guide/routing#root-and-source-directory)
 
@@ -48,6 +48,12 @@ posts/demo.md  -->  /posts/demo.html  -->  https://xxx.xx/posts/demo.html
 export default defineConfig({
 	themeConfig: {
 		rewritePost: true // [!code ++]
+	},
+});
+//等效于
+export default defineConfig({
+	rewrites: {
+		'posts/(.*)': '(.*)' // [!code ++]
 	},
 });
 ```
@@ -546,9 +552,11 @@ globalComponents?: boolean | Array<string>;
 
 主题内置 css 变量参考 `vitepress-theme-async/styles/_variables/index.less` 文件
 
-::: details vitepress-theme-async/styles/\_variables/index.less
-<<< @/../packages/vitepress-theme-async/styles/\_variables/index.less#NoticeOutdateConfig
+<!--  prettier-ignore-start -->
+::: details vitepress-theme-async/styles/_variables/index.less
+<<< @/../packages/vitepress-theme-async/styles/_variables/index.less
 :::
+<!--  prettier-ignore-end  -->
 
 ## 自定义组件
 

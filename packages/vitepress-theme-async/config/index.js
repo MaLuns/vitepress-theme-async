@@ -371,13 +371,16 @@ export const defineConfig = config => {
 	config.vite.css.preprocessorOptions.less.globalVars.isSearch = Boolean(config.themeConfig?.search?.provider === 'local');
 	config.vite.css.preprocessorOptions.less.globalVars.isCustomMdStyle = Boolean(config.themeConfig?.customMdStyle);
 
-	if (config.themeConfig.rss.enable) {
-		const selfBuildEnd = config.buildEnd;
-		config.buildEnd = async siteConfig => {
+	const selfBuildEnd = config.buildEnd;
+	config.buildEnd = async siteConfig => {
+		console.log();
+		console.log(`💖 Vitepress-Theme-Async. Guide: https://vitepress-theme-async.imalun.com`);
+		console.log();
+		if (config.themeConfig.rss.enable) {
 			await selfBuildEnd?.(siteConfig);
 			(await import('../plugin/rss.js'))?.genFeed(siteConfig);
-		};
-	}
+		}
+	};
 
 	return config;
 };

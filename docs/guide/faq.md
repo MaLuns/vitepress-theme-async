@@ -22,11 +22,11 @@
 
 检查安装主题版本，然后查看更新日志里是否发生变更，参考文档配置说明，确保配置正确。
 
-## 目录结构如何选择？
+## 目录结构是怎么的？
 
 ### 单仓库
 
-如果仅仅是单个博客站点，可以将 `srcDir` 设置为根目录
+如果仅仅是单个博客站点，目录结构应该是下面样子的
 
 ::: code-group
 
@@ -62,21 +62,21 @@ npm create async-theme@latest my-first-blog
 
 ### 多仓库
 
-当然你也可以选择多个包的 monorepo 结构
+如果是 monorepo 结构，目录结构应该是下面样子的
 
 ::: code-group
 
 ```[目录结构]
 .
-├─ .vitepress
 ├─ blog
-│		├─ posts
-│		│  ├─ test.md
-│		│  ├─ demo.md
-│		│  └─ ...
-│		├─ about.md
-│		├─ index.md
-│		├─ ...
+│	├─ .vitepress
+│	├─ posts
+│	│  ├─ test.md
+│	│  ├─ demo.md
+│	│  └─ ...
+│	├─ about.md
+│	├─ index.md
+│	├─ ...
 ├─ other
 │		├─ ...
 ```
@@ -92,3 +92,86 @@ npm create async-theme@latest my-first-blog
 ```
 
 :::
+
+## hexo-theme-async 如何迁移？
+
+### 文件和配置迁移
+
+- 首先可以修改配置 `postDir` 改为 `_posts`
+
+```ts
+export default defineConfig({
+	themeConfig: {
+		postDir: '_posts', //[!code ++]
+	},
+});
+```
+
+- 然后将 hexo 里 `source` 里文件都复制到你的 vitpress 目录下
+
+```
+.
+├─ .vitepress
+├─ _posts
+│  ├─ test.md
+│  ├─ demo.md
+│  └─ ...
+├─ about
+│  ├─ index.md
+├─ img
+│  ├─ xxx.png
+├─ ...
+```
+
+- 去除 \_data、\_drafts 等文件夹
+
+- 在源目录下新建 public 文件，将静态文件如 图片、脚本、字体文件等等放到里面
+
+```
+.
+├─ .vitepress
+├─ _posts
+│  ├─ test.md
+│  ├─ demo.md
+│  └─ ...
+├─ about
+│  ├─ index.md
+├─ img // [!code --]
+│  ├─ xxx.png  // [!code --]
+├─ public // [!code ++]
+│  ├─ img // [!code ++]
+│  	 ├─ xxx.png  // [!code ++]
+├─ ...
+```
+
+- 找到配置文件 \_config.async.yaml 然后转成 json 格式后，将其放置 themeConfig 里
+
+将所有的 key 格式从 xxx_xx 改为 xxxXx 格式后，就可以根据 ts 错误提示对字段进行修改
+
+如果是没有字段进行补充，如果是提示多余字段，可以在文档搜索下确认没有情况下删除
+
+```ts
+export default defineConfig({
+  themeConfig: {
+    postDir: '_posts',
+    user: { // [!code ++]
+      name: "ThemeAsync", // [!code ++]
+      first_name: "Theme", // [!code ++]
+      last_name: "Async", // [!code ++]
+      email: null, // [!code ++]
+      domain: "站点域名", // [!code ++]
+      avatar: "/img/avatar.jpg", // [!code ++]
+      describe: "网站简介。", // [!code ++]
+      rule_text: null // [!code ++]
+    } // [!code ++]
+    ... // 更多配置 // [!code ++]
+  },
+});
+```
+
+### 文件内容
+
+- 如果原来文章里使用了 hexo tag，需要对其进行修改
+
+- 文章里使用了 script、style 等语句块的需要对其 vitepress 里 [\<script> 和 \<style>](https://vitepress.dev/zh/guide/using-vue#script-and-style)
+  规则进行调整
