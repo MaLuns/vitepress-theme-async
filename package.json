@@ -8,6 +8,7 @@
 	"private": true,
 	"type": "module",
 	"scripts": {
+		"build": "npm run docs:build && npm run demo:build",
 		"docs:dev": "vitepress dev docs",
 		"docs:build": "vitepress build docs",
 		"docs:preview": "vitepress preview docs",
