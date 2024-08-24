@@ -2,7 +2,7 @@
 title: Markdown Extensions
 date: 2023-09-21 15:25:29
 categories: 测试分类
-single_column: true
+singleColumn: true
 ---
 
 ## Using custom anchors {#my-anchor}

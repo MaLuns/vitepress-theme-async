@@ -509,11 +509,11 @@ declare namespace AsyncTheme {
 	}
 	//#endregion ConverConfig
 
-	//#region PaginationConfig
+	//#region IndexGeneratorConfig
 	/**
 	 * 页面分页配置 || [index | archives | categorys | tags] page sort paging config
 	 */
-	interface PaginationConfig {
+	interface IndexGeneratorConfig {
 		/**
 		 * 分页大小
 		 */
@@ -522,12 +522,8 @@ declare namespace AsyncTheme {
 		 * 排序方式
 		 */
 		orderBy?: string;
-		/**
-		 * 归档时日期格式
-		 */
-		dateFmt?: string;
 	}
-	//#endregion PaginationConfig
+	//#endregion IndexGeneratorConfig
 
 	//#region BuiltPageConfig
 	/**
@@ -660,7 +656,7 @@ declare namespace AsyncTheme {
 		 */
 		limitDay?: number;
 		/**
-		 * 现实在文章中位置
+		 * 显示在文章中位置
 		 */
 		position?: 'top' | 'bottom';
 	}
@@ -715,6 +711,7 @@ declare namespace AsyncTheme {
 	}
 	//#endregion CategorieCardConfig
 
+	//#region SearchConfig
 	/**
 	 * 搜索配置
 	 */
@@ -722,15 +719,20 @@ declare namespace AsyncTheme {
 		provider: 'local';
 		options?: import('vitepress').DefaultTheme.LocalSearchOptions;
 	}
+	//#endregion SearchConfig
 
 	//#region ArchiveGeneratorConfig
 	/**
 	 * 归档页生成和配置
 	 */
-	interface ArchiveGeneratorConfig extends AsyncTheme.PaginationConfig {
+	interface ArchiveGeneratorConfig extends AsyncTheme.IndexGeneratorConfig {
 		/**
 		 * 归档页时间轴卡片样式 */
 		style?: 'less' | 'more';
+		/**
+		 * 归档时日期格式
+		 */
+		dateFmt?: string;
 	}
 	//#endregion ArchiveGeneratorConfig
 
@@ -789,7 +791,7 @@ declare interface AsyncThemeConfig {
 	page?: AsyncTheme.BuiltPageConfig;
 
 	/** 首页生成 | Index page generator */
-	indexGenerator?: Omit<AsyncTheme.PaginationConfig, 'date_fmt'>;
+	indexGenerator?: AsyncTheme.IndexGeneratorConfig;
 
 	/** 归档页生成 | Archive generator */
 	archiveGenerator?: AsyncTheme.ArchiveGeneratorConfig;
