@@ -19,7 +19,7 @@ const cache = /* @__PURE__ */ new Map();
 export { data };
 
 export default <LoaderModule>{
-	watch: [`${theme.postDir ?? 'posts'}/**/*.md`].map(p => normalizePath(path.join(config.root, p))),
+	watch: [`${config.srcDir.replace(config.root, '')}/${theme.postDir ?? 'posts'}/**/*.md`].map(p => normalizePath(path.join(config.root, p))),
 	async load(files) {
 		md = md || (await createMarkdownRenderer(config.srcDir, config.markdown, config.site.base, config.logger));
 		const raw = [];
