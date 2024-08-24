@@ -1,3 +1,8 @@
+<script setup lang="ts">
+import { useData, withBase } from 'vitepress';
+
+const { theme } = useData<AsyncThemeConfig>()
+</script>
 <template>
 	<div class="trm-content-start" style="top: 50vh; position: absolute; transform: translateY(-50%); margin: auto; left: 0; right: 0">
 		<div class="container">
@@ -257,9 +262,12 @@
 					</svg>
 				</div>
 				<div class="col-md-6 align-self-center">
-					<h1>404</h1>
-					<p class="trm-mt-20 trm-mb-20">您正在查找的页面不存在。您是怎么到这里来的是个谜,但是您可以点击下面的按钮返回主页。</p>
-					<a class="trm-btn" href="/">HOME</a>
+					<h1>{{ $t(<'none'>theme.notFound?.title ?? '') }}</h1>
+					<p class="trm-mt-20 trm-mb-20">{{ $t(<'none'>theme.notFound?.text ?? '') }}</p>
+					<a class="trm-btn" :href="withBase(theme.notFound?.path || '/')">
+						{{ $t(<'none'>theme.notFound?.name ?? '')
+						}}
+					</a>
 				</div>
 			</div>
 		</div>

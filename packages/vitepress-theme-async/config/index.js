@@ -127,6 +127,12 @@ export const defaultConfig = {
 			enable: true,
 			len: 2,
 		},
+		notFound: {
+			title: 'notFound.title',
+			text: 'notFound.text',
+			path: '/',
+			name: 'notFound.name',
+		},
 		languages: {
 			'zh-Hans': {
 				site: {
@@ -205,6 +211,11 @@ export const defaultConfig = {
 					period: '。',
 					colon: '：',
 				},
+				notFound: {
+					title: '404 未找到页面',
+					text: '您正在查找的页面不存在。您是怎么到这里来的是个谜,但是您可以点击下面的按钮返回主页。',
+					name: '首页',
+				},
 			},
 			en: {
 				site: {
@@ -282,6 +293,11 @@ export const defaultConfig = {
 					comma: ', ',
 					period: '. ',
 					colon: ': ',
+				},
+				notFound: {
+					title: '404 Not Found',
+					text: 'The requested page does not exist. The method of arrival is unknown, but you can click the button below to navigate back to the homepage.',
+					name: 'Home',
 				},
 			},
 		},

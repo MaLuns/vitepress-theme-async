@@ -62,6 +62,7 @@ declare namespace AsyncTheme {
 		};
 	}
 
+	//#region NavItemWithLink
 	/** 导航栏链接 */
 	interface NavItemWithLink {
 		/**
@@ -120,6 +121,7 @@ declare namespace AsyncTheme {
 		 */
 		children: NavItemWithLink[];
 	}
+	//#endregion NavItemWithLink
 
 	//#region Links
 	/** 友情链接 */
@@ -189,6 +191,7 @@ declare namespace AsyncTheme {
 			about: string;
 		};
 
+		// 标题栏
 		favicon: {
 			showText: string;
 			hideText: string;
@@ -242,6 +245,13 @@ declare namespace AsyncTheme {
 			comma: string;
 			period: string;
 			colon: string;
+		};
+
+		// 404
+		notFound: {
+			title: string;
+			text: string;
+			name: string;
 		};
 	}
 	//#endregion Language
@@ -306,9 +316,13 @@ declare namespace AsyncTheme {
 		 * 站点昵称
 		 */
 		name?: string;
-		/** 名 */
+		/**
+		 * 名 - 用于顶部左侧 logo 边文字组成
+		 */
 		firstName?: string;
-		/** 姓 */
+		/**
+		 * 姓  - 用于顶部左侧 logo 边文字组成
+		 */
 		lastName?: string;
 		/**
 		 * 邮箱
@@ -456,6 +470,7 @@ declare namespace AsyncTheme {
 	}
 	//#endregion FooterConfig
 
+	//#region AboutPageConfig
 	/**
 	 * 关于页 || About page config
 	 */
@@ -477,6 +492,7 @@ declare namespace AsyncTheme {
 		 */
 		privacy?: string;
 	}
+	//#endregion AboutPageConfig
 
 	/**
 	 * 友情链接列表 || Links config
@@ -493,6 +509,7 @@ declare namespace AsyncTheme {
 	}
 	//#endregion ConverConfig
 
+	//#region PaginationConfig
 	/**
 	 * 页面分页配置 || [index | archives | categorys | tags] page sort paging config
 	 */
@@ -510,6 +527,7 @@ declare namespace AsyncTheme {
 		 */
 		dateFmt?: string;
 	}
+	//#endregion PaginationConfig
 
 	//#region BuiltPageConfig
 	/**
@@ -648,6 +666,7 @@ declare namespace AsyncTheme {
 	}
 	//#endregion NoticeOutdateConfig
 
+	//#region RSSConfig
 	/**
 	 * RSS 生成
 	 */
@@ -674,7 +693,9 @@ declare namespace AsyncTheme {
 		 */
 		feedOptions?: import('feed').FeedOptions;
 	}
+	//#endregion RSSConfig
 
+	//#region CategorieCardConfig
 	/**
 	 * 首页中显示的分类卡片
 	 */
@@ -692,6 +713,7 @@ declare namespace AsyncTheme {
 		 */
 		list?: string[];
 	}
+	//#endregion CategorieCardConfig
 
 	/**
 	 * 搜索配置
@@ -701,6 +723,7 @@ declare namespace AsyncTheme {
 		options?: import('vitepress').DefaultTheme.LocalSearchOptions;
 	}
 
+	//#region ArchiveGeneratorConfig
 	/**
 	 * 归档页生成和配置
 	 */
@@ -709,6 +732,31 @@ declare namespace AsyncTheme {
 		 * 归档页时间轴卡片样式 */
 		style?: 'less' | 'more';
 	}
+	//#endregion ArchiveGeneratorConfig
+
+	//#region NotFoundConfig
+	/**
+	 * 404 文案配置
+	 */
+	interface NotFoundConfig {
+		/**
+		 * 标题文案
+		 */
+		title?: string;
+		/**
+		 * 提示文案
+		 */
+		text?: string;
+		/**
+		 * 点击按钮跳转地址
+		 */
+		path?: string;
+		/**
+		 * 按钮显示文案
+		 */
+		name?: string;
+	}
+	//#endregion NotFoundConfig
 }
 
 // async-theme-config -----------------------------------------------------------------------
@@ -807,6 +855,9 @@ declare interface AsyncThemeConfig {
 
 	/** 首页分类卡片 | categorie card */
 	categorieCard?: AsyncTheme.CategorieCardConfig;
+
+	/** 404 | Not Found */
+	notFound?: AsyncTheme.NotFoundConfig;
 }
 // -----------------------------------------------------------------------
 
