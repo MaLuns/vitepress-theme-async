@@ -18,7 +18,7 @@ export const useTheme = () => {
 // 获取页面配置是否位单栏
 export const useSingleColumn = () => {
 	const { frontmatter } = useData<AsyncThemeConfig>();
-	return computed(() => Boolean(frontmatter.value.single_column));
+	return computed(() => Boolean(frontmatter.value.single_column || frontmatter.value.singleColumn));
 };
 
 // 获取页面 banner 配置

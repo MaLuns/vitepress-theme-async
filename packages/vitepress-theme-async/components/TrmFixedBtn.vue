@@ -65,7 +65,12 @@ const onSwitchThemeMode = () => {
 		<div v-if="isPost && theme.rightside?.readmode" class="trm-fixed-btn" :data-title="$t(isDark ? 'rightside.theme.light' : 'rightside.readMode.open')" @click="onSwitchReadMode()">
 			<TrmIconRead />
 		</div>
-		<div v-if="theme.rightside?.aside && !frontmatter.single_column" class="trm-fixed-btn hidden-md" :data-title="$t('rightside.aside.open')" @click="switchSingleColumn()">
+		<div
+			v-if="theme.rightside?.aside && !(frontmatter.single_column || frontmatter.singleColumn)"
+			class="trm-fixed-btn hidden-md"
+			:data-title="$t('rightside.aside.open')"
+			@click="switchSingleColumn()"
+		>
 			<TrmIconArrows />
 		</div>
 		<slot name="fixed-btn-after" />
