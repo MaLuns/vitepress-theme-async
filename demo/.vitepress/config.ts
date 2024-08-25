@@ -42,6 +42,7 @@ export default defineConfig({
 			},
 			{ title: 'Links', url: '/links' },
 			{ title: 'About', url: '/about' },
+			{ title: 'Gallery', url: '/gallery/' },
 		],
 		sidebar: {
 			typedText: ['Web Developer', 'UI Designer'],

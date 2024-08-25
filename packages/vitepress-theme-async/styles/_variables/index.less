@@ -264,3 +264,14 @@
 html:not(.dark) .vp-code-dark {
 	display: none;
 }
+
+.shadow {
+	transition:
+		all 0.4s ease-in-out,
+		box-shadow 0.3s ease;
+	box-shadow: var(--box-shadow);
+
+	&:hover {
+		box-shadow: var(--box-shadow-hover);
+	}
+}

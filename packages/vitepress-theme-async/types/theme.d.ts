@@ -7,6 +7,7 @@ declare type AnyObject = Record<string, any>;
 declare namespace AsyncTheme {
 	type OrderByArg = string | Record<string | number, 1 | -1>;
 
+	//#region PostData
 	/** 文章基础信息 */
 	interface PostData {
 		/**
@@ -61,6 +62,7 @@ declare namespace AsyncTheme {
 			type: 'img' | 'date' | 'random';
 		};
 	}
+	//#endregion PostData
 
 	//#region NavItemWithLink
 	/** 导航栏链接 */
@@ -145,6 +147,7 @@ declare namespace AsyncTheme {
 	}
 	//#endregion Links
 
+	//#region MenuItem
 	/** 文章目录 */
 	interface MenuItem {
 		title: string;
@@ -152,6 +155,7 @@ declare namespace AsyncTheme {
 		level: number;
 		children?: MenuItem[];
 	}
+	//#endregion MenuItem
 
 	//#region Language
 	/** 语言文件 */
@@ -759,6 +763,28 @@ declare namespace AsyncTheme {
 		name?: string;
 	}
 	//#endregion NotFoundConfig
+
+	//#region PluginConfig
+	/**
+	 * 插件配置
+	 */
+	interface PluginConfig {
+		/**
+		 * 插件 CDN 地址
+		 */
+		thirdPartyProvider: string;
+		/**
+		 * 插件列表
+		 */
+		plugins?: {
+			fancybox?: {
+				css?: string;
+				js?: string;
+			};
+			flickrJustifiedGallery?: string;
+		};
+	}
+	//#endregion PluginConfig
 }
 
 // async-theme-config -----------------------------------------------------------------------
@@ -860,6 +886,9 @@ declare interface AsyncThemeConfig {
 
 	/** 404 | Not Found */
 	notFound?: AsyncTheme.NotFoundConfig;
+
+	/** 三方 CDN 插件 */
+	plugin?: AsyncTheme.PluginConfig;
 }
 // -----------------------------------------------------------------------
 
@@ -890,3 +919,8 @@ declare type DiffDateSuffix = {
 };
 
 declare type DeepPartial<T> = Partial<{ [P in keyof T]: DeepPartial<T[P]> }>;
+
+declare interface Window {
+	fjGallery?: any;
+	Fancybox?: any;
+}

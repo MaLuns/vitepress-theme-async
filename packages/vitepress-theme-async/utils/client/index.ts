@@ -170,3 +170,110 @@ export const formatDate = (d: Date | number | string | undefined, fmt: string = 
 
 	return fmt;
 };
+
+/**
+ * 动态获取脚本
+ * @param url
+ * @param condition 是否存在对应实例，判断是否加载脚本
+ * @returns
+ */
+export const loadScript = (url: string, condition: boolean) => {
+	return new Promise<void>((resolve, reject) => {
+		if (condition) {
+			resolve();
+		} else {
+			const script = document.createElement('script');
+			script.src = url;
+			script.setAttribute('async', 'false');
+			script.onerror = reject;
+			script.onload = () => resolve();
+			document.head.appendChild(script);
+		}
+	});
+};
+
+/**
+ * 包裹元素
+ * @param el
+ * @param wrapper
+ * @param options
+ */
+export const wrap = (el: HTMLElement, wrapper: string | HTMLElement, options = {}) => {
+	if (typeof wrapper === 'string') {
+		wrapper = document.createElement(wrapper);
+		for (const [key, value] of Object.entries(options)) {
+			wrapper.setAttribute(key, value as string);
+		}
+	}
+
+	el?.parentNode?.insertBefore(wrapper, el);
+	wrapper.appendChild(el);
+};
+
+/**
+ * 初始化图库排版
+ * @param url
+ */
+export const initJustifiedGallery = (url: string) => {
+	const gallerys = document.querySelectorAll('.fj-gallery');
+	if (gallerys.length && url) {
+		gallerys.forEach(item => {
+			const imgList = item.querySelectorAll('img');
+			imgList.forEach((i: HTMLImageElement) => {
+				i.loading = 'eager';
+				wrap(i, 'div', {
+					class: 'fj-gallery-item',
+					'data-src': i.dataset.src || i.src,
+					'data-fancybox': 'gallery',
+				});
+			});
+		});
+
+		loadScript(url, window.fjGallery).then(() => {
+			gallerys.forEach(selector => {
+				window.fjGallery(selector, {
+					itemSelector: '.fj-gallery-item',
+					rowHeight: 220,
+					gutter: 4,
+					onJustify: function () {
+						this.$container.style.opacity = '1';
+					},
+				});
+			});
+		});
+	}
+};
+
+/**
+ * 处理文章图片
+ */
+export const initPictures = (url: string) => {
+	const picts = () => {
+		document.querySelectorAll<HTMLImageElement>('#article-container img:not(.no-fancybox)').forEach(img => {
+			if (!img?.parentElement?.dataset?.fancybox) {
+				let fancybox = 'article';
+				if (img.classList.contains('trm-light-icon')) {
+					fancybox = 'light';
+				} else if (img.classList.contains('trm-dark-icon')) {
+					fancybox = 'dark';
+				}
+
+				wrap(<HTMLImageElement>img, 'div', {
+					'data-src': img.dataset.src || img.src,
+					'data-fancybox': fancybox,
+				});
+			}
+		});
+	};
+	if (window.Fancybox) {
+		picts();
+	} else {
+		loadScript(url, window.Fancybox).then(() => {
+			window?.Fancybox.bind('[data-fancybox]');
+			window?.Fancybox.bind('[data-fancybox="dark"],[data-fancybox="article"]', { groupAll: true });
+			window?.Fancybox.bind('[data-fancybox="light"],[data-fancybox="article"]', { groupAll: true });
+			window.Fancybox.defaults.Hash = false;
+			picts();
+		});
+	}
+};

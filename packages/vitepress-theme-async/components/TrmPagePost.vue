@@ -45,7 +45,7 @@ const pageUrl = usePageUrl();
 			<slot name="post-content-before" />
 			<TrmOutdateNotice v-if="theme.noticeOutdate?.enable && theme.noticeOutdate.position === 'top'" :date="control.post.date" />
 			<Content />
-			<TrmOutdateNotice v-if="theme.noticeOutdate?.enable && theme.noticeOutdate.position === 'bottom'" :date="control.post.date" />
+			<TrmOutdateNotice style="margin-top: 20px;" v-if="theme.noticeOutdate?.enable && theme.noticeOutdate.position === 'bottom'" :date="control.post.date" />
 			<slot name="post-content-after" />
 		</article>
 		<slot name="post-copyright-before" />
