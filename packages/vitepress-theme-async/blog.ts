@@ -13,7 +13,7 @@ export const useCurrentLang = () => {
 	const lang = useLang();
 	const { theme } = useData<AsyncThemeConfig>();
 	const languages = theme.value.languages ?? {};
-	const langData = languages[lang.value] ?? languages['zh-Hans'];
+	const langData = languages[lang?.value] ?? languages['zh-Hans'];
 	return langData;
 };
 
@@ -40,16 +40,27 @@ export function withConfigProvider(App: Component) {
 			provide('AsyncShowMenuSymbol', showMenu);
 			provide('AsyncLanguageSymbol', language);
 
+			const favicon = theme.value.favicon;
+
+			const getCurLangText = (k: DeepKeys<AsyncTheme.Language> | 'none', ...pras: string[]) => {
+				const languages = theme.value.languages ?? {};
+				const langData = languages[language.value] ?? languages['zh-Hans'];
+				let text = dataPath<string>(langData, k) ?? k;
+				if (pras.length) text = stringFormat(text, ...pras);
+				return text;
+			};
+
+			const hideText = getCurLangText(<'none'>favicon?.hideText ?? '');
+			const showText = getCurLangText(<'none'>favicon?.showText ?? '');
+
 			onMounted(() => {
 				if (theme.value.pageLoading) {
 					const beforeRoute = router.onBeforeRouteChange;
 					let lastDate: number;
 					router.onBeforeRouteChange = function (to) {
-						if (beforeRoute && beforeRoute(to) === false) {
-							return false;
-						}
-						showMenu.value = false;
+						if (beforeRoute && beforeRoute(to) === false) return false;
 
+						showMenu.value = false;
 						document.documentElement.classList.add('page-animating');
 						lastDate = new Date().getTime();
 					};
@@ -63,24 +74,24 @@ export function withConfigProvider(App: Component) {
 					};
 				}
 
-				const favicon = theme.value.favicon;
 				if (favicon?.visibilitychange) {
 					const originTitle = document.title;
-					let titleTime: any;
 					const iconEls = Array.from<HTMLLinkElement>(document.querySelectorAll('[rel="icon"]'));
 					const icons = iconEls.map(item => item.href);
+					let titleTime: any;
+
 					document.addEventListener('visibilitychange', function () {
 						if (document.hidden) {
 							iconEls.forEach(item => {
 								item.href = withBase(favicon?.hidden ?? failure);
 							});
-							document.title = getLangText(favicon.hideText ?? '') ?? '';
+							document.title = hideText ?? '';
 							clearTimeout(titleTime);
 						} else {
 							iconEls.forEach((item, index) => {
 								item.href = icons[index];
 							});
-							document.title = getLangText(favicon.showText ?? '') + originTitle;
+							document.title = showText + originTitle;
 							titleTime = setTimeout(function () {
 								document.title = originTitle;
 							}, 2000);
@@ -109,7 +120,12 @@ export function withConfigProvider(App: Component) {
 							if (originalLinkEl) {
 								originalLink = originalLinkEl.innerText.replace('\n', '');
 							}
-							const copyrightText = `\n\n//本文作者：${author}\n//本文链接：${originalLink}\n//版权声明：本博客所有文章除特别声明外，均默认采用 CC ${license.toUpperCase()} ${ccVersion} 许可协议。`;
+							const copyrightText = `\n\n//${getCurLangText('post.copyright.author')}${getCurLangText('symbol.colon')}${author}\n//${getCurLangText('post.copyright.link')}${getCurLangText(
+								'symbol.colon',
+							)}${originalLink}\n//${getCurLangText('post.copyright.licenseTitle')}${getCurLangText('symbol.colon')}${getCurLangText(
+								'post.copyright.licenseContent',
+								`CC ${license.toUpperCase()} ${ccVersion}`,
+							)}`;
 							clipboardData.setData('text/plain', text + copyrightText);
 						}
 					});
