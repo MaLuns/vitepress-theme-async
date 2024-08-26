@@ -29,7 +29,7 @@ export default defineConfig({
 				},
 			},
 		},
-		globalComponents: ['TrmDividerTitle'],
+		globalComponents: true,
 		topBars: [
 			{ title: 'Home', url: '/' },
 			{
@@ -106,7 +106,6 @@ export default defineConfig({
 			logo: '/favicon.svg',
 			icon16: '/favicon.svg',
 			icon32: '/favicon.svg',
-			visibilitychange: true,
 		},
 		creativeCommons: {
 			post: true,

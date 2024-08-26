@@ -1,0 +1,21 @@
+/* 相册排版 */
+.fj-gallery {
+	position: relative;
+	overflow: hidden;
+	&::after {
+		content: "";
+		display: block;
+		clear: both;
+	}
+	.fj-gallery-item {
+		float: left;
+		top: 0;
+		left: 0;
+		& > img {
+			display: block;
+			width: 100%;
+			height: auto;
+			border-radius: 0;
+		}
+	}
+}
