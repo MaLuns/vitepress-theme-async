@@ -176,15 +176,76 @@ export default defineConfig({
 
 包含 社交图标、打字动画、侧栏信息配置，通过 `sidebar` 字段配置。
 
+### 社交图标
+
 ::: code-group
 
 ```ts [config.ts]
 export default defineConfig({
 	themeConfig: {
-		sidebar: { // [!code ++]
+		sidebar: {
+			social: [  // [!code ++]
+				{  // [!code ++]
+					name: 'vue',  // [!code ++]
+					url: 'https://cn.vuejs.org/',  // [!code ++]
+					icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M356.9 64.3H280l-56 88.6-48-88.6H0L224 448 448 64.3h-91.1zm-301.2 32h53.8L224 294.5 338.4 96.3h53.8L224 384.5 55.7 96.3z"/></svg>`,  // [!code ++]
+				},  // [!code ++]
+			],  // [!code ++]
+		}
+	}
+});
+```
+
+<<< @/../packages/vitepress-theme-async/types/theme.d.ts#SidebarConfig
+:::
+
+### 打字动画
+
+::: code-group
+
+```ts [config.ts]
+export default defineConfig({
+	themeConfig: {
+		sidebar: {
 			typedText: ['Web Developer', 'UI Designer'], // [!code ++]
-			// ...  // [!code ++]
-		} // [!code ++]
+			social: [
+				{
+					name: 'vue',
+					url: 'https://cn.vuejs.org/',
+					icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M356.9 64.3H280l-56 88.6-48-88.6H0L224 448 448 64.3h-91.1zm-301.2 32h53.8L224 294.5 338.4 96.3h53.8L224 384.5 55.7 96.3z"/></svg>`,
+				},
+			],
+		}
+	}
+});
+```
+
+<<< @/../packages/vitepress-theme-async/types/theme.d.ts#SidebarConfig
+:::
+
+### 侧栏信息
+
+::: code-group
+
+```ts [config.ts]
+export default defineConfig({
+	themeConfig: {
+		sidebar: {
+			typedText: ['Web Developer', 'UI Designer'],
+			social: [
+				{
+					name: 'vue',
+					url: 'https://cn.vuejs.org/',
+					icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M356.9 64.3H280l-56 88.6-48-88.6H0L224 448 448 64.3h-91.1zm-301.2 32h53.8L224 294.5 338.4 96.3h53.8L224 384.5 55.7 96.3z"/></svg>`,
+				},
+			],
+			info: [ // [!code ++]
+				{ // [!code ++]
+					key: '地址', // [!code ++]
+					val: '中国' // [!code ++]
+				} // [!code ++]
+			] // [!code ++]
+		}
 	}
 });
 ```
@@ -488,7 +549,7 @@ export default defineConfig({
 <<< @/../packages/vitepress-theme-async/types/theme.d.ts#CategorieCardConfig
 :::
 
-### RSS
+### RSS 配置
 
 内置 RSS 生成插件，使用 Feed 生成，默认关闭。
 
@@ -514,11 +575,46 @@ export default defineConfig({
 <<< @/../packages/vitepress-theme-async/types/theme.d.ts#RSSConfig
 :::
 
-### 搜索设置
+### 搜索配置
 
 目前仅支持本地搜索，配置与 vitepress 默认主题保持一致，参考 vitepress 配置。
 
 <<< @/../packages/vitepress-theme-async/types/theme.d.ts#SearchConfig
+
+### 插件配置
+
+主题内置插件配置，默认通过 CDN 方式加载。
+
+::: code-group
+
+```ts [config.ts]
+export default defineConfig({
+	themeConfig: {
+		plugin: {
+			// 修改默认 CDN 源
+			thirdPartyProvider: 'https://npm.elemecdn.com', // [!code ++]
+		}
+	}
+});
+```
+
+<<< @/../packages/vitepress-theme-async/types/theme.d.ts#PluginConfig
+:::
+
+如果不需要使用某个插件，可设置对应插件配置为空，主题则会跳过插件加载
+
+```ts [config.ts]
+export default defineConfig({
+	themeConfig: {
+		plugin: {
+			flickrJustifiedGallery: null, // [!code ++]
+			fancybox: {
+				js: null // [!code ++]
+			}
+		}
+	}
+});
+```
 
 ## 内置插槽
 
@@ -534,17 +630,27 @@ export default defineConfig({
 
 ## 全局组件
 
-主题中将页面中部分模块拆分单独的组件，位于 `vitepress-theme-async/components/global` 目录中。可通过 `globalComponents` 字段配置是否需要将组件注册为全局组件使用，设置为 `true` 默认会将所有组件注册为全局组件，也可一传递组件名称 `['TrmDividerTitle']` 选择性的注册。
+主题中将页面中部分模块拆分单独的组件，以便于在文章中使用，位于 `vitepress-theme-async/components/global` 目录中。可通过 `globalComponents` 字段配置是否需要将组件注册为全局组件使用，设置为 `true` 默认会将所有组件注册为全局组件，也可一传递组件名称 `['TrmDividerTitle']` 选择性的注册。
 
 ```ts
 globalComponents?: boolean | Array<string>;
 ```
 
+<li v-for="i in globalComponents">{{ i }}</li>
+
 ## 自定义图标
 
-主题内置图标是通过组件方式使用的，参考 vitepress 覆盖组件使用方式。
+主题内置图标是通过组件方式使用的，参考 vitepress 覆盖组件使用方式。[重写内部组件](https://vitepress.dev/zh/guide/extending-default-theme#overriding-internal-components)
 
 主题内置图标位置 `vitepress-theme-async/components/icons`
+
+<ClientOnly>
+	<div style="display:flex;gap:16px;flex-wrap:wrap;">
+		<li v-for="i in iconComponents" style="border-radius: 6px;width: 80px; height: 80px;list-style: none;padding: 22px;margin: 0;background:#f6f6f7;">
+			<Component :is="i" style="width:36px;height:36px;fill:currentColor;"/>
+		</li>
+	</div>
+</ClientOnly>
 
 ## 自定义样式
 
@@ -560,4 +666,12 @@ globalComponents?: boolean | Array<string>;
 
 ## 自定义组件
 
-参考 vitepress 覆盖组件使用方式。
+参考 vitepress 覆盖组件使用方式。 [重写内部组件](https://vitepress.dev/zh/guide/extending-default-theme#overriding-internal-components)
+
+<script setup>
+const modulesFiles = import.meta.glob('../../packages/vitepress-theme-async/components/global/*.vue', { eager: true })
+const globalComponents =(Object.keys(modulesFiles).map(item=>item.split('/').reverse()[0]))
+
+const iconModules = import.meta.glob('../../packages/vitepress-theme-async/components/icons/*.vue', { import: 'default', eager: true })
+const iconComponents =(Object.values(iconModules))
+</script>

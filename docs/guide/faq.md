@@ -175,3 +175,9 @@ export default defineConfig({
 
 - 文章里使用了 script、style 等语句块的需要对其 vitepress 里 [\<script> 和 \<style>](https://vitepress.dev/zh/guide/using-vue#script-and-style)
   规则进行调整
+
+### 评论迁移
+
+主题目前没有内置其他评论插件，需要参考插件在 vitepress 使用方式
+
+[twikoo](https://github.com/twikoojs/twikoo/blob/main/docs/.vitepress/theme/Twikoo.vue) 在 vitepress 使用示例

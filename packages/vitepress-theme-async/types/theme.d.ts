@@ -770,17 +770,19 @@ declare namespace AsyncTheme {
 	 */
 	interface PluginConfig {
 		/**
-		 * 插件 CDN 地址
+		 * 插件 CDN 源
 		 */
 		thirdPartyProvider: string;
 		/**
 		 * 插件列表
 		 */
 		plugins?: {
+			/** 图片预览插件 */
 			fancybox?: {
 				css?: string;
 				js?: string;
 			};
+			/** 图片排版插件 */
 			flickrJustifiedGallery?: string;
 		};
 	}

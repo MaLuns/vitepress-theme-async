@@ -38,5 +38,5 @@ const list = [
 </script>
 
 <div class="trm-card">
-	<TrmGallery :srcs="list"/>
+<TrmGallery :srcs="list"></TrmGallery> 
 </div>

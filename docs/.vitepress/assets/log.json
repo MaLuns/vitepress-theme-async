@@ -3,6 +3,24 @@
 		"large_version": "v0.0.x",
 		"children": [
 			{
+				"version": "0.0.13",
+				"date": "2024-08-26",
+				"logs": [
+					{
+						"type": "feat",
+						"text": "图片预览和图库排版"
+					},
+					{
+						"type": "style",
+						"text": "页面切换闪烁优化"
+					},
+					{
+						"type": "fix",
+						"text": "修复 hideText 无法获取"
+					}
+				]
+			},
+			{
 				"version": "0.0.12",
 				"date": "2024-08-24",
 				"logs": [
