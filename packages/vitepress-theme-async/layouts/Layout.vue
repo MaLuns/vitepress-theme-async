@@ -14,7 +14,7 @@ import TrmPageArchive from "../components/TrmPageArchive.vue";
 import TrmPageAbout from "../components/TrmPageAbout.vue";
 import TrmPageLinks from "../components/TrmPageLinks.vue";
 import { useData, useRoute } from "vitepress";
-import { initJustifiedGallery, initPictures } from "../utils/client";
+import { initJustifiedGallery, initPictures, initScrollAnimation } from "../utils/client";
 import { onMounted, onUnmounted, watch, WatchStopHandle, nextTick } from "vue";
 
 const route = useRoute()
@@ -33,6 +33,7 @@ onMounted(() => {
 				if (theme.value.plugin?.plugins?.fancybox?.js) {
 					initPictures(theme.value.plugin?.thirdPartyProvider + theme.value.plugin?.plugins?.fancybox.js)
 				}
+				initScrollAnimation()
 			})
 		},
 		{ immediate: true }

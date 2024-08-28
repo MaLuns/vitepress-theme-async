@@ -1,12 +1,31 @@
 <script setup lang="ts">
+import { onMounted, onUnmounted, ref } from 'vue';
+import { getScrollTop } from "../utils/client";
+
 defineProps<{
 	banner: AsyncTheme.BannerConfig;
 }>();
+
+const bannerRef = ref<HTMLElement>()
+
+const scrollFun = () => {
+	const scrollTop = getScrollTop();
+	bannerRef.value && (bannerRef.value.style.transform = `matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, ${Math.min(scrollTop / 3, 100)}, 0, 1)`);
+}
+
+onMounted(() => {
+	scrollFun();
+	window.addEventListener("scroll", scrollFun);
+
+	onUnmounted(() => {
+		window.removeEventListener("scroll", scrollFun);
+	});
+});
 </script>
 
 <template>
 	<template v-if="banner?.type === 'img'">
-		<img class="trm-banner-cover" :src="banner.bgurl" :style="`object-position: ${banner.position || 'top'};object-fit:${banner.fit || 'cover'};`" alt="banner" />
+		<img ref="bannerRef" class="trm-banner-cover" :src="banner.bgurl" :style="`object-position: ${banner.position || 'top'};object-fit:${banner.fit || 'cover'};`" alt="banner" />
 	</template>
 	<template v-if="banner?.type === 'video'">
 		<video class="trm-banner-cover" autoplay="true" loop muted playsinline webkit-playinginline>

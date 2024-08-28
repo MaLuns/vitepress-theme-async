@@ -277,3 +277,23 @@ export const initPictures = (url: string) => {
 		});
 	}
 };
+
+let intersectionObserver: IntersectionObserver | undefined;
+/**
+ * 滚动动画
+ */
+export const initScrollAnimation = () => {
+	intersectionObserver?.disconnect();
+	intersectionObserver = new IntersectionObserver(
+		entries => {
+			entries.forEach(({ isIntersecting, target }) => {
+				if (isIntersecting) {
+					target.classList.add('trm-active-el');
+					intersectionObserver?.unobserve(target);
+				}
+			});
+		},
+		{ threshold: [0, 1], rootMargin: '0px 0px -40px 0px' },
+	);
+	document.querySelectorAll('.trm-scroll-animation').forEach(element => element && intersectionObserver?.observe(element));
+};
