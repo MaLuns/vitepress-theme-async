@@ -1,13 +1,7 @@
 /**
- * @type {import('../types/theme')}
- * @typedef {AsyncTheme.Language} Language
- */
-
-/**
  * 语言文件
- * @type {Record<string,Language>}
  */
-const lang = {
+export default <Record<string, AsyncTheme.Language>>{
 	'zh-Hans': {
 		site: {
 			title: '本站信息',
@@ -175,5 +169,3 @@ const lang = {
 		},
 	},
 };
-
-export default lang;

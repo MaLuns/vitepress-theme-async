@@ -898,7 +898,7 @@ declare module 'vitepress-theme-async/config' {
 	import { UserConfig } from 'vitepress';
 
 	export function defineConfig(config: UserConfig<AsyncThemeConfig>): UserConfig<AsyncThemeConfig>;
-	export const defaultConfig: AsyncThemeConfig;
+	export const defaultConfig: UserConfig<AsyncThemeConfig>;
 }
 
 declare module '@localSearchIndex' {

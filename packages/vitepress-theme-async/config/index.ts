@@ -1,17 +1,14 @@
 import { mergeConfig as mergeViteConfig } from 'vite';
-import lang from './languages.js';
-import setLess from './less.js';
-
-/**
- * @type {import('../types/theme')}
- * @typedef {import('vitepress').UserConfig<AsyncThemeConfig>} Config
- */
+import type { UserConfig } from 'vitepress';
+import { isObject } from '../utils/shared';
+import { version, homepage } from '../package.json';
+import lang from './languages';
+import setLess from './less';
 
 /**
  * 默认配置
- * @type {Config}
  */
-export const defaultConfig = {
+export const defaultConfig: UserConfig<AsyncThemeConfig> = {
 	lang: 'zh-Hans',
 	vite: {
 		css: {
@@ -47,14 +44,14 @@ export const defaultConfig = {
 		},
 		page: {
 			archives: '/archives',
-			categories: '/categories',
+			categorys: '/categories',
 			tags: '/tags',
 		},
 		user: {
 			name: 'ThemeAsync',
 			firstName: 'Theme',
 			lastName: 'Async',
-			email: null,
+			email: undefined,
 			domain: '站点域名',
 			describe: '网站简介。',
 			ruleText: '暂不接受个人博客以外的友链申请，确保您的网站内容积极向上，文章至少30篇，原创70%以上，部署HTTPS。',
@@ -73,7 +70,7 @@ export const defaultConfig = {
 		},
 		sidebar: {
 			typedTextPrefix: 'I`m',
-			typedText: null,
+			typedText: undefined,
 		},
 		footer: {
 			powered: {
@@ -81,9 +78,9 @@ export const defaultConfig = {
 			},
 			beian: {
 				enable: false,
-				icp: null,
+				icp: undefined,
 			},
-			copyrightYear: null,
+			copyrightYear: undefined,
 			liveTime: {
 				enable: false,
 				prefix: 'footer.tips',
@@ -124,6 +121,7 @@ export const defaultConfig = {
 			position: 'top',
 		},
 		rss: {
+			baseUrl: '',
 			enable: false,
 			limit: 20,
 		},
@@ -153,18 +151,16 @@ export const defaultConfig = {
 
 /**
  * 配置合并
- * @param {Config} config
- * @returns {Config}
  */
-export const defineConfig = config => {
+export const defineConfig = (config: UserConfig<AsyncThemeConfig>) => {
 	if (Array.isArray(config.themeConfig?.outline?.level)) {
-		defaultConfig.themeConfig.outline.level = [];
+		defaultConfig.themeConfig!.outline!.level! = <[number, number]>(<unknown>[]);
 	}
 
 	config = mergeConfig(defaultConfig, config);
 	config.head = config.head ?? [];
 
-	if (config.themeConfig.favicon.icon16) {
+	if (config.themeConfig?.favicon?.icon16) {
 		config.head.push([
 			'link',
 			{
@@ -175,7 +171,7 @@ export const defineConfig = config => {
 			},
 		]);
 	}
-	if (config.themeConfig.favicon.icon32) {
+	if (config.themeConfig?.favicon?.icon32) {
 		config.head.push([
 			'link',
 			{
@@ -186,7 +182,7 @@ export const defineConfig = config => {
 			},
 		]);
 	}
-	if (config.themeConfig.favicon.appleTouchIcon) {
+	if (config.themeConfig?.favicon?.appleTouchIcon) {
 		config.head.push([
 			'link',
 			{
@@ -196,7 +192,7 @@ export const defineConfig = config => {
 			},
 		]);
 	}
-	if (config.themeConfig.favicon.webmanifest) {
+	if (config.themeConfig?.favicon?.webmanifest) {
 		config.head.push([
 			'link',
 			{
@@ -205,7 +201,7 @@ export const defineConfig = config => {
 			},
 		]);
 	}
-	if (config.themeConfig.rewritePost) {
+	if (config.themeConfig?.rewritePost) {
 		config.rewrites = {
 			...(config.rewrites ?? {}),
 			[`${config.themeConfig.postDir}/(.*)`]: '(.*)',
@@ -215,11 +211,11 @@ export const defineConfig = config => {
 	const selfBuildEnd = config.buildEnd;
 	config.buildEnd = async siteConfig => {
 		console.log();
-		console.log(`💖 Vitepress-Theme-Async. Guide: https://vitepress-theme-async.imalun.com`);
+		console.log(`💖 Vitepress-Theme-Async. ${version}  Guide: ${homepage}`);
 		console.log();
-		if (config.themeConfig.rss.enable) {
+		if (config?.themeConfig?.rss?.enable) {
 			await selfBuildEnd?.(siteConfig);
-			(await import('../plugin/rss.js'))?.genFeed(siteConfig);
+			(await import('../plugin/rss'))?.genFeed(siteConfig);
 		}
 	};
 
@@ -233,15 +229,15 @@ export const defineConfig = config => {
  *
  * @param {Config} config
  */
-const setFancybox = config => {
-	const { thirdPartyProvider, plugins } = config.themeConfig.plugin;
-	if (plugins.fancybox.js) {
+const setFancybox = (config: UserConfig<AsyncThemeConfig>) => {
+	const { thirdPartyProvider, plugins } = config.themeConfig?.plugin ?? {};
+	if (plugins?.fancybox?.js) {
 		config.head = config.head ?? [];
 		config.head.push(['link', { rel: 'stylesheet', href: `${thirdPartyProvider}${plugins.fancybox.css}` }]);
 	}
 };
 
-const mergeConfig = (a, b, isRoot = true) => {
+const mergeConfig = (a: any, b: any, isRoot = true) => {
 	const merged = { ...a };
 	for (const key in b) {
 		const value = b[key];
@@ -265,5 +261,3 @@ const mergeConfig = (a, b, isRoot = true) => {
 	}
 	return merged;
 };
-
-const isObject = value => Object.prototype.toString.call(value) === '[object Object]';

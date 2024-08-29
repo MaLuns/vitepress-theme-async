@@ -3,30 +3,14 @@ import matter from 'gray-matter';
 import path from 'node:path';
 import { Feed } from 'feed';
 import { normalizePath } from 'vite';
-import { spawnSync } from 'node:child_process';
-
-function getFileBirthTime(url) {
-	try {
-		// ct
-		const infoStr = spawnSync('git', ['log', '--pretty="%ci"', url]).stdout?.toString().replace(/["']/g, '').trim();
-		const timeList = infoStr.split('\n').filter(item => Boolean(item.trim()));
-		if (timeList.length > 0) {
-			return new Date(timeList.pop()).getTime();
-		}
-	} catch (error) {
-		return undefined;
-	}
-}
-
-function isString(value) {
-	return Object.prototype.toString.call(value) === '[object String]';
-}
+import { SiteConfig } from 'vitepress';
+import { getFileBirthTime } from '../utils/node';
+import { isString } from '../utils/shared';
 
 /**
  *
- * @param {import('vitepress').SiteConfig<AsyncThemeConfig>} config
  */
-export const genFeed = async config => {
+export const genFeed = async (config: SiteConfig<AsyncThemeConfig>) => {
 	const { themeConfig, base, title, description } = config.site;
 	const { rss } = themeConfig;
 
@@ -42,6 +26,7 @@ export const genFeed = async config => {
 		const fileContent = fs.readFileSync(filePath, 'utf-8');
 		let excerpt = '';
 		const { data: meta } = matter(fileContent, {
+			//@ts-ignore
 			excerpt: ({ content }) => {
 				const reg = /<!--\s*more\s*-->/gs;
 				const rpt = reg.exec(content);
@@ -80,7 +65,7 @@ export const genFeed = async config => {
 			meta.cover = meta.cover[0];
 		}
 		if (!isString(meta.cover)) {
-			meta.cover = isString(cover?.default) ? cover.default : '';
+			meta.cover = isString(cover?.default) ? cover?.default : '';
 		}
 
 		const html = mdRender.render(fileContent);
@@ -108,21 +93,22 @@ export const genFeed = async config => {
 	}
 
 	const feed = new Feed({
-		id: rss.baseUrl,
-		link: rss.baseUrl,
+		id: rss?.baseUrl ?? '',
+		link: rss?.baseUrl,
 		title: title,
 		description: description,
-		...(rss.feedOptions ?? {}),
+		copyright: '',
+		...(rss?.feedOptions ?? {}),
 	});
 
 	for (const post of posts) {
 		const { title, html, description, date, meta, url } = post;
 		const author = meta?.author || themeConfig.author || '';
-		const link = `${themeConfig.rss.baseUrl}${url}`;
+		const link = `${themeConfig?.rss?.baseUrl}${url}`;
 
 		let cover = meta?.cover;
 		if (cover && !/^http|^\/\//.test(cover)) {
-			cover = `${rss.baseUrl}${(config.site.base + cover).replace('//', '/')}`;
+			cover = `${rss?.baseUrl}${(config.site.base + cover).replace('//', '/')}`;
 		}
 
 		feed.addItem({
@@ -141,14 +127,14 @@ export const genFeed = async config => {
 		});
 	}
 
-	const RSSFilename = rss.fileName || 'feed.rss';
+	const RSSFilename = rss?.fileName || 'feed.rss';
 	const RSSFilepath = path.join(config.outDir, RSSFilename);
 	fs.writeFileSync(RSSFilepath, /\.rss$/.test(RSSFilename) ? feed.rss2() : /\.xml$/.test(RSSFilename) ? feed.atom1() : /\.json$/.test(RSSFilename) ? feed.json1() : feed.rss2());
 
 	console.log();
 	console.log('🎉 RSS generated', RSSFilename);
 	console.log('✅ rss filepath:', RSSFilepath);
-	console.log('✅ rss url:', `${rss.baseUrl}${config.site.base + RSSFilename}`);
+	console.log('✅ rss url:', `${rss?.baseUrl}${config.site.base + RSSFilename}`);
 	console.log('✅ include', posts.length, 'posts');
 	console.log();
 };

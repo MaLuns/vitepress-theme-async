@@ -15,5 +15,5 @@
 		"lib": ["ESNext", "DOM", "DOM.Iterable"],
 		"types": ["vite/client"]
 	},
-	"include": ["."]
+	"include": [".", "../../markdown.js"]
 }

@@ -8,7 +8,9 @@
 	"private": true,
 	"type": "module",
 	"scripts": {
-		"build": "npm run docs:build && npm run demo:build",
+		"build": "npm run docs:build && npm run config:build && npm run demo:build",
+		"config:dev": "npm --prefix packages/vitepress-theme-async run config:dev",
+		"config:build": "npm --prefix packages/vitepress-theme-async run config:build",
 		"docs:dev": "vitepress dev docs",
 		"docs:build": "vitepress build docs",
 		"docs:preview": "vitepress preview docs",
@@ -31,6 +33,7 @@
 		"husky": "^8.0.3",
 		"lint-staged": "^14.0.1",
 		"prettier": "^3.0.3",
+		"tsup": " ^7.2.0",
 		"vue-eslint-parser": "^9.3.2"
 	},
 	"workspaces": [

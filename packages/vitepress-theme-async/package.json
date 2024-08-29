@@ -16,13 +16,34 @@
 			"default": "./main.ts"
 		},
 		"./config": {
+			"types": "./config/index.d.ts",
 			"default": "./config/index.js"
 		}
 	},
+	"files": [
+		"assets",
+		"components",
+		"composables",
+		"config/index.js",
+		"config/index.d.ts",
+		"layouts",
+		"styles",
+		"types",
+		"utils",
+		"blog.ts",
+		"main.ts",
+		"README_zh-CN.md",
+		"README.md",
+		"tsconfig.json"
+	],
 	"keywords": [
 		"vitepress-theme",
 		"blog-theme"
 	],
+	"scripts": {
+		"config:dev": "tsup --watch",
+		"config:build": "tsup"
+	},
 	"dependencies": {
 		"@vueuse/core": "^9.6.0",
 		"gray-matter": "^4.0.3",
