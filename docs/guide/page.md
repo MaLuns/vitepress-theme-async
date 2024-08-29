@@ -145,6 +145,20 @@ export default defineConfig({
 
 :::
 
+links 也支持通过 api 加载数据，返回数据格式需要与定义类型保持一致。
+
+```ts [config.ts]
+import links from './links' // [!code --]
+
+export default defineConfig({
+	themeConfig: {
+		links: links, // [!code --]
+		links: 'https://api.xx.xx' // [!code ++]
+	},
+});
+```
+
+
 ## 关于页 About
 
 在 `layout` 为 `about` 时，根据配置生成页面。

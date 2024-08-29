@@ -14,23 +14,24 @@ import TrmPageArchive from "../components/TrmPageArchive.vue";
 import TrmPageAbout from "../components/TrmPageAbout.vue";
 import TrmPageLinks from "../components/TrmPageLinks.vue";
 import errimg from '../assets/404.jpg'
-import { useData, useRoute } from "vitepress";
+import { useData, useRoute, withBase } from "vitepress";
 import { initJustifiedGallery, initPictures, initPostErrorImg, initScrollAnimation } from "../utils/client";
 import { onMounted, onUnmounted, watch, WatchStopHandle, nextTick } from "vue";
 
 const route = useRoute()
 const { frontmatter, page, theme } = useData<AsyncThemeConfig>();
 
+const eimg = theme.value.errorImg?.postPage ? withBase(theme.value.errorImg?.postPage) : errimg
 let watcher: WatchStopHandle
 
 onMounted(() => {
 	watcher = watch(
 		() => route.path,
 		() => {
-			const flag = initPostErrorImg(theme.value.errorImg?.postPage || errimg)
+			const flag = initPostErrorImg(eimg)
 			nextTick(() => {
 				initScrollAnimation()
-				!flag && initPostErrorImg(theme.value.errorImg?.postPage || errimg)
+				!flag && initPostErrorImg(eimg)
 				if (theme.value.plugin?.plugins?.flickrJustifiedGallery) {
 					initJustifiedGallery(theme.value.plugin?.thirdPartyProvider + theme.value.plugin.plugins.flickrJustifiedGallery)
 				}

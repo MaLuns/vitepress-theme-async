@@ -28,9 +28,9 @@ jobs:
           cp ./README_zh-CN.md ./packages/vitepress-theme-async
           cp ./README.md ./packages/vitepress-theme-async
           node ./scripts/publish.mjs
-					yarn config:build
-					rm ./packages/vitepress-theme-async/config/index.ts ./packages/vitepress-theme-async/config/languages.ts ./packages/vitepress-theme-async/config/less.ts
-					rm  -r ./packages/vitepress-theme-async/plugin
+          yarn config:build
+          rm ./packages/vitepress-theme-async/config/index.ts ./packages/vitepress-theme-async/config/languages.ts ./packages/vitepress-theme-async/config/less.ts
+          rm  -r ./packages/vitepress-theme-async/plugin
           zip -r vitepress-theme-async ./packages/vitepress-theme-async
         env:
           RELEASE_VERSION: ${{ github.ref }}

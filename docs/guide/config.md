@@ -356,7 +356,7 @@ export default defineConfig({
 });
 ```
 
-## 文章详情页
+## 文章详情
 
 这里是一些关于文章相关配置合集。
 
@@ -458,6 +458,25 @@ export default defineConfig({
 ```
 
 <<< @/../packages/vitepress-theme-async/types/theme.d.ts#NoticeOutdateConfig
+:::
+
+### 破图配置
+
+您可以添加图片加载失败时显示默认图片，通过配置 `errorImg` 字段使用。
+
+::: code-group
+
+```ts [config.ts]
+export default defineConfig({
+	themeConfig: {
+		errorImg: { // [!code ++]
+			... // [!code ++]
+		} // [!code ++]
+	}
+});
+```
+
+<<< @/../packages/vitepress-theme-async/types/theme.d.ts#ErrorImgConfig
 :::
 
 ## 其他配置

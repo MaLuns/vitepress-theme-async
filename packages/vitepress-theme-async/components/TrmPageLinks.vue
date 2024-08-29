@@ -3,9 +3,11 @@ import TrmDividerTitle from "./global/TrmDividerTitle.vue";
 import TrmCardLink from "./global/TrmCardLink.vue";
 import { data } from '../composables/links.data'
 import { useTheme } from "../composables";
+import { withBase } from "vitepress";
 
 let i = 0;
 const theme = useTheme();
+const flink = theme.value.errorImg?.flink ? withBase(theme.value.errorImg?.flink) : undefined
 </script>
 <template>
 	<slot name="links-before" />
@@ -40,7 +42,7 @@ const theme = useTheme();
 			<TrmDividerTitle :title="$t('title.links')" :index="`0${++i}`" />
 		</div>
 		<div v-for="item in data" :key="item.url" class="col-lg-6">
-			<TrmCardLink v-bind="item" :err="theme.errorImg?.flink" />
+			<TrmCardLink v-bind="item" :err="flink" />
 		</div>
 	</div>
 	<slot name="links-after" />
