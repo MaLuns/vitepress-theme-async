@@ -787,6 +787,22 @@ declare namespace AsyncTheme {
 		};
 	}
 	//#endregion PluginConfig
+
+	//#region ErrorImgConfig
+	/**
+	 * 破图时默认图片
+	 */
+	interface ErrorImgConfig {
+		/**
+		 * 友链头像破图时显示默认图片
+		 */
+		flink?: string;
+		/**
+		 * 文章破图时显示默认图片
+		 */
+		postPage?: string;
+	}
+	//#endregion ErrorImgConfig
 }
 
 // async-theme-config -----------------------------------------------------------------------
@@ -855,7 +871,7 @@ declare interface AsyncThemeConfig {
 	about?: AsyncTheme.AboutPageConfig;
 
 	/** 友情链接 | Links */
-	links?: AsyncTheme.LinksConfig;
+	links?: AsyncTheme.LinksConfig | string;
 
 	/** 打赏 | Reward */
 	reward?: AsyncTheme.RewardConfig;
@@ -891,6 +907,9 @@ declare interface AsyncThemeConfig {
 
 	/** 三方 CDN 插件 */
 	plugin?: AsyncTheme.PluginConfig;
+
+	/** 破图时默认图片 | Replace Broken Images  */
+	errorImg?: AsyncTheme.ErrorImgConfig;
 }
 // -----------------------------------------------------------------------
 

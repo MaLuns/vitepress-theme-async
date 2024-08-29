@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import TrmDividerTitle from "./global/TrmDividerTitle.vue";
 import TrmCardLink from "./global/TrmCardLink.vue";
+import { data } from '../composables/links.data'
 import { useTheme } from "../composables";
 
 let i = 0;
@@ -34,12 +35,12 @@ const theme = useTheme();
 		</div>
 	</div>
 	<slot name="links-list-before" />
-	<div v-if="theme.links?.length" class="row trm-scroll-animation">
+	<div v-if="data?.length" class="row trm-scroll-animation">
 		<div class="col-lg-12">
 			<TrmDividerTitle :title="$t('title.links')" :index="`0${++i}`" />
 		</div>
-		<div v-for="item in theme.links" :key="item.url" class="col-lg-6">
-			<TrmCardLink v-bind="item" />
+		<div v-for="item in data" :key="item.url" class="col-lg-6">
+			<TrmCardLink v-bind="item" :err="theme.errorImg?.flink" />
 		</div>
 	</div>
 	<slot name="links-after" />

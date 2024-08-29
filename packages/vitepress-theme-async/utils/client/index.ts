@@ -297,3 +297,11 @@ export const initScrollAnimation = () => {
 	);
 	document.querySelectorAll('.trm-scroll-animation').forEach(element => element && intersectionObserver?.observe(element));
 };
+
+export const initPostErrorImg = (url: string) => {
+	const imgs = document.querySelectorAll<HTMLImageElement>('#article-container img');
+	imgs.forEach(img => {
+		img.setAttribute('onerror', `this.onerror=null;this.src="${url}";`);
+	});
+	return imgs.length > 0;
+};
