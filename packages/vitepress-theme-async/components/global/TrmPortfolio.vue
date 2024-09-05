@@ -25,7 +25,7 @@ withDefaults(
 		<div class="trm-item-description">
 			<div>
 				<h6>{{ title }}</h6>
-				<p v-show="desc" style="margin: 5px 0 0;font-size: .9rem;opacity: .8;">{{ desc }}</p>
+				<p v-if="desc" style="margin: 5px 0 0;font-size: .9rem;opacity: .8;">{{ desc }}</p>
 			</div>
 		</div>
 	</a>
