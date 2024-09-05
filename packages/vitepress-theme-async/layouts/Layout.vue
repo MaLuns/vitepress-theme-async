@@ -17,8 +17,10 @@ import errimg from '../assets/404.jpg'
 import { useData, useRoute, withBase } from "vitepress";
 import { initJustifiedGallery, initPictures, initPostErrorImg, initScrollAnimation } from "../utils/client";
 import { onMounted, onUnmounted, watch, WatchStopHandle, nextTick } from "vue";
+import { useCurrentPageIndex } from "../blog";
 
 const route = useRoute()
+const currentPage = useCurrentPageIndex();
 const { frontmatter, page, theme } = useData<AsyncThemeConfig>();
 
 const eimg = theme.value.errorImg?.postPage ? withBase(theme.value.errorImg?.postPage) : errimg
@@ -26,7 +28,7 @@ let watcher: WatchStopHandle
 
 onMounted(() => {
 	watcher = watch(
-		() => route.path,
+		() => [route.path, currentPage],
 		() => {
 			const flag = initPostErrorImg(eimg)
 			nextTick(() => {
@@ -40,7 +42,7 @@ onMounted(() => {
 				}
 			})
 		},
-		{ immediate: true }
+		{ immediate: true, deep: true }
 	)
 })
 
