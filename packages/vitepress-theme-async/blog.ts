@@ -83,7 +83,7 @@ export function withConfigProvider(App: Component) {
 					document.addEventListener('visibilitychange', function () {
 						if (document.hidden) {
 							iconEls.forEach(item => {
-								item.href = withBase(favicon?.hidden ?? failure);
+								item.href = favicon?.hidden ? withBase(favicon?.hidden) : failure;
 							});
 							document.title = hideText ?? '';
 							clearTimeout(titleTime);

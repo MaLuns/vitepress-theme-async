@@ -3,6 +3,7 @@ import { useTheme } from "../composables/index";
 import TrmSwichImgs from "./global/TrmSwichImgs.vue";
 import avatarImg from "../assets/avatar.jpg";
 import { onMounted, ref } from "vue";
+import { withBase } from "vitepress";
 
 const theme = useTheme();
 const typedTextRef = ref<HTMLDivElement>();
@@ -66,11 +67,16 @@ onMounted(() => {
 		setTyper(typedTextRef.value, theme.value.sidebar?.typedText);
 	}
 });
+
+const avatars = [
+	theme.value.user?.avatar ? withBase(theme.value.user?.avatar) : avatarImg,  //
+	theme.value.user?.darkAvatar ? withBase(theme.value.user?.darkAvatar) : undefined
+]
 </script>
 <template>
 	<div class="trm-mc-header">
 		<div class="trm-avatar-frame trm-mb-20">
-			<TrmSwichImgs :src="[theme.user?.avatar || avatarImg, theme.user?.darkAvatar]" :attrs="{ alt: 'Avatar', class: 'trm-avatar' }" />
+			<TrmSwichImgs :src="avatars" :attrs="{ alt: 'Avatar', class: 'trm-avatar' }" />
 		</div>
 		<h5 class="trm-name trm-mb-15">
 			{{ theme.user?.name }}

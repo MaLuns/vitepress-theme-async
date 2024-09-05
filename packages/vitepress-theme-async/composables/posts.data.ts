@@ -81,6 +81,12 @@ export default <LoaderModule>{
 				};
 			}
 
+			if (isString(meta.cover.default)) {
+				meta.cover.default = withBase(config.site.base, meta.cover.default);
+			} else if (Array.isArray(meta.cover.default)) {
+				meta.cover.default = meta.cover.default.map((item: string) => withBase(config.site.base, item));
+			}
+
 			// 标题
 			if (!meta.title) {
 				const title = /^#\s(.+)/gm.exec(fileContent);

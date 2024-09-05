@@ -1,6 +1,6 @@
 import { mergeConfig as mergeViteConfig } from 'vite';
 import type { UserConfig } from 'vitepress';
-import { isObject } from '../utils/shared';
+import { isObject, withBase } from '../utils/shared';
 import { version, homepage } from '../package.json';
 import lang from './languages';
 import setLess from './less';
@@ -164,7 +164,7 @@ export const defineConfig = (config: UserConfig<AsyncThemeConfig>) => {
 		config.head.push([
 			'link',
 			{
-				href: config.themeConfig.favicon.icon16,
+				href: withBase(config.base ?? '', config.themeConfig.favicon.icon16),
 				rel: 'icon',
 				type: 'image/png',
 				sizes: '16x16',
@@ -175,7 +175,7 @@ export const defineConfig = (config: UserConfig<AsyncThemeConfig>) => {
 		config.head.push([
 			'link',
 			{
-				href: config.themeConfig.favicon.icon32,
+				href: withBase(config.base ?? '', config.themeConfig.favicon.icon32),
 				rel: 'icon',
 				type: 'image/png',
 				sizes: '32x32',
@@ -186,7 +186,7 @@ export const defineConfig = (config: UserConfig<AsyncThemeConfig>) => {
 		config.head.push([
 			'link',
 			{
-				href: config.themeConfig.favicon.appleTouchIcon,
+				href: withBase(config.base ?? '', config.themeConfig.favicon.appleTouchIcon),
 				rel: 'apple-touch-icon',
 				sizes: '180x180',
 			},
@@ -196,7 +196,7 @@ export const defineConfig = (config: UserConfig<AsyncThemeConfig>) => {
 		config.head.push([
 			'link',
 			{
-				href: config.themeConfig.favicon.webmanifest,
+				href: withBase(config.base ?? '', config.themeConfig.favicon.webmanifest),
 				rel: 'manifest',
 			},
 		]);
