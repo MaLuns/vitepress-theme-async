@@ -68,7 +68,7 @@ export const useActiveAnchor = (container: Ref<HTMLElement>, marker: Ref<HTMLEle
 	let prevActiveLink: HTMLElement | null = null;
 
 	const setActiveLink = () => {
-		if (!hasOutline.value) {
+		if (!hasOutline.value || !container.value) {
 			return;
 		}
 
