@@ -21,19 +21,22 @@ const pageUrl = usePageUrl();
 	<div class="trm-post-info row hidden-sm">
 		<div class="col-sm-4">
 			<div class="trm-card trm-label trm-label-light text-center">
-				<TrmIconCalendar />
+				<TrmIconCalendar class="trm-icon" />
+				<br />
 				{{ formatDate(control.post.date, "YYYY-MM-DD") }}
 			</div>
 		</div>
 		<div class="col-sm-4">
 			<div class="trm-card trm-label trm-label-light text-center">
-				<TrmIconClock />
+				<TrmIconClock class="trm-icon" />
+				<br />
 				{{ formatDate(control.post.date, "HH:mm") }}
 			</div>
 		</div>
 		<div class="col-sm-4">
 			<div class="trm-card trm-label trm-label-light text-center">
-				<TrmIconUser />
+				<TrmIconUser class="trm-icon" />
+				<br />
 				{{ control.post.author || theme.author }}
 			</div>
 		</div>

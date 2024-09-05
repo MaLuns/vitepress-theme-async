@@ -9,7 +9,7 @@ const singleColumn = useSingleColumn();
 
 const onScrollTo = () => {
 	const container = document.querySelector(".trm-banner");
-	container && window.scrollTo({ top: container.clientHeight - 20, behavior: "smooth" });
+	container && window.scrollTo({ top: container.clientHeight - 160, behavior: "smooth" });
 };
 </script>
 
