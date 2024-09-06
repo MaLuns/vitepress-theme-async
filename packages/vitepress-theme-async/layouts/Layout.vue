@@ -138,7 +138,7 @@ onUnmounted(() => {
 								</template>
 							</TrmPageLinks>
 							<template v-else-if="frontmatter.layout === 'custom'">
-								<article id="article-container" class="trm-publication">
+								<article id="article-container">
 									<Content />
 								</article>
 							</template>
