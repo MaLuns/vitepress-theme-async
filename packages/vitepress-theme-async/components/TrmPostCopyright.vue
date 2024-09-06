@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useData } from "vitepress";
+import { onMounted, ref } from "vue";
 
 const { theme, frontmatter, page } = useData<AsyncThemeConfig>();
 const license = theme.value.creativeCommons?.license || "by-nc-sa";
@@ -7,6 +8,11 @@ const ccVersion = theme.value.creativeCommons?.license == "zero" ? "1.0" : "4.0"
 const ccPrefix = theme.value.creativeCommons?.license == "zero" ? "publicdomain" : "licenses";
 const ccURL = "https://creativecommons.org/" + ccPrefix + "/" + license + "/" + ccVersion + "/" + theme.value.creativeCommons?.language || "deed.zh-hans";
 const link = `<a href="${ccURL}" target="_blank" rel="noopener" title="CC ${license.toUpperCase() + " " + ccVersion}">CC ${license.toUpperCase() + " " + ccVersion}</a>`;
+
+const olink = ref<string>('')
+onMounted(() => {
+	olink.value = page.value.frontmatter.originalLink ?? window.location.href
+})
 </script>
 <template>
 	<ul v-if="theme.creativeCommons?.post" class="trm-post-copyright">
@@ -16,8 +22,8 @@ const link = `<a href="${ccURL}" target="_blank" rel="noopener" title="CC ${lice
 		</li>
 		<li class="trm-post-copyright-link">
 			<strong>{{ $t("post.copyright.link") }}{{ $t("symbol.colon") }}</strong>
-			<a id="original-link" :href="page.filePath" :title="page.title">
-				{{ page.filePath }}
+			<a id="original-link" :href="olink" :title="page.title">
+				{{ olink }}
 			</a>
 		</li>
 		<li class="trm-post-copyright-license">
