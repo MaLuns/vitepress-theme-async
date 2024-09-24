@@ -639,13 +639,17 @@ export default defineConfig({
 
 插槽位置主要分布在 :
 
-- 顶部导航栏 (TrmTopBar)
-- 横幅 (TrmBanner)
-- 侧栏 (TrmSidebar)
-- 内容区域 (TrmPageContent)，内容区域除了公用插槽外，文章页、关于页、友链页会存在特有的插槽。
-- 固定按钮块 (TrmFixedBtn)
+- 顶部导航栏 <ul><li v-for="item in slotNames.topbar">{{item}}</li></ul>
+- 横幅 <ul><li v-for="item in slotNames.banner">{{item}}</li></ul>
+- 侧栏 <ul><li v-for="item in slotNames.sidebar">{{item}}</li></ul>
+- 内容区域 ，内容区域除了公用插槽外，文章页、关于页、友链页会存在特有的插槽。 <ul><li v-for="item in slotNames.page">{{item}}</li></ul>
+  - 文章页 <ul><li v-for="item in slotNames.post">{{item}}</li></ul>
+  - 关于页 <ul><li v-for="item in slotNames.about">{{item}}</li></ul>
+  - 友链页 <ul><li v-for="item in slotNames.links">{{item}}</li></ul>
+- 固定按钮块 <ul><li v-for="item in slotNames.fixed">{{item}}</li></ul>
+- 页尾 <ul><li v-for="item in slotNames.footer">{{item}}</li></ul>
 
-具体插槽 [请看这里](https://github.com/MaLuns/vitepress-theme-async/blob/main/packages/vitepress-theme-async/layouts/Layout.vue)
+想看更具体插槽信息 [请看这里](https://github.com/MaLuns/vitepress-theme-async/blob/main/packages/vitepress-theme-async/layouts/Layout.vue)
 
 ## 全局组件
 
@@ -677,7 +681,7 @@ globalComponents?: boolean | Array<string>;
 
 <ClientOnly>
 	<div style="display:flex;gap:16px;flex-wrap:wrap;">
-		<li v-for="i in iconComponents" style="border-radius: 6px;width: 80px; height: 80px;list-style: none;padding: 22px;margin: 0;background:#f6f6f7;">
+		<li v-for="i in iconComponents" style="border-radius: 6px;width: 80px; height: 80px;list-style: none;padding: 22px;margin: 0;background:var(--vp-sidebar-bg-color);">
 			<Component :is="i" style="width:36px;height:36px;fill:currentColor;"/>
 		</li>
 	</div>
@@ -700,9 +704,19 @@ globalComponents?: boolean | Array<string>;
 参考 vitepress 覆盖组件使用方式。 [重写内部组件](https://vitepress.dev/zh/guide/extending-default-theme#overriding-internal-components)
 
 <script setup>
+import layoutRaw from '../../packages/vitepress-theme-async/layouts/Layout.vue?raw'
+
 const modulesFiles = import.meta.glob('../../packages/vitepress-theme-async/components/global/*.vue', { eager: true })
 const globalComponents =(Object.keys(modulesFiles).map(item=>item.split('/').reverse()[0]))
 
 const iconModules = import.meta.glob('../../packages/vitepress-theme-async/components/icons/*.vue', { import: 'default', eager: true })
 const iconComponents =(Object.values(iconModules))
+const slotNames = layoutRaw.match(/name="(.*)"/g)
+		.map(item=> item.replace(/name="(.*)"/g,'$1'))
+		.reduce((pre,cur)=>{
+			const key = cur.split('-')[0]
+			pre[key] = pre[key] || []
+			pre[key].push(cur)
+			return pre
+		},{})
 </script>
