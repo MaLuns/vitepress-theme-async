@@ -1,8 +1,8 @@
 # 示例站点
-
+<!-- 
 <script setup>
 import DemoSites from '../.vitepress/components/DemoSites.vue'
-</script>
+</script> -->
 
 ![npm (tag)](https://img.shields.io/npm/dm/vitepress-theme-async?color=red&label=vitepress-theme-async%40latest&logo=npm&style=for-the-badge)
 

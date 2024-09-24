@@ -52,6 +52,10 @@ export default defineConfig({
 							link: '/guide/page',
 						},
 						{
+							text: '全局组件',
+							link: '/guide/global-components',
+						},
+						{
 							text: '更新日志',
 							link: '/guide/change-log',
 						},
@@ -78,6 +82,13 @@ export default defineConfig({
 		},
 		outline: {
 			level: [2, 4],
+		},
+		// @ts-ignore
+		plugin: {
+			thirdPartyProvider: 'https://npm.elemecdn.com',
+			plugins: {
+				flickrJustifiedGallery: '/flickr-justified-gallery@latest/dist/fjGallery.min.js',
+			},
 		},
 	},
 });

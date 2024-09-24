@@ -649,7 +649,7 @@ export default defineConfig({
 
 ## 全局组件
 
-主题中将页面中部分模块拆分单独的组件，以便于在文章中使用，位于 `vitepress-theme-async/components/global` 目录中。默认情况下不会注册到全局组件中，可通过 `globalComponents` 字段配置是否需要将组件注册为全局组件使用，设置为 `true` 默认会将所有组件注册为全局组件，也可一传递组件名称 `['TrmDividerTitle']` 选择性的注册。
+主题中将页面中部分模块拆分单独的组件，以便于在文章中使用，位于 `vitepress-theme-async/components/global` 目录中。默认情况下不会注册到全局组件中，需要通过 `globalComponents` 字段配置是否需要将组件注册为全局组件使用，设置为 `true` 默认会将所有组件注册为全局组件，也可一传递组件名称 `['TrmDividerTitle']` 选择性的注册。
 
 ::: code-group
 
