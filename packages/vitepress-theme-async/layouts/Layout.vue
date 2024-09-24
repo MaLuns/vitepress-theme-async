@@ -15,7 +15,7 @@ import TrmPageAbout from "../components/TrmPageAbout.vue";
 import TrmPageLinks from "../components/TrmPageLinks.vue";
 import errimg from '../assets/404.jpg'
 import { useData, useRoute, withBase } from "vitepress";
-import { initJustifiedGallery, initPictures, initPostErrorImg, initScrollAnimation } from "../utils/client";
+import { initPictures, initPostErrorImg, initScrollAnimation } from "../utils/client";
 import { onMounted, onUnmounted, watch, WatchStopHandle, nextTick } from "vue";
 import { useCurrentPageIndex } from "../blog";
 
@@ -34,9 +34,9 @@ onMounted(() => {
 			nextTick(() => {
 				initScrollAnimation()
 				!flag && initPostErrorImg(eimg)
-				if (theme.value.plugin?.plugins?.flickrJustifiedGallery) {
-					initJustifiedGallery(theme.value.plugin?.thirdPartyProvider + theme.value.plugin.plugins.flickrJustifiedGallery)
-				}
+				// if (theme.value.plugin?.plugins?.flickrJustifiedGallery) {
+				// 	initJustifiedGallery(theme.value.plugin?.thirdPartyProvider + theme.value.plugin.plugins.flickrJustifiedGallery)
+				// }
 				if (theme.value.plugin?.plugins?.fancybox?.js) {
 					initPictures(theme.value.plugin?.thirdPartyProvider + theme.value.plugin.plugins.fancybox.js)
 				}

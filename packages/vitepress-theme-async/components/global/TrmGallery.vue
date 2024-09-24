@@ -1,5 +1,8 @@
 <script setup lang="ts">
-import { withBase } from "vitepress";
+import { withBase, useData } from "vitepress";
+import { onMounted } from "vue";
+import { initJustifiedGallery } from "../../utils/client";
+const { theme } = useData<AsyncThemeConfig>();
 
 withDefaults(
 	defineProps<{
@@ -9,6 +12,12 @@ withDefaults(
 		srcs: () => []
 	},
 );
+
+onMounted(() => {
+	if (theme.value.plugin?.plugins?.flickrJustifiedGallery) {
+		initJustifiedGallery(theme.value.plugin?.thirdPartyProvider + theme.value.plugin.plugins.flickrJustifiedGallery)
+	}
+})
 </script>
 <template>
 	<div class="fj-gallery no-fancybox">
