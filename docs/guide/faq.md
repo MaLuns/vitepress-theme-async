@@ -123,7 +123,11 @@ export default defineConfig({
 ├─ ...
 ```
 
-- 去除 \_data、\_drafts 等文件夹
+- 将 \_data 里有自定义样式、语言包迁移到 vitepress 下后，去除 \_data、\_drafts 文件夹
+
+将 `source/_data/style/index.less` 文件放到 `.vitepress/theme/` 目录下，然后在 `.vitepress\theme\index.ts` 引入样式文件
+
+将 `source/_data/languages.yml` 转成 json 后放到 `vitepress-theme-async` 配置里， [参考 个性化语言包](https://vitepress-theme-async.imalun.com/guide/config#%E8%87%AA%E5%AE%9A%E4%B9%89%E8%AF%AD%E8%A8%80)
 
 - 在源目录下新建 public 文件，将静态文件如 图片、脚本、字体文件等等放到里面
 
