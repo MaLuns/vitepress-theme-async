@@ -158,7 +158,6 @@ export default defineConfig({
 });
 ```
 
-
 ## 关于页 About
 
 在 `layout` 为 `about` 时，根据配置生成页面。
@@ -225,7 +224,7 @@ singleColumn: true  // [!code ++]
 
 ### 相册页
 
-TrmPortfolio 相册组件
+`TrmPortfolio` 相册组件，`TrmPortfolio` 为主题内置 [全局组件](/guide/config#%E5%85%A8%E5%B1%80%E7%BB%84%E4%BB%B6)，默认未开启。
 
 ```md
 ---
@@ -250,7 +249,8 @@ single_column: true
 
 ### 相册详情页
 
-TrmGallery 相册详情组件，可以通过 `srcs` 传入图片列表
+`TrmGallery` 相册详情组件，可以通过 `srcs` 传入图片列表。`TrmGallery` 为主题内置 [全局组件](guide/config#%E5%85%A8%E5%B1%80%E7%BB%84%E4%BB%B6)，默认未开启。
+
 
 ```md
 ---
