@@ -526,6 +526,10 @@ declare namespace AsyncTheme {
 		 * 排序方式
 		 */
 		orderBy?: string;
+		/**
+		 * 分页是否生成静态文件
+		 */
+		static?: boolean;
 	}
 	//#endregion IndexGeneratorConfig
 

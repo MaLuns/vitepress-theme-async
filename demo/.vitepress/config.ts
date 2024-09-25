@@ -22,6 +22,10 @@ export default defineConfig({
 	titleTemplate: ':title | Async',
 	themeConfig: {
 		rewritePost: true,
+		indexGenerator: {
+			perPage: 2,
+			static: true,
+		},
 		languages: {
 			'zh-Hans': {
 				title: {

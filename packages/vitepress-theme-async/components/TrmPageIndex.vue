@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed, ref, watch } from "vue";
 import { useData } from "vitepress";
 import { useAllPosts, useCategories, usePageUrl } from "../composables";
 import { useCurrentPageIndex } from "../blog";
@@ -9,9 +9,13 @@ import TrmCardPost from "./global/TrmCardPost.vue";
 import TrmPagination from "./TrmPagination.vue";
 import TrmDividerTitle from "./global/TrmDividerTitle.vue";
 
-const { page, theme } = useData<AsyncThemeConfig>();
+const { page, theme, params, site } = useData<AsyncThemeConfig>();
 const pageUrl = usePageUrl();
-const currentPageIndex = useCurrentPageIndex();
+const currentPageIndex = theme.value.indexGenerator?.static ?
+	ref(params.value?.index === 'index' ? 1 :
+		Number(params.value?.index.replace('page/', '') || '1'))
+	: useCurrentPageIndex();
+
 const allPosts = useAllPosts();
 const pageSize = theme.value.indexGenerator?.perPage || 10;
 
@@ -39,6 +43,14 @@ const categorieList = computed(() => {
 	}
 	return categories;
 });
+
+// 如果是静态生成, 监听路由参数变更
+if (theme.value.indexGenerator?.static) {
+	watch(() => params.value?.index, () => {
+		currentPageIndex.value = params.value?.index === 'index' ? 1 :
+			Number(params.value?.index.replace('page/', '') || '1')
+	})
+}
 </script>
 <template>
 	<div v-if="hasCategorieCard" class="row hidden-sm">
@@ -54,5 +66,5 @@ const categorieList = computed(() => {
 			<TrmCardPost :post="item" :category-url="pageUrl.categorys" :sticky="Boolean(page.frontmatter.index && item.sticky && item.sticky > 0)" />
 		</div>
 	</div>
-	<TrmPagination :total="allPosts.length" :size="pageSize" />
+	<TrmPagination :total="allPosts.length" :size="pageSize" :static="theme.indexGenerator?.static" :url="site.base" />
 </template>

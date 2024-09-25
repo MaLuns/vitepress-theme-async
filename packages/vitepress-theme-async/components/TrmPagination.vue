@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { computed, watch } from "vue";
-import { useRouter } from "vitepress";
+import { computed, watch, ref } from "vue";
+import { useRouter, useData } from "vitepress";
 import { useBrowserLocation } from "@vueuse/core";
 import { useCurrentPageIndex } from "../blog";
 
@@ -8,6 +8,8 @@ const props = withDefaults(
 	defineProps<{
 		total: number;
 		size?: number;
+		static?: boolean;
+		url?: string
 	}>(),
 	{
 		total: 0,
@@ -15,10 +17,15 @@ const props = withDefaults(
 	},
 );
 
+const { params } = useData()
+
 const queryPageNumKey = "page";
 const router = useRouter();
 const location = useBrowserLocation();
-const currentPage = useCurrentPageIndex();
+const currentPage = props.static ?
+	ref(params.value?.index === 'index' ? 1 :
+		Number(params.value?.index.replace('page/', '') || '1'))
+	: useCurrentPageIndex();
 
 const pageList = computed(() => {
 	const count = Math.ceil(props.total / props.size);
@@ -35,28 +42,35 @@ const onChangePageNumber = (current: number) => {
 		return;
 	}
 	currentPage.value = current;
-	const { searchParams } = new URL(window.location.href!);
-	searchParams.delete(queryPageNumKey);
-	searchParams.append(queryPageNumKey, String(current));
-	router.go(`${location.value.origin}${router.route.path}?${searchParams.toString()}`);
+	if (props.static) {
+		const url = `${props.url}${current === 1 ? '' : `/page/${current}`}`.replace('//', '/')
+		router.go(`${location.value.origin}${url}`);
+	} else {
+		const { searchParams } = new URL(window.location.href!);
+		searchParams.delete(queryPageNumKey);
+		searchParams.append(queryPageNumKey, String(current));
+		router.go(`${location.value.origin}${router.route.path}?${searchParams.toString()}`);
+	}
 };
 
-watch(
-	location,
-	() => {
-		if (location.value.href) {
-			const { searchParams } = new URL(location.value.href);
-			if (searchParams.has(queryPageNumKey)) {
-				currentPage.value = Number(searchParams.get(queryPageNumKey));
-			} else {
-				currentPage.value = 1;
+if (!props.static) {
+	watch(
+		location,
+		() => {
+			if (location.value.href) {
+				const { searchParams } = new URL(location.value.href);
+				if (searchParams.has(queryPageNumKey)) {
+					currentPage.value = Number(searchParams.get(queryPageNumKey));
+				} else {
+					currentPage.value = 1;
+				}
 			}
-		}
-	},
-	{
-		immediate: true,
-	},
-);
+		},
+		{
+			immediate: true,
+		},
+	);
+}
 </script>
 
 <template>
