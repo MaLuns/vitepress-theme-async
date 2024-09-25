@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { formatDate } from "../utils/client";
+import { formatDate } from "../utils/shared";
 import { usePageUrl, usePrevNext, useTheme } from "../composables";
 
 import TrmDividerTitle from "./global/TrmDividerTitle.vue";
@@ -63,11 +63,11 @@ const pageUrl = usePageUrl();
 			<TrmDividerTitle :title="$t('title.otherArticles')" index="01" />
 		</div>
 		<div class="col-lg-6" v-if="control.prev">
-			<TrmCardPost v-if="theme.postPagination?.type === 'large'" :post="control.prev" :category-url="pageUrl.categorys" :sticky="false" />
+			<TrmCardPost v-if="theme.postPagination?.type === 'large'" :post="control.prev" :category-url="pageUrl.categories" :sticky="false" />
 			<TrmCardPostMini v-else :post="control.prev" />
 		</div>
 		<div class="col-lg-6" v-if="control.next">
-			<TrmCardPost v-if="theme.postPagination?.type === 'large'" :post="control.next" :category-url="pageUrl.categorys" :sticky="false" />
+			<TrmCardPost v-if="theme.postPagination?.type === 'large'" :post="control.next" :category-url="pageUrl.categories" :sticky="false" />
 			<TrmCardPostMini v-else :post="control.next" />
 		</div>
 	</div>

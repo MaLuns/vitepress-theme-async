@@ -1,4 +1,4 @@
-import { isString } from '../shared';
+import { stringFormat } from '../shared';
 
 /**
  * 窗体已滚动距离
@@ -134,44 +134,6 @@ export const switchSingleColumn = () => document.body.classList.toggle('trm-sing
 export const backTop = (smooth?: boolean) => window.scrollTo({ top: 0, behavior: smooth ? 'smooth' : 'auto' });
 
 /**
- * 日期格式化
- * @param date
- * @param format
- * @returns
- */
-export const formatDate = (d: Date | number | string | undefined, fmt: string = 'yyyy-MM-dd HH:mm:ss'): string => {
-	if (!(d instanceof Date)) {
-		if (isString(d)) {
-			d = d.replace(/-/gs, '/');
-		}
-		d = d ? new Date(d) : new Date();
-	}
-
-	const o = {
-		'M+': d.getMonth() + 1,
-		'(d|D)+': d.getDate(),
-		'(h|H)+': d.getHours(),
-		'm+': d.getMinutes(),
-		's+': d.getSeconds(),
-		'q+': Math.floor((d.getMonth() + 3) / 3),
-		S: d.getMilliseconds(),
-	};
-
-	if (/((Y|y)+)/.test(fmt)) {
-		fmt = fmt.replace(RegExp.$1, (d.getFullYear() + '').substring(4 - RegExp.$1.length));
-	}
-
-	for (const k in o) {
-		if (new RegExp('(' + k + ')').test(fmt)) {
-			const val = o[k as keyof typeof o].toString();
-			fmt = fmt.replace(RegExp.$1, RegExp.$1.length === 1 ? val : ('00' + val).substring(val.length));
-		}
-	}
-
-	return fmt;
-};
-
-/**
  * 动态获取脚本
  * @param url
  * @param condition 是否存在对应实例，判断是否加载脚本
@@ -212,7 +174,7 @@ export const wrap = (el: HTMLElement, wrapper: string | HTMLElement, options = {
 
 /**
  * 初始化图库排版
- * @param url
+ * @param url fjGallery CDN
  */
 export const initJustifiedGallery = (url: string) => {
 	const gallerys = document.querySelectorAll('.fj-gallery');
@@ -246,6 +208,7 @@ export const initJustifiedGallery = (url: string) => {
 
 /**
  * 处理文章图片
+ * @param url Fancybox CDN
  */
 export const initPictures = (url: string) => {
 	const picts = () => {
@@ -298,10 +261,75 @@ export const initScrollAnimation = () => {
 	document.querySelectorAll('.trm-scroll-animation').forEach(element => element && intersectionObserver?.observe(element));
 };
 
+/**
+ * 文章破图显示替换图片
+ * @param url 破图时显示图片
+ * @returns
+ */
 export const initPostErrorImg = (url: string) => {
 	const imgs = document.querySelectorAll<HTMLImageElement>('#article-container img');
-	imgs.forEach(img => {
-		img.setAttribute('onerror', `this.onerror=null;this.src="${url}";`);
-	});
+	imgs.forEach(img => img.setAttribute('onerror', `this.onerror=null;this.src="${url}";`));
 	return imgs.length > 0;
+};
+
+/**
+ * 页面失焦时标题东湖
+ * @param failure 失焦时的图标
+ * @param showText 重新获取焦点时显示文案
+ * @param hideText 失焦时显示文案
+ */
+export const initVisibilitychange = (failure: string, showText: string, hideText: string) => {
+	const originTitle = document.title;
+	const iconEls = Array.from<HTMLLinkElement>(document.querySelectorAll('[rel="icon"]'));
+	const icons = iconEls.map(item => item.href);
+	let titleTime: any;
+
+	document.addEventListener('visibilitychange', function () {
+		if (document.hidden) {
+			iconEls.forEach(item => {
+				item.href = failure;
+			});
+			document.title = hideText ?? '';
+			clearTimeout(titleTime);
+		} else {
+			iconEls.forEach((item, index) => {
+				item.href = icons[index];
+			});
+			document.title = showText + originTitle;
+			titleTime = setTimeout(function () {
+				document.title = originTitle;
+			}, 2000);
+		}
+	});
+};
+
+/**
+ * 复制时 - 添加版权信息
+ * @param config
+ */
+export const initClipboard = (config: { author?: string; license?: string; text: string }) => {
+	document.addEventListener('copy', function (event: ClipboardEvent) {
+		const clipboardData = event.clipboardData;
+		if (!clipboardData) {
+			return;
+		}
+		let author = config.author || '';
+		const text = window.getSelection()?.toString() || '';
+		if (text) {
+			event.preventDefault();
+			const authorEl = document.getElementById('post-author');
+			if (authorEl) {
+				author = authorEl.innerText.replace('\n', '');
+			}
+			const license = config.license || 'by-nc-sa';
+			const ccVersion = config.license == 'zero' ? '1.0' : '4.0';
+			let originalLink = location.href;
+			const originalLinkEl = document.getElementById('original-link');
+			if (originalLinkEl) {
+				originalLink = originalLinkEl.innerText.replace('\n', '');
+			}
+			const copyrightText = stringFormat(config.text, author, originalLink, license.toUpperCase(), ccVersion);
+			clipboardData.setData('text/plain', text + copyrightText);
+		}
+	});
 };

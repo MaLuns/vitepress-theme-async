@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { formatDate } from "../../utils/client";
+import { formatDate } from "../../utils/shared";
 import TrmSwichImgs from "./TrmSwichImgs.vue";
 import defImage from "../../assets/block.jpg";
 

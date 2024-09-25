@@ -1,69 +1,77 @@
 <script setup lang="ts">
-import { computed, onMounted, ref } from "vue";
-import { useTags, useArchives, useCategories, useAllPosts, useTheme } from "../composables";
+import { useTheme, usePageArchiveStatic, usePageArchiveParam } from "../composables";
 
 import TrmTimeline from "./global/TrmTimeline.vue";
 import TrmDividerTitle from "./global/TrmDividerTitle.vue";
 import TrmPagination from "./TrmPagination.vue";
-import { formatDate } from "../utils/client";
-import { useCurrentPageIndex } from "../blog";
 
 const theme = useTheme();
-const currentPageIndex = useCurrentPageIndex();
-const pageSize = theme.value.archiveGenerator?.perPage || 10;
-const props = defineProps<{ type: "tags" | "archives" | "categories" }>();
 
-const allPosts = useAllPosts(theme.value.archiveGenerator?.orderBy || "-date", item => {
-	if (["tags", "categories"].includes(props.type)) {
-		//@ts-ignore
-		return item[props.type].length > 0;
-	} else {
-		//@ts-ignore
-		item.archive_date = formatDate(item.date, theme.value.archiveGenerator?.dateFmt || "YYYY");
-		return true;
-	}
-});
+const { filter, tagsList, pageList, pageIndex, pageSize,
+	pageLength, onFilter, onChangePage } =
+	theme.value.archiveGenerator?.static ?
+		usePageArchiveStatic() : usePageArchiveParam()
 
-const data = new Map([
-	["tags", useTags],
-	["archives", useArchives],
-	["categories", useCategories],
-]);
+// const mitt = getMitt()
+// const pageIndex = ref(1);
+// const pageSize = theme.value.archiveGenerator?.perPage || 10;
+// const props = defineProps<{ type: "tags" | "archives" | "categories" }>();
 
-const filter = ref("");
-const tagsList = (data.get(props.type) ?? (() => []))();
+// const allPosts = useAllPosts(theme.value.archiveGenerator?.orderBy || "-date", item => {
+// 	if (["tags", "categories"].includes(props.type)) {
+// 		//@ts-ignore
+// 		return item[props.type].length > 0;
+// 	} else {
+// 		//@ts-ignore
+// 		item.archive_date = formatDate(item.date, theme.value.archiveGenerator?.dateFmt || "YYYY");
+// 		return true;
+// 	}
+// });
 
-const filterList = computed(() => {
-	let list = allPosts;
-	if (filter.value) {
-		if (["tags", "categories"].includes(props.type)) {
-			//@ts-ignore
-			list = list.filter(item => item[props.type].includes(filter.value));
-		} else {
-			//@ts-ignore
-			list = list.filter(item => item.archive_date === filter.value);
-		}
-	}
-	return list;
-});
+// const data = new Map([
+// 	["tags", useTags],
+// 	["archives", useArchives],
+// 	["categories", useCategories],
+// ]);
 
-const pageList = computed(() => {
-	const startIdx = (currentPageIndex.value - 1) * pageSize;
-	const endIdx = startIdx + pageSize;
-	return filterList.value.slice(startIdx, endIdx);
-});
+// const filter = ref("");
+// const tagsList = (data.get(props.type) ?? (() => []))();
 
-const onFilter = (item: string) => {
-	filter.value = item;
-	currentPageIndex.value = 1;
-};
+// const filterList = computed(() => {
+// 	let list = allPosts;
+// 	if (filter.value) {
+// 		if (["tags", "categories"].includes(props.type)) {
+// 			//@ts-ignore
+// 			list = list.filter(item => item[props.type].includes(filter.value));
+// 		} else {
+// 			//@ts-ignore
+// 			list = list.filter(item => item.archive_date === filter.value);
+// 		}
+// 	}
+// 	return list;
+// });
 
-onMounted(() => {
-	const { searchParams } = new URL(location.href);
-	if (searchParams.has("q")) {
-		filter.value = searchParams.get("q") ?? "";
-	}
-});
+// const pageList = computed(() => {
+// 	const startIdx = (pageIndex.value - 1) * pageSize;
+// 	const endIdx = startIdx + pageSize;
+// 	return filterList.value.slice(startIdx, endIdx);
+// });
+
+// const onFilter = (item: string) => {
+// 	console.log(1111);
+
+// 	filter.value = item;
+// 	pageIndex.value = 1;
+// 	mitt.emit('page:update')
+// 	console.log(mitt);
+// };
+
+// onMounted(() => {
+// 	const { searchParams } = new URL(location.href);
+// 	if (searchParams.has("q")) {
+// 		filter.value = searchParams.get("q") ?? "";
+// 	}
+// });
 </script>
 <template>
 	<div class="row">
@@ -83,7 +91,7 @@ onMounted(() => {
 			<TrmTimeline :list="pageList" :excerpt="theme.archiveGenerator?.style !== 'less'" />
 		</div>
 	</div>
-	<TrmPagination :total="filterList.length" :size="pageSize" />
+	<TrmPagination :page-index="pageIndex" :total="pageLength" :size="pageSize" @update:page-index="onChangePage" />
 </template>
 <style scoped>
 .trm-list-item {

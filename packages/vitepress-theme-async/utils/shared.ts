@@ -60,9 +60,9 @@ export const normalize = (path: string) => {
 };
 
 /**
- *
- * @param data
- * @param paths
+ * 获取对象指定路径值
+ * @param data 对象
+ * @param paths 路径 eg: a.b.c
  * @returns
  */
 export const dataPath = <T>(data: any, paths: string): T | undefined => {
@@ -81,10 +81,20 @@ export const dataPath = <T>(data: any, paths: string): T | undefined => {
 };
 
 /**
- * 分组
- * @param data
- * @param path
+ * 数据分组统计
+ * @param data 分组数据
+ * @param path 分组字段
+ * @param convert 字段转换
  * @returns
+ * Example:
+ *
+ * ``` js
+ * groupBy([{a:'k'},{a:'f'},{a:'k'}],'a')
+ *
+ * // return
+ *
+ * [['f',1],['k',2]]
+ * ```
  */
 export const groupBy = <T extends AnyObject>(data: T[], path: string, convert?: (key: string) => string) => {
 	const map = new Map<string, number>();
@@ -198,7 +208,10 @@ export const withBase = (base: string, path: string) => {
 	return EXTERNAL_URL_RE.test(path) || !path.startsWith('/') ? path : joinPath(base, path);
 };
 
-export const joinPath = (base: string, path: string) => `${base}${path}`.replace(/\/+/g, '/');
+/**
+ * 路径拼接
+ */
+export const joinPath = (base: string, ...paths: string[]) => `${base}/${paths.join('/')}`.replace(/\/+/g, '/');
 
 /**
  * 合并对象
@@ -231,6 +244,10 @@ export const mergeObj = <T extends AnyObject>(a: T, b: T): T => {
  * 字符格式化
  * @param str
  * @param vals
+ *
+ * ``` js
+ * stringFormat('这是{0}提供的{1}','主题','字符串插值方法')
+ * ```
  */
 export const stringFormat = (str: string, ...vals: string[]): string => {
 	return vals.reduce((s, v, i) => s.replace(new RegExp('\\{' + i + '\\}', 'g'), v), str);
@@ -291,6 +308,44 @@ export function diffDate(d: string | number, more: boolean, suffix?: DiffDateSuf
 		return parseInt((dateDiff / day).toString());
 	}
 }
+
+/**
+ * 日期格式化
+ * @param date
+ * @param format
+ * @returns
+ */
+export const formatDate = (d: Date | number | string | undefined, fmt: string = 'yyyy-MM-dd HH:mm:ss'): string => {
+	if (!(d instanceof Date)) {
+		if (isString(d)) {
+			d = d.replace(/-/gs, '/');
+		}
+		d = d ? new Date(d) : new Date();
+	}
+
+	const o = {
+		'M+': d.getMonth() + 1,
+		'(d|D)+': d.getDate(),
+		'(h|H)+': d.getHours(),
+		'm+': d.getMinutes(),
+		's+': d.getSeconds(),
+		'q+': Math.floor((d.getMonth() + 3) / 3),
+		S: d.getMilliseconds(),
+	};
+
+	if (/((Y|y)+)/.test(fmt)) {
+		fmt = fmt.replace(RegExp.$1, (d.getFullYear() + '').substring(4 - RegExp.$1.length));
+	}
+
+	for (const k in o) {
+		if (new RegExp('(' + k + ')').test(fmt)) {
+			const val = o[k as keyof typeof o].toString();
+			fmt = fmt.replace(RegExp.$1, RegExp.$1.length === 1 ? val : ('00' + val).substring(val.length));
+		}
+	}
+
+	return fmt;
+};
 
 /**
  * 获取语言配置文本

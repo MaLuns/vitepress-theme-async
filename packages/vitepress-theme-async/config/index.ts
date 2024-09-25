@@ -44,8 +44,9 @@ export const defaultConfig: UserConfig<AsyncThemeConfig> = {
 		},
 		page: {
 			archives: '/archives',
-			categorys: '/categories',
+			categories: '/categories',
 			tags: '/tags',
+			index: '/',
 		},
 		user: {
 			name: 'ThemeAsync',
@@ -155,6 +156,10 @@ export const defaultConfig: UserConfig<AsyncThemeConfig> = {
 export const defineConfig = (config: UserConfig<AsyncThemeConfig>) => {
 	if (Array.isArray(config.themeConfig?.outline?.level)) {
 		defaultConfig.themeConfig!.outline!.level! = <[number, number]>(<unknown>[]);
+	}
+
+	if (config.themeConfig?.page?.categorys && !config.themeConfig?.page?.categories) {
+		config.themeConfig.page.categories = config.themeConfig.page.categorys;
 	}
 
 	config = mergeConfig(defaultConfig, config);

@@ -2,7 +2,7 @@
 import { useData } from "vitepress";
 import { version } from "vitepress/package.json";
 import { ref, onMounted } from "vue";
-import { formatDate } from "../utils/client";
+import { formatDate } from "../utils/shared";
 import pkg from "../package.json";
 
 const { theme } = useData<AsyncThemeConfig>();

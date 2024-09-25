@@ -5,7 +5,15 @@ declare type AnyObject = Record<string, any>;
 
 /** 配置且在主题中使用 */
 declare namespace AsyncTheme {
+	type MittEvents = {
+		/** 页码更新 */
+		'page:update': any;
+	};
+
 	type OrderByArg = string | Record<string | number, 1 | -1>;
+
+	// md 中 layout 类型
+	type PageType = 'archives' | 'categories' | 'tags' | 'index';
 
 	//#region PostData
 	/** 文章基础信息 */
@@ -355,10 +363,12 @@ declare namespace AsyncTheme {
 	}
 	//#endregion UserConfig
 
+	//#region TobBarsConfig
 	/**
 	 * 顶部导航栏 || Layout top bars
 	 */
 	type TobBarsConfig = Array<AsyncTheme.NavItemWithLink | AsyncTheme.NavItemWithChildren>;
+	//#endregion TobBarsConfig
 
 	//#region BannerConfig
 	/**
@@ -498,10 +508,12 @@ declare namespace AsyncTheme {
 	}
 	//#endregion AboutPageConfig
 
+	//#region LinksConfig
 	/**
 	 * 友情链接列表 || Links config
 	 */
 	type LinksConfig = Links[];
+	//#endregion LinksConfig
 
 	//#region ConverConfig
 	/**
@@ -537,20 +549,18 @@ declare namespace AsyncTheme {
 	/**
 	 * 内置页面跳转地址 || built in page path config
 	 */
-	interface BuiltPageConfig {
+	type BuiltPageConfig = {
 		/**
-		 * 归档页地址 || archive page url
-		 */
-		archives?: string;
-		/**
-		 * 分类页地址 || category page url
+		 * 分类页地址 默认为 /categories
+		 * @deprecated 使用 categories
 		 */
 		categorys?: string;
+	} & {
 		/**
-		 * 标签页地址 || tag page url
+		 * 归档页 分类页 标签页地址 eg: /archives /categories /tags
 		 */
-		tags?: string;
-	}
+		[k in PageType]?: string;
+	};
 	//#endregion BuiltPageConfig
 
 	//#region FixedBtnConfig

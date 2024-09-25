@@ -1,7 +1,10 @@
-import { useData, useRouter, withBase } from 'vitepress';
-import { Component, defineComponent, Ref, h, inject, onMounted, provide, ref } from 'vue';
+import { useData, useRoute, useRouter, withBase } from 'vitepress';
+import { Component, defineComponent, Ref, h, inject, onMounted, provide, ref, nextTick, onUnmounted, WatchStopHandle, watch } from 'vue';
 import failure from './assets/failure.ico';
+import errimg from './assets/404.jpg';
 import { dataPath, stringFormat } from './utils/shared';
+import { initClipboard, initPictures, initPostErrorImg, initScrollAnimation, initVisibilitychange } from './utils/client';
+import { getMitt } from './composables/mitt';
 
 // export const AsyncCurrentPageIndexSymbol: InjectionKey<Ref<number>> = Symbol('current-page-index');
 // export const AsyncShowMenuSymbol: InjectionKey<Ref<boolean>> = Symbol('show-menu');
@@ -30,9 +33,12 @@ export function withConfigProvider(App: Component) {
 		setup(_, { slots }) {
 			const { theme, site } = useData<AsyncThemeConfig>();
 			const router = useRouter();
+			const route = useRoute();
+			const mitt = getMitt();
 			const currentPageIndex = ref(1);
 			const showMenu = ref(false);
 			const language = ref(site.value.lang ?? 'zh-Hans');
+			let watcher: WatchStopHandle;
 
 			// fix: 通过 npm 安装, 在 dev 模式时 vue 会提示 injection "Symbol(current-page-index)" not found.
 			// 未找到具体原因 暂时用字符替代
@@ -53,7 +59,22 @@ export function withConfigProvider(App: Component) {
 			const hideText = getCurLangText(<'none'>favicon?.hideText ?? '');
 			const showText = getCurLangText(<'none'>favicon?.showText ?? '');
 
+			// 页面更新时重新初始化相关操作
+			const initPageUpdate = () => {
+				const eimg = theme.value.errorImg?.postPage ? withBase(theme.value.errorImg?.postPage) : errimg;
+				const flag = initPostErrorImg(eimg);
+				nextTick(() => {
+					initScrollAnimation();
+					!flag && initPostErrorImg(eimg);
+					if (theme.value.plugin?.plugins?.fancybox?.js) {
+						initPictures(theme.value.plugin?.thirdPartyProvider + theme.value.plugin.plugins.fancybox.js);
+					}
+				});
+			};
+
 			onMounted(() => {
+				mitt.on('page:update', initPageUpdate);
+
 				if (theme.value.pageLoading) {
 					const beforeRoute = router.onBeforeRouteChange;
 					let lastDate: number;
@@ -75,61 +96,32 @@ export function withConfigProvider(App: Component) {
 				}
 
 				if (favicon?.visibilitychange) {
-					const originTitle = document.title;
-					const iconEls = Array.from<HTMLLinkElement>(document.querySelectorAll('[rel="icon"]'));
-					const icons = iconEls.map(item => item.href);
-					let titleTime: any;
-
-					document.addEventListener('visibilitychange', function () {
-						if (document.hidden) {
-							iconEls.forEach(item => {
-								item.href = favicon?.hidden ? withBase(favicon?.hidden) : failure;
-							});
-							document.title = hideText ?? '';
-							clearTimeout(titleTime);
-						} else {
-							iconEls.forEach((item, index) => {
-								item.href = icons[index];
-							});
-							document.title = showText + originTitle;
-							titleTime = setTimeout(function () {
-								document.title = originTitle;
-							}, 2000);
-						}
-					});
+					initVisibilitychange(favicon?.hidden ? withBase(favicon?.hidden) : failure, showText, hideText);
 				}
 
 				if (theme.value.creativeCommons?.clipboard) {
-					document.addEventListener('copy', function (event: ClipboardEvent) {
-						const clipboardData = event.clipboardData;
-						if (!clipboardData) {
-							return;
-						}
-						let author = theme.value.author;
-						const text = window.getSelection()?.toString() || '';
-						if (text) {
-							event.preventDefault();
-							const authorEl = document.getElementById('post-author');
-							if (authorEl) {
-								author = authorEl.innerText.replace('\n', '');
-							}
-							const license = theme.value.creativeCommons?.license || 'by-nc-sa';
-							const ccVersion = theme.value.creativeCommons?.license == 'zero' ? '1.0' : '4.0';
-							let originalLink = location.href;
-							const originalLinkEl = document.getElementById('original-link');
-							if (originalLinkEl) {
-								originalLink = originalLinkEl.innerText.replace('\n', '');
-							}
-							const copyrightText = `\n\n//${getCurLangText('post.copyright.author')}${getCurLangText('symbol.colon')}${author}\n//${getCurLangText('post.copyright.link')}${getCurLangText(
-								'symbol.colon',
-							)}${originalLink}\n//${getCurLangText('post.copyright.licenseTitle')}${getCurLangText('symbol.colon')}${getCurLangText(
-								'post.copyright.licenseContent',
-								`CC ${license.toUpperCase()} ${ccVersion}`,
-							)}`;
-							clipboardData.setData('text/plain', text + copyrightText);
-						}
+					const authorTitle = getCurLangText('post.copyright.author');
+					const linkTitle = getCurLangText('post.copyright.link');
+					const licenseTitle = getCurLangText('post.copyright.licenseTitle');
+					const licenseContent = getCurLangText('post.copyright.licenseContent', `CC {2} {3}`);
+					const colon = getCurLangText('symbol.colon');
+					initClipboard({
+						author: theme.value.author,
+						license: theme.value.creativeCommons?.license,
+						text: `\n\n//${authorTitle}${colon}{0}\n//${linkTitle}${colon}{1}\n//${licenseTitle}${colon}${licenseContent}`,
 					});
 				}
+
+				watcher = watch(
+					() => route.path,
+					() => mitt.emit('page:update'),
+					{ immediate: true, deep: true },
+				);
+			});
+
+			onUnmounted(() => {
+				mitt.off('page:update', initPageUpdate);
+				watcher?.();
 			});
 
 			return () => h(App, null, slots);

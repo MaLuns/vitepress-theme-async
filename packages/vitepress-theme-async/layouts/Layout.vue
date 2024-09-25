@@ -13,42 +13,9 @@ import TrmPagePost from "../components/TrmPagePost.vue";
 import TrmPageArchive from "../components/TrmPageArchive.vue";
 import TrmPageAbout from "../components/TrmPageAbout.vue";
 import TrmPageLinks from "../components/TrmPageLinks.vue";
-import errimg from '../assets/404.jpg'
-import { useData, useRoute, withBase } from "vitepress";
-import { initPictures, initPostErrorImg, initScrollAnimation } from "../utils/client";
-import { onMounted, onUnmounted, watch, WatchStopHandle, nextTick } from "vue";
-import { useCurrentPageIndex } from "../blog";
+import { useData } from "vitepress";
 
-const route = useRoute()
-const currentPage = useCurrentPageIndex();
 const { frontmatter, page, theme } = useData<AsyncThemeConfig>();
-
-const eimg = theme.value.errorImg?.postPage ? withBase(theme.value.errorImg?.postPage) : errimg
-let watcher: WatchStopHandle
-
-onMounted(() => {
-	watcher = watch(
-		() => [route.path, currentPage],
-		() => {
-			const flag = initPostErrorImg(eimg)
-			nextTick(() => {
-				initScrollAnimation()
-				!flag && initPostErrorImg(eimg)
-				// if (theme.value.plugin?.plugins?.flickrJustifiedGallery) {
-				// 	initJustifiedGallery(theme.value.plugin?.thirdPartyProvider + theme.value.plugin.plugins.flickrJustifiedGallery)
-				// }
-				if (theme.value.plugin?.plugins?.fancybox?.js) {
-					initPictures(theme.value.plugin?.thirdPartyProvider + theme.value.plugin.plugins.fancybox.js)
-				}
-			})
-		},
-		{ immediate: true, deep: true }
-	)
-})
-
-onUnmounted(() => {
-	watcher?.()
-})
 </script>
 
 <template>
@@ -104,8 +71,8 @@ onUnmounted(() => {
 						</TrmSidebar>
 						<TrmPageContent>
 							<slot name="page-content-top" />
-							<TrmPageIndex v-if="frontmatter.index" />
-							<TrmPageArchive v-else-if="['tags', 'archives', 'categories'].includes(frontmatter.layout)" :type="frontmatter.layout" :key="frontmatter.layout" />
+							<TrmPageIndex v-if="frontmatter.index || frontmatter.layout === 'index'" />
+							<TrmPageArchive v-else-if="['tags', 'archives', 'categories'].includes(frontmatter.layout)" :key="page.relativePath" />
 							<TrmPageAbout v-else-if="frontmatter.layout === 'about'">
 								<template #about-before>
 									<slot name="about-before" />

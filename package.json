@@ -34,8 +34,7 @@
 		"lint-staged": "^14.0.1",
 		"prettier": "^3.0.3",
 		"tsup": " ^7.2.0",
-		"vue-eslint-parser": "^9.3.2",
-		"tinyglobby": "^0.2.5"
+		"vue-eslint-parser": "^9.3.2"
 	},
 	"workspaces": [
 		"demo",

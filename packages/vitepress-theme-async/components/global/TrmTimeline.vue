@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { formatDate } from "../../utils/client";
+import { formatDate } from "../../utils/shared";
 
 type DataItem = {
 	url: string;
