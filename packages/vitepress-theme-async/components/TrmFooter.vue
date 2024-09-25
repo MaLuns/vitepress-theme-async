@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useData } from "vitepress";
+import { version } from "vitepress/package.json";
 import { ref, onMounted } from "vue";
 import { formatDate } from "../utils/client";
 import pkg from "../package.json";
@@ -35,7 +36,7 @@ onMounted(() => {
 			<span class="trm-accent-color">{{ theme.user?.name }}</span>
 		</div>
 		<div v-if="theme?.footer?.powered?.enable" class="trm-footer-item">
-			<span v-html="$t('footer.powered', `<a href='https://vitepress.dev' target='_blank' rel='noopener'>Vitepress</a>`)"></span>
+			<span v-html="$t('footer.powered', `<a href='https://vitepress.dev' target='_blank' rel='noopener'>Vitepress</a> v${version}`)"></span>
 			<span class="footer-separator" data-separator=" | "></span>
 			<span>
 				{{ $t("footer.theme") }} -

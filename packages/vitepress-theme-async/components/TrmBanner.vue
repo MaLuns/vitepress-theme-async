@@ -32,7 +32,7 @@ const onScrollTo = () => {
 								</li>
 								<li>
 									<span>
-										{{ page.relativePath.split("/")[0] }}
+										{{ page.relativePath.split("/")[0].replace('.md', '') }}
 									</span>
 								</li>
 							</ul>
