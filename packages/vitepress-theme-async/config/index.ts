@@ -220,7 +220,7 @@ export const defineConfig = (config: UserConfig<AsyncThemeConfig>) => {
 		console.log();
 		if (config?.themeConfig?.rss?.enable) {
 			await selfBuildEnd?.(siteConfig);
-			(await import('../plugin/rss'))?.genFeed(siteConfig);
+			(await import('./rss'))?.genFeed(siteConfig);
 		}
 	};
 

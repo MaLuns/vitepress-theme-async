@@ -29,6 +29,7 @@
 		"composables",
 		"config/index.js",
 		"config/index.d.ts",
+		"plugin",
 		"layouts",
 		"styles",
 		"types",
