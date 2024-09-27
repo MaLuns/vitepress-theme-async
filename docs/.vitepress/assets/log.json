@@ -3,6 +3,56 @@
 		"large_version": "v0.0.x",
 		"children": [
 			{
+				"version": "0.0.17",
+				"date": "2024-09-27",
+				"logs": [
+					{
+						"type": "feat",
+						"text": "分页生成静态文件"
+					},
+					{
+						"type": "style",
+						"text": "样式优化"
+					},
+					{
+						"type": "perf",
+						"text": "将 fjGallery  插件初始化放到相册详情组件内"
+					}
+				]
+			},
+			{
+				"version": "0.0.16",
+				"date": "2024-09-11",
+				"logs": [
+					{
+						"type": "style",
+						"text": "样式优化"
+					},
+					{
+						"type": "refactor",
+						"text": "原文地址取值调整"
+					}
+				]
+			},
+			{
+				"version": "0.0.15",
+				"date": "2024-09-05",
+				"logs": [
+					{
+						"type": "fix",
+						"text": "分页时 route.path 无变动"
+					},
+					{
+						"type": "fix",
+						"text": "页面无法提取出目录时报错"
+					},
+					{
+						"type": "fix",
+						"text": "子路径下图标头像兼容"
+					}
+				]
+			},
+			{
 				"version": "0.0.14",
 				"date": "2024-08-29",
 				"logs": [

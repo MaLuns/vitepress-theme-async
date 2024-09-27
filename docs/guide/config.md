@@ -513,15 +513,67 @@ export default defineConfig({
 ```ts [config.ts]
 export default defineConfig({
 	themeConfig: {
-		indexGenerator: { // [!code ++]
+		indexGenerator: {
 			perPage: 8, // [!code ++]
-			// ...  // [!code ++]
-		} // [!code ++]
+		}
 	}
 });
 ```
 
 <<< @/../packages/vitepress-theme-async/types/theme.d.ts#IndexGeneratorConfig
+:::
+
+默认情况下，生成的分页是伪分页，通过 URL 参数前端实现的分页，并不会按照分页生成对应 .html 文件。
+
+如果需要按分页生成静态文件需要开启 `static` 配置，然后将 `index.md` 改名为 `[index].md`，并添加 `[index].paths.ts` 文件，调用主题 `dynamicPages` 方法动态添加分页路由。
+
+::: code-group
+
+```ts [config.ts]
+export default defineConfig({
+	themeConfig: {
+		indexGenerator: {
+			static: true, // [!code ++]
+		}
+	}
+});
+```
+
+```txt [博客目录]
+.
+├─ .vitepress
+├─ posts
+│  └─ ...
+├─ index.md // [!code --]
+├─ [index].md // [!code ++]
+├─ [index].paths.ts // [!code ++]
+├─ ...
+```
+
+```ts [[index].paths.ts]
+import { dynamicPages } from 'vitepress-theme-async/plugin/page';
+import config from './.vitepress/config';
+
+export default {
+	async paths() {
+		return dynamicPages(config, 'index');
+	},
+};
+
+```
+
+```txt [对比]
+# 静态模式访问路径
+https://xxx				// 首页
+https://xxx/page/2		// 第二页
+https://xxx/page/3		// 第三页
+
+# 普通模式访问路径
+https://xxx				// 首页
+https://xxx?page=2		// 第二页
+https://xxx?page=3		// 第三页
+```
+
 :::
 
 #### 归档分页
@@ -535,16 +587,60 @@ export default defineConfig({
 ```ts [config.ts]
 export default defineConfig({
 	themeConfig: {
-		archiveGenerator: { // [!code ++]
+		archiveGenerator: {
 			style: 'less', // [!code ++]
-			// ...  // [!code ++]
-		} // [!code ++]
+		}
 	}
 });
 ```
 
 <<< @/../packages/vitepress-theme-async/types/theme.d.ts#ArchiveGeneratorConfig
 :::
+
+归档分类页与首页一样，默认情况下，生成的分页是伪分页，通过 URL 参数前端实现的分页，并不会按照分页生成对应 .html 文件。
+
+如果需要按分页生成静态文件需要开启 static 配置，然后将 `archives|categories|tags.md` 改名为 `[archives|categories|tags].md`，并添加 `[archives|categories|tags].paths.ts` 文件，调用主题 dynamicPages 方法动态添加分页路由。
+
+::: code-group
+
+```ts [config.ts]
+export default defineConfig({
+	themeConfig: {
+		archiveGenerator: {
+			static: true, // [!code ++]
+		}
+	}
+});
+```
+
+```txt [博客目录]
+.
+├─ .vitepress
+├─ posts
+│  └─ ...
+├─ archives.md // [!code --]
+├─ [archives].md // [!code ++]
+├─ [archives].paths.ts // [!code ++]
+├─ categories.md // [!code --]
+├─ [categories].md // [!code ++]
+├─ [categories].paths.ts // [!code ++]
+├─ tags.md // [!code --]
+├─ [tags].md // [!code ++]
+├─ [tags].paths.ts // [!code ++]
+├─ ...
+```
+
+:::
+
+如果开启了分页生成静态文件，文件的路由会根据 `page` 配置生成路由，以 `tags` 为例
+
+| 配置路径    | 第一页路径       | 其他页路径        | 子级第一页      | 子级其他页路径         |
+| :---------- | :--------------- | :---------------- | :-------------- | :--------------------- |
+| /           | /index.html      | /page/2.html      | /子级.html      | /子级/page/2.html      |
+| /index      | /index.html      | /page/2.html      | /子级.html      | /子级/page/2.html      |
+| /tags       | /tags.html       | /tags/page/2.html | /tags/子级.html | /tags/子级/page/2.html |
+| /tags/      | /tags/index.html | /tags/page/2.html | /tags/子级.html | /tags/子级/page/2.html |
+| /tags/index | /tags/index.html | /tags/page/2.html | /tags/子级.html | /tags/子级/page/2.html |
 
 ### 分类卡片
 

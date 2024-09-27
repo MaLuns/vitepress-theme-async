@@ -67,12 +67,12 @@ date: 2019-11-20 10:16:09
 ```ts [config.ts]
 export default defineConfig({
 	themeConfig: {
-	page: {// [!code ++]
+	page: {
 			archives: '/archives',// [!code ++]
 			categories: '/categories',// [!code ++]
 			tags: '/tags',// [!code ++]
-		}// [!code ++]
-	},// [!code ++]
+		}
+	},
 });
 ```
 
@@ -250,7 +250,6 @@ single_column: true
 ### 相册详情页
 
 `TrmGallery` 相册详情组件，可以通过 `srcs` 传入图片列表。`TrmGallery` 为主题内置 [全局组件](https://vitepress-theme-async.imalun.com/guide/config#%E5%85%A8%E5%B1%80%E7%BB%84%E4%BB%B6)，默认未开启。
-
 
 ```md
 ---

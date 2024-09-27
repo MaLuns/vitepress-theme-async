@@ -3,6 +3,8 @@ import config from './.vitepress/config';
 
 export default {
 	async paths() {
-		return dynamicPages(config, 'tags');
+		const paths = await dynamicPages(config, 'tags');
+		console.log(paths);
+		return paths;
 	},
 };
