@@ -84,7 +84,19 @@ const generatePages = (len: number, pageSize: number, paramKey: string, otherPag
 	fitstPageName = fitstPageName.replace(/^\//, '');
 	const count = Math.ceil(len / pageSize);
 	return new Array(count).fill(null).map((_, i) => {
-		return i === 0 ? { params: { [paramKey]: fitstPageName } } : { params: { [paramKey]: joinPath(otherPageName, (i + 1).toString()) } };
+		return i === 0
+			? {
+					params: {
+						[paramKey]: fitstPageName,
+						index: fitstPageName,
+					},
+			  }
+			: {
+					params: {
+						[paramKey]: joinPath(otherPageName, (i + 1).toString()),
+						index: joinPath(otherPageName, (i + 1).toString()),
+					},
+			  };
 	});
 };
 
@@ -92,7 +104,7 @@ const generatePages = (len: number, pageSize: number, paramKey: string, otherPag
  * 通用分页生成
  * @param files 文章路径集合
  * @param config 主题配置
- * @param paramKey [paramName].md 动态文件参数名
+ * @param pageType [paramName].md 动态文件参数名
  * @param processFn 子级分页数据处理
  * @returns
  *
@@ -104,12 +116,13 @@ const generatePages = (len: number, pageSize: number, paramKey: string, otherPag
  * | /xxx/			| /xxx/index.html	| /xxx/page/2.html | /xxx/子级.html | /xxx/子级/page/2.html |
  * | /xxx/index | /xxx/index.html	| /xxx/page/2.html | /xxx/子级.html | /xxx/子级/page/2.html |
  */
-const generatePagesByType = async (files: string[], config: UserConfig<AsyncThemeConfig>, paramKey: AsyncTheme.PageType, processFn?: ProcessFn) => {
+const generatePagesByType = async (files: string[], config: UserConfig<AsyncThemeConfig>, pageType: AsyncTheme.PageType, processFn?: ProcessFn) => {
 	const raw = getMeta(files, config.themeConfig?.timeZone || 8);
-	const pageSize = (paramKey === 'index' ? config.themeConfig?.indexGenerator?.perPage : config.themeConfig?.archiveGenerator?.perPage) || 10;
-	const type = paramKey;
+	const pageSize = (pageType === 'index' ? config.themeConfig?.indexGenerator?.perPage : config.themeConfig?.archiveGenerator?.perPage) || 10;
+	const type = pageType; // 当前页类型在 Frontmatter 使用的 [属性]
+	const paramKey = pageType; // 动态路径参数名 - 默认与 layout 值保持一致
 
-	const baseName = config.themeConfig?.page?.[type] || type; // 获取用户配置路径
+	const baseName = config.themeConfig?.page?.[pageType] || pageType; // 获取用户配置路径
 	const basePageName = baseName.replace(/(\/index$|^index$)/, ''); // 去掉路径最后一层的 index
 
 	// 默认分页
@@ -117,7 +130,9 @@ const generatePagesByType = async (files: string[], config: UserConfig<AsyncThem
 	if (/\/$/.test(firstPageName) || firstPageName === '') {
 		firstPageName = joinPath(firstPageName, 'index');
 	}
-	const len = ['index', 'archives'].includes(type) ? files.length : raw.filter(item => item[type].length).length;
+
+	// 首页、归档默认分页取全部数据   标签、分类默认分页需要根据 Frontmatter [属性] 过滤数据
+	const len = ['index', 'archives'].includes(pageType) ? files.length : raw.filter(item => item[type].length).length;
 	const defpage = generatePages(len, pageSize, paramKey, joinPath(basePageName, 'page'), firstPageName);
 
 	// 子级分页
@@ -137,40 +152,40 @@ const generatePagesByType = async (files: string[], config: UserConfig<AsyncThem
 };
 
 /** 首页生成 */
-const pageIndex = async (files: string[], config: UserConfig<AsyncThemeConfig>, paramKey: AsyncTheme.PageType) => {
-	return generatePagesByType(files, config, paramKey);
+const pageIndex = async (files: string[], config: UserConfig<AsyncThemeConfig>, pageType: AsyncTheme.PageType) => {
+	return generatePagesByType(files, config, pageType);
 };
 
 /** 标签页生成 */
-const tagPageIndex = async (files: string[], config: UserConfig<AsyncThemeConfig>, paramKey: AsyncTheme.PageType) => {
+const tagPageIndex = async (files: string[], config: UserConfig<AsyncThemeConfig>, pageType: AsyncTheme.PageType) => {
 	const processFn: ProcessFn = raw => sortBy(groupBy(raw, 'tags'), { 1: -1 });
-	return generatePagesByType(files, config, paramKey, processFn);
+	return generatePagesByType(files, config, pageType, processFn);
 };
 
 /** 分类页生成 */
-const categoriePageIndex = async (files: string[], config: UserConfig<AsyncThemeConfig>, paramKey: AsyncTheme.PageType) => {
+const categoriePageIndex = async (files: string[], config: UserConfig<AsyncThemeConfig>, pageType: AsyncTheme.PageType) => {
 	const processFn: ProcessFn = raw => sortBy(groupBy(raw, 'categories'), { 1: -1 });
-	return generatePagesByType(files, config, paramKey, processFn);
+	return generatePagesByType(files, config, pageType, processFn);
 };
 
 /** 归档页生成 */
-const archivePageIndex = async (files: string[], config: UserConfig<AsyncThemeConfig>, paramKey: AsyncTheme.PageType) => {
+const archivePageIndex = async (files: string[], config: UserConfig<AsyncThemeConfig>, pageType: AsyncTheme.PageType) => {
 	const processFn: ProcessFn = raw =>
 		sortBy(
 			groupBy(raw, 'date', date => formatDate(date, config.themeConfig?.archiveGenerator?.dateFmt || 'YYYY')),
 			{ 0: -1 },
 		);
-	return generatePagesByType(files, config, paramKey, processFn);
+	return generatePagesByType(files, config, pageType, processFn);
 };
 
 /**
  * 动态路由生成
  * @param config 主题配置信息
- * @param type
+ * @param pageType 页面 layout 类型
  * @param root 根目录
  * @returns
  */
-export const dynamicPages = async (config: UserConfig<AsyncThemeConfig>, type: AsyncTheme.PageType, root?: string) => {
+export const dynamicPages = async (config: UserConfig<AsyncThemeConfig>, pageType: AsyncTheme.PageType, root?: string) => {
 	if (!root) {
 		const argv = process.argv.slice(2);
 		const command = argv[0];
@@ -182,18 +197,18 @@ export const dynamicPages = async (config: UserConfig<AsyncThemeConfig>, type: A
 	const files = await getFiles(normalizePath(`${srcDir}/${config.themeConfig?.postDir ?? 'posts'}`));
 
 	let paths: DynamicPages[] = [];
-	switch (type) {
+	switch (pageType) {
 		case 'index':
-			paths = await pageIndex(files, config, type);
+			paths = await pageIndex(files, config, pageType);
 			break;
 		case 'tags':
-			paths = await tagPageIndex(files, config, type);
+			paths = await tagPageIndex(files, config, pageType);
 			break;
 		case 'archives':
-			paths = await archivePageIndex(files, config, type);
+			paths = await archivePageIndex(files, config, pageType);
 			break;
 		case 'categories':
-			paths = await categoriePageIndex(files, config, type);
+			paths = await categoriePageIndex(files, config, pageType);
 			break;
 		default:
 			break;
