@@ -23,7 +23,9 @@ export default defineConfig({
 	themeConfig: {
 		rewritePost: true,
 		indexGenerator: {
-			perPage: 2,
+			static: true,
+		},
+		archiveGenerator: {
 			static: true,
 		},
 		languages: {
@@ -39,7 +41,7 @@ export default defineConfig({
 			{
 				title: 'Demo',
 				children: [
-					{ title: '归档', url: '/archives' },
+					{ title: '归档', url: '/archives/' },
 					{ title: '分类', url: '/categories' },
 					{ title: '标签', url: '/tags' },
 				],
@@ -119,9 +121,10 @@ export default defineConfig({
 			provider: 'local',
 		},
 		page: {
-			archives: '/archives',
+			archives: '/archives/',
 			tags: '/tags',
 			categorys: '/categories',
+			index: '/',
 		},
 		noticeOutdate: {
 			enable: true,

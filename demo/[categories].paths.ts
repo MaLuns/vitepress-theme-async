@@ -3,6 +3,6 @@ import config from './.vitepress/config';
 
 export default {
 	async paths() {
-		return dynamicPages(config, 'index');
+		return dynamicPages(config, 'categories');
 	},
 };
