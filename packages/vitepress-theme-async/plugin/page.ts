@@ -1,7 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import matter from 'gray-matter';
-import { glob } from 'tinyglobby';
 import { groupBy, sortBy, formatDate, joinPath } from '../utils/shared';
 import { getFileBirthTime } from '../utils/node';
 import { UserConfig } from 'vitepress';
@@ -22,13 +21,34 @@ const cache = /* @__PURE__ */ new Map();
  * @param cwd
  * @returns
  */
-const getFiles = (cwd: string) => {
-	return glob(['**.md'], {
-		cwd: cwd,
-		ignore: ['**/node_modules/**', '**/dist/**'],
-		expandDirectories: false,
-		absolute: true,
-	});
+const getFiles = (dir: string) => {
+	// return globSync(['**/*.md'], {
+	// 	cwd: cwd,
+	// 	ignore: ['**/node_modules/**', '**/dist/**'],
+	// 	absolute: true,
+	// });
+
+	let results: string[] = [];
+	const files = fs.readdirSync(dir);
+
+	for (const file of files) {
+		const filePath = path.join(dir, file);
+		const stat = fs.statSync(filePath);
+
+		// 如果是目录，递归查找
+		if (stat && stat.isDirectory()) {
+			// 忽略 node_modules 和 dist
+			if (file !== 'node_modules' && file !== 'dist') {
+				results = results.concat(getFiles(filePath));
+			}
+		} else {
+			// 匹配 .md 文件
+			if (/\.md$/.test(file)) {
+				results.push(path.resolve(filePath)); // 绝对路径
+			}
+		}
+	}
+	return results;
 };
 
 /**
@@ -194,7 +214,7 @@ export const dynamicPages = async (config: UserConfig<AsyncThemeConfig>, pageTyp
 	}
 
 	const srcDir = normalizePath(path.resolve(root!, config.srcDir || '.'));
-	const files = await getFiles(normalizePath(`${srcDir}/${config.themeConfig?.postDir ?? 'posts'}`));
+	const files = getFiles(normalizePath(`${srcDir}/${config.themeConfig?.postDir ?? 'posts'}`));
 
 	let paths: DynamicPages[] = [];
 	switch (pageType) {

@@ -1,4 +1,5 @@
 # dev esbuild
-config/index.js
-config/index.d.ts
-
+config/*.js
+config/*.d.ts
+plugin/*.js
+plugin/*.d.ts
