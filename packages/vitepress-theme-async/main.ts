@@ -16,7 +16,12 @@ const theme = <Theme>{
 
 		const globalComponents = siteData.value.themeConfig.globalComponents;
 		if (globalComponents) {
-			const modulesFiles = import.meta.glob('./components/global/*.vue', { import: 'default', eager: true });
+			let modulesFiles: any
+			if (import.meta.env.DEV) {
+				modulesFiles = import.meta.glob('../../../node_modules/vitepress-theme-async/components/global/*.vue', { import: 'default', eager: true });
+			} else {
+				modulesFiles = import.meta.glob('./components/global/*.vue', { import: 'default', eager: true });
+			}
 			const flag = Array.isArray(globalComponents);
 			for (const path in modulesFiles) {
 				const componentName = path.split('/').reverse()[0].replace(/.vue$/, '');
