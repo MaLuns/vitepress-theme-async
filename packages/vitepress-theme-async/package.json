@@ -16,7 +16,6 @@
 			"default": "./main.ts"
 		},
 		"./config": {
-			"types": "./config/index.d.ts",
 			"default": "./config/index.js"
 		},
 		"./plugin/page": {

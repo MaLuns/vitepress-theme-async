@@ -202,7 +202,7 @@ npm i hexo-theme-async@latest
 
 ## 图片排版
 
-<div class="fj-gallery no-fancybox">
+<TrmGallery>
 
 ![](https://img2.wallspic.com/previews/7/6/8/1/7/171867/171867-wu_kong-chao_ji_sai_ya_ren-sai_ya_ren-zamasu-long_zhu-500x.jpg)
 ![](https://img3.wallspic.com/previews/2/0/1/8/6/168102/168102-yi_shu-ka_tong-mian_bu_biao_qing-kuai_le_de-ji_qie-500x.jpg)
@@ -233,4 +233,4 @@ npm i hexo-theme-async@latest
 ![](https://img3.wallspic.com/previews/5/1/0/2/4/142015/142015-feng_ge-ka_ka_xi_qi_mu-huo_ying_ren_zhe-tu_xing_she_ji-shi_jue_yi_shu-500x.jpg)
 ![](https://img1.wallspic.com/previews/8/8/7/8/5/158788/158788-e_mo_sha_shoukimetsu_no_yaiba-shnen_man_hua-tao-ka_tong-azure-500x.jpg)
 
-</div>
+</TrmGallery>

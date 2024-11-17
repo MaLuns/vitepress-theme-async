@@ -4,6 +4,7 @@ import { isObject, withBase } from '../utils/shared';
 import { version, homepage } from '../package.json';
 import lang from './languages';
 import setLess from './less';
+import markdown from './markdown';
 
 /**
  * 默认配置
@@ -226,6 +227,7 @@ export const defineConfig = (config: UserConfig<AsyncThemeConfig>) => {
 
 	setLess(config);
 	setFancybox(config);
+	markdown(config);
 
 	return config;
 };

@@ -5,7 +5,7 @@ export default defineConfig([
 	{
 		entry: ['./config/index.ts'],
 		outDir: path.resolve(__dirname, './config'),
-		dts: true,
+		dts: false,
 		external: ['vite', 'vitepress'],
 		silent: true,
 		splitting: false,
