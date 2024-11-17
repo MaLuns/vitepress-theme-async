@@ -41,9 +41,9 @@ export default defineConfig({
 			{
 				title: 'Demo',
 				children: [
-					{ title: '归档', url: '/archives/' },
-					{ title: '分类', url: '/categories' },
-					{ title: '标签', url: '/tags' },
+					{ title: 'Archives', url: '/archives/' },
+					{ title: 'Categories', url: '/categories' },
+					{ title: 'Tags', url: '/tags' },
 				],
 			},
 			{ title: 'Links', url: '/links' },
