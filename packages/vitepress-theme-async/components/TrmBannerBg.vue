@@ -25,7 +25,14 @@ onMounted(() => {
 
 <template>
 	<template v-if="banner?.type === 'img'">
-		<img ref="bannerRef" class="trm-banner-cover" :src="banner.bgurl" :style="`object-position: ${banner.position || 'top'};object-fit:${banner.fit || 'cover'};`" alt="banner" />
+		<img
+			ref="bannerRef"
+			class="trm-banner-cover"
+			:src="banner.bgurl"
+			:style="`object-position: ${banner.position || 'top'};object-fit:${banner.fit || 'cover'};`"
+			alt="banner"
+			onload="this.onload=null;this.style.opacity=1;"
+		/>
 	</template>
 	<template v-if="banner?.type === 'video'">
 		<video class="trm-banner-cover" autoplay="true" loop muted playsinline webkit-playinginline>

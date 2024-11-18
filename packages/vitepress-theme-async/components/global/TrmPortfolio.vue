@@ -20,7 +20,7 @@ withDefaults(
 <template>
 	<a :href="withBase(src)" class="trm-portfolio-item trm-scroll-animation trm-active-el">
 		<div class="trm-cover-frame" style="padding-bottom:60%">
-			<img class="trm-cover no-fancybox" :src="withBase(cover)" data-tag="post-image" loading="lazy" />
+			<img class="trm-cover no-fancybox" :src="withBase(cover)" data-tag="post-image" loading="lazy" onload="this.onload=null;this.style.opacity=1;" />
 		</div>
 		<div class="trm-item-description">
 			<div>
@@ -41,6 +41,7 @@ withDefaults(
 		all 0.4s ease-in-out,
 		box-shadow 0.3s ease;
 	box-shadow: var(--box-shadow);
+	background-color: var(--theme-bg2-color, #f4f5f7);
 
 	.trm-cover-frame {
 		padding-bottom: 100%;
@@ -58,6 +59,7 @@ withDefaults(
 			transform: scale(1.05);
 			margin: 0;
 			transition: all .4s ease-in-out;
+			opacity: 0;
 		}
 	}
 
