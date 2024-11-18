@@ -88,10 +88,18 @@ If you are using this theme, welcome to leave your site in [Demo Sites | Example
   <tr align="center">
         <td>
             <a href="https://vitepress-theme-async.imalun.com/demosite/" target="_blank">
-                <img width="80px" src="https://vitepress-theme-async.imalun.com/demosite/img/favicon.svg" />
+                <img width="80px" src="https://vitepress-theme-async.imalun.com/logo.svg" />
                 <br />
                 <sub title="主题默认示例">默认示例</sub>
             </a>
         </td>
+        <td>
+            <a href="https://www.imalun.com" target="_blank">
+                <img width="80px" src="https://www.imalun.com/images/avatar.jpg" />
+                <br />
+                <sub title="醒，亦在人间；梦，亦在人间。">白云苍狗</sub>
+            </a>
+        </td>
+      </tr>
 </table>
 <!-- demo-end -->
