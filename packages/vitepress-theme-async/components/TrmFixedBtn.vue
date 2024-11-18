@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref } from "vue";
+import { nextTick, onMounted, onUnmounted, ref } from "vue";
 import { useData } from "vitepress";
 import { useIsPost } from "../composables/index";
 import { getScrollTop, backTop, themeLoading, switchReadMode, switchSingleColumn, setThemeColor } from "../utils/client";
@@ -29,7 +29,7 @@ const scrollFun = () => {
 onMounted(() => {
 	scrollFun();
 	window.addEventListener("scroll", scrollFun);
-
+	nextTick(setThemeColor);
 	onUnmounted(() => {
 		window.removeEventListener("scroll", scrollFun);
 	});
@@ -43,12 +43,14 @@ const onSwitchThemeMode = () => {
 			document.querySelector(".trm-mode-swich-animation")?.classList.toggle("trm-active");
 			// isDark.value = !isDark.value
 			// fix: 打包后 isDark 赋值影响原过渡动画，dev 模式正常，暂时改为延迟更新
-			setTimeout(() => (isDark.value = !isDark.value), 600);
-			setThemeColor();
+			setTimeout(() => {
+				isDark.value = !isDark.value;
+				nextTick(setThemeColor);
+			}, 600);
 		});
 	} else {
 		isDark.value = !isDark.value;
-		setThemeColor();
+		nextTick(setThemeColor);
 	}
 };
 </script>
