@@ -17,6 +17,7 @@
 		"demo:dev": "vitepress dev demo --host",
 		"demo:build": "vitepress build demo",
 		"demo:preview": "vitepress preview demo",
+		"generate:demo-sites": "node ./scripts/sites-check.mjs",
 		"lint": "eslint --cache --max-warnings 0  \"**/*.{js,jsx,vue,ts,tsx}\" --fix",
 		"prettier": "prettier --write \"**/*.{js,jsx,vue,ts,tsx,json,less}\"",
 		"prepare": "husky install"
