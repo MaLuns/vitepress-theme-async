@@ -14,7 +14,7 @@
 		"docs:dev": "vitepress dev docs",
 		"docs:build": "vitepress build docs",
 		"docs:preview": "vitepress preview docs",
-		"demo:dev": "vitepress dev demo",
+		"demo:dev": "vitepress dev demo --host",
 		"demo:build": "vitepress build demo",
 		"demo:preview": "vitepress preview demo",
 		"lint": "eslint --cache --max-warnings 0  \"**/*.{js,jsx,vue,ts,tsx}\" --fix",

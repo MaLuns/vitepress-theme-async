@@ -2,14 +2,13 @@ import { useData, useRoute, useRouter, withBase } from 'vitepress';
 import { Component, defineComponent, Ref, h, inject, onMounted, provide, ref, nextTick, onUnmounted, WatchStopHandle, watch } from 'vue';
 import failure from './assets/failure.ico';
 import errimg from './assets/404.jpg';
-import { dataPath, stringFormat } from './utils/shared';
+import pkg from './package.json';
+import { dataPath, stringFormat, log } from './utils/shared';
 import { initClipboard, initPictures, initPostErrorImg, initScrollAnimation, initVisibilitychange } from './utils/client';
 import { getMitt } from './composables/mitt';
 
-// export const AsyncCurrentPageIndexSymbol: InjectionKey<Ref<number>> = Symbol('current-page-index');
 // export const AsyncShowMenuSymbol: InjectionKey<Ref<boolean>> = Symbol('show-menu');
 
-export const useCurrentPageIndex = () => inject<Ref<number>>('AsyncCurrentPageIndexSymbol')!;
 export const useShowMenu = () => inject<Ref<boolean>>('AsyncShowMenuSymbol')!;
 export const useLang = () => inject<Ref<string>>('AsyncLanguageSymbol')!;
 export const useCurrentLang = () => {
@@ -35,14 +34,13 @@ export function withConfigProvider(App: Component) {
 			const router = useRouter();
 			const route = useRoute();
 			const mitt = getMitt();
-			const currentPageIndex = ref(1);
+
 			const showMenu = ref(false);
 			const language = ref(site.value.lang ?? 'zh-Hans');
 			let watcher: WatchStopHandle;
 
 			// fix: 通过 npm 安装, 在 dev 模式时 vue 会提示 injection "Symbol(current-page-index)" not found.
 			// 未找到具体原因 暂时用字符替代
-			provide('AsyncCurrentPageIndexSymbol', currentPageIndex);
 			provide('AsyncShowMenuSymbol', showMenu);
 			provide('AsyncLanguageSymbol', language);
 
@@ -73,6 +71,8 @@ export function withConfigProvider(App: Component) {
 			};
 
 			onMounted(() => {
+				log(`%c 🚀 Vitepress-Theme-Async ${pkg.version == '0.0.0' ? 'Github' : pkg.version} %c https://github.com/MaLuns/hexo-theme-async `);
+				log(`%c 📑 Vitepress-Theme-Async Docs %c ${pkg.homepage}`);
 				mitt.on('page:update', initPageUpdate);
 
 				if (theme.value.pageLoading) {
