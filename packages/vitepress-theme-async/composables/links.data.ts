@@ -12,7 +12,7 @@ export default {
 	async load() {
 		if (isString(theme.links) && /^(http[s]{0,1}):\/\//g.test(theme.links)) {
 			return (await fetch(theme.links)).json();
-		} else if (Array.isArray(theme.links)) {
+		} else {
 			return Array.isArray(theme.links) ? theme.links : [];
 		}
 	},
