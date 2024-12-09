@@ -28,7 +28,11 @@ jobs:
           cp ./README_zh-CN.md ./packages/vitepress-theme-async
           cp ./README.md ./packages/vitepress-theme-async
           node ./scripts/publish.mjs
+<<<<<<< HEAD
           node ./scripts/sites-check.mjs 
+=======
+					node ./scripts/sites-check.mjs 
+>>>>>>> dev
           yarn config:build
           zip -r vitepress-theme-async ./packages/vitepress-theme-async
         env:

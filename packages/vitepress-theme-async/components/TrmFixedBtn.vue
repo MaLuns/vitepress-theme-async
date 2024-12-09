@@ -16,6 +16,7 @@ import TrmIconBackTop from "./icons/TrmIconBackTop.vue";
 
 const offset = ref(false);
 const ratio = ref(0);
+const isRead = ref(false);
 const isPost = useIsPost();
 const { theme, frontmatter, isDark } = useData<AsyncThemeConfig>();
 
@@ -35,7 +36,10 @@ onMounted(() => {
 	});
 });
 
-const onSwitchReadMode = throttleAndDebounce(switchReadMode, 500);
+const onSwitchReadMode = throttleAndDebounce(() => {
+	switchReadMode();
+	isRead.value = !isRead.value
+}, 500);
 
 const onSwitchThemeMode = () => {
 	if (theme.value.themeLoading) {
@@ -60,11 +64,11 @@ const onSwitchThemeMode = () => {
 		<slot name="fixed-btn-before" />
 		<TrmSearchBtn />
 		<TrmPostOutline />
-		<div class="trm-fixed-btn" :data-title="$t('rightside.theme.dark')" @click="onSwitchThemeMode">
+		<div class="trm-fixed-btn" :data-title="$t(isDark ? 'rightside.theme.light' : 'rightside.theme.dark')" @click="onSwitchThemeMode">
 			<TrmIconSun class="trm-dark-icon" />
 			<TrmIconMoon class="trm-light-icon" />
 		</div>
-		<div v-if="isPost && theme.rightside?.readmode" class="trm-fixed-btn" :data-title="$t(isDark ? 'rightside.theme.light' : 'rightside.readMode.open')" @click="onSwitchReadMode()">
+		<div v-if="isPost && theme.rightside?.readmode" class="trm-fixed-btn" :data-title="$t(isRead ? 'rightside.readMode.exit' : 'rightside.readMode.open')" @click="onSwitchReadMode()">
 			<TrmIconRead />
 		</div>
 		<div
