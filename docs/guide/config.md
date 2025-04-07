@@ -731,6 +731,48 @@ export default defineConfig({
 });
 ```
 
+### 动画配置
+
+如果你不需要页面动画效果，可以通过这里配置关闭
+
+关闭页面切换动画
+
+::: code-group
+
+```ts [config.ts]
+export default defineConfig({
+	themeConfig: {
+		pageLoading: false // [!code ++]
+	}
+});
+```
+
+```ts [theme.d.ts]
+pageLoading?: boolean;
+```
+
+:::
+
+
+关闭主题切换动画
+
+
+::: code-group
+
+```ts [config.ts]
+export default defineConfig({
+	themeConfig: {
+		themeLoading: false // [!code ++]
+	}
+});
+```
+
+```ts [theme.d.ts]
+themeLoading?: boolean;
+```
+
+:::
+
 ## 内置插槽
 
 插槽位置主要分布在 :
