@@ -136,5 +136,10 @@ export default defineConfig({
 			enable: true,
 			baseUrl: 'https://vitepress-theme-async.imalun.com',
 		},
+		themeColor: {
+			enable: true,
+			primary: ['#afb42b', '#ff0000'],
+			primaryWeak: ['#c0ca33', '#c0ca00'],
+		},
 	},
 });

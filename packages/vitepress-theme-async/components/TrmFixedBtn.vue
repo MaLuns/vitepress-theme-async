@@ -1,18 +1,20 @@
 <script setup lang="ts">
-import { nextTick, onMounted, onUnmounted, ref } from "vue";
+import { nextTick, onMounted, onUnmounted, ref, computed } from "vue";
 import { useData } from "vitepress";
 import { useIsPost } from "../composables/index";
-import { getScrollTop, backTop, themeLoading, switchReadMode, switchSingleColumn, setThemeColor } from "../utils/client";
-import { throttleAndDebounce } from "../utils/shared";
+import { getScrollTop, backTop, themeLoading, switchReadMode, switchSingleColumn, setThemeColor, setPrimaryColors } from "../utils/client";
+import { throttleAndDebounce, colors } from "../utils/shared";
 
+import TrmPopover from "./TrmPopover.vue";
 import TrmPostOutline from "./TrmPostOutline.vue";
 import TrmSearchBtn from "./TrmSearchBtn.vue";
-
+import TrmColorPicker from "./global/TrmColorPicker.vue";
 import TrmIconMoon from "./icons/TrmIconMoon.vue";
 import TrmIconSun from "./icons/TrmIconSun.vue";
 import TrmIconRead from "./icons/TrmIconRead.vue";
 import TrmIconArrows from "./icons/TrmIconArrows.vue";
 import TrmIconBackTop from "./icons/TrmIconBackTop.vue";
+import TrmIconTheme from "./icons/TrmIconTheme.vue";
 
 const offset = ref(false);
 const ratio = ref(0);
@@ -57,6 +59,19 @@ const onSwitchThemeMode = () => {
 		nextTick(setThemeColor);
 	}
 };
+
+const onUpdateColor = (color: string) => {
+	const oklchColor = colors.oklch(color);
+	const primary = colors.formatRgb(oklchColor);
+	if (primary) {
+		setPrimaryColors(primary, primary);
+		nextTick(setThemeColor);
+	}
+};
+
+const themePrimary = computed(() => {
+	return Array.isArray(theme.value.themeColor?.primary) ? theme.value.themeColor?.primary[isDark.value ? 1 : 0] : theme.value.themeColor?.primary;
+});
 </script>
 
 <template>
@@ -64,6 +79,12 @@ const onSwitchThemeMode = () => {
 		<slot name="fixed-btn-before" />
 		<TrmSearchBtn />
 		<TrmPostOutline />
+		<TrmPopover v-if="theme.themeColor?.enable" class="trm-fixed-btn" placement="right-start">
+			<template #content>
+				<TrmColorPicker :color="themePrimary" :title="$t('title.themeColor')" @update:color="onUpdateColor" />
+			</template>
+			<TrmIconTheme />
+		</TrmPopover>
 		<div class="trm-fixed-btn" :data-title="$t(isDark ? 'rightside.theme.light' : 'rightside.theme.dark')" @click="onSwitchThemeMode">
 			<TrmIconSun class="trm-dark-icon" />
 			<TrmIconMoon class="trm-light-icon" />

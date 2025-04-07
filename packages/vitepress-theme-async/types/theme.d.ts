@@ -191,6 +191,7 @@ declare namespace AsyncTheme {
 			yearArchives: string;
 			otherArticles: string;
 			unclassified: string;
+			themeColor: string;
 		};
 
 		// 菜单
@@ -817,6 +818,26 @@ declare namespace AsyncTheme {
 		postPage?: string;
 	}
 	//#endregion ErrorImgConfig
+
+	//#region ThemeColorConfig
+	/**
+	 * 主题色配置
+	 */
+	interface ThemeColorConfig {
+		/**
+		 * 开启自定义主题色
+		 */
+		enable?: boolean;
+		/**
+		 * 主题色
+		 */
+		primary?: string | [string, string];
+		/**
+		 * 主题色弱
+		 */
+		primaryWeak?: string | [string, string];
+	}
+	//#endregion ThemeColorConfig
 }
 
 // async-theme-config -----------------------------------------------------------------------
@@ -924,6 +945,9 @@ declare interface AsyncThemeConfig {
 
 	/** 破图时默认图片 | Replace Broken Images  */
 	errorImg?: AsyncTheme.ErrorImgConfig;
+
+	/** 主题配置 | Theme config */
+	themeColor?: AsyncTheme.ThemeColorConfig;
 }
 // -----------------------------------------------------------------------
 

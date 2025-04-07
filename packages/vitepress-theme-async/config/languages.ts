@@ -24,6 +24,7 @@ export default <Record<string, AsyncTheme.Language>>{
 			yearArchives: '{0} 年的归档',
 			otherArticles: '其他文章',
 			unclassified: '未分类',
+			themeColor: '主题色',
 		},
 		menu: {
 			home: '首页',
@@ -107,6 +108,7 @@ export default <Record<string, AsyncTheme.Language>>{
 			yearArchives: 'Archive for {0}',
 			otherArticles: 'Other Articles',
 			unclassified: 'Unclassified',
+			themeColor: 'Theme Color',
 		},
 		menu: {
 			home: 'Home',

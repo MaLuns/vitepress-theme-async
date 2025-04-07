@@ -23,7 +23,7 @@
 	@theme-bg-color: #fcfcfe;
 
 	// base
-	.var-primary();
+	.var-primary(@primaryLight, @primaryWeakLight);
 	.var-theme();
 	--top-bar-height: 80px;
 
@@ -131,7 +131,7 @@
 
 .dark() {
 	// base
-	.var-primary();
+	.var-primary(@primaryDark, @primaryWeakDark);
 	.var-theme(#d1d9e9b3, #00151f, #dedee0, #00283a, #02162b);
 
 	--box-shadow: 0 2px 4px -2px rgba(0, 0, 0, 0.6);

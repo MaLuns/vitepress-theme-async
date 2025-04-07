@@ -333,3 +333,18 @@ export const initClipboard = (config: { author?: string; license?: string; text:
 		}
 	});
 };
+
+/**
+ * 设置主题色
+ * @param primary 主色
+ * @param primaryWeak 弱色
+ * @param root 根元素
+ */
+export const setPrimaryColors = (primary: string, primaryWeak: string, root = document.documentElement) => {
+	root.style.setProperty('--primary', primary);
+	root.style.setProperty('--primary-70', primary.replace('rgb', 'rgba').replace(')', ', 0.7)'));
+	root.style.setProperty('--primary-50', primary.replace('rgb', 'rgba').replace(')', ', 0.5)'));
+	root.style.setProperty('--primary-30', primary.replace('rgb', 'rgba').replace(')', ', 0.3)'));
+	root.style.setProperty('--primary-weak', primaryWeak);
+	root.style.setProperty('--primary-weak-50', primaryWeak.replace('rgb', 'rgba').replace(')', ', 0.5)'));
+};

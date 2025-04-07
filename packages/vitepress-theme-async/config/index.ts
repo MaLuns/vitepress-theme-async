@@ -148,6 +148,11 @@ export const defaultConfig: UserConfig<AsyncThemeConfig> = {
 				flickrJustifiedGallery: '/flickr-justified-gallery@latest/dist/fjGallery.min.js',
 			},
 		},
+		themeColor: {
+			enable: false,
+			primary: '#afb42b',
+			primaryWeak: '#c0ca33',
+		},
 	},
 };
 
@@ -212,6 +217,11 @@ export const defineConfig = (config: UserConfig<AsyncThemeConfig>) => {
 			...(config.rewrites ?? {}),
 			[`${config.themeConfig.postDir}/(.*)`]: '(.*)',
 		};
+	}
+	if (config.themeConfig?.themeColor) {
+		const { primary = '#afb42b', primaryWeak = '#c0ca33' } = config.themeConfig.themeColor;
+		config.themeConfig.themeColor.primary = Array.isArray(primary) ? primary : [primary, primary];
+		config.themeConfig.themeColor.primaryWeak = Array.isArray(primaryWeak) ? primaryWeak : [primaryWeak, primaryWeak];
 	}
 
 	const selfBuildEnd = config.buildEnd;

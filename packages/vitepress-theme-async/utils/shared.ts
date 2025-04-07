@@ -1,3 +1,5 @@
+import { modeOklch, modeRgb, useMode, formatHex, formatRgb } from 'culori/fn';
+
 export const EXTERNAL_URL_RE = /^[a-z]+:/i;
 export const HASH_RE = /#.*$/;
 export const EXT_RE = /(index)?\.(md|html)$/;
@@ -367,15 +369,13 @@ export const log = (str: string) =>
 		'color: white; background: #0078E7; padding:5px 0;margin: 0 0 2px 0;border-radius: 4px 0 0 4px;',
 		'padding: 4px;border:1px solid #0078E7;border-radius: 0 4px 4px 0; background: linear-gradient(70deg, #e3f9eb, #d1dbff);',
 	);
+
 /**
- * 获取语言配置文本
- * @param langData
- * @param k
- * @param pras
- * @returns
+ * 颜色模式
  */
-// export const getLangText = (langData: AsyncTheme.Language, k: string, ...pras: string[]) => {
-// 	let text = dataPath<string>(langData, k) ?? k;
-// 	if (pras.length) text = stringFormat(text, ...pras);
-// 	return text;
-// };
+export const colors = {
+	oklch: useMode(modeOklch),
+	rgb: useMode(modeRgb),
+	formatHex,
+	formatRgb,
+};

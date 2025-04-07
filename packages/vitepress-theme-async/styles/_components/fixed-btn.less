@@ -23,6 +23,11 @@
 		color: var(--fixed-button-color);
 		box-shadow: var(--box-shadow);
 
+		&:not([data-title]) {
+			&::before {
+				display: none;
+			}
+		}
 		.transition-mixin(color);
 
 		+ .trm-fixed-btn {
