@@ -31,6 +31,13 @@ defineProps<{
 	margin-bottom: var(--card-bottom-card, 40px);
 	box-shadow: var(--box-shadow2, 0 2px 4px -2px rgba(0, 0, 0, 0.15));
 
+	h6 {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 6px;
+	}
+
 	&:before {
 		content: "";
 		position: absolute;
@@ -45,13 +52,11 @@ defineProps<{
 
 	.trm-number {
 		color: var(--theme-bg-color, #fcfcfe);
-		margin-left: 5px;
-		border-radius: 20px;
+		border-radius: 5px;
 		font-size: 12px;
 		font-weight: 600;
 		display: inline-block;
-		padding: 3px 10px;
-		transform: translateY(-2px);
+		padding: 4px 10px;
 		background-color: var(--primary, #afb42b);
 	}
 }

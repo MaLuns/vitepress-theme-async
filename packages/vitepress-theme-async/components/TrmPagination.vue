@@ -48,6 +48,7 @@ const onChangePageNumber = (current: number) => emits('update:pageIndex', curren
 	display: flex;
 	justify-content: center;
 	margin-bottom: var(--card-bottom-card);
+	gap: 4px;
 
 	&:first-child {
 		margin-left: 0;
@@ -75,6 +76,7 @@ const onChangePageNumber = (current: number) => emits('update:pageIndex', curren
 		&:hover {
 			opacity: 1;
 			color: var(--primary, #afb42b);
+			background-color: var(--primary-30);
 		}
 	}
 
