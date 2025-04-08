@@ -30,6 +30,19 @@
 		border-radius: 6px;
 		box-shadow: 0 0 0 0 #00000024;
 		overflow: hidden;
+		animation: showAnimation 0.3s;
+
+		@keyframes showAnimation {
+			from {
+				opacity: 0.75;
+				transform: scale(0.8) translateY(-80px);
+			}
+
+			to {
+				opacity: 1;
+				transform: scale(1) translateY(0);
+			}
+		}
 
 		.trm-search-form {
 			margin: 10px;
@@ -82,7 +95,7 @@
 		}
 
 		.trm-search-result-container {
-			min-height: 76px;
+			min-height: 96px;
 			padding: 0 12px;
 			margin: 0 0 12px 0;
 			color: var(--theme-color, #00283a);
@@ -113,6 +126,10 @@
 
 				&:active,
 				&:hover {
+					border-color: var(--primary);
+				}
+
+				&.checked {
 					border-color: var(--primary);
 				}
 
