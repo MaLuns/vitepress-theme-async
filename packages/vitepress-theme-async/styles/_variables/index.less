@@ -23,7 +23,13 @@
 	@theme-bg-color: #fcfcfe;
 
 	// base
-	.var-primary(@primaryLight, @primaryWeakLight);
+	& when (isdefined(@primaryLight)) and (isdefined(@primaryWeakLight)){
+		.var-primary(@primaryLight, @primaryWeakLight);
+	} 
+
+	& when not (isdefined(@primaryLight)), not (isdefined(@primaryWeakLight)){
+		.var-primary();
+	} 
 	.var-theme();
 	--top-bar-height: 80px;
 
@@ -131,7 +137,14 @@
 
 .dark() {
 	// base
-	.var-primary(@primaryDark, @primaryWeakDark);
+	& when (isdefined(@primaryDark)) and (isdefined(@primaryWeakDark)){
+		.var-primary(@primaryDark, @primaryWeakDark);
+	} 
+
+	& when not (isdefined(@primaryDark)), not (isdefined(@primaryWeakDark)){
+		.var-primary();
+	} 
+
 	.var-theme(#d1d9e9b3, #00151f, #dedee0, #00283a, #02162b);
 
 	--box-shadow: 0 2px 4px -2px rgba(0, 0, 0, 0.6);
