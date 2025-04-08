@@ -829,13 +829,33 @@ declare namespace AsyncTheme {
 		 */
 		enable?: boolean;
 		/**
-		 * 主题色
+		 * 主色调
 		 */
 		primary?: string | [string, string];
 		/**
-		 * 主题色弱
+		 * 主色调弱
 		 */
 		primaryWeak?: string | [string, string];
+		/**
+		 * body 字体色
+		 */
+		bodyColor?: string | [string, string];
+		/**
+		 * body 背景色
+		 */
+		bodyBgColor?: string | [string, string];
+		/**
+		 * 主题字体色，
+		 */
+		themeColor?: string | [string, string];
+		/**
+		 * 主题背景色，用于各种卡片背景色
+		 */
+		themeBgColor?: string | [string, string];
+		/**
+		 * 主题背景色-2，用于底部背景区域
+		 */
+		themeBg2Color?: string | [string, string];
 	}
 	//#endregion ThemeColorConfig
 }

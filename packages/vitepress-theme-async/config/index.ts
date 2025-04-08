@@ -3,7 +3,7 @@ import type { UserConfig } from 'vitepress';
 import { isObject, withBase } from '../utils/shared';
 import { version, homepage } from '../package.json';
 import lang from './languages';
-import setLess from './less';
+import setLess, { defaultColor } from './less';
 import markdown from './markdown';
 
 /**
@@ -150,8 +150,7 @@ export const defaultConfig: UserConfig<AsyncThemeConfig> = {
 		},
 		themeColor: {
 			enable: false,
-			primary: '#afb42b',
-			primaryWeak: '#c0ca33',
+			...defaultColor,
 		},
 	},
 };
@@ -217,11 +216,6 @@ export const defineConfig = (config: UserConfig<AsyncThemeConfig>) => {
 			...(config.rewrites ?? {}),
 			[`${config.themeConfig.postDir}/(.*)`]: '(.*)',
 		};
-	}
-	if (config.themeConfig?.themeColor) {
-		const { primary = '#afb42b', primaryWeak = '#c0ca33' } = config.themeConfig.themeColor;
-		config.themeConfig.themeColor.primary = Array.isArray(primary) ? primary : [primary, primary];
-		config.themeConfig.themeColor.primaryWeak = Array.isArray(primaryWeak) ? primaryWeak : [primaryWeak, primaryWeak];
 	}
 
 	const selfBuildEnd = config.buildEnd;

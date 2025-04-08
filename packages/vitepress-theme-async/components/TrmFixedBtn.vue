@@ -79,7 +79,7 @@ const themePrimary = computed(() => {
 		<slot name="fixed-btn-before" />
 		<TrmSearchBtn />
 		<TrmPostOutline />
-		<TrmPopover v-if="theme.themeColor?.enable" class="trm-fixed-btn" placement="right-start">
+		<TrmPopover v-if="theme.themeColor?.enable" class="trm-fixed-btn" :data-title="$t('title.themeColor')" placement="right-start">
 			<template #content>
 				<TrmColorPicker :color="themePrimary" :title="$t('title.themeColor')" @update:color="onUpdateColor" />
 			</template>
