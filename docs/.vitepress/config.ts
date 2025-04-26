@@ -9,10 +9,10 @@ export default defineConfig({
 	head: [
 		['link', { rel: 'icon', href: '/logo@64x64.png' }],
 		['meta', { property: 'og:type', content: 'website' }],
-		['meta', { property: 'og:title', content: 'hexo-theme-async 主题' }],
+		['meta', { property: 'og:title', content: 'vitepress-theme-async 主题' }],
 		['meta', { property: 'og:image', content: '/logo@64x64.png' }],
 		['meta', { property: 'og:url', content: 'https://www.imalun.com' }],
-		['meta', { property: 'og:description', content: '一个简单而轻量级的 Hexo 主题' }],
+		['meta', { property: 'og:description', content: '一个简单而轻量级的 vitepress 主题' }],
 	],
 	cleanUrls: true,
 	themeConfig: {

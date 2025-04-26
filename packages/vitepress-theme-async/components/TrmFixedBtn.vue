@@ -64,7 +64,8 @@ const onUpdateColor = (color: string) => {
 	const oklchColor = colors.oklch(color);
 	const primary = colors.formatRgb(oklchColor);
 	if (primary) {
-		setPrimaryColors(primary, primary);
+		oklchColor!.l! += 0.3;
+		setPrimaryColors(primary, colors.formatRgb(oklchColor)!);
 		nextTick(setThemeColor);
 	}
 };
@@ -77,8 +78,11 @@ const themePrimary = computed(() => {
 <template>
 	<div class="trm-fixed-container" :class="offset ? 'offset' : ''">
 		<slot name="fixed-btn-before" />
-		<TrmSearchBtn />
 		<TrmPostOutline />
+		<TrmSearchBtn />
+		<div v-if="isPost && theme.rightside?.readmode" class="trm-fixed-btn" :data-title="$t(isRead ? 'rightside.readMode.exit' : 'rightside.readMode.open')" @click="onSwitchReadMode()">
+			<TrmIconRead />
+		</div>
 		<TrmPopover v-if="theme.themeColor?.enable" class="trm-fixed-btn" :data-title="$t('title.themeColor')" placement="right-start">
 			<template #content>
 				<TrmColorPicker :color="themePrimary" :title="$t('title.themeColor')" @update:color="onUpdateColor" />
@@ -88,9 +92,6 @@ const themePrimary = computed(() => {
 		<div class="trm-fixed-btn" :data-title="$t(isDark ? 'rightside.theme.light' : 'rightside.theme.dark')" @click="onSwitchThemeMode">
 			<TrmIconSun class="trm-dark-icon" />
 			<TrmIconMoon class="trm-light-icon" />
-		</div>
-		<div v-if="isPost && theme.rightside?.readmode" class="trm-fixed-btn" :data-title="$t(isRead ? 'rightside.readMode.exit' : 'rightside.readMode.open')" @click="onSwitchReadMode()">
-			<TrmIconRead />
 		</div>
 		<div
 			v-if="theme.rightside?.aside && !(frontmatter.single_column || frontmatter.singleColumn)"

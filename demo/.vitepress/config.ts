@@ -109,7 +109,7 @@ export default defineConfig({
 			level: [2, 6],
 		},
 		favicon: {
-			logo: '/favicon.svg',
+			logo: 'https://vitepress-theme-async.imalun.com/logo@128x128.png',
 			icon16: '/favicon.svg',
 			icon32: '/favicon.svg',
 		},
@@ -138,8 +138,8 @@ export default defineConfig({
 		},
 		themeColor: {
 			enable: true,
-			primary: ['#afb42b', '#ff0000'],
-			primaryWeak: ['#c0ca33', '#c0ca00'],
+			primary: ['#c33737', '#d77093'],
+			primaryWeak: ['#ca5a33', '#c0ca00'],
 		},
 	},
 });

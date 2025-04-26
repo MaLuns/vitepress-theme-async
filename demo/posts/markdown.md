@@ -5,7 +5,7 @@ categories: 测试分类
 katex: true
 ---
 
-主题 Hexo-theme-async 文章页面适配预览。
+主题 Vitepress-theme-async 文章页面适配预览。
 
 <!--more-->
 
@@ -72,13 +72,13 @@ _这个是斜体_
 
 ### 链接
 
-关于 `Hexo-theme-async` 的使用文档可以[点击这里](https://hexo-theme-async.imalun.com)查看
+关于 `Vitepress-theme-async` 的使用文档可以[点击这里](https://vitepress-theme-async.imalun.com)查看
 
 ### 图片
 
 插入图片，格式如下：
 
-![这里写图片描述](https://hexo-theme-async.imalun.com/github_star.png)
+![这里写图片描述](https://vitepress-theme-async.imalun.com/github_star.png)
 
 ![](https://markdown.com.cn/images/i-am-svg.svg)
 
@@ -192,10 +192,10 @@ Second Term
 <details>
   <summary>Async 安装方法</summary>
 
-进入您的 Hexo 博客根目录，执行：
+进入您的 vitepress 博客根目录，执行：
 
 ```bash
-npm i hexo-theme-async@latest
+npm i vitepress-theme-async@latest
 ```
 
 </details>
