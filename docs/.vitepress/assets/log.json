@@ -3,6 +3,54 @@
 		"large_version": "v0.0.x",
 		"children": [
 			{
+				"version": "0.0.24",
+				"date": "2025-04-26",
+				"logs": [
+					{
+						"type": "feat",
+						"text": "主题色简化配置"
+					},
+					{
+						"type": "style",
+						"text": "样式优化"
+					}
+				]
+			},
+			{
+				"version": "0.0.23",
+				"date": "2024-12-09",
+				"logs": [
+					{
+						"type": "fix",
+						"text": "固定按钮不同状态 tooltip 显示不对"
+					}
+				]
+			},
+			{
+				"version": "0.0.22",
+				"date": "2024-11-18",
+				"logs": [
+					{
+						"type": "fix",
+						"text": "移动端状态栏颜色与主题不一致"
+					},
+					{
+						"type": "fix",
+						"text": "兼容未设置友链"
+					}
+				]
+			},
+			{
+				"version": "0.0.21",
+				"date": "2024-11-06",
+				"logs": [
+					{
+						"type": "fix",
+						"text": "开发模式下，全局注册组件不生效"
+					}
+				]
+			},
+			{
 				"version": "0.0.17",
 				"date": "2024-09-27",
 				"logs": [

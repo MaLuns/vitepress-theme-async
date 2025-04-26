@@ -837,6 +837,27 @@ globalComponents?: boolean | Array<string>;
 :::
 <!--  prettier-ignore-end  -->
 
+从 v0.0.24+ 版本，可以在配置中直接修改主题色和主背景色等。
+
+<!--  prettier-ignore-start -->
+::: code-group
+```ts [config.ts]
+export default defineConfig({
+	themeConfig: {
+		themeColor: { // [!code ++]
+			enable: true, // [!code ++]
+			primary: ['#c33737', '#d77093'], // [!code ++]
+			primaryWeak: ['#ca5a33', '#c0ca00'],// [!code ++]
+		}, // [!code ++]
+	}
+});
+```
+
+<<< @/../packages/vitepress-theme-async/types/theme.d.ts#ThemeColorConfig
+:::
+<!--  prettier-ignore-end  -->
+
+
 ## 自定义组件
 
 参考 vitepress 覆盖组件使用方式。 [重写内部组件](https://vitepress.dev/zh/guide/extending-default-theme#overriding-internal-components)
