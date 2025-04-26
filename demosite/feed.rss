@@ -4,7 +4,7 @@
         <title>Vitepress Theme Async</title>
         <link>https://vitepress-theme-async.imalun.com</link>
         <description>一个简洁、优雅、轻量、美观的 vitepress 主题</description>
-        <lastBuildDate>Mon, 18 Nov 2024 08:44:29 GMT</lastBuildDate>
+        <lastBuildDate>Sat, 26 Apr 2025 04:43:26 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <item>
@@ -167,7 +167,7 @@
 <span class="line"><span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #005CC5">line3</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> </span><span style="color: #032F62">&#39;This is line 3&#39;</span></span>
 <span class="line"><span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #005CC5">line4</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> </span><span style="color: #032F62">&#39;This is line 4&#39;</span></span></code></pre>
 <div class="line-numbers-wrapper" aria-hidden="true"><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><h3 id="code-groups" tabindex="-1">Code Groups <a class="header-anchor" href="#code-groups" aria-label="Permalink to &quot;Code Groups&quot;">&ZeroWidthSpace;</a></h3>
-<div class="vp-code-group vp-adaptive-theme"><div class="tabs"><input type="radio" name="group-vo2Tm" id="tab-mt_BXtM" checked="checked"><label for="tab-mt_BXtM">config.js</label><input type="radio" name="group-vo2Tm" id="tab-ydfwOGg" ><label for="tab-ydfwOGg">config.ts</label></div><div class="blocks">
+<div class="vp-code-group vp-adaptive-theme"><div class="tabs"><input type="radio" name="group-6ydrR" id="tab-eJvE2m4" checked="checked"><label for="tab-eJvE2m4">config.js</label><input type="radio" name="group-6ydrR" id="tab-WWddvbe" ><label for="tab-WWddvbe">config.ts</label></div><div class="blocks">
 <div class="language-js vp-adaptive-theme active"><button title="Copy Code" class="copy"></button><span class="lang">js</span><pre v-pre class="shiki github-dark vp-code-dark" ><code><span class="line"><span style="color: #6A737D">/**</span></span>
 <span class="line"><span style="color: #6A737D"> * </span><span style="color: #F97583">@type</span><span style="color: #6A737D"> </span><span style="color: #B392F0">{import(&#39;vitepress&#39;).UserConfig}</span></span>
 <span class="line"><span style="color: #6A737D"> */</span></span>
@@ -204,9 +204,9 @@
             <link>https://vitepress-theme-async.imalun.com/demosite/posts/markdown</link>
             <guid>https://vitepress-theme-async.imalun.com/demosite/posts/markdown</guid>
             <pubDate>Wed, 21 Sep 2022 07:25:29 GMT</pubDate>
-            <description><![CDATA[<p>主题 Hexo-theme-async 文章页面适配预览。</p>
+            <description><![CDATA[<p>主题 Vitepress-theme-async 文章页面适配预览。</p>
 ]]></description>
-            <content:encoded><![CDATA[<p>主题 Hexo-theme-async 文章页面适配预览。</p>
+            <content:encoded><![CDATA[<p>主题 Vitepress-theme-async 文章页面适配预览。</p>
 <!--more-->
 <h2 id="markdown-基础语法" tabindex="-1">Markdown 基础语法 <a class="header-anchor" href="#markdown-基础语法" aria-label="Permalink to &quot;Markdown 基础语法&quot;">&ZeroWidthSpace;</a></h2>
 <h3 id="标题" tabindex="-1">标题 <a class="header-anchor" href="#标题" aria-label="Permalink to &quot;标题&quot;">&ZeroWidthSpace;</a></h3>
@@ -260,10 +260,10 @@
 <p>雇用制度对工人不利，但工人根本无力摆脱这个制度。 ——阮一峰</p>
 </blockquote>
 <h3 id="链接" tabindex="-1">链接 <a class="header-anchor" href="#链接" aria-label="Permalink to &quot;链接&quot;">&ZeroWidthSpace;</a></h3>
-<p>关于 <code>Hexo-theme-async</code> 的使用文档可以<a href="https://hexo-theme-async.imalun.com" target="_blank" rel="noreferrer">点击这里</a>查看</p>
+<p>关于 <code>Vitepress-theme-async</code> 的使用文档可以<a href="https://vitepress-theme-async.imalun.com" target="_blank" rel="noreferrer">点击这里</a>查看</p>
 <h3 id="图片" tabindex="-1">图片 <a class="header-anchor" href="#图片" aria-label="Permalink to &quot;图片&quot;">&ZeroWidthSpace;</a></h3>
 <p>插入图片，格式如下：</p>
-<p><img src="https://hexo-theme-async.imalun.com/github_star.png" alt="这里写图片描述" data-tag="post-image" loading="lazy" onload="this.onload=null;this.style.opacity=1;"></p>
+<p><img src="https://vitepress-theme-async.imalun.com/github_star.png" alt="这里写图片描述" data-tag="post-image" loading="lazy" onload="this.onload=null;this.style.opacity=1;"></p>
 <p><img src="https://markdown.com.cn/images/i-am-svg.svg" alt="" data-tag="post-image" loading="lazy" onload="this.onload=null;this.style.opacity=1;"></p>
 <div class="row">
   <div class="col-lg-4">
@@ -367,8 +367,8 @@
 </div><h3 id="details" tabindex="-1">details <a class="header-anchor" href="#details" aria-label="Permalink to &quot;details&quot;">&ZeroWidthSpace;</a></h3>
 <details>
   <summary>Async 安装方法</summary>
-<p>进入您的 Hexo 博客根目录，执行：</p>
-<div class="language-bash vp-adaptive-theme"><button title="Copy Code" class="copy"></button><span class="lang">bash</span><pre v-pre class="shiki github-dark vp-code-dark" ><code><span class="line"><span style="color: #B392F0">npm</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">i</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">hexo-theme-async@latest</span></span></code></pre><pre v-pre class="shiki github-light vp-code-light" ><code><span class="line"><span style="color: #6F42C1">npm</span><span style="color: #24292E"> </span><span style="color: #032F62">i</span><span style="color: #24292E"> </span><span style="color: #032F62">hexo-theme-async@latest</span></span></code></pre>
+<p>进入您的 vitepress 博客根目录，执行：</p>
+<div class="language-bash vp-adaptive-theme"><button title="Copy Code" class="copy"></button><span class="lang">bash</span><pre v-pre class="shiki github-dark vp-code-dark" ><code><span class="line"><span style="color: #B392F0">npm</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">i</span><span style="color: #E1E4E8"> </span><span style="color: #9ECBFF">vitepress-theme-async@latest</span></span></code></pre><pre v-pre class="shiki github-light vp-code-light" ><code><span class="line"><span style="color: #6F42C1">npm</span><span style="color: #24292E"> </span><span style="color: #032F62">i</span><span style="color: #24292E"> </span><span style="color: #032F62">vitepress-theme-async@latest</span></span></code></pre>
 </div></details>
 <h2 id="图片排版" tabindex="-1">图片排版 <a class="header-anchor" href="#图片排版" aria-label="Permalink to &quot;图片排版&quot;">&ZeroWidthSpace;</a></h2>
 <TrmGallery>
