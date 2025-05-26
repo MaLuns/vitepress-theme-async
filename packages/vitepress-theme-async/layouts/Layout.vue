@@ -21,7 +21,15 @@ const { frontmatter, page, theme } = useData<AsyncThemeConfig>();
 <template>
 	<TrmPageLoading v-if="theme.pageLoading" />
 	<TrmThemeLoading v-if="theme.themeLoading" />
-	<div v-if="frontmatter.layout !== false" class="trm-app-frame">
+	<div
+		v-if="frontmatter.layout !== false"
+		class="trm-app-frame"
+		:class="[
+		frontmatter.page_class,
+		frontmatter.pageClass,
+		frontmatter.layout ? `${frontmatter.layout}_layout` : ''
+	]"
+	>
 		<div id="trm-dynamic-content" class="trm-swup-animation">
 			<!-- <div id="trm-scroll-container" class="trm-scroll-container"> -->
 			<TrmTopBar>
