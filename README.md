@@ -54,7 +54,7 @@ npm install --save vitepress-theme-async
 or
 
 ```bash
-yarn add --save vitepress-theme-async
+yarn add vitepress-theme-async
 ```
 
 ## Upgrade
