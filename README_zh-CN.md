@@ -54,7 +54,7 @@ npm install --save vitepress-theme-async
 或者
 
 ```bash
-yarn add --save vitepress-theme-async
+yarn add vitepress-theme-async
 ```
 
 ## 更新
