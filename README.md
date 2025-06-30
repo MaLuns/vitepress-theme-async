@@ -81,7 +81,7 @@ We use [SATA License](https://github.com/zTrix/sata-license).
 
 ## Demo Sites
 
-If you are using this theme, welcome to leave your site in [Demo Sites | Example Site | Discussions](https://github.com/MaLuns/vitepress-theme-async/discussions/7), and I will add it to the sample site below.
+If you are using this theme, welcome to leave your site in [Demo Sites | Example Site | Discussions](https://github.com/MaLuns/vitepress-theme-async/discussions/2), and I will add it to the sample site below.
 
 <!-- demo-start -->
 <table>
