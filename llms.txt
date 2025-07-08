@@ -1,0 +1,11 @@
+# vitepress-theme-async
+
+vitepress-theme-async 是一个基于 vitepress 的博客主题，有简洁、优雅、自适应、美观的 UI，同时也拥有响应式界面，支持手机、平板、PC 多种平台。
+
+## articles
+
+- [快速开始](https://vitepress-theme-async.imalun.com/guide/) 主题基础安装指南
+- [主题配置](https://vitepress-theme-async.imalun.com/guide/config) 主题详细配置使用说明
+- [页面配置](https://vitepress-theme-async.imalun.com/guide/page) 主题页面类型使用说明
+- [更新日志](https://vitepress-theme-async.imalun.com/guide/change-log) 更新日志记录
+- [FAQ](https://vitepress-theme-async.imalun.com/guide/faq) 问答说明
