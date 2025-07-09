@@ -20,7 +20,7 @@ const offset = ref(false);
 const ratio = ref(0);
 const isRead = ref(false);
 const isPost = useIsPost();
-const { theme, frontmatter, isDark } = useData<AsyncThemeConfig>();
+const { theme, frontmatter, isDark, site } = useData<AsyncThemeConfig>();
 
 const scrollFun = () => {
 	const scrollTop = getScrollTop();
@@ -89,7 +89,15 @@ const themePrimary = computed(() => {
 			</template>
 			<TrmIconTheme />
 		</TrmPopover>
-		<div class="trm-fixed-btn" :data-title="$t(isDark ? 'rightside.theme.light' : 'rightside.theme.dark')" @click="onSwitchThemeMode">
+		<div
+			v-if="
+			site.appearance &&
+			site.appearance !== 'force-dark' &&
+			site.appearance !== 'force-auto'"
+			class="trm-fixed-btn"
+			:data-title="$t(isDark ? 'rightside.theme.light' : 'rightside.theme.dark')"
+			@click="onSwitchThemeMode"
+		>
 			<TrmIconSun class="trm-dark-icon" />
 			<TrmIconMoon class="trm-light-icon" />
 		</div>
