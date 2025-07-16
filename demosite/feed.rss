@@ -4,7 +4,7 @@
         <title>Vitepress Theme Async</title>
         <link>https://vitepress-theme-async.imalun.com</link>
         <description>一个简洁、优雅、轻量、美观的 vitepress 主题</description>
-        <lastBuildDate>Tue, 08 Jul 2025 11:52:36 GMT</lastBuildDate>
+        <lastBuildDate>Wed, 16 Jul 2025 10:31:49 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <item>
@@ -167,7 +167,7 @@
 <span class="line"><span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #005CC5">line3</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> </span><span style="color: #032F62">&#39;This is line 3&#39;</span></span>
 <span class="line"><span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #005CC5">line4</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> </span><span style="color: #032F62">&#39;This is line 4&#39;</span></span></code></pre>
 <div class="line-numbers-wrapper" aria-hidden="true"><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><h3 id="code-groups" tabindex="-1">Code Groups <a class="header-anchor" href="#code-groups" aria-label="Permalink to &quot;Code Groups&quot;">&ZeroWidthSpace;</a></h3>
-<div class="vp-code-group vp-adaptive-theme"><div class="tabs"><input type="radio" name="group-Cei1H" id="tab-WhPfqWf" checked="checked"><label for="tab-WhPfqWf">config.js</label><input type="radio" name="group-Cei1H" id="tab-V2AO1Hr" ><label for="tab-V2AO1Hr">config.ts</label></div><div class="blocks">
+<div class="vp-code-group vp-adaptive-theme"><div class="tabs"><input type="radio" name="group-xRFcc" id="tab-6-1Wbsv" checked="checked"><label for="tab-6-1Wbsv">config.js</label><input type="radio" name="group-xRFcc" id="tab-R6Jw-5J" ><label for="tab-R6Jw-5J">config.ts</label></div><div class="blocks">
 <div class="language-js vp-adaptive-theme active"><button title="Copy Code" class="copy"></button><span class="lang">js</span><pre v-pre class="shiki github-dark vp-code-dark" ><code><span class="line"><span style="color: #6A737D">/**</span></span>
 <span class="line"><span style="color: #6A737D"> * </span><span style="color: #F97583">@type</span><span style="color: #6A737D"> </span><span style="color: #B392F0">{import(&#39;vitepress&#39;).UserConfig}</span></span>
 <span class="line"><span style="color: #6A737D"> */</span></span>
