@@ -13,10 +13,12 @@
 	"types": "./types/index.d.ts",
 	"exports": {
 		".": {
-			"default": "./main.ts"
+			"default": "./main.ts",
+			"types": "./types/index.d.ts"
 		},
 		"./config": {
-			"default": "./config/index.js"
+			"default": "./config/index.js",
+			"types": "./types/config.d.ts"
 		},
 		"./plugin/page": {
 			"default": "./plugin/page.js"
