@@ -118,3 +118,44 @@ export default ThemeAsync;
 ## 配置主题 Config
 
 配置主题 [请看这里](./config)
+
+## TS 类型提示
+
+在 tsconfig 文件里添加 `vitepress-theme-async` 到 types 字段里。
+
+``` ts
+{
+  "compilerOptions": {
+    //...
+    "types": ["vitepress-theme-async"]
+  },
+}
+```
+
+v0.0.28+ 版本，也可以修改 tsconfig 配置的 moduleResolution 字段，切换到支持识别 package.json 的 exports 字段的模式。
+
+
+## MCP Server
+
+将下面 JSON 配置添加到 IDE 对应的 MCP 配置文件里，就可以让 AI 帮助修改配置文件里
+
+你只要告诉 AI 你想要通过 修改主题配置信息，示例：
+
+- “主题 vitepress-theme-async 有哪些配置信息”
+- “帮我修改 banner 配置, 将背景图换成 xxxx ”
+- “帮我修改 关于我 页面配置”
+- “.......”
+
+``` json
+{
+  "mcpServers": {
+    "async配置": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "vitepress-theme-async-mcp-server@latest",
+      ]
+    }
+  }
+}
+```
