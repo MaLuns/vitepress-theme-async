@@ -69,11 +69,11 @@ export const genFeed = async (config: SiteConfig<AsyncThemeConfig>) => {
 		}
 
 		const html = mdRender.render(fileContent);
-		const url =
-			config.site.base +
-			normalizePath(path.relative(config.srcDir, filePath))
-				.replace(/(^|\/)index\.md$/, '$1')
-				.replace(/\.md$/, config.cleanUrls ? '' : '.html');
+		let url = normalizePath(path.relative(config.srcDir, filePath));
+			url = config.rewrites.map[url] ?? url;
+			url = config.site.base + url
+					.replace(/(^|\/)index\.md$/, '$1')
+					.replace(/\.md$/, config.cleanUrls ? '' : '.html');
 
 		posts.push({
 			url,
