@@ -63,6 +63,6 @@
 		"@types/culori": "^2.0.1",
 		"typescript": "^4.6.4",
 		"vue": "^3.2.45",
-		"vitepress": "^1.0.0-rc.21"
+		"vitepress": "^1.1.4"
 	}
 }
